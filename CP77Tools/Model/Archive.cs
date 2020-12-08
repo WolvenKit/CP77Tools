@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CP77Tools.Oodle;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using CP77Tools.Oodle;
 
 namespace CP77Tools.Model
 {
@@ -62,9 +62,12 @@ namespace CP77Tools.Model
                 var startindex = (int)entry.FirstDataSector;
                 var nextindex = (int)entry.NextDataSector;
 
+                MemoryStream ms = new MemoryStream();
+                BinaryWriter bw = new BinaryWriter(ms);
+
                 for (int j = startindex; j < nextindex; j++)
                 {
-                    var offsetentry = this.Table.Offsets[i];
+                    var offsetentry = this.Table.Offsets[idx];
                     binaryReader.BaseStream.Seek((long)offsetentry.Offset, SeekOrigin.Begin);
                     if (offsetentry.PhysicalSize == offsetentry.VirtualSize)
                     {
@@ -173,7 +176,7 @@ namespace CP77Tools.Model
                         $"{x.NextDataSector}," +
                         $"{x.FirstUnkIndex}," +
                         $"{x.NextUnkIndex}," +
-                        $"{x.Footer:X2}";
+                        $"{BitConverter.ToString(x.SHA1Hash)}";
 
                     writer.WriteLine(info);
                 }
@@ -300,8 +303,7 @@ namespace CP77Tools.Model
         public uint NextDataSector { get; private set; }
         public uint FirstUnkIndex { get; private set; }
         public uint NextUnkIndex { get; private set; }
-
-        public byte[] Footer { get; set; }
+        public byte[] SHA1Hash { get; set; }
 
         public FileInfoEntry(BinaryReader br)
         {
@@ -321,7 +323,7 @@ namespace CP77Tools.Model
             FirstUnkIndex = br.ReadUInt32();
             NextUnkIndex = br.ReadUInt32();
 
-            Footer = br.ReadBytes(20);
+            SHA1Hash = br.ReadBytes(20);
         }
     }
 }

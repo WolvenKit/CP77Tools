@@ -16,6 +16,7 @@ namespace CP77Tools
 
         [Option(HelpText = "Extract files.", Required = false)]
         public bool extract { get; set; }
+
         [Option(HelpText = "Output files extension", Required = false)]
         public string extension { get; set; }
     }

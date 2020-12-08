@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CP77Tools
+namespace CP77Tools.Oodle
 {
     public static class OodleLZ
     {

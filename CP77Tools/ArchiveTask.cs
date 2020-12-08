@@ -45,7 +45,7 @@ namespace CP77Tools
                         
                         string outpath = Path.Combine(outDir.FullName, $"{ar.Table.FileInfo[i].NameHash64:X8}.{extension}");
 
-                        await File.WriteAllBytesAsync(outpath, file);
+                        File.WriteAllBytes(outpath, file);
                     }
                 }
 
