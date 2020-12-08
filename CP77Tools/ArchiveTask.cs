@@ -16,7 +16,7 @@ namespace CP77Tools
                 var inputFileInfo = new FileInfo(options.path);
                 if (!inputFileInfo.Exists)
                     return 0;
-                var outDir = inputFileInfo.Directory;
+                var outDir = Directory.CreateDirectory(inputFileInfo.Directory + "\\" + inputFileInfo.Name.Replace(".archive", ""));
                 if (outDir == null)
                     return 0;
                 if (!outDir.Exists)
@@ -30,14 +30,14 @@ namespace CP77Tools
 
                 if (options.extract)
                 {
-                    for (var i = 0; i < ar.Files.Count; i++)
+                    for (var i = 0; i < ar.FilesCount; i++)
                     {
-                        var file = ar.Files[i];
+                        var file = ar.GetFileData(i);
                         var indir = new FileInfo(options.path).Directory;
                         if (indir == null)
                             continue;
 
-                        string outpath = Path.Combine(indir.FullName, $"extractedfile_{i}.oodl");
+                        string outpath = Path.Combine(outDir.FullName, $"{ar.Table.FileInfo[i].NameHash:X8}.bin");
                         await File.WriteAllBytesAsync(outpath, file);
                     }
                 }

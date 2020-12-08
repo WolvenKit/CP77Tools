@@ -9,50 +9,45 @@ namespace CP77Tools.Model
     public class Archive
     {
         public ArHeader Header { get; set; }
-        public List<byte[]> Files { get; set; }
+        public uint FilesCount { get; set; }
         public ArTable Table { get; set; }
 
         private string filepath;
 
+
+        private BinaryReader binaryReader { get; set; }
+
         public Archive(string path)
         {
             filepath = path;
-            Files = new List<byte[]>();
-
-            using (var br = new BinaryReader(new FileStream(path, FileMode.Open)))
-            {
-                Read(br);
-            }
+            binaryReader = new BinaryReader(new FileStream(path, FileMode.Open));
+            Header = new ArHeader(binaryReader);
+            binaryReader.BaseStream.Seek((long)Header.Tableoffset, SeekOrigin.Begin);
+            Table = new ArTable(binaryReader);
+            FilesCount = Table.Table1count;
         }
 
-
-        private void Read(BinaryReader br)
+        public byte[] GetFileData(int idx)
         {
-            Header = new ArHeader(br);
-
-            br.BaseStream.Seek((long)Header.Tableoffset, SeekOrigin.Begin);
-
-            Table = new ArTable(br);
-
-            // read files
-            foreach (var entry in Table.FileInfo)
+            if (idx < Table.FileInfo.Count)
             {
-                // get file offsets
-                var startindex = (int)entry.Value.startindex;
-                var nextindex = (int)entry.Value.nextindex;
+                var entry = Table.FileInfo[idx];
+                var startindex = (int)entry.firstDataSector;
+                var nextindex = (int)entry.lastDataSector;
 
                 using var ms = new MemoryStream();
                 using var bw = new BinaryWriter(ms);
                 for (int i = startindex; i < nextindex; i++)
                 {
                     var offsetentry = this.Table.Offsets[i];
-                    br.BaseStream.Seek((long)offsetentry.Offset, SeekOrigin.Begin);
-                    var buffer = br.ReadBytes((int)offsetentry.Zsize);
+                    binaryReader.BaseStream.Seek((long)offsetentry.Offset, SeekOrigin.Begin);
+                    var buffer = binaryReader.ReadBytes((int)offsetentry.PhysicalSize);
                     bw.Write(buffer);
                 }
 
-                Files.Add(ms.ToArray());
+                return ms.ToArray();
             }
+            return null;
         }
 
         /// <summary>
@@ -81,20 +76,22 @@ namespace CP77Tools.Model
             }
 
             const string head = //"Hash\t" +
-                                "Offset\t" +
-                                "Size\t" +
-                                "Zsize\t" +
-                                "Header\t" +
-                                "somebool\t" +
-                                "startindex\t" +
-                                "nextindex\t" +
-                                "unk1\t" +
-                                "unk2\t" +
-                                "Footer\t"
+                                "Offset," +
+                                "RamSize," +
+                                "VirtualSize," +
+                                "Hash," +
+                                "Unknown1," +
+                                "Unknown2," +
+                                "somebool," +
+                                "startindex," +
+                                "nextindex," +
+                                "startTable3Index," +
+                                "nextTable3Index," +
+                                "Footer,"
                                 ;
 
             // dump and extract files
-            using (var writer = File.CreateText($"{this.filepath}.txt"))
+            using (var writer = File.CreateText($"{this.filepath}.csv"))
             {
                 // write header
                 writer.WriteLine(head);
@@ -112,18 +109,18 @@ namespace CP77Tools.Model
 
                     string info =
                         //$"{hashEntry.Hash:X2}\t +" +
-                        $"{offsetEntry.Offset}\t" +
-                        $"{offsetEntry.Size}\t" +
-                        $"{offsetEntry.Zsize}\t" +
-                        $"{x.Header:X2}\t" +
-                        $"{x.somebool}\t" +
-                        $"{x.startindex}\t" +
-                        $"{x.nextindex}\t" +
-                        $"{x.unk1}\t" +
-                        $"{x.unk2}\t" +
-                        $"{x.Footer:X2}\t"
-                                  
-                        ;
+                        $"{offsetEntry.Offset}," +
+                        $"{offsetEntry.VirtualSize}," +
+                        $"{offsetEntry.PhysicalSize}," +
+                        $"{x.NameHash:X2}," +
+                        $"{x.Unknown1:X2}," +
+                        $"{x.Unknown2:X2}," +
+                        $"{x.somebool}," +
+                        $"{x.firstDataSector}," +
+                        $"{x.lastDataSector}," +
+                        $"{x.firstUnkIndex}," +
+                        $"{x.lastUnkIndex}," +
+                        $"{x.Footer:X2}";
                     
                     writer.WriteLine(info);
                 }
@@ -229,8 +226,8 @@ namespace CP77Tools.Model
     {
 
         public ulong Offset { get; set; }
-        public uint Zsize { get; set; }
-        public uint Size { get; set; }
+        public uint PhysicalSize { get; set; }
+        public uint VirtualSize { get; set; }
 
         public OffsetEntry(BinaryReader br)
         {
@@ -240,18 +237,20 @@ namespace CP77Tools.Model
         private void Read(BinaryReader br)
         {
             Offset = br.ReadUInt64();
-            Zsize = br.ReadUInt32();
-            Size = br.ReadUInt32();
+            PhysicalSize = br.ReadUInt32();
+            VirtualSize = br.ReadUInt32();
         }
     }
     public partial class FileInfoEntry
     {
-        public byte[] Header { get; set; }
+        public ulong NameHash { get; set; }
+        public uint Unknown1 { get; set; }
+        public uint Unknown2 { get; set; }
         public uint somebool { get; private set; }
-        public uint startindex { get; private set; }
-        public uint nextindex { get; private set; }
-        public uint unk1 { get; private set; }
-        public uint unk2 { get; private set; }
+        public uint firstDataSector { get; private set; }
+        public uint lastDataSector { get; private set; }
+        public uint firstUnkIndex { get; private set; }
+        public uint lastUnkIndex { get; private set; }
 
         public byte[] Footer { get; set; }
 
@@ -262,13 +261,15 @@ namespace CP77Tools.Model
 
         private void Read(BinaryReader br)
         {
-            Header = br.ReadBytes(16);
+            NameHash = br.ReadUInt64();
+            Unknown1 = br.ReadUInt32();
+            Unknown2 = br.ReadUInt32();
 
             somebool = br.ReadUInt32();
-            startindex = br.ReadUInt32();
-            nextindex = br.ReadUInt32();
-            unk1 = br.ReadUInt32();
-            unk2 = br.ReadUInt32();
+            firstDataSector = br.ReadUInt32();
+            lastDataSector = br.ReadUInt32();
+            firstUnkIndex = br.ReadUInt32();
+            lastUnkIndex = br.ReadUInt32();
 
             Footer = br.ReadBytes(20);
         }
