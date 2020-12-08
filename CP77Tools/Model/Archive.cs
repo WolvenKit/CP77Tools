@@ -32,8 +32,8 @@ namespace CP77Tools.Model
             if (idx < Table.FileInfo.Count)
             {
                 var entry = Table.FileInfo[idx];
-                var startindex = (int)entry.firstDataSector;
-                var nextindex = (int)entry.lastDataSector;
+                var startindex = (int)entry.FirstDataSector;
+                var nextindex = (int)entry.NextDataSector;
 
                 using var ms = new MemoryStream();
                 using var bw = new BinaryWriter(ms);
@@ -55,7 +55,7 @@ namespace CP77Tools.Model
         /// </summary>
         public void DumpInfo()
         {
-            
+
 
             // dump chache info
             using (var writer = File.CreateText($"{this.filepath}.info"))
@@ -76,17 +76,17 @@ namespace CP77Tools.Model
             }
 
             const string head = //"Hash\t" +
-                                "Offset," +
-                                "RamSize," +
+                                "Hash64," +
+                                "Hash32," +
                                 "VirtualSize," +
-                                "Hash," +
-                                "Unknown1," +
-                                "Unknown2," +
-                                "somebool," +
-                                "startindex," +
-                                "nextindex," +
-                                "startTable3Index," +
-                                "nextTable3Index," +
+                                "PhysicalSize," +
+                                "Unk1," +
+                                "Unk2," +
+                                "Flags," +
+                                "StartDataSector," +
+                                "NextDataSector," +
+                                "StartUnkSector," +
+                                "NextUnkSector," +
                                 "Footer,"
                                 ;
 
@@ -102,26 +102,37 @@ namespace CP77Tools.Model
                     var x = entry.Value;
                     var idx = entry.Key;
 
+                    int PhysicalSize = 0;
+                    int VirtualSize = 0;
+
+                    var startindex = (int)x.FirstDataSector;
+                    var nextindex = (int)x.NextDataSector;
+
+                    for (int i = startindex; i < nextindex; i++)
+                    {
+                        PhysicalSize += (int)Table.Offsets[i].PhysicalSize;
+                        VirtualSize += (int)Table.Offsets[i].VirtualSize;
+                    }
+
                     var offsetEntry = Table.Offsets[idx];
                     //var hashEntry = Table.HashTable[idx];
 
                     //string ext = x.Name.Split('.').Last();
 
                     string info =
-                        //$"{hashEntry.Hash:X2}\t +" +
-                        $"{offsetEntry.Offset}," +
-                        $"{offsetEntry.VirtualSize}," +
-                        $"{offsetEntry.PhysicalSize}," +
-                        $"{x.NameHash:X2}," +
-                        $"{x.Unknown1:X2}," +
-                        $"{x.Unknown2:X2}," +
-                        $"{x.somebool}," +
-                        $"{x.firstDataSector}," +
-                        $"{x.lastDataSector}," +
-                        $"{x.firstUnkIndex}," +
-                        $"{x.lastUnkIndex}," +
+                        $"{x.NameHash64:X2}," +
+                        $"{x.NameHash32:X2}," +
+                        $"{VirtualSize}," +
+                        $"{PhysicalSize}," +
+                        $"{x.Unk1:X2}," +
+                        $"{x.Unk2:X2}," +
+                        $"{x.FileFlags}," +
+                        $"{x.FirstDataSector}," +
+                        $"{x.NextDataSector}," +
+                        $"{x.FirstUnkIndex}," +
+                        $"{x.NextUnkIndex}," +
                         $"{x.Footer:X2}";
-                    
+
                     writer.WriteLine(info);
                 }
             }
@@ -243,14 +254,15 @@ namespace CP77Tools.Model
     }
     public partial class FileInfoEntry
     {
-        public ulong NameHash { get; set; }
-        public uint Unknown1 { get; set; }
-        public uint Unknown2 { get; set; }
-        public uint somebool { get; private set; }
-        public uint firstDataSector { get; private set; }
-        public uint lastDataSector { get; private set; }
-        public uint firstUnkIndex { get; private set; }
-        public uint lastUnkIndex { get; private set; }
+        public ulong NameHash64 { get; private set; }
+        public uint NameHash32 { get; private set; }
+        public ushort Unk1 { get; private set; } //???? maybe it's really one int32
+        public ushort Unk2 { get; private set; } //????
+        public uint FileFlags { get; private set; }
+        public uint FirstDataSector { get; private set; }
+        public uint NextDataSector { get; private set; }
+        public uint FirstUnkIndex { get; private set; }
+        public uint NextUnkIndex { get; private set; }
 
         public byte[] Footer { get; set; }
 
@@ -261,15 +273,16 @@ namespace CP77Tools.Model
 
         private void Read(BinaryReader br)
         {
-            NameHash = br.ReadUInt64();
-            Unknown1 = br.ReadUInt32();
-            Unknown2 = br.ReadUInt32();
+            NameHash64 = br.ReadUInt64();
+            NameHash32 = br.ReadUInt32();
+            Unk1 = br.ReadUInt16();
+            Unk2 = br.ReadUInt16();
 
-            somebool = br.ReadUInt32();
-            firstDataSector = br.ReadUInt32();
-            lastDataSector = br.ReadUInt32();
-            firstUnkIndex = br.ReadUInt32();
-            lastUnkIndex = br.ReadUInt32();
+            FileFlags = br.ReadUInt32();
+            FirstDataSector = br.ReadUInt32();
+            NextDataSector = br.ReadUInt32();
+            FirstUnkIndex = br.ReadUInt32();
+            NextUnkIndex = br.ReadUInt32();
 
             Footer = br.ReadBytes(20);
         }

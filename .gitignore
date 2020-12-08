@@ -56,4 +56,3 @@ dkms.conf
 *bin/
 *.vs/
 *.suo
-*.suo
