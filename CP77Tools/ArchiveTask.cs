@@ -45,16 +45,6 @@ namespace CP77Tools
                             extension = options.extension;
                         }
                         
-                        if (file.Length > 4)
-                        {
-                            byte[] magic = new byte[4];
-                            Array.Copy(file, magic, 4);
-                            if (magic.SequenceEqual(new byte[] { 0x4B, 0x41, 0x52, 0x4B }))
-                            {
-                                extension = "kark";
-                            }
-                        }
-                        
                         string outpath = Path.Combine(outDir.FullName, $"{ar.Table.FileInfo[i].NameHash64:X8}.{extension}");
 
                         await File.WriteAllBytesAsync(outpath, file);

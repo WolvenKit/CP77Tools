@@ -42,7 +42,31 @@ namespace CP77Tools.Model
                     var offsetentry = this.Table.Offsets[i];
                     binaryReader.BaseStream.Seek((long)offsetentry.Offset, SeekOrigin.Begin);
                     var buffer = binaryReader.ReadBytes((int)offsetentry.PhysicalSize);
-                    bw.Write(buffer);
+                    if (offsetentry.PhysicalSize == offsetentry.VirtualSize)
+                    {
+                        bw.Write(buffer);
+                    }
+                    else
+                    {
+                        var ms2 = new MemoryStream(buffer);
+                        var br2 = new BinaryReader(ms2);
+
+                        var oodleCompression = br2.ReadBytes(4);
+                        if (!(oodleCompression.SequenceEqual(new byte[] { 0x4b, 0x41, 0x52, 0x4b })))
+                            throw new NotImplementedException();
+                        var size = br2.ReadUInt32();
+
+                        if (size != offsetentry.VirtualSize)
+                            throw new NotImplementedException();
+
+                        var buffer2 = br2.ReadBytes((int)offsetentry.PhysicalSize - 8);
+
+                        byte[] unpacked = new byte[offsetentry.VirtualSize];
+                        long unpackedSize = OodleLZ.Decompress(buffer2, unpacked);
+                        if (unpackedSize != offsetentry.VirtualSize)
+                            throw new Exception(string.Format("Unpacked size doesn't match real size. {0} vs {1}", unpackedSize, offsetentry.VirtualSize));
+                        bw.Write(unpacked);
+                    }
                 }
 
                 return ms.ToArray();
