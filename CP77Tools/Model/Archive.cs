@@ -159,7 +159,7 @@ namespace CP77Tools.Model
         private void Read(BinaryReader br)
         {
             Magic = br.ReadBytes(4);
-            if (!(Magic.SequenceEqual(new byte[] { 82, 68, 65, 82 })))
+            if (!Magic.SequenceEqual(new byte[] { 82, 68, 65, 82 }))
             {
                 throw new NotImplementedException();
             }

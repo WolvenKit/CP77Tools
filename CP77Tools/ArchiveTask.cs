@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using CP77Tools.Model;
 
@@ -39,11 +40,23 @@ namespace CP77Tools
                             continue;
 
                         string extension = "bin";
-                        if (options.extension.Length > 0)
+                        if (options.extension != null)
                         {
                             extension = options.extension;
                         }
+                        
+                        if (file.Length > 4)
+                        {
+                            byte[] magic = new byte[4];
+                            Array.Copy(file, magic, 4);
+                            if (magic.SequenceEqual(new byte[] { 0x4B, 0x41, 0x52, 0x4B }))
+                            {
+                                extension = "kark";
+                            }
+                        }
+                        
                         string outpath = Path.Combine(outDir.FullName, $"{ar.Table.FileInfo[i].NameHash64:X8}.{extension}");
+
                         await File.WriteAllBytesAsync(outpath, file);
                     }
                 }
