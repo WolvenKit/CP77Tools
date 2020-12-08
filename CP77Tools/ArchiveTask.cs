@@ -8,8 +8,8 @@ namespace CP77Tools
 {
     public static partial class ConsoleFunctions
     {
-
-        public static async Task<int> ArchiveTask(ArchiveOptions options)
+        
+        public static int ArchiveTask(ArchiveOptions options)
         {
             if (options.extract || options.dump)
             {
@@ -18,8 +18,6 @@ namespace CP77Tools
                 if (!inputFileInfo.Exists)
                     return 0;
 
-                // load texture cache
-                // switch chache types
                 var ar = new Archive(inputFileInfo.FullName);
 
                 if (options.extract)
