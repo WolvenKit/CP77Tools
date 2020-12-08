@@ -16,13 +16,6 @@ namespace CP77Tools
                 var inputFileInfo = new FileInfo(options.path);
                 if (!inputFileInfo.Exists)
                     return 0;
-                var outDir = Directory.CreateDirectory(inputFileInfo.Directory + "\\" + inputFileInfo.Name.Replace(".archive", ""));
-                if (outDir == null)
-                    return 0;
-                if (!outDir.Exists)
-                    Directory.CreateDirectory(outDir.FullName);
-                if (inputFileInfo.Extension != ".archive")
-                    return 0;
 
                 // load texture cache
                 // switch chache types
@@ -30,6 +23,14 @@ namespace CP77Tools
 
                 if (options.extract)
                 {
+                    var outDir = Directory.CreateDirectory(inputFileInfo.Directory + "\\" + inputFileInfo.Name.Replace(".archive", ""));
+                    if (outDir == null)
+                        return 0;
+                    if (!outDir.Exists)
+                        Directory.CreateDirectory(outDir.FullName);
+                    if (inputFileInfo.Extension != ".archive")
+                        return 0;
+
                     for (var i = 0; i < ar.FilesCount; i++)
                     {
                         var file = ar.GetFileData(i);
@@ -37,7 +38,12 @@ namespace CP77Tools
                         if (indir == null)
                             continue;
 
-                        string outpath = Path.Combine(outDir.FullName, $"{ar.Table.FileInfo[i].NameHash:X8}.bin");
+                        string extension = "bin";
+                        if (options.extension.Length > 0)
+                        {
+                            extension = options.extension;
+                        }
+                        string outpath = Path.Combine(outDir.FullName, $"{ar.Table.FileInfo[i].NameHash64:X8}.{extension}");
                         await File.WriteAllBytesAsync(outpath, file);
                     }
                 }
