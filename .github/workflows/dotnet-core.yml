@@ -27,17 +27,23 @@ jobs:
         target: ./CP77Tools/
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Zip
-      run: tar -a -c -f release.zip ./CP77Tools/bin/Release
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.1
+      with:
+        name: artifact
+        path: ./CP77Tools/bin/Release/net5.0
+    - uses: papeloto/action-zip@v1
+      with:
+        files: ./CP77Tools/bin/Release/net5.0
+        dest: release.zip
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
+        tag_name: commit-${{ github.sha }}
+        draft: true
         prerelease: true
     - name: Upload Release Asset
       id: upload-release-asset 
