@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
@@ -16,8 +16,17 @@
     <None Remove="Resources\PageMove.png" />
     <None Remove="Resources\PageMoveSelected.png" />
     <None Remove="Resources\PanelShape.png" />
+    <None Remove="Resources\PanelShape_V3.png" />
     <None Remove="Resources\TopHeader.png" />
     <None Remove="TopHeader" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CP77Tools\CP77Tools.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +41,7 @@
     <Resource Include="Resources\PageMove.png" />
     <Resource Include="Resources\PageMoveSelected.png" />
     <Resource Include="Resources\PanelShape.png" />
+    <Resource Include="Resources\PanelShape_V3.png" />
     <Resource Include="Resources\TopHeader.png" />
   </ItemGroup>
 
