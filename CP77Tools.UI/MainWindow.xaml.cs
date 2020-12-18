@@ -23,6 +23,7 @@ using CP77Tools.Services;
 using WolvenKit.Common.Services;
 using System.ComponentModel;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace CP77Tools.UI
 {
@@ -31,9 +32,6 @@ namespace CP77Tools.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
-
         //Archive 
         private string ToolTipArchive = "Target an archive to extract files or dump information.";
         private string ToolTipArchive_Path = "Input path to .archive.";
@@ -122,52 +120,54 @@ namespace CP77Tools.UI
 
         private void UI_Logger_PropertyChanging(object sender, PropertyChangingEventArgs e)
         {
-           // Trace.Write(e.PropertyName);
+           Trace.Write(e.PropertyName);
         }
 
         private void UI_Logger_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            //  Trace.Write(e.PropertyName);
+        {            
             if (sender is LoggerService _logger)
             {
                 switch (e.PropertyName)
                 {
                     case "Progress":
                         {
-                            ProgressCounter(_logger); break;
+                            UIProgressCounter(_logger); break;
                         }
                     default:
                         break;
                 }
             }
+            else
+            {
+                Trace.Write(e.PropertyName);
+            }
         }
 
         private void UI_Logger_OnStringLogged(object sender, LogStringEventArgs e)
         {
+           
            Trace.Write(e.Message + e.Logtype);
         }
 
 
-        private int TestCounter = 0;
-        private void ProgressCounter(LoggerService _logger)
+        private int TaskCounter = 0;
+        private void UIProgressCounter(LoggerService _logger)
         {
-           TestCounter += 1;
-           this.Dispatcher.Invoke(() => OnUIThread(_logger));
+            TaskCounter += 1;
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+            {
+                Logtype TYPE = _logger.Logtype;
+                var CURRENTTASK = TaskCounter;
+                string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + " - Working on Task : " + CURRENTTASK + Environment.NewLine;
+                UIElement_Progressbar.Value += _logger.Progress.Item1;
+                UIElement_ProgressOutput.Text = OUTPUTSTRING;
 
+            }));
         }
 
-        private void OnUIThread(LoggerService _logger)
-        {
-
-            Logtype TYPE = _logger.Logtype; 
-            
+    
 
 
-            var CURRENTTASK = TestCounter;
-            string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + " - Working on Task : " + CURRENTTASK + Environment.NewLine;
-            UIElement_Progressbar.Value += _logger.Progress.Item1;
-            UIElement_ProgressOutput.Text = OUTPUTSTRING;
-        }
 
 
 
@@ -224,6 +224,86 @@ namespace CP77Tools.UI
 
 
 
+
+        private void TaskManager(int taskindex)
+        {
+            switch (taskindex)
+            {
+                case 0:
+                    if (Archive_Path != "" && Archive_OutPath != "") 
+                    {
+                        Task task = new Task(() => ConsoleFunctions.ArchiveTask(Archive_Path, Archive_OutPath, Archive_Extract, Archive_Dump, Archive_List, Archive_Uncook, Archive_UncookFileType, Archive_Hash, Archive_Pattern, Archive_Regex));
+                        task.Start();
+                        task.Wait();
+                        Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+                        {
+                            UIElement_Progressbar.Value = 0;
+                            UIElement_ProgressOutput.Text = "[Normal] - Finished.." ;
+                            TaskCounter = 0;
+                        }));
+                    }
+                    break;
+
+                case 1:
+
+                    break;
+            }
+
+        }
+
+
+        private void UISender(int item)
+        {
+            switch (item)
+            {
+                case 0:
+
+                    if (Archive_Path != "" && Archive_OutPath != "") {
+
+ 
+
+                        //Task task = new Task(() => TaskManager(0));
+                        
+
+
+
+                        Thread worker = new Thread(() => TaskManager(0)); 
+                        worker.IsBackground = true;
+                        worker.Start();
+
+                    }
+                    break;
+
+                case 1:
+                  //  if (Dump_Path != "" && Dump_OutPath != "") { ConsoleFunctions.DumpTask(Dump_Path, Dump_OutPath, Dump_Imports, Dump_MissingHashes, Dump_Info); }
+                    break;
+
+                case 2:
+                  //  if (CR2W_Path != "" && CR2W_OutPath != "") { ConsoleFunctions.Cr2wTask(CR2W_Path, CR2W_OutPath, CR2W_All, CR2W_Chunks); }
+                    break;
+
+                case 3:
+                    ConsoleFunctions.HashTask(Hash_Input, Hash_Missing);
+                    break;
+
+                case 4:
+                   // if (CR2W_Path != "" && CR2W_OutPath != "") { ConsoleFunctions.OodleTask(Oodle_Path, Oodle_OutPath, Oodle_Decompress); }
+                    break;
+            }
+        }
+
+        private void UIElement_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog(); openFileDialog.Multiselect = false; openFileDialog.Filter = "Archives (*.archive)|*.archive"; var result = openFileDialog.ShowDialog();
+            if (result.HasValue && result.Value) { UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName; Archive_Path = openFileDialog.FileName; }
+        }
+
+        private void UIElement_Button_ArchiveSelectOutputPath_Click(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog(); dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok) { UIElement_Archive_PathIndicator_Output.Text = dialog.FileName.ReverseTruncate(34); Archive_OutPath = dialog.FileName; }
+        }
+
         private void UIFunc_DragWindow(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
         // General Events
         private void UIElement_CloseButton_MouseEnter(object sender, MouseEventArgs e) { UIElement_CloseButton.Source = ImageCache.CloseSelected; }
@@ -276,67 +356,6 @@ namespace CP77Tools.UI
         private void UIElement_Checkbox_DumpInfo_Unchecked(object sender, RoutedEventArgs e) { Dump_Info = false; }
         private void UIElement_Button_DumpStart_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_DumpStart.Foreground = new SolidColorBrush(Colors.Black); }
         private void UIElement_Button_DumpStart_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_DumpStart.Foreground = new SolidColorBrush(Colors.Yellow); }
-
-        private void TaskManager(int taskindex)
-        {
-            switch (taskindex)
-            {
-                case 0:
-                    if (Archive_Path != "" && Archive_OutPath != "") { ConsoleFunctions.ArchiveTask(Archive_Path, Archive_OutPath, Archive_Extract, Archive_Dump, Archive_List, Archive_Uncook, Archive_UncookFileType, Archive_Hash, Archive_Pattern, Archive_Regex); }
-                    break;
-
-                case 1:
-
-                    break;
-            }
-
-        }
-        private void UISender(int item)
-        {
-            switch (item)
-            {
-                case 0:
-
-                    if (Archive_Path != "" && Archive_OutPath != "") {
-
-
-                        Thread worker = new Thread(() => TaskManager(0)); 
-                        worker.IsBackground = true;
-                        worker.Start(); 
-
-                    }
-                    break;
-
-                case 1:
-                  //  if (Dump_Path != "" && Dump_OutPath != "") { ConsoleFunctions.DumpTask(Dump_Path, Dump_OutPath, Dump_Imports, Dump_MissingHashes, Dump_Info); }
-                    break;
-
-                case 2:
-                  //  if (CR2W_Path != "" && CR2W_OutPath != "") { ConsoleFunctions.Cr2wTask(CR2W_Path, CR2W_OutPath, CR2W_All, CR2W_Chunks); }
-                    break;
-
-                case 3:
-                    ConsoleFunctions.HashTask(Hash_Input, Hash_Missing);
-                    break;
-
-                case 4:
-                   // if (CR2W_Path != "" && CR2W_OutPath != "") { ConsoleFunctions.OodleTask(Oodle_Path, Oodle_OutPath, Oodle_Decompress); }
-                    break;
-            }
-        }
-
-        private void UIElement_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog(); openFileDialog.Multiselect = false; openFileDialog.Filter = "Archives (*.archive)|*.archive"; var result = openFileDialog.ShowDialog();
-            if (result.HasValue && result.Value) { UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName; Archive_Path = openFileDialog.FileName; }
-        }
-
-        private void UIElement_Button_ArchiveSelectOutputPath_Click(object sender, RoutedEventArgs e)
-        {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog(); dialog.IsFolderPicker = true;
-            if (dialog.ShowDialog() == CommonFileDialogResult.Ok) { UIElement_Archive_PathIndicator_Output.Text = dialog.FileName.ReverseTruncate(34); Archive_OutPath = dialog.FileName; }
-        }
-
     }
 
     public static class StringExt
@@ -348,4 +367,5 @@ namespace CP77Tools.UI
             return value.Length <= maxLength ? value : value.Substring(a, maxLength);
         }
     }
+
 }
