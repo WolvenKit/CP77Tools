@@ -11,74 +11,58 @@ namespace CP77Tools.UI.Functionality
 {
     public class UI
     {
-        private MainWindow App_UI;
-        public UI(MainWindow mainWindow)        {            this.App_UI = mainWindow;        }
+        private MainWindow app;
+        public UI(MainWindow mainWindow) { this.app = mainWindow; }
 
 
 
+        // Creates Tasks based on Taskindex.
         private void TaskManager(int taskindex)
         {
             switch (taskindex)
             {
                 case 0:
-                    if (App_UI._General.Archive_Path != "" && App_UI._General.Archive_OutPath != "")
+                    if (app.data.Archive_Path != "" && app.data.Archive_OutPath != "")
                     {
-                        Task task = new Task(() => ConsoleFunctions.ArchiveTask(App_UI._General.Archive_Path, App_UI._General.Archive_OutPath, App_UI._General.Archive_Extract, App_UI._General.Archive_Dump, App_UI._General.Archive_List, App_UI._General.Archive_Uncook, App_UI._General.Archive_UncookFileType, App_UI._General.Archive_Hash, App_UI._General.Archive_Pattern, App_UI._General.Archive_Regex));
-                        task.Start();
-                        task.Wait();
-                        App_UI._Logging.TaskFinished(MainWindow.TaskType.Archive);
+                        Task task = new Task(() => ConsoleFunctions.ArchiveTask(app.data.Archive_Path, app.data.Archive_OutPath, app.data.Archive_Extract, app.data.Archive_Dump, app.data.Archive_List, app.data.Archive_Uncook, app.data.Archive_UncookFileType, app.data.Archive_Hash, app.data.Archive_Pattern, app.data.Archive_Regex));
+                        task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);
                     }
                     break;
 
-                case 1:
-                    if (App_UI._General.Dump_Path != "" && App_UI._General.Dump_OutPath != "")
-                    {
-                        //  Thread worker = new Thread(() => TaskManager(1));
-                        // worker.IsBackground = true;
-                        // worker.Start();
-                        // ConsoleFunctions.DumpTask(Dump_Path, Dump_OutPath, Dump_Imports, Dump_MissingHashes, Dump_Info);
-                    }
-                    break;
-                case 2:
-                    if (App_UI._General.CR2W_Path != "" && App_UI._General.CR2W_OutPath != "")
-                    {
-                        // Thread worker = new Thread(() => TaskManager(2));
-                        // worker.IsBackground = true;
-                        // worker.Start();
-                        // ConsoleFunctions.Cr2wTask(CR2W_Path, CR2W_OutPath, CR2W_All, CR2W_Chunks);
-                    }
-                    break;
+                case 1: if (app.data.Dump_Path != "" && app.data.Dump_OutPath != "") { } break;
+                //  Thread worker = new Thread(() => TaskManager(1));
+                // worker.IsBackground = true;
+                // worker.Start();
+                // ConsoleFunctions.DumpTask(Dump_Path, Dump_OutPath, Dump_Imports, Dump_MissingHashes, Dump_Info);
+                case 2: if (app.data.CR2W_Path != "" && app.data.CR2W_OutPath != "") { } break;
+                // Thread worker = new Thread(() => TaskManager(2));
+                // worker.IsBackground = true;
+                // worker.Start();
+                // ConsoleFunctions.Cr2wTask(CR2W_Path, CR2W_OutPath, CR2W_All, CR2W_Chunks);
 
-                case 3:
-                    ConsoleFunctions.HashTask(App_UI._General.Hash_Input, App_UI._General.Hash_Missing);
-                    break;
+                case 3: ConsoleFunctions.HashTask(app.data.Hash_Input, app.data.Hash_Missing); break;
 
-                case 4:
-                    // if (CR2W_Path != "" && CR2W_OutPath != "") { ConsoleFunctions.OodleTask(Oodle_Path, Oodle_OutPath, Oodle_Decompress); }
-                    break;
+                case 4: break;
+                    // if (CR2W_Path != "" && CR2W_OutPath != "") { ConsoleFunctions.OodleTask(Oodle_Path, Oodle_OutPath, Oodle_Decompress); } 
             }
-
         }
 
 
-        public void ThreadedTaskSender(int item)
-        {
-            Thread worker = new Thread(() => TaskManager(item));
-            worker.IsBackground = true;
-            worker.Start();
-        }
+
+        // Creates Thread and sends TaskIndicator to taskmanager to run task on thread.
+        public void ThreadedTaskSender(int item) { Thread worker = new Thread(() => TaskManager(item)); worker.IsBackground = true; worker.Start(); }
 
         // Open file dialog with filter based on typeindicator.
         public void OpenFile(int TypeIndicator)
         {
-            string FileFilter = App_UI.InputFileTypes[TypeIndicator];
+            string FileFilter = app.InputFileTypes[TypeIndicator];
             OpenFileDialog openFileDialog = new OpenFileDialog(); openFileDialog.Multiselect = false; openFileDialog.Filter = FileFilter;
             var result = openFileDialog.ShowDialog();
             if (result.HasValue && result.Value)
             {
                 switch (TypeIndicator)
                 {
-                    case 0: App_UI.UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName; App_UI._General.Archive_Path = openFileDialog.FileName; break;
+                    case 0: app.UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName; app.data.Archive_Path = openFileDialog.FileName; break;
                     case 1: break;
                     case 2: break;
                     case 3: break;
@@ -97,7 +81,7 @@ namespace CP77Tools.UI.Functionality
                 if (CurrentPageIndex >= 0 && CurrentPageIndex <= 3) { CurrentPageIndex = 3; }
                 if (CurrentPageIndex >= 4 && CurrentPageIndex <= 7) { CurrentPageIndex = 7; }
                 if (CurrentPageIndex >= 8 && CurrentPageIndex <= 11) { CurrentPageIndex = 11; }
-                if (CurrentPageIndex >= App_UI.UIElement_ItemList.Items.Count - 1) { CurrentPageIndex = App_UI.UIElement_ItemList.Items.Count - 1; }
+                if (CurrentPageIndex >= app.UIElement_ItemList.Items.Count - 1) { CurrentPageIndex = app.UIElement_ItemList.Items.Count - 1; }
                 return CurrentPageIndex;
             }
             if (!plus)
@@ -120,7 +104,7 @@ namespace CP77Tools.UI.Functionality
                 switch (TypeIndicator)
                 {
                     case 0:
-                        App_UI.UIElement_Archive_PathIndicator_Output.Text = dialog.FileName.ReverseTruncate(34); App_UI._General.Archive_OutPath = dialog.FileName;
+                        app.UIElement_Archive_PathIndicator_Output.Text = dialog.FileName.ReverseTruncate(34); app.data.Archive_OutPath = dialog.FileName;
                         break;
 
 
@@ -132,13 +116,19 @@ namespace CP77Tools.UI.Functionality
         public void SetToolTips()
         {
             //Archive
-            App_UI.UIElement_Button_ArchiveSelectArchive.ToolTip = App_UI._General.ToolTipArchive_Path; App_UI.UIElement_Button_ArchiveSelectOutputPath.ToolTip = App_UI._General.ToolTipArchive_OutputPath;
-            App_UI.UIElement_Checkbox_ArchiveDump.ToolTip = App_UI._General.ToolTipArchive_Dump; App_UI.UIElement_Checkbox_ArchiveExtract.ToolTip = App_UI._General.ToolTipArchive_Extract;
-            App_UI.UIElement_Checkbox_ArchiveList.ToolTip = App_UI._General.ToolTipArchive_List; App_UI.UIElement_Checkbox_ArchiveUncook.ToolTip = App_UI._General.ToolTipArchive_Uncook;
-            App_UI.UIElement_TextBox_ArchiveHash.ToolTip = App_UI._General.ToolTipArchive_Hash; App_UI.UIElement_Button_ArchiveStart.ToolTip = App_UI._General.ToolTipArchive;
+            app.UIElement_Button_ArchiveSelectArchive.ToolTip = app.data.ToolTipArchive_Path;
+            app.UIElement_Button_ArchiveSelectOutputPath.ToolTip = app.data.ToolTipArchive_OutputPath;
+            app.UIElement_Checkbox_ArchiveDump.ToolTip = app.data.ToolTipArchive_Dump;
+            app.UIElement_Checkbox_ArchiveExtract.ToolTip = app.data.ToolTipArchive_Extract;
+            app.UIElement_Checkbox_ArchiveList.ToolTip = app.data.ToolTipArchive_List;
+            app.UIElement_Checkbox_ArchiveUncook.ToolTip = app.data.ToolTipArchive_Uncook;
+            app.UIElement_TextBox_ArchiveHash.ToolTip = app.data.ToolTipArchive_Hash;
+            app.UIElement_Button_ArchiveStart.ToolTip = app.data.ToolTipArchive;
             //Dump
-            App_UI.UIElement_Dump_PathIndicator_Selected.ToolTip = App_UI._General.ToolTipDump_Path; App_UI.UIElement_Checkbox_DumpImports.ToolTip = App_UI._General.ToolTipDump_Imports;
-            App_UI.UIElement_Checkbox_DumpMissingHashes.ToolTip = App_UI._General.ToolTipDump_MissingHashes; App_UI.UIElement_Checkbox_DumpInfo.ToolTip = App_UI._General.ToolTipDump_Info;
+            app.UIElement_Dump_PathIndicator_Selected.ToolTip = app.data.ToolTipDump_Path;
+            app.UIElement_Checkbox_DumpImports.ToolTip = app.data.ToolTipDump_Imports;
+            app.UIElement_Checkbox_DumpMissingHashes.ToolTip = app.data.ToolTipDump_MissingHashes;
+            app.UIElement_Checkbox_DumpInfo.ToolTip = app.data.ToolTipDump_Info;
             //CR2W
             //Hash
             //Oodle

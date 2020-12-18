@@ -14,9 +14,8 @@ namespace CP77Tools.UI.Functionality
 {
     public class Logging
     {
-        private MainWindow App_UI;
-
-        public Logging(MainWindow mainWindow)        {            this.App_UI = mainWindow;        }
+        private MainWindow app;
+        public Logging(MainWindow mainWindow) { this.app = mainWindow; }
 
 
         public void UI_Logger_PropertyChanging(object sender, PropertyChangingEventArgs e)
@@ -63,8 +62,8 @@ namespace CP77Tools.UI.Functionality
                 Logtype TYPE = _logger.Logtype;
                 var CURRENTTASK = TaskCounter;
                 string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + " - Working on Task : " + CURRENTTASK + Environment.NewLine;
-                App_UI.UIElement_Progressbar.Value += _logger.Progress.Item1;
-                App_UI.UIElement_ProgressOutput.Text = OUTPUTSTRING;
+                app.UIElement_Progressbar.Value += _logger.Progress.Item1;
+                app.UIElement_ProgressOutput.Text = OUTPUTSTRING;
 
             }));
         }
@@ -73,8 +72,8 @@ namespace CP77Tools.UI.Functionality
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                App_UI.UIElement_Progressbar.Value = 0;
-                App_UI.UIElement_ProgressOutput.Text = "[Normal] - Finished : " + CurrentTaskType.ToString();
+                app.UIElement_Progressbar.Value = 0;
+                app.UIElement_ProgressOutput.Text = "[Normal] - Finished : " + CurrentTaskType.ToString();
                 TaskCounter = 0;
             }));
         }
