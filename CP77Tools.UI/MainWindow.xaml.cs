@@ -43,6 +43,8 @@ namespace CP77Tools.UI
         private string ToolTipArchive_Uncook = "Uncooks textures from archive.";
         private string ToolTipArchive_Uext = "Uncook extension (tga, bmp, jpg, png, dds). Default is tga.";
         private string ToolTipArchive_Hash = "Extract single file with given hash.";
+        private string ToolTipArchive_Pattern = "";
+        private string ToolTipArchive_Regex = "";
 
         private string Archive_Path = "";
         private string Archive_OutPath = "";
@@ -52,6 +54,8 @@ namespace CP77Tools.UI
         private bool Archive_Uncook = false;
         private EUncookExtension Archive_UncookFileType = EUncookExtension.tga;
         private ulong Archive_Hash = 0;
+        private string Archive_Pattern = "";
+        private string Archive_Regex = "";
 
         //Dump
         private string ToolTipDump = "Target an archive or a directory to dump archive information.";
@@ -97,33 +101,61 @@ namespace CP77Tools.UI
         private string Oodle_Path;
         private string Oodle_OutPath;
         private bool Oodle_Decompress = false;
-
+        private ILoggerService UI_Logger;
 
         public MainWindow()
         {
             InitializeComponent();
             ServiceLocator.Default.RegisterType<IMainController, MainController>();
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
-            var UI_Logger = ServiceLocator.Default.ResolveType<ILoggerService>();
+            UI_Logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
             SetToolTips();
 
             UI_Logger.PropertyChanged += UI_Logger_PropertyChanged;
             UI_Logger.OnStringLogged += UI_Logger_OnStringLogged;
-         
+            UI_Logger.PropertyChanging += UI_Logger_PropertyChanging;
 
 
 
+        }
+
+        private void UI_Logger_PropertyChanging(object sender, PropertyChangingEventArgs e)
+        {
+           // Trace.Write(e.PropertyName);
         }
 
         private void UI_Logger_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Trace.Write(e.PropertyName);
+         //  Trace.Write(e.PropertyName);
+            if (sender is LoggerService _logger)
+            {
+                switch (e.PropertyName)
+                {
+                    case "Progress":
+                        {
+                            ProgressCounter(_logger);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
         }
 
         private void UI_Logger_OnStringLogged(object sender, LogStringEventArgs e)
         {
-            Trace.Write("Fuck me" + e.Message + e.Logtype);
+           // Trace.Write(e.Message + e.Logtype);
+        }
+
+
+        private int TestCounter = 0;
+        private void ProgressCounter(LoggerService _logger)
+        {
+            TestCounter += 1;
+            Trace.Write(TestCounter + Environment.NewLine); // Itemcount? Parralel.   // CURRENT TASK NUMBER
+            Trace.Write(_logger.Progress.Item2 + Environment.NewLine); // TOTAL TASKS
+            Trace.Write(_logger.Progress.Item1 + Environment.NewLine); // 0.0000 - 1 For progress bar.
         }
 
      
@@ -238,7 +270,7 @@ namespace CP77Tools.UI
             {
                 case 0:
 
-                    if (Archive_Path != "" && Archive_OutPath != "") { ConsoleFunctions.ArchiveTask(Archive_Path, Archive_OutPath, Archive_Extract, Archive_Dump, Archive_List, Archive_Uncook, Archive_UncookFileType, Archive_Hash); }
+                    if (Archive_Path != "" && Archive_OutPath != "") { ConsoleFunctions.ArchiveTask(Archive_Path, Archive_OutPath, Archive_Extract, Archive_Dump, Archive_List, Archive_Uncook, Archive_UncookFileType, Archive_Hash, Archive_Pattern , Archive_Regex); }
                     break;
 
                 case 1:
