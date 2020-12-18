@@ -22,6 +22,7 @@ using Catel.IoC;
 using CP77Tools.Services;
 using WolvenKit.Common.Services;
 using System.ComponentModel;
+using System.Threading;
 
 namespace CP77Tools.UI
 {
@@ -117,7 +118,6 @@ namespace CP77Tools.UI
             UI_Logger.PropertyChanging += UI_Logger_PropertyChanging;
 
 
-
         }
 
         private void UI_Logger_PropertyChanging(object sender, PropertyChangingEventArgs e)
@@ -127,15 +127,14 @@ namespace CP77Tools.UI
 
         private void UI_Logger_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-         //  Trace.Write(e.PropertyName);
+            //  Trace.Write(e.PropertyName);
             if (sender is LoggerService _logger)
             {
                 switch (e.PropertyName)
                 {
                     case "Progress":
                         {
-                            ProgressCounter(_logger);
-                            break;
+                            ProgressCounter(_logger); break;
                         }
                     default:
                         break;
@@ -145,20 +144,35 @@ namespace CP77Tools.UI
 
         private void UI_Logger_OnStringLogged(object sender, LogStringEventArgs e)
         {
-           // Trace.Write(e.Message + e.Logtype);
+           Trace.Write(e.Message + e.Logtype);
         }
 
 
         private int TestCounter = 0;
         private void ProgressCounter(LoggerService _logger)
         {
-            TestCounter += 1;
-            Trace.Write(TestCounter + Environment.NewLine); // Itemcount? Parralel.   // CURRENT TASK NUMBER
-            Trace.Write(_logger.Progress.Item2 + Environment.NewLine); // TOTAL TASKS
-            Trace.Write(_logger.Progress.Item1 + Environment.NewLine); // 0.0000 - 1 For progress bar.
+           TestCounter += 1;
+           this.Dispatcher.Invoke(() => OnUIThread(_logger));
+
         }
 
-     
+        private void OnUIThread(LoggerService _logger)
+        {
+
+            Logtype TYPE = _logger.Logtype; 
+            
+
+
+            var CURRENTTASK = TestCounter;
+            string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + " - Working on Task : " + CURRENTTASK + Environment.NewLine;
+            UIElement_Progressbar.Value += _logger.Progress.Item1;
+            UIElement_ProgressOutput.Text = OUTPUTSTRING;
+        }
+
+
+
+
+
 
 
         // TooltipsSetter
@@ -263,14 +277,34 @@ namespace CP77Tools.UI
         private void UIElement_Button_DumpStart_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_DumpStart.Foreground = new SolidColorBrush(Colors.Black); }
         private void UIElement_Button_DumpStart_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_DumpStart.Foreground = new SolidColorBrush(Colors.Yellow); }
 
+        private void TaskManager(int taskindex)
+        {
+            switch (taskindex)
+            {
+                case 0:
+                    if (Archive_Path != "" && Archive_OutPath != "") { ConsoleFunctions.ArchiveTask(Archive_Path, Archive_OutPath, Archive_Extract, Archive_Dump, Archive_List, Archive_Uncook, Archive_UncookFileType, Archive_Hash, Archive_Pattern, Archive_Regex); }
+                    break;
 
+                case 1:
+
+                    break;
+            }
+
+        }
         private void UISender(int item)
         {
             switch (item)
             {
                 case 0:
 
-                    if (Archive_Path != "" && Archive_OutPath != "") { ConsoleFunctions.ArchiveTask(Archive_Path, Archive_OutPath, Archive_Extract, Archive_Dump, Archive_List, Archive_Uncook, Archive_UncookFileType, Archive_Hash, Archive_Pattern , Archive_Regex); }
+                    if (Archive_Path != "" && Archive_OutPath != "") {
+
+
+                        Thread worker = new Thread(() => TaskManager(0)); 
+                        worker.IsBackground = true;
+                        worker.Start(); 
+
+                    }
                     break;
 
                 case 1:
