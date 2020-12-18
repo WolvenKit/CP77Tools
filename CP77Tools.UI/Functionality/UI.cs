@@ -81,7 +81,7 @@ namespace CP77Tools.UI.Functionality
                 if (CurrentPageIndex >= 0 && CurrentPageIndex <= 3) { CurrentPageIndex = 3; }
                 if (CurrentPageIndex >= 4 && CurrentPageIndex <= 7) { CurrentPageIndex = 7; }
                 if (CurrentPageIndex >= 8 && CurrentPageIndex <= 11) { CurrentPageIndex = 11; }
-                if (CurrentPageIndex >= app.UIElement_ItemList.Items.Count - 1) { CurrentPageIndex = app.UIElement_ItemList.Items.Count - 1; }
+                if (CurrentPageIndex >= app.Main_ItemList_UIElement_ListBox.Items.Count - 1) { CurrentPageIndex = app.Main_ItemList_UIElement_ListBox.Items.Count - 1; }
                 return CurrentPageIndex;
             }
             if (!plus)

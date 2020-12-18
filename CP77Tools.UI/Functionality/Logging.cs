@@ -62,8 +62,8 @@ namespace CP77Tools.UI.Functionality
                 Logtype TYPE = _logger.Logtype;
                 var CURRENTTASK = TaskCounter;
                 string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + " - Working on Task : " + CURRENTTASK + Environment.NewLine;
-                app.UIElement_Progressbar.Value += _logger.Progress.Item1;
-                app.UIElement_ProgressOutput.Text = OUTPUTSTRING;
+                app.Main_ProgressBar_UIElement_ProgressBar.Value += _logger.Progress.Item1;
+                app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
 
             }));
         }
@@ -73,8 +73,8 @@ namespace CP77Tools.UI.Functionality
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                app.UIElement_Progressbar.Value = 0;
-                app.UIElement_ProgressOutput.Text = "[Normal] - Finished : " + CurrentTaskType.ToString();
+                app.Main_ProgressBar_UIElement_ProgressBar.Value = 0;
+                app.Main_ProgressOutput_UIElement_TextBlock.Text = "[Normal] - Finished : " + CurrentTaskType.ToString();
                 TaskCounter = 0;
             }));
         }

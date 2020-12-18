@@ -115,18 +115,18 @@ namespace CP77Tools.UI
         private void UIFunc_DragWindow(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
 
         // General Events
-        private void UIElement_CloseButton_MouseEnter(object sender, MouseEventArgs e) { UIElement_CloseButton.Source = ImageCache.CloseSelected; }
-        private void UIElement_CloseButton_MouseLeave(object sender, MouseEventArgs e) { UIElement_CloseButton.Source = ImageCache.Close; }
-        private void UIElement_MinimizeButton_MouseEnter(object sender, MouseEventArgs e) { UIElement_MinimizeButton.Source = ImageCache.MinimizeSelected; }
-        private void UIElement_MinimizeButton_MouseLeave(object sender, MouseEventArgs e) { UIElement_MinimizeButton.Source = ImageCache.Minimize; }
-        private void UIElement_PreviousItems_MouseEnter(object sender, MouseEventArgs e) { UIElement_PreviousItems.Source = ImageCache.PageMoveSelected; }
-        private void UIElement_PreviousItems_MouseLeave(object sender, MouseEventArgs e) { UIElement_PreviousItems.Source = ImageCache.PageMove; }
-        private void UIElement_Button_NextItems_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_NextItems.Opacity = 0.75; }
-        private void UIElement_Button_NextItems_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_NextItems.Opacity = 0.9; }
-        private void UIElement_Button_NextItems_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { UIElement_Button_NextItems.Opacity = 0.9; }
-        private void UIElement_Button_PreviousItems_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_PreviousItems.Opacity = 0.75; }
-        private void UIElement_Button_PreviousItems_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_PreviousItems.Opacity = 0.9; }
-        private void UIElement_Button_PreviousItems_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { UIElement_Button_PreviousItems.Opacity = 0.9; }
+        private void UIElement_CloseButton_MouseEnter(object sender, MouseEventArgs e) { Main_CloseApp_UIElement_Image.Source = ImageCache.CloseSelected; }
+        private void UIElement_CloseButton_MouseLeave(object sender, MouseEventArgs e) { Main_CloseApp_UIElement_Image.Source = ImageCache.Close; }
+        private void UIElement_MinimizeButton_MouseEnter(object sender, MouseEventArgs e) { Main_MinimizeApp_UIElement_Image.Source = ImageCache.MinimizeSelected; }
+        private void UIElement_MinimizeButton_MouseLeave(object sender, MouseEventArgs e) { Main_MinimizeApp_UIElement_Image.Source = ImageCache.Minimize; }
+        private void UIElement_PreviousItems_MouseEnter(object sender, MouseEventArgs e) { Main_PreviousItems_UIElement_Image.Source = ImageCache.PageMoveSelected; }
+        private void UIElement_PreviousItems_MouseLeave(object sender, MouseEventArgs e) { Main_PreviousItems_UIElement_Image.Source = ImageCache.PageMove; }
+        private void UIElement_Button_NextItems_MouseEnter(object sender, MouseEventArgs e) { Main_NextItems_UIElement_Button.Opacity = 0.75; }
+        private void UIElement_Button_NextItems_MouseLeave(object sender, MouseEventArgs e) { Main_NextItems_UIElement_Button.Opacity = 0.9; }
+        private void UIElement_Button_NextItems_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { Main_NextItems_UIElement_Button.Opacity = 0.9; }
+        private void UIElement_Button_PreviousItems_MouseEnter(object sender, MouseEventArgs e) { Main_PreviousItems_UIElement_Button.Opacity = 0.75; }
+        private void UIElement_Button_PreviousItems_MouseLeave(object sender, MouseEventArgs e) { Main_PreviousItems_UIElement_Button.Opacity = 0.9; }
+        private void UIElement_Button_PreviousItems_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { Main_PreviousItems_UIElement_Button.Opacity = 0.9; }
 
         // OnExit
         private void UIElement_CloseButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { System.Windows.Application.Current.Shutdown(); }
@@ -135,9 +135,9 @@ namespace CP77Tools.UI
         private void UIElement_MinimizeButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { this.WindowState = WindowState.Minimized; }
 
         // Prev/Next Items Click events
-        private void UIElement_Button_PreviousItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { UIElement_Button_PreviousItems.Opacity = 0.6; if (ui.CurrentPageIndex > 0) { UIElement_ItemList.ScrollIntoView(UIElement_ItemList.Items[ui.Pagehandler(false)]); } }
-        private void UIElement_Button_NextItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { UIElement_Button_NextItems.Opacity = 0.6; UIElement_ItemList.ScrollIntoView(UIElement_ItemList.Items[ui.Pagehandler(true)]); }
-        private void UIElement_PreviousItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { UIElement_ItemList.ScrollIntoView(UIElement_ItemList.Items[0]);}
+        private void UIElement_Button_PreviousItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { Main_PreviousItems_UIElement_Button.Opacity = 0.6; if (ui.CurrentPageIndex > 0) { Main_ItemList_UIElement_ListBox.ScrollIntoView(Main_ItemList_UIElement_ListBox.Items[ui.Pagehandler(false)]); } }
+        private void UIElement_Button_NextItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { Main_NextItems_UIElement_Button.Opacity = 0.6; Main_ItemList_UIElement_ListBox.ScrollIntoView(Main_ItemList_UIElement_ListBox.Items[ui.Pagehandler(true)]); }
+        private void UIElement_PreviousItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { Main_ItemList_UIElement_ListBox.ScrollIntoView(Main_ItemList_UIElement_ListBox.Items[0]);}
 
         //Archive events
         private void UIElement_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e) { ui.OpenFile(0); }
