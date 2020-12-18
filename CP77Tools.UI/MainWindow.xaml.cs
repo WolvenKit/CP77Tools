@@ -20,6 +20,8 @@ using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Catel.IoC;
 using CP77Tools.Services;
+using WolvenKit.Common.Services;
+using System.ComponentModel;
 
 namespace CP77Tools.UI
 {
@@ -31,7 +33,6 @@ namespace CP77Tools.UI
 
 
 
-        
         //Archive 
         private string ToolTipArchive = "Target an archive to extract files or dump information.";
         private string ToolTipArchive_Path = "Input path to .archive.";
@@ -102,13 +103,30 @@ namespace CP77Tools.UI
         {
             InitializeComponent();
             ServiceLocator.Default.RegisterType<IMainController, MainController>();
+            ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
+            var UI_Logger = ServiceLocator.Default.ResolveType<ILoggerService>();
+
             SetToolTips();
-            
+
+            UI_Logger.PropertyChanged += UI_Logger_PropertyChanged;
+            UI_Logger.OnStringLogged += UI_Logger_OnStringLogged;
+         
+
 
 
         }
 
+        private void UI_Logger_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Trace.Write(e.PropertyName);
+        }
 
+        private void UI_Logger_OnStringLogged(object sender, LogStringEventArgs e)
+        {
+            Trace.Write("Fuck me" + e.Message + e.Logtype);
+        }
+
+     
 
 
         // TooltipsSetter

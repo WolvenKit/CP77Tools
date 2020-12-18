@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:CP77Tools.UI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
 
         <LinearGradientBrush x:Key="ItemBG" EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF314249"/>
@@ -50,5 +51,13 @@
             <GradientStop Color="#FF314249" Offset="1"/>
             <GradientStop Color="#FF169BCD" Offset="0.544"/>
         </LinearGradientBrush>
+
+        <ResourceDictionary x:Name="hello" x:Key="2">
+            <ResourceDictionary.MergedDictionaries>
+                <!--  FluentWPF Controls  -->
+                <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
+
 </Application>
