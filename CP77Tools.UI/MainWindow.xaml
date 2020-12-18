@@ -9,7 +9,7 @@
         Title="CP77Tools" Height="450" Width="839" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None">
     <Grid Opacity="0.9">
 
-        <Rectangle x:Name="UIElement_MainPanel" HorizontalAlignment="Center" Height="322" Margin="0,88,0,0" VerticalAlignment="Top" Width="803" MouseDown="UIFunc_DragWindow">
+        <Rectangle x:Name="UIElement_MainPanel"  HorizontalAlignment="Center" Height="322" Margin="0,88,0,0" VerticalAlignment="Top" Width="803" MouseDown="UIFunc_DragWindow">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
@@ -17,7 +17,7 @@
                 <ImageBrush ImageSource="/Resources/PanelShape_V3.png"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle x:Name="UIElement_Button_PreviousItems" Margin="36,108,787,94" Opacity="0.75" MouseEnter="UIElement_Button_PreviousItems_MouseEnter" MouseLeave="UIElement_Button_PreviousItems_MouseLeave" MouseLeftButtonDown="UIElement_Button_PreviousItems_MouseLeftButtonDown" MouseLeftButtonUp="UIElement_Button_PreviousItems_MouseLeftButtonUp" RadiusX="5" RadiusY="5">
+        <Rectangle x:Name="UIElement_Button_PreviousItems"  Margin="36,108,787,94" Opacity="0.75" MouseEnter="UIElement_Button_PreviousItems_MouseEnter" MouseLeave="UIElement_Button_PreviousItems_MouseLeave" MouseLeftButtonDown="UIElement_Button_PreviousItems_MouseLeftButtonDown" MouseLeftButtonUp="UIElement_Button_PreviousItems_MouseLeftButtonUp" RadiusX="5" RadiusY="5">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
@@ -30,7 +30,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle x:Name="UIElement_Button_NextItems" Margin="789,117,34,56" Opacity="0.75" MouseEnter="UIElement_Button_NextItems_MouseEnter" MouseLeave="UIElement_Button_NextItems_MouseLeave" MouseLeftButtonDown="UIElement_Button_NextItems_MouseLeftButtonDown" MouseLeftButtonUp="UIElement_Button_NextItems_MouseLeftButtonUp" RadiusX="5" RadiusY="5" Width="16">
+        <Rectangle x:Name="UIElement_Button_NextItems"  Margin="789,117,34,56" Opacity="0.75" MouseEnter="UIElement_Button_NextItems_MouseEnter" MouseLeave="UIElement_Button_NextItems_MouseLeave" MouseLeftButtonDown="UIElement_Button_NextItems_MouseLeftButtonDown" MouseLeftButtonUp="UIElement_Button_NextItems_MouseLeftButtonUp" RadiusX="5" RadiusY="5" Width="16">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
@@ -43,14 +43,14 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Label x:Name="UIElement_ComingSoon" Content="COMING SOON!" HorizontalAlignment="Left" Margin="242,231,0,0" VerticalAlignment="Top" Background="{x:Null}" FontFamily="Cyberpunk" FontSize="36" Foreground="#FFCCD12B"/>
-        <ListBox x:Name="UIElement_ItemList"  Margin="59,99,56,16" HorizontalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True">
+        <Label x:Name="UIElement_ComingSoon"  Content="COMING SOON!" HorizontalAlignment="Left" Margin="242,231,0,0" VerticalAlignment="Top" Background="{x:Null}" FontFamily="Cyberpunk" FontSize="36" Foreground="#FFCCD12B"/>
+        <ListBox x:Name="UIElement_ItemList"   Margin="59,99,56,16" HorizontalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True">
 
             <ListBox.ItemsPanel>
 
                 <ItemsPanelTemplate>
 
-                    <StackPanel x:Name="SideScrollOverviewStackPanel" Margin="0,0,0,20" Orientation="Horizontal" />
+                    <StackPanel x:Name="SideScrollOverviewStackPanel"  Margin="0,0,0,20" Orientation="Horizontal" />
 
                 </ItemsPanelTemplate>
 
@@ -66,140 +66,140 @@
                     </Setter>
                 </Style>
             </ListBox.ItemContainerStyle>
-            <Expander  x:Name="UIElement_Expander_Archive" Header="ARCHIVE" Height="280" Width="180" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" ExpandDirection="Down" ScrollViewer.CanContentScroll="True" BorderBrush="{x:Null}" Background="{DynamicResource ItemBG_Top}" MouseDown="UIFunc_DragWindow">
+            <Expander  x:Name="UIElement_Expander_Archive"  Header="ARCHIVE" Height="280" Width="180" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" ExpandDirection="Down" ScrollViewer.CanContentScroll="True" BorderBrush="{x:Null}" Background="{DynamicResource ItemBG_Top}" MouseDown="UIFunc_DragWindow">
 
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <TextBlock x:Name="UIElement_Archive_PathIndicator_Selected" HorizontalAlignment="Center" Margin="0,22,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_ArchiveSelectArchive" Content="Select Archive" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveSelectArchive_MouseEnter" MouseLeave="UIElement_Button_ArchiveSelectArchive_MouseLeave" Margin="0,6,0,0" Height="16" Click="UIElement_Button_ArchiveSelectArchive_Click"/>
-                    <Button x:Name="UIElement_Button_ArchiveStart" Content="Start" HorizontalAlignment="Center" Margin="0,226,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveStart_MouseEnter" MouseLeave="UIElement_Button_ArchiveStart_MouseLeave" Height="20" Background="{DynamicResource ItemBG_Bottom}" Click="UIElement_Button_ArchiveStart_Click"/>
-                    <TextBlock Background="{DynamicResource TextBlockBG}" x:Name="UIElement_Archive_PathIndicator_Output" HorizontalAlignment="Center" Margin="0,50,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Foreground="#FFE5D90C">
+                    <TextBlock x:Name="UIElement_Archive_PathIndicator_Selected"   HorizontalAlignment="Center" Margin="0,22,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
+                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_ArchiveSelectArchive"   Content="Select Archive" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveSelectArchive_MouseEnter" MouseLeave="UIElement_Button_ArchiveSelectArchive_MouseLeave" Margin="0,6,0,0" Height="16" Click="UIElement_Button_ArchiveSelectArchive_Click"/>
+                    <Button x:Name="UIElement_Button_ArchiveStart"   Content="Start" HorizontalAlignment="Center" Margin="0,226,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveStart_MouseEnter" MouseLeave="UIElement_Button_ArchiveStart_MouseLeave" Height="20" Background="{DynamicResource ItemBG_Bottom}" Click="UIElement_Button_ArchiveStart_Click"/>
+                    <TextBlock Background="{DynamicResource TextBlockBG}" x:Name="UIElement_Archive_PathIndicator_Output"   HorizontalAlignment="Center" Margin="0,50,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Foreground="#FFE5D90C">
                     </TextBlock>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_ArchiveSelectOutputPath" Content="Select Output Path" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="178" Foreground="#FFE5D90C" MouseEnter="UIElement_Button_ArchiveSelectOutputPath_MouseEnter" MouseLeave="UIElement_Button_ArchiveSelectOutputPath_MouseLeave" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" Click="UIElement_Button_ArchiveSelectOutputPath_Click"/>
-                    <CheckBox x:Name="UIElement_Checkbox_ArchiveExtract" Content="Extract" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveExtract_Checked" Unchecked="UIElement_Checkbox_ArchiveExtract_Unchecked">
+                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_ArchiveSelectOutputPath"   Content="Select Output Path" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="178" Foreground="#FFE5D90C" MouseEnter="UIElement_Button_ArchiveSelectOutputPath_MouseEnter" MouseLeave="UIElement_Button_ArchiveSelectOutputPath_MouseLeave" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" Click="UIElement_Button_ArchiveSelectOutputPath_Click"/>
+                    <CheckBox x:Name="UIElement_Checkbox_ArchiveExtract"   Content="Extract" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveExtract_Checked" Unchecked="UIElement_Checkbox_ArchiveExtract_Unchecked">
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="0.60" ScaleY="0.60" />
                         </CheckBox.LayoutTransform>
                     </CheckBox>
-                    <CheckBox x:Name="UIElement_Checkbox_ArchiveDump" Content="Dump" HorizontalAlignment="Left" Margin="3,65,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveDump_Checked" Unchecked="UIElement_Checkbox_ArchiveDump_Unchecked">
+                    <CheckBox x:Name="UIElement_Checkbox_ArchiveDump"   Content="Dump" HorizontalAlignment="Left" Margin="3,65,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveDump_Checked" Unchecked="UIElement_Checkbox_ArchiveDump_Unchecked">
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="0.60" ScaleY="0.60" />
                         </CheckBox.LayoutTransform>
                     </CheckBox>
-                    <CheckBox x:Name="UIElement_Checkbox_ArchiveList" Content="List" HorizontalAlignment="Left" Margin="94,65,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveList_Checked" Unchecked="UIElement_Checkbox_ArchiveList_Unchecked">
+                    <CheckBox x:Name="UIElement_Checkbox_ArchiveList"   Content="List" HorizontalAlignment="Left" Margin="94,65,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveList_Checked" Unchecked="UIElement_Checkbox_ArchiveList_Unchecked">
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="0.60" ScaleY="0.60" />
                         </CheckBox.LayoutTransform>
                     </CheckBox>
-                    <CheckBox x:Name="UIElement_Checkbox_ArchiveUncook" Content="Uncook" HorizontalAlignment="Left" Margin="127,65,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveUncook_Checked" Unchecked="UIElement_Checkbox_ArchiveUncook_Unchecked">
+                    <CheckBox x:Name="UIElement_Checkbox_ArchiveUncook"   Content="Uncook" HorizontalAlignment="Left" Margin="127,65,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveUncook_Checked" Unchecked="UIElement_Checkbox_ArchiveUncook_Unchecked">
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="0.60" ScaleY="0.60" />
                         </CheckBox.LayoutTransform>
                     </CheckBox>
-                    <TextBox x:Name="UIElement_TextBox_ArchiveHash" HorizontalAlignment="Center" Margin="0,96,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
+                    <TextBox x:Name="UIElement_TextBox_ArchiveHash"   HorizontalAlignment="Center" Margin="0,96,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
                     <Rectangle HorizontalAlignment="Center" Height="34" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="180" RadiusX="4" RadiusY="4" Margin="0,129,0,0" StrokeThickness="2">
                         <UIElement.RenderTransform>
                             <MatrixTransform/>
                         </UIElement.RenderTransform>
                     </Rectangle>
 
-                    <RadioButton Content=".jpg" HorizontalAlignment="Left" Margin="21,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
-                    <RadioButton Content=".bmp" HorizontalAlignment="Left" Margin="113,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="45"/>
-                    <RadioButton Content=".jpeg" HorizontalAlignment="Left" Margin="98,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="45"/>
-                    <RadioButton Content=".png" HorizontalAlignment="Left" Margin="58,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
-                    <RadioButton Content=".dds" HorizontalAlignment="Left" Margin="38,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
-                    <RadioButton Content=".tga" HorizontalAlignment="Left" Margin="75,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="46" IsChecked="True"/>
-                    <Label Content="Extract Single File By Hash" HorizontalContentAlignment="Center" Margin="0,77,0,154" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
-                    <Rectangle HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,79,0,0" StrokeThickness="2">
+                    <RadioButton   Content=".jpg" HorizontalAlignment="Left" Margin="21,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
+                    <RadioButton   Content=".bmp" HorizontalAlignment="Left" Margin="113,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="45"/>
+                    <RadioButton   Content=".jpeg" HorizontalAlignment="Left" Margin="98,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="45"/>
+                    <RadioButton   Content=".png" HorizontalAlignment="Left" Margin="58,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
+                    <RadioButton   Content=".dds" HorizontalAlignment="Left" Margin="38,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
+                    <RadioButton   Content=".tga" HorizontalAlignment="Left" Margin="75,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="46" IsChecked="True"/>
+                    <Label   Content="Extract Single File By Hash" HorizontalContentAlignment="Center" Margin="0,77,0,154" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <Rectangle   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,79,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Label Content="Uncook File Format" HorizontalContentAlignment="Center" Margin="0,108,0,123" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
-                    <Rectangle HorizontalAlignment="Center" Height="18" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="180" RadiusX="4" RadiusY="4" Margin="0,110,0,0" StrokeThickness="2">
+                    <Label   Content="Uncook File Format" HorizontalContentAlignment="Center" Margin="0,108,0,123" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <Rectangle   HorizontalAlignment="Center" Height="18" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="180" RadiusX="4" RadiusY="4" Margin="0,110,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <TextBox x:Name="UIElement_TextBox_ArchiveHash_Copy2" HorizontalAlignment="Center" Margin="0,212,0,0" Text="Enter Regex" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
-                    <Rectangle HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,195,0,0" StrokeThickness="2">
+                    <TextBox x:Name="UIElement_TextBox_ArchiveHash_Copy2"   HorizontalAlignment="Center" Margin="0,212,0,0" Text="Enter Regex" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
+                    <Rectangle   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,195,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Label Content="Regex" HorizontalContentAlignment="Center" Margin="0,193,0,38" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
-                    <TextBox x:Name="UIElement_TextBox_ArchiveHash_Copy3" HorizontalAlignment="Center" Margin="0,181,0,0" Text="Enter Pattern" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
-                    <Rectangle HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,164,0,0" StrokeThickness="2">
+                    <Label   Content="Regex" HorizontalContentAlignment="Center" Margin="0,193,0,38" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <TextBox x:Name="UIElement_TextBox_ArchiveHash_Copy3"   HorizontalAlignment="Center" Margin="0,181,0,0" Text="Enter Pattern" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
+                    <Rectangle   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,164,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Label Content="Pattern" HorizontalContentAlignment="Center" Margin="0,162,0,69" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <Label   Content="Pattern" HorizontalContentAlignment="Center" Margin="0,162,0,69" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
                 </Grid>
             </Expander>
-            <Expander x:Name="UIElement_Expander_Dump" Header="DUMP" Height="280" Width="180" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}" MouseDown="UIFunc_DragWindow">
+            <Expander x:Name="UIElement_Expander_Dump"   Header="DUMP" Height="280" Width="180" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}" MouseDown="UIFunc_DragWindow">
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <TextBlock x:Name="UIElement_Dump_PathIndicator_Selected" HorizontalAlignment="Center" Margin="0,22,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_DumpSelectArchiveOrDir" Content="Select Archive/Directory" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" Margin="0,6,0,0" Height="16" MouseEnter="UIElement_Button_DumpSelectArchiveOrDir_MouseEnter" MouseLeave="UIElement_Button_DumpSelectArchiveOrDir_MouseLeave"/>
-                    <Button x:Name="UIElement_Button_DumpStart" Content="Start" HorizontalAlignment="Center" Margin="0,195,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" Height="51" Background="{DynamicResource ItemBG_Bottom}" MouseEnter="UIElement_Button_DumpStart_MouseEnter" MouseLeave="UIElement_Button_DumpStart_MouseLeave"/>
-                    <TextBlock Background="{DynamicResource TextBlockBG}" x:Name="UIElement_Dump_PathIndicator_Output" HorizontalAlignment="Center" Margin="0,50,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Foreground="#FFE5D90C"/>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_DumpSelectOutputPath" Content="Select Output Path" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="178" Foreground="#FFE5D90C" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" MouseEnter="UIElement_Button_DumpSelectOutputPath_MouseEnter" MouseLeave="UIElement_Button_DumpSelectOutputPath_MouseLeave"/>
-                    <CheckBox x:Name="UIElement_Checkbox_DumpImports" Content="Dump Imports" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_DumpImports_Checked" Unchecked="UIElement_Checkbox_DumpImports_Unchecked"/>
-                    <CheckBox x:Name="UIElement_Checkbox_DumpMissingHashes" Content="Dump Missing Hashes" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_DumpMissingHashes_Checked" Unchecked="UIElement_Checkbox_DumpMissingHashes_Unchecked"/>
-                    <CheckBox x:Name="UIElement_Checkbox_DumpInfo" Content="Dump Info" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_DumpInfo_Checked" Unchecked="UIElement_Checkbox_DumpInfo_Unchecked"/>
+                    <TextBlock x:Name="UIElement_Dump_PathIndicator_Selected"   HorizontalAlignment="Center" Margin="0,22,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
+                    <Button   Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_DumpSelectArchiveOrDir" Content="Select Archive/Directory" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" Margin="0,6,0,0" Height="16" MouseEnter="UIElement_Button_DumpSelectArchiveOrDir_MouseEnter" MouseLeave="UIElement_Button_DumpSelectArchiveOrDir_MouseLeave"/>
+                    <Button   x:Name="UIElement_Button_DumpStart" Content="Start" HorizontalAlignment="Center" Margin="0,195,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" Height="51" Background="{DynamicResource ItemBG_Bottom}" MouseEnter="UIElement_Button_DumpStart_MouseEnter" MouseLeave="UIElement_Button_DumpStart_MouseLeave"/>
+                    <TextBlock   Background="{DynamicResource TextBlockBG}" x:Name="UIElement_Dump_PathIndicator_Output" HorizontalAlignment="Center" Margin="0,50,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Foreground="#FFE5D90C"/>
+                    <Button   Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_DumpSelectOutputPath" Content="Select Output Path" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="178" Foreground="#FFE5D90C" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" MouseEnter="UIElement_Button_DumpSelectOutputPath_MouseEnter" MouseLeave="UIElement_Button_DumpSelectOutputPath_MouseLeave"/>
+                    <CheckBox   x:Name="UIElement_Checkbox_DumpImports" Content="Dump Imports" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_DumpImports_Checked" Unchecked="UIElement_Checkbox_DumpImports_Unchecked"/>
+                    <CheckBox   x:Name="UIElement_Checkbox_DumpMissingHashes" Content="Dump Missing Hashes" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_DumpMissingHashes_Checked" Unchecked="UIElement_Checkbox_DumpMissingHashes_Unchecked"/>
+                    <CheckBox   x:Name="UIElement_Checkbox_DumpInfo" Content="Dump Info" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_DumpInfo_Checked" Unchecked="UIElement_Checkbox_DumpInfo_Unchecked"/>
                 </Grid>
             </Expander>
-            <Expander x:Name="UIElement_Expander_Oodle" Header="Oodle" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Visibility="Visible" Background="{DynamicResource ItemBG_Top}" Height="280" Width="180">
+            <Expander   x:Name="UIElement_Expander_Oodle" Header="Oodle" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Visibility="Visible" Background="{DynamicResource ItemBG_Top}" Height="280" Width="180">
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <TextBlock x:Name="UIElement_Archive_PathIndicator_Selected_Copy3" HorizontalAlignment="Center" Margin="0,22,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_ArchiveSelectArchive_Copy3" Content="Select File" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveSelectArchive_MouseEnter" MouseLeave="UIElement_Button_ArchiveSelectArchive_MouseLeave" Margin="0,6,0,0" Height="16" Click="UIElement_Button_ArchiveSelectArchive_Click"/>
-                    <Button x:Name="UIElement_Button_ArchiveStart_Copy3" Content="Start" HorizontalAlignment="Center" Margin="0,195,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveStart_MouseEnter" MouseLeave="UIElement_Button_ArchiveStart_MouseLeave" Height="51" Background="{DynamicResource ItemBG_Bottom}" Click="UIElement_Button_ArchiveStart_Click"/>
-                    <TextBlock Background="{DynamicResource TextBlockBG}" x:Name="UIElement_Archive_PathIndicator_Output_Copy3" HorizontalAlignment="Center" Margin="0,50,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Foreground="#FFE5D90C"/>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_ArchiveSelectOutputPath_Copy3" Content="Select Output Path" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="178" Foreground="#FFE5D90C" MouseEnter="UIElement_Button_ArchiveSelectOutputPath_MouseEnter" MouseLeave="UIElement_Button_ArchiveSelectOutputPath_MouseLeave" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" Click="UIElement_Button_ArchiveSelectOutputPath_Click"/>
-                    <CheckBox x:Name="UIElement_Checkbox_ArchiveExtract_Copy3" Content="Decompress" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveExtract_Checked" Unchecked="UIElement_Checkbox_ArchiveExtract_Unchecked"/>
+                    <TextBlock   x:Name="UIElement_Archive_PathIndicator_Selected_Copy3" HorizontalAlignment="Center" Margin="0,22,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
+                    <Button   Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_ArchiveSelectArchive_Copy3" Content="Select File" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveSelectArchive_MouseEnter" MouseLeave="UIElement_Button_ArchiveSelectArchive_MouseLeave" Margin="0,6,0,0" Height="16" Click="UIElement_Button_ArchiveSelectArchive_Click"/>
+                    <Button   x:Name="UIElement_Button_ArchiveStart_Copy3" Content="Start" HorizontalAlignment="Center" Margin="0,195,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveStart_MouseEnter" MouseLeave="UIElement_Button_ArchiveStart_MouseLeave" Height="51" Background="{DynamicResource ItemBG_Bottom}" Click="UIElement_Button_ArchiveStart_Click"/>
+                    <TextBlock   Background="{DynamicResource TextBlockBG}" x:Name="UIElement_Archive_PathIndicator_Output_Copy3" HorizontalAlignment="Center" Margin="0,50,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Foreground="#FFE5D90C"/>
+                    <Button   Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_ArchiveSelectOutputPath_Copy3" Content="Select Output Path" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="178" Foreground="#FFE5D90C" MouseEnter="UIElement_Button_ArchiveSelectOutputPath_MouseEnter" MouseLeave="UIElement_Button_ArchiveSelectOutputPath_MouseLeave" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" Click="UIElement_Button_ArchiveSelectOutputPath_Click"/>
+                    <CheckBox   x:Name="UIElement_Checkbox_ArchiveExtract_Copy3" Content="Decompress" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveExtract_Checked" Unchecked="UIElement_Checkbox_ArchiveExtract_Unchecked"/>
                 </Grid>
             </Expander>
-            <Expander x:Name="UIElement_Expander_CR2W" Header="CRzW" Height="280" Width="180" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}">
+            <Expander   x:Name="UIElement_Expander_CR2W" Header="CRzW" Height="280" Width="180" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}">
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <TextBlock x:Name="UIElement_CR2W_PathIndicator_Selected" HorizontalAlignment="Center" Margin="0,22,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_CR2WSelectFile" Content="Select CR2W File" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" Margin="0,6,0,0" Height="16"/>
-                    <TextBlock Background="{DynamicResource TextBlockBG}" x:Name="UIElement_CR2W_PathIndicator_Output" HorizontalAlignment="Center" Margin="0,50,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Foreground="#FFE5D90C"/>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_CR2WSelectOutputPath" Content="Select Output Path" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="178" Foreground="#FFE5D90C" Height="16" BorderBrush="{DynamicResource ItemBG_Top}"/>
-                    <CheckBox x:Name="UIElement_Checkbox_CR2WDumpAll" Content="Dump All Information" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C"/>
-                    <CheckBox x:Name="UIElement_Checkbox_CR2WDumpChunks" Content="Dump All Class Information" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C"/>
-                    <Button x:Name="UIElement_Button_CR2WStart" Content="Start" HorizontalAlignment="Center" Margin="0,195,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" Height="51" Background="{DynamicResource ItemBG_Bottom}"/>
+                    <TextBlock   x:Name="UIElement_CR2W_PathIndicator_Selected" HorizontalAlignment="Center" Margin="0,22,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
+                    <Button   Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_CR2WSelectFile" Content="Select CR2W File" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" Margin="0,6,0,0" Height="16"/>
+                    <TextBlock   Background="{DynamicResource TextBlockBG}" x:Name="UIElement_CR2W_PathIndicator_Output" HorizontalAlignment="Center" Margin="0,50,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="178" Foreground="#FFE5D90C"/>
+                    <Button   Background="{DynamicResource ItemBG_Bottom}" x:Name="UIElement_Button_CR2WSelectOutputPath" Content="Select Output Path" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="178" Foreground="#FFE5D90C" Height="16" BorderBrush="{DynamicResource ItemBG_Top}"/>
+                    <CheckBox   x:Name="UIElement_Checkbox_CR2WDumpAll" Content="Dump All Information" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C"/>
+                    <CheckBox   x:Name="UIElement_Checkbox_CR2WDumpChunks" Content="Dump All Class Information" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C"/>
+                    <Button   x:Name="UIElement_Button_CR2WStart" Content="Start" HorizontalAlignment="Center" Margin="0,195,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" Height="51" Background="{DynamicResource ItemBG_Bottom}"/>
                 </Grid>
             </Expander>
-            <Expander x:Name="UIElement_Expander_Hash" Header="HASH" Height="280" Width="180" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}">
+            <Expander   x:Name="UIElement_Expander_Hash" Header="HASH" Height="280" Width="180" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}">
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <CheckBox x:Name="UIElement_Checkbox_ArchiveExtract_Copy2" Content="Missing " HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveExtract_Checked" Unchecked="UIElement_Checkbox_ArchiveExtract_Unchecked"/>
-                    <TextBox x:Name="UIElement_TextBox_ArchiveHash_Copy" HorizontalAlignment="Center" Margin="0,22,0,0" Text="Enter String" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
-                    <Rectangle HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,5,0,0" StrokeThickness="2">
+                    <CheckBox   x:Name="UIElement_Checkbox_ArchiveExtract_Copy2" Content="Missing " HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="UIElement_Checkbox_ArchiveExtract_Checked" Unchecked="UIElement_Checkbox_ArchiveExtract_Unchecked"/>
+                    <TextBox   x:Name="UIElement_TextBox_ArchiveHash_Copy" HorizontalAlignment="Center" Margin="0,22,0,0" Text="Enter String" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
+                    <Rectangle   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,5,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Label Content="Create FNV1A hash by string" HorizontalContentAlignment="Center" Margin="0,3,0,228" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
-                    <Button x:Name="UIElement_Button_ArchiveStart_Copy2" Content="Start" HorizontalAlignment="Center" Margin="0,195,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveStart_MouseEnter" MouseLeave="UIElement_Button_ArchiveStart_MouseLeave" Height="51" Background="{DynamicResource ItemBG_Bottom}" Click="UIElement_Button_ArchiveStart_Click"/>
-                    <TextBox x:Name="UIElement_TextBox_ArchiveHash_Copy1" HorizontalAlignment="Center" Margin="0,53,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
-                    <Rectangle HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,36,0,0" StrokeThickness="2">
+                    <Label   Content="Create FNV1A hash by string" HorizontalContentAlignment="Center" Margin="0,3,0,228" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <Button   x:Name="UIElement_Button_ArchiveStart_Copy2" Content="Start" HorizontalAlignment="Center" Margin="0,195,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="178" MouseEnter="UIElement_Button_ArchiveStart_MouseEnter" MouseLeave="UIElement_Button_ArchiveStart_MouseLeave" Height="51" Background="{DynamicResource ItemBG_Bottom}" Click="UIElement_Button_ArchiveStart_Click"/>
+                    <TextBox   x:Name="UIElement_TextBox_ArchiveHash_Copy1" HorizontalAlignment="Center" Margin="0,53,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
+                    <Rectangle   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,36,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Label Content="Output" HorizontalContentAlignment="Center" Margin="0,34,0,197" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <Label   Content="Output" HorizontalContentAlignment="Center" Margin="0,34,0,197" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
                 </Grid>
             </Expander>
-            <Expander x:Name="UIElement_Expander_Placeholder_2" Header="HASH" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="180" Visibility="Hidden" Background="{DynamicResource ItemBG_Top}" IsEnabled="False">
+            <Expander   x:Name="UIElement_Expander_Placeholder_2" Header="HASH" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="180" Visibility="Hidden" Background="{DynamicResource ItemBG_Top}" IsEnabled="False">
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <Button Content="Button" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
+                    <Button   Content="Button" HorizontalAlignment="Left" Margin="52,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
+                    <Button   Content="Button" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
+                    <RadioButton   Content="RadioButton" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
+                    <RadioButton   Content="RadioButton" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
+                    <RadioButton   Content="RadioButton" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
+                    <RadioButton   Content="RadioButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
                 </Grid>
             </Expander>
-            <Expander x:Name="UIElement_Expander_Placeholder_3" Header="HASH" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="180" Visibility="Hidden" Background="{DynamicResource ItemBG_Top}" IsEnabled="False">
+            <Expander   x:Name="UIElement_Expander_Placeholder_3" Header="HASH" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="180" Visibility="Hidden" Background="{DynamicResource ItemBG_Top}" IsEnabled="False">
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
                     <Button Content="Button" HorizontalAlignment="Left" Margin="52,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
                     <Button Content="Button" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
@@ -251,7 +251,7 @@
             </Expander>
 
         </ListBox>
-        <Rectangle x:Name="UIElement_TopHeader" HorizontalAlignment="Left" Height="64" Margin="-10,60,0,0" VerticalAlignment="Top" Width="825" MouseDown="UIFunc_DragWindow">
+        <Rectangle x:Name="UIElement_TopHeader"  HorizontalAlignment="Left" Height="64" Margin="-10,60,0,0" VerticalAlignment="Top" Width="825" MouseDown="UIFunc_DragWindow">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/Resources/TopHeader.png"/>
             </Rectangle.Fill>
@@ -259,32 +259,32 @@
                 <DropShadowEffect/>
             </Rectangle.Effect>
         </Rectangle>
-        <Image x:Name="UIElement_CP77Logo" HorizontalAlignment="Left" Height="56" Margin="55,32,0,0" VerticalAlignment="Top" Width="152" Source="/Resources/Logo.png">
+        <Image x:Name="UIElement_CP77Logo"  HorizontalAlignment="Left" Height="56" Margin="55,32,0,0" VerticalAlignment="Top" Width="152" Source="/Resources/Logo.png">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Image x:Name="UIElement_CloseButton" HorizontalAlignment="Left" Height="28" Margin="784,46,0,0" VerticalAlignment="Top" Width="28" Source="/Resources/Close.png" MouseEnter="UIElement_CloseButton_MouseEnter" MouseLeave="UIElement_CloseButton_MouseLeave" MouseLeftButtonDown="UIElement_CloseButton_MouseLeftButtonDown">
+        <Image x:Name="UIElement_CloseButton"  HorizontalAlignment="Left" Height="28" Margin="784,46,0,0" VerticalAlignment="Top" Width="28" Source="/Resources/Close.png" MouseEnter="UIElement_CloseButton_MouseEnter" MouseLeave="UIElement_CloseButton_MouseLeave" MouseLeftButtonDown="UIElement_CloseButton_MouseLeftButtonDown">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Image x:Name="UIElement_MinimizeButton" HorizontalAlignment="Left" Height="7" Margin="745,57,0,0" VerticalAlignment="Top" Width="28" Source="/Resources/Minimize.png" MouseEnter="UIElement_MinimizeButton_MouseEnter" MouseLeave="UIElement_MinimizeButton_MouseLeave" MouseLeftButtonDown="UIElement_MinimizeButton_MouseLeftButtonDown">
+        <Image x:Name="UIElement_MinimizeButton"  HorizontalAlignment="Left" Height="7" Margin="745,57,0,0" VerticalAlignment="Top" Width="28" Source="/Resources/Minimize.png" MouseEnter="UIElement_MinimizeButton_MouseEnter" MouseLeave="UIElement_MinimizeButton_MouseLeave" MouseLeftButtonDown="UIElement_MinimizeButton_MouseLeftButtonDown">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Image x:Name="UIElement_PreviousItems" HorizontalAlignment="Left" Height="22" Margin="28,366,0,0" VerticalAlignment="Top" Width="22" Source="/Resources/PageMove.png" MouseLeftButtonDown="UIElement_PreviousItems_MouseLeftButtonDown" MouseEnter="UIElement_PreviousItems_MouseEnter" MouseLeave="UIElement_PreviousItems_MouseLeave" OpacityMask="White" Opacity="0.8">
+        <Image x:Name="UIElement_PreviousItems"  HorizontalAlignment="Left" Height="22" Margin="28,366,0,0" VerticalAlignment="Top" Width="22" Source="/Resources/PageMove.png" MouseLeftButtonDown="UIElement_PreviousItems_MouseLeftButtonDown" MouseEnter="UIElement_PreviousItems_MouseEnter" MouseLeave="UIElement_PreviousItems_MouseLeave" OpacityMask="White" Opacity="0.8">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Rectangle HorizontalAlignment="Left" Height="22" Margin="439,412,0,0" Stroke="#FF077DA9" VerticalAlignment="Top" Width="362" Fill="#FF077DA9" RadiusX="5" RadiusY="5" Opacity="0.8" MouseDown="UIFunc_DragWindow">
+        <Rectangle   HorizontalAlignment="Left" Height="22" Margin="439,412,0,0" Stroke="#FF077DA9" VerticalAlignment="Top" Width="362" Fill="#FF077DA9" RadiusX="5" RadiusY="5" Opacity="0.8" MouseDown="UIFunc_DragWindow">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
         </Rectangle>
-        <TextBlock x:Name="UIElement_ProgressOutput" Margin="445,417,38,0" Text="Current state : " TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="14" Foreground="#FFCFC40F" MouseDown="UIFunc_DragWindow"/>
-        <ProgressBar x:Name="UIElement_Progressbar" HorizontalAlignment="Left" Height="7" Margin="432,400,0,0" VerticalAlignment="Top" Width="389" Foreground="#FFE5D90C" BorderBrush="{x:Null}" Background="#FF077DA9" Maximum="1" LargeChange="0.1"/>
+        <TextBlock   x:Name="UIElement_ProgressOutput" Margin="445,417,38,0" Text="Current state : " TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="14" Foreground="#FFCFC40F" MouseDown="UIFunc_DragWindow"/>
+        <ProgressBar   x:Name="UIElement_Progressbar" HorizontalAlignment="Left" Height="7" Margin="432,400,0,0" VerticalAlignment="Top" Width="389" Foreground="#FFE5D90C" BorderBrush="{x:Null}" Background="#FF077DA9" Maximum="1" LargeChange="0.1"/>
     </Grid>
 </Window>
