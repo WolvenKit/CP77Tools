@@ -10,6 +10,7 @@ using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -18,6 +19,8 @@ using CP77Tools.Services;
 using WolvenKit.Common.FNV1A;
 using WolvenKit.Common.Services;
 using WolvenKit.Common.Tools.DDS;
+using System.Diagnostics;
+using Luna.ConsoleProgressBar;
 
 namespace CP77Tools
 {
@@ -28,15 +31,17 @@ namespace CP77Tools
         {
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
             ServiceLocator.Default.RegisterType<IMainController, MainController>();
-
+            var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
             // get csv data
             Console.WriteLine("Loading Hashes...");
             await Loadhashes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/archivehashes.csv"));
+
             
+
 
             #region commands
 
-            
+
 
 
 
@@ -98,7 +103,6 @@ namespace CP77Tools
 
             #endregion
 
-            var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
             // Run
             if (args == null || args.Length == 0)
@@ -114,6 +118,32 @@ namespace CP77Tools
                         return;
 
                     var parsed = CommandLineExtensions.ParseText(line, ' ', '"');
+
+                    using var pb = new ConsoleProgressBar()
+                    {
+                        DisplayBars = true,
+                        DisplayAnimation = false
+                    };
+
+
+                    logger.PropertyChanged += delegate (object? sender, PropertyChangedEventArgs args)
+                    {
+                        if (sender is LoggerService _logger)
+                        {
+                            switch (args.PropertyName)
+                            {
+                                case "Progress":
+                                {
+                                    pb.Report(_logger.Progress.Item1);
+                                    break;
+                                }
+                                default:
+                                    break;
+                            }
+                        }
+                    };
+
+
                     rootCommand.InvokeAsync(parsed.ToArray()).Wait();
 
                     await WriteLog();
@@ -155,37 +185,29 @@ namespace CP77Tools
         {
             var _maincontroller = ServiceLocator.Default.ResolveType<IMainController>();
 
-            using var fr = new FileStream(path, FileMode.Open, FileAccess.Read);
-            using var sr = new StreamReader(fr);
+            Stopwatch watch = new Stopwatch();
+            watch.Restart();
 
             var hashDictionary = new ConcurrentDictionary<ulong,string>();
 
-            while (true)
+            Parallel.ForEach(File.ReadLines(path), line =>
             {
-                string line = await sr.ReadLineAsync();
-                if (line == null)
-                {
-                    break;
-                }
-
                 // check line
-                line = line.Split(',',StringSplitOptions.RemoveEmptyEntries).First();
-                if (string.IsNullOrEmpty(line)) continue;
-
-                ulong hash = FNV1A64HashAlgorithm.HashString(line);
-                hashDictionary.AddOrUpdate(hash, line, (key, val) => val);
-            }
-
-
-       
+                line = line.Split(',', StringSplitOptions.RemoveEmptyEntries).First();
+                if (!string.IsNullOrEmpty(line))
+                {
+                    ulong hash = FNV1A64HashAlgorithm.HashString(line);
+                    hashDictionary.AddOrUpdate(hash, line, (key, val) => val);
+                }                
+            });
 
             _maincontroller.Hashdict = hashDictionary.ToDictionary(
                 entry => entry.Key,
                 entry => entry.Value);
-            Console.WriteLine($"Loaded {hashDictionary.Count} Hashes.");
+
+            watch.Stop();
+
+            Console.WriteLine($"Loaded {hashDictionary.Count} hashes in {watch.ElapsedMilliseconds}ms.");
         }
-
-
-        
     }
 }

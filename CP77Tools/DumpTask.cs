@@ -11,13 +11,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Catel.Collections;
 using Catel.IoC;
-using ConsoleProgressBar;
 using CP77Tools.Model;
 using CP77Tools.Services;
 using Newtonsoft.Json;
 using WolvenKit.Common;
 using WolvenKit.Common.Extensions;
 using WolvenKit.Common.FNV1A;
+using WolvenKit.Common.Services;
 using WolvenKit.CR2W;
 using WolvenKit.CR2W.Reflection;
 using WolvenKit.CR2W.Types;
@@ -95,6 +95,7 @@ namespace CP77Tools
             #endregion
 
             var mainController = ServiceLocator.Default.ResolveType<IMainController>();
+            var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
             var missinghashtxt = isDirectory 
                 ? Path.Combine(inputDirInfo.FullName, "missinghashes.txt") 
@@ -125,10 +126,12 @@ namespace CP77Tools
                             File = fileinfo.Where(_ => Path.GetExtension(_.NameStr) == ext)
                         }).ToList();
 
-                    using var pb = new ProgressBar();
-                    using var p1 = pb.Progress.Fork();
+
+
                     int progress = 0;
                     var total = query.Count;
+
+                    Console.Write($"Exporting {total} bundle entries ");
 
                     // foreach extension
                     Parallel.ForEach(query, new ParallelOptions { MaxDegreeOfParallelism = 16 }, result =>
@@ -150,21 +153,17 @@ namespace CP77Tools
                                 {
                                     return;
                                 }
-
+                                
                                 foreach (var chunk in cr2w.Chunks)
                                 {
                                     var o = chunk.GetDumpObject(br);
                                     if (o != null) Register(o);
-
-                                    // register variables
-
                                 }
                             });
                         }
                         
                         Interlocked.Increment(ref progress);
-                        var perc = progress / (double)total;
-                        p1.Report(perc, $"Loading bundle entries: {progress}/{total}");
+                        logger.LogProgress(progress / (float)total);
 
                         Console.WriteLine($"Dumped extension {result.Key}");
                     });
@@ -176,16 +175,17 @@ namespace CP77Tools
                     using var mmf = MemoryMappedFile.CreateFromFile(ar.Filepath, FileMode.Open,
                         ar.Filepath.GetHashMD5(), 0,
                         MemoryMappedFileAccess.Read);
-                    using var pb = new ProgressBar();
-                    using var p1 = pb.Progress.Fork();
+
                     int progress = 0;
 
                     var fileDictionary = new ConcurrentDictionary<ulong, Cr2wChunkInfo>();
                     var texDictionary = new ConcurrentDictionary<ulong, Cr2wTextureInfo>();
 
-
                     // get info
                     var count = ar.FileCount;
+
+                    Console.Write($"Exporting {count} bundle entries ");
+
                     Parallel.For(0, count, new ParallelOptions {MaxDegreeOfParallelism = 8}, i =>
                     {
                         var entry = ar.Files.ToList()[i];
@@ -263,11 +263,8 @@ namespace CP77Tools
                             }
                         }
 
-                        
-
-                        progress += 1;
-                        var perc = progress / (double)count;
-                        p1.Report(perc, $"Loading bundle entries: {progress}/{count}");
+                        Interlocked.Increment(ref progress);
+                        logger.LogProgress(progress / (float)count);
                     });
 
                     // write
@@ -343,7 +340,7 @@ namespace CP77Tools
             foreach (var (typename, variables) in typedict)
             {
                 //write
-                var sb = new StringBuilder($"[REDMeta] public class {typename} {{\r\n");
+                var sb = new StringBuilder($"[REDMeta] public class {typename} : CVariable {{\r\n");
 
                 var variableslist = variables.ToList();
                 for (int i = 0; i < variableslist.Count; i++)
@@ -402,7 +399,19 @@ namespace CP77Tools
                     if (oVariable.Type != null && oVariable.Type.Contains(":"))
                     {
                         var gentyp = oVariable.Type.Split(":").First();
-                        continue;
+                        var innertype = oVariable.Type.Substring(gentyp.Length + 1);
+                        var innertype2 = oVariable.Type[(gentyp.Length + 1)];
+                        if (gentyp == "array")
+                        {
+                            oVariable.Type = innertype;
+                            Register(oVariable);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        
                     }
 
                     Register(oVariable);
