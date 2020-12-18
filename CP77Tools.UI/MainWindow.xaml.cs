@@ -29,6 +29,9 @@ namespace CP77Tools.UI
     public partial class MainWindow : Window
     {
 
+
+
+        
         //Archive 
         private string ToolTipArchive = "Target an archive to extract files or dump information.";
         private string ToolTipArchive_Path = "Input path to .archive.";
@@ -89,7 +92,7 @@ namespace CP77Tools.UI
         private string ToolTipOodle = "Some helper functions related to oodle compression.";
         private string ToolTipOodle_Path = "";
         private string ToolTipOodle_Decompress = "";
-        
+
         private string Oodle_Path;
         private string Oodle_OutPath;
         private bool Oodle_Decompress = false;
@@ -100,7 +103,7 @@ namespace CP77Tools.UI
             InitializeComponent();
             ServiceLocator.Default.RegisterType<IMainController, MainController>();
             SetToolTips();
-
+            
 
 
         }
@@ -156,7 +159,7 @@ namespace CP77Tools.UI
         }
 
 
-        
+
         private void UIFunc_DragWindow(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
         // General Events
         private void UIElement_CloseButton_MouseEnter(object sender, MouseEventArgs e) { UIElement_CloseButton.Source = ImageCache.CloseSelected; }
@@ -167,10 +170,10 @@ namespace CP77Tools.UI
         private void UIElement_PreviousItems_MouseLeave(object sender, MouseEventArgs e) { UIElement_PreviousItems.Source = ImageCache.PageMove; }
         private void UIElement_Button_NextItems_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_NextItems.Opacity = 0.75; }
         private void UIElement_Button_NextItems_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_NextItems.Opacity = 0.9; }
-        private void UIElement_Button_NextItems_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { UIElement_Button_NextItems.Opacity = 0.9; }        
+        private void UIElement_Button_NextItems_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { UIElement_Button_NextItems.Opacity = 0.9; }
         private void UIElement_Button_PreviousItems_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_PreviousItems.Opacity = 0.75; }
-        private void UIElement_Button_PreviousItems_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_PreviousItems.Opacity = 0.9; }        
-        private void UIElement_Button_PreviousItems_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { UIElement_Button_PreviousItems.Opacity = 0.9; }       
+        private void UIElement_Button_PreviousItems_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_PreviousItems.Opacity = 0.9; }
+        private void UIElement_Button_PreviousItems_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { UIElement_Button_PreviousItems.Opacity = 0.9; }
         // OnExit
         private void UIElement_CloseButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { System.Windows.Application.Current.Shutdown(); }
         // Minimize
@@ -216,60 +219,38 @@ namespace CP77Tools.UI
             switch (item)
             {
                 case 0:
-                    if (Archive_Path != "" && Archive_OutPath != "")
-                        ConsoleFunctions.ArchiveTask(Archive_Path, Archive_OutPath, Archive_Extract, Archive_Dump, Archive_List, Archive_Uncook, Archive_UncookFileType, Archive_Hash);
+
+                    if (Archive_Path != "" && Archive_OutPath != "") { ConsoleFunctions.ArchiveTask(Archive_Path, Archive_OutPath, Archive_Extract, Archive_Dump, Archive_List, Archive_Uncook, Archive_UncookFileType, Archive_Hash); }
                     break;
 
                 case 1:
-                    if (Dump_Path != "" && Dump_OutPath != "") ;
-                    //ConsoleFunctions.DumpTask(Dump_Path,Dump_OutPath, Dump_Imports, Dump_MissingHashes, Dump_Info);
+                  //  if (Dump_Path != "" && Dump_OutPath != "") { ConsoleFunctions.DumpTask(Dump_Path, Dump_OutPath, Dump_Imports, Dump_MissingHashes, Dump_Info); }
                     break;
 
                 case 2:
-                    //    ConsoleFunctions.Cr2wTask();
+                  //  if (CR2W_Path != "" && CR2W_OutPath != "") { ConsoleFunctions.Cr2wTask(CR2W_Path, CR2W_OutPath, CR2W_All, CR2W_Chunks); }
                     break;
 
                 case 3:
-                    //   ConsoleFunctions.HashTask();
+                    ConsoleFunctions.HashTask(Hash_Input, Hash_Missing);
                     break;
 
                 case 4:
-                    //    ConsoleFunctions.OodleTask();
+                   // if (CR2W_Path != "" && CR2W_OutPath != "") { ConsoleFunctions.OodleTask(Oodle_Path, Oodle_OutPath, Oodle_Decompress); }
                     break;
-
-
-                    // public static void ArchiveTask(string path, string outpath, bool extract, bool dump, bool list, bool uncook, EUncookExtension uext, ulong hash)
-
-
-
             }
-
         }
 
         private void UIElement_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "Archives (*.archive)|*.archive";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var result = openFileDialog.ShowDialog();
-            if (result.HasValue && result.Value)
-            {
-                UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName;
-                Archive_Path = openFileDialog.FileName;
-
-            }
+            OpenFileDialog openFileDialog = new OpenFileDialog(); openFileDialog.Multiselect = false; openFileDialog.Filter = "Archives (*.archive)|*.archive"; var result = openFileDialog.ShowDialog();
+            if (result.HasValue && result.Value) { UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName; Archive_Path = openFileDialog.FileName; }
         }
+
         private void UIElement_Button_ArchiveSelectOutputPath_Click(object sender, RoutedEventArgs e)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            //dialog.InitialDirectory = "C:\\Users";
-            dialog.IsFolderPicker = true;
-            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-            {
-                UIElement_Archive_PathIndicator_Output.Text = dialog.FileName.ReverseTruncate(34);
-                Archive_OutPath = dialog.FileName;
-            }
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog(); dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok) { UIElement_Archive_PathIndicator_Output.Text = dialog.FileName.ReverseTruncate(34); Archive_OutPath = dialog.FileName; }
         }
 
     }
