@@ -68,6 +68,7 @@ namespace CP77Tools.UI.Functionality
             worker.Start();
         }
 
+        // Open file dialog with filter based on typeindicator.
         public void OpenFile(int TypeIndicator)
         {
             string FileFilter = App_UI.InputFileTypes[TypeIndicator];
@@ -77,16 +78,15 @@ namespace CP77Tools.UI.Functionality
             {
                 switch (TypeIndicator)
                 {
-                    case 0:
-                        App_UI.UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName; App_UI._General.Archive_Path = openFileDialog.FileName;
-                        break;
-
-
+                    case 0: App_UI.UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName; App_UI._General.Archive_Path = openFileDialog.FileName; break;
+                    case 1: break;
+                    case 2: break;
+                    case 3: break;
                 }
             }
         }
 
-        // Just some breh code for handling pages.
+        // Items Page Handler
         public int CurrentPageIndex = 3;
         public int Pagehandler(bool plus)
         {
@@ -111,6 +111,7 @@ namespace CP77Tools.UI.Functionality
             else { return 3; }
         }
 
+        // Open Folder Dialog, change UI based on typeindicator.
         public void OpenFolder(int TypeIndicator)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog(); dialog.IsFolderPicker = true;
