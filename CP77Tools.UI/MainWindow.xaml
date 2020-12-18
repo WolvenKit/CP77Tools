@@ -9,7 +9,7 @@
         Title="CP77Tools" Height="450" Width="839" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None">
     <Grid Opacity="0.9">
 
-        <Rectangle x:Name="UIElement_MainPanel"  HorizontalAlignment="Center" Height="322" Margin="0,88,0,0" VerticalAlignment="Top" Width="803" MouseDown="UIFunc_DragWindow">
+        <Rectangle x:Name="Main_Window_UIElement_Rectangle"  HorizontalAlignment="Center" Height="322" Margin="0,88,0,0" VerticalAlignment="Top" Width="803" MouseDown="UIFunc_DragWindow">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
@@ -17,7 +17,7 @@
                 <ImageBrush ImageSource="/Resources/PanelShape_V3.png"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle x:Name="UIElement_Button_PreviousItems"  Margin="36,108,787,94" Opacity="0.75" MouseEnter="UIElement_Button_PreviousItems_MouseEnter" MouseLeave="UIElement_Button_PreviousItems_MouseLeave" MouseLeftButtonDown="UIElement_Button_PreviousItems_MouseLeftButtonDown" MouseLeftButtonUp="UIElement_Button_PreviousItems_MouseLeftButtonUp" RadiusX="5" RadiusY="5">
+        <Rectangle x:Name="Main_PreviousItems_UIElement_Button"  Margin="36,108,787,94" Opacity="0.75" MouseEnter="UIElement_Button_PreviousItems_MouseEnter" MouseLeave="UIElement_Button_PreviousItems_MouseLeave" MouseLeftButtonDown="UIElement_Button_PreviousItems_MouseLeftButtonDown" MouseLeftButtonUp="UIElement_Button_PreviousItems_MouseLeftButtonUp" RadiusX="5" RadiusY="5">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
@@ -30,7 +30,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle x:Name="UIElement_Button_NextItems"  Margin="789,117,34,56" Opacity="0.75" MouseEnter="UIElement_Button_NextItems_MouseEnter" MouseLeave="UIElement_Button_NextItems_MouseLeave" MouseLeftButtonDown="UIElement_Button_NextItems_MouseLeftButtonDown" MouseLeftButtonUp="UIElement_Button_NextItems_MouseLeftButtonUp" RadiusX="5" RadiusY="5" Width="16">
+        <Rectangle x:Name="Main_NextItems_UIElement_Button"  Margin="789,117,34,56" Opacity="0.75" MouseEnter="UIElement_Button_NextItems_MouseEnter" MouseLeave="UIElement_Button_NextItems_MouseLeave" MouseLeftButtonDown="UIElement_Button_NextItems_MouseLeftButtonDown" MouseLeftButtonUp="UIElement_Button_NextItems_MouseLeftButtonUp" RadiusX="5" RadiusY="5" Width="16">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
@@ -43,8 +43,8 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Label x:Name="UIElement_ComingSoon"  Content="COMING SOON!" HorizontalAlignment="Left" Margin="242,231,0,0" VerticalAlignment="Top" Background="{x:Null}" FontFamily="Cyberpunk" FontSize="36" Foreground="#FFCCD12B"/>
-        <ListBox x:Name="UIElement_ItemList"   Margin="59,99,56,16" HorizontalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True">
+        <Label x:Name="Main_ComingSoon_UIElement_Label"  Content="COMING SOON!" HorizontalAlignment="Left" Margin="242,231,0,0" VerticalAlignment="Top" Background="{x:Null}" FontFamily="Cyberpunk" FontSize="36" Foreground="#FFCCD12B"/>
+        <ListBox x:Name="Main_ItemList_UIElement_ListBox"   Margin="59,99,56,16" HorizontalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True">
 
             <ListBox.ItemsPanel>
 
@@ -96,44 +96,44 @@
                         </CheckBox.LayoutTransform>
                     </CheckBox>
                     <TextBox x:Name="UIElement_TextBox_ArchiveHash"   HorizontalAlignment="Center" Margin="0,96,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
-                    <Rectangle HorizontalAlignment="Center" Height="34" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="180" RadiusX="4" RadiusY="4" Margin="0,129,0,0" StrokeThickness="2">
+                    <Rectangle x:Name="UIElement_Rectangle_ArchiveFormats" HorizontalAlignment="Center" Height="34" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="180" RadiusX="4" RadiusY="4" Margin="0,129,0,0" StrokeThickness="2">
                         <UIElement.RenderTransform>
                             <MatrixTransform/>
                         </UIElement.RenderTransform>
                     </Rectangle>
 
-                    <RadioButton   Content=".jpg" HorizontalAlignment="Left" Margin="21,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
-                    <RadioButton   Content=".bmp" HorizontalAlignment="Left" Margin="113,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="45"/>
-                    <RadioButton   Content=".jpeg" HorizontalAlignment="Left" Margin="98,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="45"/>
-                    <RadioButton   Content=".png" HorizontalAlignment="Left" Margin="58,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
-                    <RadioButton   Content=".dds" HorizontalAlignment="Left" Margin="38,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
-                    <RadioButton   Content=".tga" HorizontalAlignment="Left" Margin="75,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="46" IsChecked="True"/>
-                    <Label   Content="Extract Single File By Hash" HorizontalContentAlignment="Center" Margin="0,77,0,154" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
-                    <Rectangle   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,79,0,0" StrokeThickness="2">
+                    <RadioButton x:Name="UIElement_RadioButton_ArchiveJPG"   Content=".jpg" HorizontalAlignment="Left" Margin="21,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
+                    <RadioButton x:Name="UIElement_RadioButton_ArchiveBMP"   Content=".bmp" HorizontalAlignment="Left" Margin="113,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="45"/>
+                    <RadioButton x:Name="UIElement_RadioButton_ArchiveJPEG"   Content=".jpeg" HorizontalAlignment="Left" Margin="98,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="45"/>
+                    <RadioButton x:Name="UIElement_RadioButton_ArchivePNG"   Content=".png" HorizontalAlignment="Left" Margin="58,132,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
+                    <RadioButton x:Name="UIElement_RadioButton_ArchiveDDS"   Content=".dds" HorizontalAlignment="Left" Margin="38,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="40"/>
+                    <RadioButton x:Name="UIElement_RadioButton_ArchiveTGA"   Content=".tga" HorizontalAlignment="Left" Margin="75,146,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="46" IsChecked="True"/>
+                    <Label x:Name="UIElement_Label_ArchiveHash"   Content="Extract Single File By Hash" HorizontalContentAlignment="Center" Margin="0,77,0,154" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <Rectangle x:Name="UIElement_Rectangle_ArchiveHash"   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,79,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Label   Content="Uncook File Format" HorizontalContentAlignment="Center" Margin="0,108,0,123" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
-                    <Rectangle   HorizontalAlignment="Center" Height="18" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="180" RadiusX="4" RadiusY="4" Margin="0,110,0,0" StrokeThickness="2">
+                    <Label x:Name="UIElement_Label_ArchiveUncookFormat"   Content="Uncook File Format" HorizontalContentAlignment="Center" Margin="0,108,0,123" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <Rectangle x:Name="UIElement_Rectangle_ArchiveUncook"   HorizontalAlignment="Center" Height="18" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="180" RadiusX="4" RadiusY="4" Margin="0,110,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <TextBox x:Name="UIElement_TextBox_ArchiveHash_Copy2"   HorizontalAlignment="Center" Margin="0,212,0,0" Text="Enter Regex" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
-                    <Rectangle   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,195,0,0" StrokeThickness="2">
+                    <TextBox x:Name="UIElement_TextBox_ArchiveRegex"   HorizontalAlignment="Center" Margin="0,212,0,0" Text="Enter Regex" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
+                    <Rectangle x:Name="UIElement_Rectangle_ArchiveRegex"   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,195,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Label   Content="Regex" HorizontalContentAlignment="Center" Margin="0,193,0,38" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
-                    <TextBox x:Name="UIElement_TextBox_ArchiveHash_Copy3"   HorizontalAlignment="Center" Margin="0,181,0,0" Text="Enter Pattern" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
-                    <Rectangle   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,164,0,0" StrokeThickness="2">
+                    <Label x:Name="UIElement_Label_ArchiveRegex"   Content="Regex" HorizontalContentAlignment="Center" Margin="0,193,0,38" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <TextBox x:Name="UIElement_TextBox_ArchivePattern"   HorizontalAlignment="Center" Margin="0,181,0,0" Text="Enter Pattern" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66"/>
+                    <Rectangle x:Name="UIElement_Rectangle_ArchivePattern"   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="178" RadiusX="4" RadiusY="4" Margin="0,164,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Label   Content="Pattern" HorizontalContentAlignment="Center" Margin="0,162,0,69" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
+                    <Label x:Name="UIElement_Label_ArchivePattern"   Content="Pattern" HorizontalContentAlignment="Center" Margin="0,162,0,69" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="158" Background="{x:Null}"/>
                 </Grid>
             </Expander>
             <Expander x:Name="UIElement_Expander_Dump"   Header="DUMP" Height="280" Width="180" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}" MouseDown="UIFunc_DragWindow">
@@ -251,7 +251,7 @@
             </Expander>
 
         </ListBox>
-        <Rectangle x:Name="UIElement_TopHeader"  HorizontalAlignment="Left" Height="64" Margin="-10,60,0,0" VerticalAlignment="Top" Width="825" MouseDown="UIFunc_DragWindow">
+        <Rectangle x:Name="Main_TopHeader_UIElement_Rectangle"  HorizontalAlignment="Left" Height="64" Margin="-10,60,0,0" VerticalAlignment="Top" Width="825" MouseDown="UIFunc_DragWindow">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/Resources/TopHeader.png"/>
             </Rectangle.Fill>
@@ -259,32 +259,32 @@
                 <DropShadowEffect/>
             </Rectangle.Effect>
         </Rectangle>
-        <Image x:Name="UIElement_CP77Logo"  HorizontalAlignment="Left" Height="56" Margin="55,32,0,0" VerticalAlignment="Top" Width="152" Source="/Resources/Logo.png">
+        <Image x:Name="Main_CP77Logo_UIElement_Image"  HorizontalAlignment="Left" Height="56" Margin="55,32,0,0" VerticalAlignment="Top" Width="152" Source="/Resources/Logo.png">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Image x:Name="UIElement_CloseButton"  HorizontalAlignment="Left" Height="28" Margin="784,46,0,0" VerticalAlignment="Top" Width="28" Source="/Resources/Close.png" MouseEnter="UIElement_CloseButton_MouseEnter" MouseLeave="UIElement_CloseButton_MouseLeave" MouseLeftButtonDown="UIElement_CloseButton_MouseLeftButtonDown">
+        <Image x:Name="Main_CloseApp_UIElement_Image"  HorizontalAlignment="Left" Height="28" Margin="784,46,0,0" VerticalAlignment="Top" Width="28" Source="/Resources/Close.png" MouseEnter="UIElement_CloseButton_MouseEnter" MouseLeave="UIElement_CloseButton_MouseLeave" MouseLeftButtonDown="UIElement_CloseButton_MouseLeftButtonDown">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Image x:Name="UIElement_MinimizeButton"  HorizontalAlignment="Left" Height="7" Margin="745,57,0,0" VerticalAlignment="Top" Width="28" Source="/Resources/Minimize.png" MouseEnter="UIElement_MinimizeButton_MouseEnter" MouseLeave="UIElement_MinimizeButton_MouseLeave" MouseLeftButtonDown="UIElement_MinimizeButton_MouseLeftButtonDown">
+        <Image x:Name="Main_MinimizeApp_UIElement_Image"  HorizontalAlignment="Left" Height="7" Margin="745,57,0,0" VerticalAlignment="Top" Width="28" Source="/Resources/Minimize.png" MouseEnter="UIElement_MinimizeButton_MouseEnter" MouseLeave="UIElement_MinimizeButton_MouseLeave" MouseLeftButtonDown="UIElement_MinimizeButton_MouseLeftButtonDown">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Image x:Name="UIElement_PreviousItems"  HorizontalAlignment="Left" Height="22" Margin="28,366,0,0" VerticalAlignment="Top" Width="22" Source="/Resources/PageMove.png" MouseLeftButtonDown="UIElement_PreviousItems_MouseLeftButtonDown" MouseEnter="UIElement_PreviousItems_MouseEnter" MouseLeave="UIElement_PreviousItems_MouseLeave" OpacityMask="White" Opacity="0.8">
+        <Image x:Name="Main_PreviousItems_UIElement_Image"  HorizontalAlignment="Left" Height="22" Margin="28,366,0,0" VerticalAlignment="Top" Width="22" Source="/Resources/PageMove.png" MouseLeftButtonDown="UIElement_PreviousItems_MouseLeftButtonDown" MouseEnter="UIElement_PreviousItems_MouseEnter" MouseLeave="UIElement_PreviousItems_MouseLeave" OpacityMask="White" Opacity="0.8">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Rectangle   HorizontalAlignment="Left" Height="22" Margin="439,412,0,0" Stroke="#FF077DA9" VerticalAlignment="Top" Width="362" Fill="#FF077DA9" RadiusX="5" RadiusY="5" Opacity="0.8" MouseDown="UIFunc_DragWindow">
+        <Rectangle x:Name="Main_ProgressRect_UIElement_Rectangle"   HorizontalAlignment="Left" Height="22" Margin="439,412,0,0" Stroke="#FF077DA9" VerticalAlignment="Top" Width="362" Fill="#FF077DA9" RadiusX="5" RadiusY="5" Opacity="0.8" MouseDown="UIFunc_DragWindow">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
         </Rectangle>
-        <TextBlock   x:Name="UIElement_ProgressOutput" Margin="445,417,38,0" Text="Current state : " TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="14" Foreground="#FFCFC40F" MouseDown="UIFunc_DragWindow"/>
-        <ProgressBar   x:Name="UIElement_Progressbar" HorizontalAlignment="Left" Height="7" Margin="432,400,0,0" VerticalAlignment="Top" Width="389" Foreground="#FFE5D90C" BorderBrush="{x:Null}" Background="#FF077DA9" Maximum="1" LargeChange="0.1"/>
+        <TextBlock   x:Name="Main_ProgressOutput_UIElement_TextBlock" Margin="445,417,38,0" Text="Current state : " TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="14" Foreground="#FFCFC40F" MouseDown="UIFunc_DragWindow"/>
+        <ProgressBar   x:Name="Main_ProgressBar_UIElement_ProgressBar" HorizontalAlignment="Left" Height="7" Margin="432,400,0,0" VerticalAlignment="Top" Width="389" Foreground="#FFE5D90C" BorderBrush="{x:Null}" Background="#FF077DA9" Maximum="1" LargeChange="0.1"/>
     </Grid>
 </Window>

@@ -51,9 +51,9 @@ namespace CP77Tools.UI.Functionality
         
 
 
-        private int TaskCounter = 0;
-  
 
+        // Progress Reporting.
+        private int TaskCounter = 0;
         public void UIProgressCounter(LoggerService _logger)
         {
             TaskCounter += 1;
@@ -68,6 +68,7 @@ namespace CP77Tools.UI.Functionality
             }));
         }
 
+        // Reporting when finished.
         public void TaskFinished(MainWindow.TaskType CurrentTaskType)
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
