@@ -41,20 +41,13 @@ namespace CP77Tools
 
 
             #region commands
-
-
-
-
-
-
-
-
-
+            
+            
             var rootCommand = new RootCommand();
 
             var archive = new Command("archive", "Extract files or dump information from one or many archives.")
             {
-                new Option<string>(new []{"--path", "-p"}, "Input path. Can be a path to one .archive, or the content directory.\nIf this is a directory, all archives in it will be processed."),
+                new Option<string[]>(new []{"--path", "-p"}, "Input path. Can be a path to one .archive, or the content directory.\nIf this is a directory, all archives in it will be processed."),
                 new Option<string>(new []{ "--outpath", "-o"}, "Output directory to extract files to.\nIf not specified, will output to a new child directory, in place."),
                 new Option<string>(new []{ "--pattern", "-w"}, "Use optional search pattern, e.g. *.ink.\nIf both regex and pattern is defined, pattern will be used first."),
                 new Option<string>(new []{ "--regex", "-r"}, "Use optional regex pattern."),
@@ -66,7 +59,7 @@ namespace CP77Tools
                 new Option<ulong>(new []{ "--hash"}, "Extract single file with given hash."),
             };
             rootCommand.Add(archive);
-            archive.Handler = CommandHandler.Create<string, string, bool, bool, bool, bool, EUncookExtension, ulong, string, string>
+            archive.Handler = CommandHandler.Create<string[], string, bool, bool, bool, bool, EUncookExtension, ulong, string, string>
                 (Tasks.ConsoleFunctions.ArchiveTask);
 
             var dump = new Command("dump", "Target an archive or a directory to dump archive information.")
@@ -83,11 +76,12 @@ namespace CP77Tools
             var cr2w = new Command("cr2w", "Target a specific cr2w (extracted) file and dumps file information.")
             {
                 new Option<string>(new []{"--path", "-p"}, "Input path to a cr2w file."),
+                new Option<string>(new []{"--outpath", "-o"}, "Output path."),
                 new Option<bool>(new []{ "--all", "-a"}, "Dump all information."),
                 new Option<bool>(new []{ "--chunks", "-c"}, "Dump all class information of file."),
             };
             rootCommand.Add(cr2w);
-            cr2w.Handler = CommandHandler.Create<string, bool, bool>(Tasks.ConsoleFunctions.Cr2wTask);
+            cr2w.Handler = CommandHandler.Create<string,string, bool, bool>(Tasks.ConsoleFunctions.Cr2wTask);
 
             var hashTask = new Command("hash", "Some helper functions related to hashes.")
             {
@@ -100,10 +94,11 @@ namespace CP77Tools
             var oodleTask = new Command("oodle", "Some helper functions related to oodle compression.")
             {
                 new Option<string>(new []{"--path", "-p"}, ""),
+                new Option<string>(new []{"--outpath", "-o"}, ""),
                 new Option<bool>(new []{"--decompress", "-d"}, ""),
             };
             rootCommand.Add(oodleTask);
-            oodleTask.Handler = CommandHandler.Create<string, bool>(Tasks.ConsoleFunctions.OodleTask);
+            oodleTask.Handler = CommandHandler.Create<string,string, bool>(Tasks.ConsoleFunctions.OodleTask);
 
             #endregion
 
@@ -131,30 +126,29 @@ namespace CP77Tools
 
                     logger.PropertyChanged += delegate (object? sender, PropertyChangedEventArgs args)
                     {
-                        if (sender is LoggerService _logger)
+                        if (!(sender is LoggerService logger))
+                            return;
+                        switch (args.PropertyName)
                         {
-                            switch (args.PropertyName)
+                            case "Progress":
                             {
-                                case "Progress":
+                                if (logger.Progress.Item1 == 0)
                                 {
-                                    if (_logger.Progress.Item1 == 0)
+                                    pb = new ConsoleProgressBar()
                                     {
-                                        pb = new ConsoleProgressBar()
-                                        {
-                                            DisplayBars = true,
-                                            DisplayAnimation = false
-                                        };
-                                    }
-                                    pb.Report(_logger.Progress.Item1);
-                                    if (_logger.Progress.Item1 == 1)
-                                    {
-                                        System.Threading.Thread.Sleep(1000);
-                                    }
-                                    break;
+                                        DisplayBars = true,
+                                        DisplayAnimation = false
+                                    };
                                 }
-                                default:
-                                    break;
+                                pb.Report(logger.Progress.Item1);
+                                if (logger.Progress.Item1 == 1)
+                                {
+                                    System.Threading.Thread.Sleep(1000);
+                                }
+                                break;
                             }
+                            default:
+                                break;
                         }
                     };
 

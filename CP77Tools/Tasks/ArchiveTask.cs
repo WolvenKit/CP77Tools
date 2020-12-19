@@ -2,15 +2,33 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using CP77.CR2W.Archive;
+using Newtonsoft.Json;
 using WolvenKit.Common.Tools.DDS;
 
 namespace CP77Tools.Tasks
 {
     public static partial class ConsoleFunctions
     {
-        
-        public static void ArchiveTask(string path, string outpath, bool extract, bool dump, bool list, 
+        public static void ArchiveTask(string[] path, string outpath, bool extract, bool dump, bool list,
+            bool uncook, EUncookExtension uext, ulong hash, string pattern, string regex)
+        {
+            if (path == null || path.Length < 1)
+            {
+                Console.WriteLine("Please fill in an input path");
+                return;
+            }
+
+            Parallel.ForEach(path, file =>
+            {
+                ArchiveTaskInner(file, outpath, extract, dump, list,
+                    uncook, uext, hash, pattern, regex);
+            });
+        }
+
+
+        private static void ArchiveTaskInner(string path, string outpath, bool extract, bool dump, bool list, 
             bool uncook, EUncookExtension uext, ulong hash, string pattern, string regex)
         {
             #region checks
@@ -114,7 +132,14 @@ namespace CP77Tools.Tasks
 
                     if (dump)
                     {
-                        ar.DumpInfo(outDir);
+                        File.WriteAllText(Path.Combine(outDir.FullName, $"{ar.Name}.json"),
+                            JsonConvert.SerializeObject(ar, Formatting.Indented, new JsonSerializerSettings()
+                            {
+                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                PreserveReferencesHandling = PreserveReferencesHandling.None,
+                                TypeNameHandling = TypeNameHandling.None
+                            }));
+
                         Console.WriteLine($"Finished dumping {processedarchive.FullName}.");
                     }
 
@@ -125,6 +150,8 @@ namespace CP77Tools.Tasks
                             Console.WriteLine(entry.Value.NameStr);
                         }
                     }
+
+
                 }
             }
             return;

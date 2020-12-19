@@ -99,19 +99,11 @@ namespace CP77Tools.Tasks
 
             var mainController = ServiceLocator.Default.ResolveType<IMainController>();
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
-
-            var missinghashtxt = isDirectory 
-                ? Path.Combine(inputDirInfo.FullName, "missinghashes.txt") 
-                : $"{inputFileInfo.FullName}.missinghashes.txt";
-            using var mwriter = File.CreateText(missinghashtxt);
-
             var typedict = new ConcurrentDictionary<string, IEnumerable<string>>();
 
             // Parallel
             foreach (var ar in archives)
             {
-                
-
                 if (classinfo)
                 {
                     using var mmf = MemoryMappedFile.CreateFromFile(ar.Filepath, FileMode.Open,
@@ -137,11 +129,11 @@ namespace CP77Tools.Tasks
                     Console.Write($"Exporting {total} bundle entries ");
 
                     // foreach extension
-                    Parallel.ForEach(query, new ParallelOptions { MaxDegreeOfParallelism = 16 }, result =>
+                    Parallel.ForEach(query, result =>
                     {
                         if (!string.IsNullOrEmpty(result.Key))
                         {
-                            Parallel.ForEach(result.File, new ParallelOptions { MaxDegreeOfParallelism = 16 }, fi =>
+                            Parallel.ForEach(result.File, fi =>
                             {
                                 var (f, b) = ar.GetFileData(fi.NameHash64, mmf);
                                 using var ms = new MemoryStream(f);
@@ -189,7 +181,7 @@ namespace CP77Tools.Tasks
 
                     Console.Write($"Exporting {count} bundle entries ");
 
-                    Parallel.For(0, count, new ParallelOptions {MaxDegreeOfParallelism = 8}, i =>
+                    Parallel.For(0, count, i =>
                     {
                         var entry = ar.Files.ToList()[i];
                         var hash = entry.Key;
@@ -280,7 +272,6 @@ namespace CP77Tools.Tasks
 
                     if (imports)
                     {
-                        using var writer = File.CreateText($"{ar.Filepath}.imports.txt");
                         using var hwriter = File.CreateText($"{ar.Filepath}.hashes.csv");
                         hwriter.WriteLine("String,Hash");
                         List<string> allimports = new List<string>();
@@ -293,13 +284,23 @@ namespace CP77Tools.Tasks
                         }
                         foreach (var str in allimports.Distinct())
                         {
-                            writer.WriteLine(str);
                             var hash = FNV1A64HashAlgorithm.HashString(str);
                             if (!mainController.Hashdict.ContainsKey(hash))
                                 hwriter.WriteLine($"{str},{hash}");
                         }
 
                         Console.WriteLine($"Finished. Dump file written to {ar.Filepath}.");
+
+                        //write
+                        File.WriteAllText($"{ar.Filepath}.json",
+                            JsonConvert.SerializeObject(arobj, Formatting.Indented, new JsonSerializerSettings()
+                            {
+                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                PreserveReferencesHandling = PreserveReferencesHandling.None,
+                                TypeNameHandling = TypeNameHandling.None
+                            }));
+                        Console.WriteLine($"Finished. Dump file written to {inputFileInfo.FullName}.json");
+
                     }
 
                     if (texinfo)
@@ -315,8 +316,63 @@ namespace CP77Tools.Tasks
                         Console.WriteLine($"Finished. Dump file written to {inputFileInfo.FullName}.json");
                     }
                 }
+            }
 
-                if (missinghashes)
+            if (classinfo)
+            {
+                //write class definitions
+                var outdir = isDirectory
+                ? Path.Combine(inputDirInfo.FullName, "ClassDefinitions")
+                : Path.Combine(inputFileInfo.Directory.FullName, "ClassDefinitions");
+                Directory.CreateDirectory(outdir);
+                var outfile = Path.Combine(outdir, "classdefinitions.txt");
+                var outfileS = Path.Combine(outdir, "classdefinitions_simple.json");
+                var text = "";
+                foreach (var (typename, variables) in typedict)
+                {
+                    //write
+                    var sb = new StringBuilder($"[REDMeta] public class {typename} : CVariable {{\r\n");
+
+                    var variableslist = variables.ToList();
+                    for (int i = 0; i < variableslist.Count; i++)
+                    {
+                        var typ = variableslist[i].Split(' ').First();
+                        var nam = variableslist[i].Split(' ').Last();
+                        var wktype = REDReflection.GetWKitBaseTypeFromREDBaseType(typ);
+
+                        if (string.IsNullOrEmpty(nam)) nam = "Missing";
+                        if (string.IsNullOrEmpty(typ)) typ = "Missing";
+
+
+                        sb.Append($"\t[Ordinal({i})]  [RED(\"{nam}\")] public {wktype} {nam.FirstCharToUpper()} {{ get; set; }}\r\n");
+                    }
+
+                    sb.Append(
+                        $"public {typename}(CR2WFile cr2w, CVariable parent, string name) : base(cr2w, parent, name) {{ }}\r\n");
+
+                    sb.Append("}\r\n");
+                    text += sb.ToString();
+                }
+                File.WriteAllText(outfile, text);
+
+                //write
+                File.WriteAllText(outfileS,
+                    JsonConvert.SerializeObject(typedict, Formatting.Indented, new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        PreserveReferencesHandling = PreserveReferencesHandling.None,
+                        TypeNameHandling = TypeNameHandling.None
+                    }));
+
+                Console.WriteLine("Done.");
+            }
+            if (missinghashes)
+            {
+                var missinghashtxt = isDirectory
+                    ? Path.Combine(inputDirInfo.FullName, "missinghashes.txt")
+                    : $"{inputFileInfo.FullName}.missinghashes.txt";
+                using var mwriter = File.CreateText(missinghashtxt);
+                foreach (var ar in archives)
                 {
                     var ctr = 0;
                     foreach (var (hash, fileInfoEntry) in ar.Files)
@@ -330,53 +386,6 @@ namespace CP77Tools.Tasks
                     Console.WriteLine($"{ar.Filepath} - missing: {ctr}");
                 }
             }
-
-
-            //write class definitions
-            var outdir = isDirectory 
-                ? Path.Combine(inputDirInfo.FullName, "ClassDefinitions")
-                : Path.Combine(inputFileInfo.Directory.FullName, "ClassDefinitions");
-            Directory.CreateDirectory(outdir);
-            var outfile = Path.Combine(outdir, "classdefinitions.txt");
-            var outfileS = Path.Combine(outdir, "classdefinitions_simple.json");
-            var text = "";
-            foreach (var (typename, variables) in typedict)
-            {
-                //write
-                var sb = new StringBuilder($"[REDMeta] public class {typename} : CVariable {{\r\n");
-
-                var variableslist = variables.ToList();
-                for (int i = 0; i < variableslist.Count; i++)
-                {
-                    var typ = variableslist[i].Split(' ').First();
-                    var nam = variableslist[i].Split(' ').Last();
-                    var wktype = REDReflection.GetWKitBaseTypeFromREDBaseType(typ);
-                    
-                    if (string.IsNullOrEmpty(nam)) nam = "Missing";
-                    if (string.IsNullOrEmpty(typ)) typ = "Missing";
-
-
-                    sb.Append($"\t[Ordinal({i})]  [RED(\"{nam}\")] public {wktype} {nam.FirstCharToUpper()} {{ get; set; }}\r\n");
-                }
-
-                sb.Append(
-                    $"public {typename}(CR2WFile cr2w, CVariable parent, string name) : base(cr2w, parent, name) {{ }}\r\n");
-
-                sb.Append("}\r\n");
-                text += sb.ToString();
-            }
-            File.WriteAllText(outfile, text);
-
-            //write
-            File.WriteAllText(outfileS,
-                JsonConvert.SerializeObject(typedict, Formatting.Indented, new JsonSerializerSettings()
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    PreserveReferencesHandling = PreserveReferencesHandling.None,
-                    TypeNameHandling = TypeNameHandling.None
-                }));
-
-            Console.WriteLine("Done.");
 
 
             return 1;
