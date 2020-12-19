@@ -4,25 +4,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Catel.Collections;
 using Catel.IoC;
-using CP77Tools.Model;
-using CP77Tools.Services;
+using CP77.Common.Services;
+using CP77.Common.Tools.FNV1A;
+using CP77.CR2W.Archive;
 using Newtonsoft.Json;
 using WolvenKit.Common;
 using WolvenKit.Common.Extensions;
-using WolvenKit.Common.FNV1A;
 using WolvenKit.Common.Services;
 using WolvenKit.CR2W;
 using WolvenKit.CR2W.Reflection;
 using WolvenKit.CR2W.Types;
 
-namespace CP77Tools
+namespace CP77Tools.Tasks
 {
     public class ArchiveDumpObject
     {
@@ -67,6 +64,12 @@ namespace CP77Tools
         public static int DumpTask(string path, bool imports, bool missinghashes, bool texinfo, bool classinfo)
         {
             #region checks
+
+            if (string.IsNullOrEmpty(path))
+            {
+                Console.WriteLine("Please fill in an input path");
+                return 0;
+            }
 
             var isDirectory = false;
             var inputFileInfo = new FileInfo(path);

@@ -15,11 +15,12 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using CP77Tools.Model;
-using CP77Tools.Services;
-using WolvenKit.Common.FNV1A;
 using WolvenKit.Common.Services;
 using WolvenKit.Common.Tools.DDS;
 using System.Diagnostics;
+using CP77.Common.Services;
+using CP77.Common.Tools.FNV1A;
+using CP77Tools.Extensions;
 using Luna.ConsoleProgressBar;
 
 namespace CP77Tools
@@ -51,11 +52,11 @@ namespace CP77Tools
 
             var rootCommand = new RootCommand();
 
-            var archive = new Command("archive", "Target an archive to extract files or dump information.")
+            var archive = new Command("archive", "Extract files or dump information from one or many archives.")
             {
-                new Option<string>(new []{"--path", "-p"}, "Input path to .archive."),
-                new Option<string>(new []{ "--outpath", "-o"}, "Output directory to extract files to."),
-                new Option<string>(new []{ "--pattern", "-w"}, "Use optional search pattern, e.g. *.ink. If bith regex and pattern is definedm, pattern will be used first"),
+                new Option<string>(new []{"--path", "-p"}, "Input path. Can be a path to one .archive, or the content directory.\nIf this is a directory, all archives in it will be processed."),
+                new Option<string>(new []{ "--outpath", "-o"}, "Output directory to extract files to.\nIf not specified, will output to a new child directory, in place."),
+                new Option<string>(new []{ "--pattern", "-w"}, "Use optional search pattern, e.g. *.ink.\nIf both regex and pattern is defined, pattern will be used first."),
                 new Option<string>(new []{ "--regex", "-r"}, "Use optional regex pattern."),
                 new Option<bool>(new []{ "--extract", "-e"}, "Extract files from archive."),
                 new Option<bool>(new []{ "--dump", "-d"}, "Dump archive information."),
@@ -66,7 +67,7 @@ namespace CP77Tools
             };
             rootCommand.Add(archive);
             archive.Handler = CommandHandler.Create<string, string, bool, bool, bool, bool, EUncookExtension, ulong, string, string>
-                (ConsoleFunctions.ArchiveTask);
+                (Tasks.ConsoleFunctions.ArchiveTask);
 
             var dump = new Command("dump", "Target an archive or a directory to dump archive information.")
             {
@@ -77,7 +78,7 @@ namespace CP77Tools
                 new Option<bool>(new []{ "--classinfo"}, "Dump all class info."),
             };
             rootCommand.Add(dump);
-            dump.Handler = CommandHandler.Create<string, bool, bool, bool, bool>(ConsoleFunctions.DumpTask);
+            dump.Handler = CommandHandler.Create<string, bool, bool, bool, bool>(Tasks.ConsoleFunctions.DumpTask);
 
             var cr2w = new Command("cr2w", "Target a specific cr2w (extracted) file and dumps file information.")
             {
@@ -86,7 +87,7 @@ namespace CP77Tools
                 new Option<bool>(new []{ "--chunks", "-c"}, "Dump all class information of file."),
             };
             rootCommand.Add(cr2w);
-            cr2w.Handler = CommandHandler.Create<string, bool, bool>(ConsoleFunctions.Cr2wTask);
+            cr2w.Handler = CommandHandler.Create<string, bool, bool>(Tasks.ConsoleFunctions.Cr2wTask);
 
             var hashTask = new Command("hash", "Some helper functions related to hashes.")
             {
@@ -94,7 +95,7 @@ namespace CP77Tools
                 new Option<bool>(new []{"--missing", "-m"}, ""),
             };
             rootCommand.Add(hashTask);
-            hashTask.Handler = CommandHandler.Create<string, bool>(ConsoleFunctions.HashTask);
+            hashTask.Handler = CommandHandler.Create<string, bool>(Tasks.ConsoleFunctions.HashTask);
 
             var oodleTask = new Command("oodle", "Some helper functions related to oodle compression.")
             {
@@ -102,7 +103,7 @@ namespace CP77Tools
                 new Option<bool>(new []{"--decompress", "-d"}, ""),
             };
             rootCommand.Add(oodleTask);
-            oodleTask.Handler = CommandHandler.Create<string, bool>(ConsoleFunctions.OodleTask);
+            oodleTask.Handler = CommandHandler.Create<string, bool>(Tasks.ConsoleFunctions.OodleTask);
 
             #endregion
 
@@ -120,14 +121,13 @@ namespace CP77Tools
                     if (line == "q()")
                         return;
 
-                    var parsed = CommandLineExtensions.ParseText(line, ' ', '"');
-
-                    using var pb = new ConsoleProgressBar()
+                    var pb = new ConsoleProgressBar()
                     {
-                        DisplayBars = true,
+                        DisplayBars = false,
+                        DisplayPercentComplete = false,
                         DisplayAnimation = false
                     };
-
+                    var parsed = CommandLineExtensions.ParseText(line, ' ', '"');
 
                     logger.PropertyChanged += delegate (object? sender, PropertyChangedEventArgs args)
                     {
@@ -137,7 +137,19 @@ namespace CP77Tools
                             {
                                 case "Progress":
                                 {
+                                    if (_logger.Progress.Item1 == 0)
+                                    {
+                                        pb = new ConsoleProgressBar()
+                                        {
+                                            DisplayBars = true,
+                                            DisplayAnimation = false
+                                        };
+                                    }
                                     pb.Report(_logger.Progress.Item1);
+                                    if (_logger.Progress.Item1 == 1)
+                                    {
+                                        System.Threading.Thread.Sleep(1000);
+                                    }
                                     break;
                                 }
                                 default:
