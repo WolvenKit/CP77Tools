@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using CP77Tools.Tasks;
+using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;

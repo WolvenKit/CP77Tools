@@ -19,12 +19,12 @@ using WolvenKit.Common.Tools.DDS;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Catel.IoC;
-using CP77Tools.Services;
 using WolvenKit.Common.Services;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Threading;
 using CP77Tools.UI.Functionality;
+using CP77.Common.Services;
 
 namespace CP77Tools.UI
 {
