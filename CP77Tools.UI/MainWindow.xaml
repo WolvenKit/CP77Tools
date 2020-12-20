@@ -181,13 +181,13 @@
                     <CheckBox   x:Name="UIElement_Checkbox_CR2WDumpAll" Content="Dump All Information" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C"/>
                     <CheckBox   x:Name="UIElement_Checkbox_CR2WDumpChunks" Content="Dump All Class Information" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C"/>
                     <Button   x:Name="UIElement_Button_CR2WStart" Content="Start" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="358" Height="20" Background="{DynamicResource ItemBG_Bottom}"/>
-                    <Label x:Name="UIElement_Label_ArchiveOptions_Copy"   Content="Options" HorizontalContentAlignment="Center" Margin="0,45,0,186" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="74" Background="{x:Null}"/>
-                    <Rectangle x:Name="UIElement_Rectangle_ArchiveFormats_Copy5" HorizontalAlignment="Center" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,89,0,0" StrokeThickness="2">
+                    <Label x:Name="UIElement_Label_CR2WOptions"   Content="Options" HorizontalContentAlignment="Center" Margin="0,45,0,186" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="74" Background="{x:Null}"/>
+                    <Rectangle x:Name="UIElement_Rectangle_CR2WDumpChunks" HorizontalAlignment="Center" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,89,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Rectangle x:Name="UIElement_Rectangle_ArchiveFormats_Copy6" HorizontalAlignment="Center" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,63,0,0" StrokeThickness="2">
+                    <Rectangle x:Name="UIElement_Rectangle_CR2WDumpAll" HorizontalAlignment="Center" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,63,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
@@ -334,5 +334,7 @@
         </Rectangle>
         <TextBlock   x:Name="Main_ProgressOutput_UIElement_TextBlock" Margin="445,417,38,0" Text="Current state : " TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="14" Foreground="#FFCFC40F" MouseDown="UIFunc_DragWindow"/>
         <ProgressBar   x:Name="Main_ProgressBar_UIElement_ProgressBar" HorizontalAlignment="Left" Height="7" Margin="432,400,0,0" VerticalAlignment="Top" Width="389" Foreground="#FFE5D90C" BorderBrush="{x:Null}" Background="#FF077DA9" Maximum="1" LargeChange="0.1"/>
+        <ComboBox HorizontalAlignment="Left" Margin="781,415,0,0" VerticalAlignment="Top" Width="16" Height="16" MinWidth="10" MinHeight="10" FontFamily="Bahnschrift" FontSize="11">
+        </ComboBox>
     </Grid>
 </Window>
