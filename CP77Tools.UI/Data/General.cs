@@ -22,7 +22,7 @@ namespace CP77Tools.UI.Data
         public string ToolTipArchive_Pattern = "";
         public string ToolTipArchive_Regex = "";
 
-        public string Archive_Path = "";
+        public string[] Archive_Path = new string[0];
         public string Archive_OutPath = "";
         public bool Archive_Extract = false;
         public bool Archive_Dump = false;

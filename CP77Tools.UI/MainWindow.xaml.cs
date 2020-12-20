@@ -30,6 +30,8 @@ namespace CP77Tools.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// Archive - Cr2w - Repack (EndUser)
+    /// All options (Dev)
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -51,7 +53,7 @@ namespace CP77Tools.UI
             Oodle
         }
 
- 
+        public Color ForeGroundTextColor = (Color)ColorConverter.ConvertFromString("#FFE5D90C");
 
 
 
@@ -101,9 +103,12 @@ namespace CP77Tools.UI
         private void UIElement_MinimizeButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { this.WindowState = WindowState.Minimized; }
 
         // Prev/Next Items Click events
-        private void UIElement_Button_PreviousItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { Main_PreviousItems_UIElement_Button.Opacity = 0.6; if (ui.CurrentPageIndex > 0) { Main_ItemList_UIElement_ListBox.ScrollIntoView(Main_ItemList_UIElement_ListBox.Items[ui.Pagehandler(false)]); } }
-        private void UIElement_Button_NextItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { Main_NextItems_UIElement_Button.Opacity = 0.6; Main_ItemList_UIElement_ListBox.ScrollIntoView(Main_ItemList_UIElement_ListBox.Items[ui.Pagehandler(true)]); }
-        private void UIElement_PreviousItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { Main_ItemList_UIElement_ListBox.ScrollIntoView(Main_ItemList_UIElement_ListBox.Items[0]);}
+        private void UIElement_Button_PreviousItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)        {  ui.PreviousItemsInView(); }
+        private void UIElement_Button_NextItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)        { ui.NextItemsInView(); }
+        private void UIElement_PreviousItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)        { ui.GoToFirstItemInView(); }
+
+
+
 
         //Archive events
         private void UIElement_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e) { ui.OpenFile(0); }
@@ -119,17 +124,17 @@ namespace CP77Tools.UI
         private void UIElement_Button_ArchiveStart_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(0); }
         private void UIElement_TextBox_ArchiveHash_TextChanged(object sender, TextChangedEventArgs e) { data.Archive_Hash = Convert.ToUInt64(UIElement_TextBox_ArchiveHash.Text); }
         private void UIElement_Button_ArchiveSelectArchive_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectArchive.Foreground = new SolidColorBrush(Colors.Black); }
-        private void UIElement_Button_ArchiveSelectArchive_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectArchive.Foreground = new SolidColorBrush(Colors.Yellow); }
+        private void UIElement_Button_ArchiveSelectArchive_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectArchive.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void UIElement_Button_ArchiveSelectOutputPath_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectOutputPath.Foreground = new SolidColorBrush(Colors.Black); }
-        private void UIElement_Button_ArchiveSelectOutputPath_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectOutputPath.Foreground = new SolidColorBrush(Colors.Yellow); }
+        private void UIElement_Button_ArchiveSelectOutputPath_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectOutputPath.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void UIElement_Button_ArchiveStart_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_ArchiveStart.Foreground = new SolidColorBrush(Colors.Black); }
-        private void UIElement_Button_ArchiveStart_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_ArchiveStart.Foreground = new SolidColorBrush(Colors.Yellow); }
+        private void UIElement_Button_ArchiveStart_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_ArchiveStart.Foreground = new SolidColorBrush(ForeGroundTextColor); }
 
-        //Dump Events
+        //Dump Events (DEV ONLY)
         private void UIElement_Button_DumpSelectArchiveOrDir_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_DumpSelectArchiveOrDir.Foreground = new SolidColorBrush(Colors.Black); }
-        private void UIElement_Button_DumpSelectArchiveOrDir_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_DumpSelectArchiveOrDir.Foreground = new SolidColorBrush(Colors.Yellow); }
+        private void UIElement_Button_DumpSelectArchiveOrDir_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_DumpSelectArchiveOrDir.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void UIElement_Button_DumpSelectOutputPath_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_DumpSelectOutputPath.Foreground = new SolidColorBrush(Colors.Black); }
-        private void UIElement_Button_DumpSelectOutputPath_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_DumpSelectOutputPath.Foreground = new SolidColorBrush(Colors.Yellow); }
+        private void UIElement_Button_DumpSelectOutputPath_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_DumpSelectOutputPath.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void UIElement_Checkbox_DumpImports_Checked(object sender, RoutedEventArgs e) { data.Dump_Imports = true; }
         private void UIElement_Checkbox_DumpImports_Unchecked(object sender, RoutedEventArgs e) { data.Dump_Imports = false; }
         private void UIElement_Checkbox_DumpMissingHashes_Checked(object sender, RoutedEventArgs e) { data.Dump_MissingHashes = true; }
@@ -137,7 +142,7 @@ namespace CP77Tools.UI
         private void UIElement_Checkbox_DumpInfo_Checked(object sender, RoutedEventArgs e) { data.Dump_Info = true; }
         private void UIElement_Checkbox_DumpInfo_Unchecked(object sender, RoutedEventArgs e) { data.Dump_Info = false; }
         private void UIElement_Button_DumpStart_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_DumpStart.Foreground = new SolidColorBrush(Colors.Black); }
-        private void UIElement_Button_DumpStart_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_DumpStart.Foreground = new SolidColorBrush(Colors.Yellow); }
+        private void UIElement_Button_DumpStart_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_DumpStart.Foreground = new SolidColorBrush(ForeGroundTextColor); }
     }
 
     public static class StringExt
