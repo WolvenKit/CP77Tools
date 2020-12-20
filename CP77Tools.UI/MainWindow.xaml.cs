@@ -51,6 +51,7 @@ namespace CP77Tools.UI
             CR2W,
             Hash,
             Oodle
+                
         }
 
         public Color ForeGroundTextColor = (Color)ColorConverter.ConvertFromString("#FFE5D90C");
@@ -60,6 +61,7 @@ namespace CP77Tools.UI
 
         public MainWindow()
         {
+
             InitializeComponent();
             ServiceLocator.Default.RegisterType<IMainController, MainController>();
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();

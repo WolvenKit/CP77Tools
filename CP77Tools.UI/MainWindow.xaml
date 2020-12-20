@@ -70,7 +70,7 @@
             <Expander  x:Name="UIElement_Expander_Archive"  Header="ARCHIVE" Height="280" Width="360" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" ExpandDirection="Down" ScrollViewer.CanContentScroll="True" BorderBrush="{x:Null}" Background="{DynamicResource ItemBG_Top}" MouseDown="UIFunc_DragWindow" IsExpanded="True">
 
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <Rectangle x:Name="UIElement_Rectangle_ArchiveFormats_Copy" HorizontalAlignment="Center" Height="183" Stroke="{DynamicResource ButtonBackground_NewV2}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,48,0,0" StrokeThickness="2" Fill="#FF09739A">
+                    <Rectangle x:Name="UIElement_Rectangle_ArchiveOptionsPanel" HorizontalAlignment="Center" Height="183" Stroke="{DynamicResource ButtonBackground_NewV2}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,48,0,0" StrokeThickness="2" Fill="#FF09739A">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
