@@ -58,20 +58,31 @@ namespace CP77Tools.UI.Functionality
         // Open file dialog with filter based on typeindicator.
         public void OpenFile(int TypeIndicator)
         {
-            string FileFilter = app.InputFileTypes[TypeIndicator];
-            OpenFileDialog openFileDialog = new OpenFileDialog(); openFileDialog.Multiselect = false; openFileDialog.Filter = FileFilter;
+            OpenFileDialog openFileDialog = new OpenFileDialog(); openFileDialog.Multiselect = true;
+
+            if (TypeIndicator == 0) { string FileFilter = app.InputFileTypes[TypeIndicator]; openFileDialog.Filter = FileFilter; }
+
             var result = openFileDialog.ShowDialog();
             if (result.HasValue && result.Value)
             {
                 switch (TypeIndicator)
                 {
-                    case 0:
+                    case 0: // Archive
                         app.UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName;
                         Array.Resize(ref app.data.Archive_Path, app.data.Archive_Path.Length + 1); app.data.Archive_Path[app.data.Archive_Path.Length - 1] = openFileDialog.FileName;
                         break;
-                    case 1: break;
-                    case 2: break;
-                    case 3: break;
+                    case 1: // CR2W
+                        app.CR2W_PathIndicatorSelected_UIElement_TextBlock.Text = openFileDialog.SafeFileName;
+                        app.data.CR2W_Path = openFileDialog.FileName;
+                        break;
+                    case 2: // REPACK
+                        break;
+                    case 3: // Dump
+                        break;
+                    case 4: // Hash
+                        break;
+                    case 5: // Oodle
+                        break;
                 }
             }
         }
@@ -148,8 +159,22 @@ namespace CP77Tools.UI.Functionality
                 switch (TypeIndicator)
                 {
                     case 0:
-                        app.UIElement_Archive_PathIndicator_Output.Text = dialog.FileName.ReverseTruncate(34); app.data.Archive_OutPath = dialog.FileName;
+                        app.UIElement_Archive_PathIndicator_Output.Text = dialog.FileName.ReverseTruncate(34);
+                        app.data.Archive_OutPath = dialog.FileName;
                         break;
+                    case 1: // CR2W
+                        app.CR2W_PathIndicator_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
+                        app.data.CR2W_OutPath = dialog.FileName;
+                        break;
+                    case 2: // REPACK
+                        break;
+                    case 3: // Dump
+                        break;
+                    case 4: // Hash
+                        break;
+                    case 5: // Oodle
+                        break;
+
 
 
                 }

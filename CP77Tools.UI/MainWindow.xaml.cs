@@ -141,7 +141,14 @@ namespace CP77Tools.UI
         private void Archive_RadioButton_ArchivePNG_Checked(object sender, RoutedEventArgs e) { data.Archive_UncookFileType = EUncookExtension.png; }
         private void Archive_RadioButton_ArchiveDDS_Checked(object sender, RoutedEventArgs e) { data.Archive_UncookFileType = EUncookExtension.dds; }
         private void Archive_RadioButton_ArchiveTGA_Checked(object sender, RoutedEventArgs e) { if (data != null) data.Archive_UncookFileType = EUncookExtension.tga; }
+        private void UIElement_TextBox_ArchivePattern_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
+        private void UIElement_TextBox_ArchiveRegex_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
         //Dump Events (DEV ONLY)
         private void DumpSelectArchiveOrDir_MouseEnter(object sender, MouseEventArgs e) { Dump_SelectArchiveOrDirectory_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
         private void DumpSelectArchiveOrDir_MouseLeave(object sender, MouseEventArgs e) { Dump_SelectArchiveOrDirectory_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
@@ -158,6 +165,85 @@ namespace CP77Tools.UI
         private void Dump_ClassInfo_UIElement_CheckBox_Checked(object sender, RoutedEventArgs e) { data.Dump_ClassInfo = true; }
         private void Dump_ClassInfo_UIElement_CheckBox_Unchecked(object sender, RoutedEventArgs e) { data.Dump_ClassInfo = false; }
         private void Dump_Start_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(3); Main_OutputBox_UIElement_ComboBox.Items.Clear(); }
+
+
+
+
+
+
+
+
+        //CR2W
+        private void CR2W_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ui.OpenFile(1);
+        }
+
+        private void CR2W_SelectFile_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CR2W_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
+
+        }
+
+        private void CR2W_SelectFile_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CR2W_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
+        }
+
+        private void CR2W_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ui.OpenFolder(1);
+        }
+
+        private void CR2W_SelectOutputPath_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
+
+        }
+
+        private void CR2W_SelectOutputPath_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
+
+        }
+
+        private void CR2W_DumpChunks_UIElement_Checkbox_Checked(object sender, RoutedEventArgs e)
+        {
+            data.CR2W_Chunks = true;
+        }
+
+        private void CR2W_DumpChunks_UIElement_Checkbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            data.CR2W_Chunks = false;
+        }
+
+        private void CR2W_DumpAll_UIElement_Checkbox_Checked(object sender, RoutedEventArgs e)
+        {
+            data.CR2W_All = true;
+        }
+
+        private void CR2W_DumpAll_UIElement_Checkbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            data.CR2W_All = false;
+        }
+
+        private void CR2W_Start_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ui.ThreadedTaskSender(1); Main_OutputBox_UIElement_ComboBox.Items.Clear();
+        }
+
+        private void CR2W_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CR2W_Start_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
+
+        }
+
+        private void CR2W_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CR2W_Start_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
+
+        }
+
     }
 
     public static class StringExt
