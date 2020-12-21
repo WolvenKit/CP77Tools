@@ -40,12 +40,14 @@ namespace CP77Tools.UI.Data
         public string ToolTipDump_Imports = "Dump all imports (all filenames that are referenced by all files in the archive).";
         public string ToolTipDump_MissingHashes = "List all missing hashes of all input archives.";
         public string ToolTipDump_Info = "Dump all xbm info.";
+        public string ToolTipDump_ClassInfo = "";
 
         public string Dump_Path = "";
         public string Dump_OutPath = "";
         public bool Dump_Imports = false;
         public bool Dump_MissingHashes = false;
         public bool Dump_Info = false;
+        public bool Dump_ClassInfo = false;
 
         //CR2W
         public string ToolTipCR2W = "Target a specific cr2w (extracted) file and dumps file information.";
