@@ -35,11 +35,31 @@ namespace CP77Tools
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
             logger.OnStringLogged += delegate (object? sender, LogStringEventArgs args)
             {
+                switch (args.Logtype)
+                {
+                    
+                    case Logtype.Error:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        break;
+                    case Logtype.Important:
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        break;
+                    case Logtype.Success:
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        break;
+                    case Logtype.Normal:
+                    case Logtype.Wcc:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
                 Console.WriteLine("[" + args.Logtype + "]" + args.Message);
+                Console.ResetColor();
             };
 
             // get csv data
-            logger.LogString("Loading Hashes...", Logtype.Normal);
+            logger.LogString("Loading Hashes...", Logtype.Important);
             await Loadhashes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/archivehashes.csv"));
 
 
@@ -47,6 +67,14 @@ namespace CP77Tools
 
 
             var rootCommand = new RootCommand();
+
+            var pack = new Command("pack", "Pack a folder of files into an .archive file.")
+            {
+                new Option<string[]>(new []{"--path", "-p"}, "Input path. Can be a path to one .archive, or the content directory.\nIf this is a directory, all archives in it will be processed."),
+                new Option<string>(new []{ "--outpath", "-o"}, "Output directory to extract files to.\nIf not specified, will output to a new child directory, in place."),
+            };
+            rootCommand.Add(pack);
+            pack.Handler = CommandHandler.Create<string[], string>(Tasks.ConsoleFunctions.PackTask);
 
             var archive = new Command("archive", "Extract files or dump information from one or many archives.")
             {
@@ -115,6 +143,7 @@ namespace CP77Tools
                 while (true)
                 {
                     string line = System.Console.ReadLine();
+                    
 
                     if (line == "q()")
                         return;
@@ -127,39 +156,39 @@ namespace CP77Tools
                     };
                     var parsed = CommandLineExtensions.ParseText(line, ' ', '"');
 
-                    logger.PropertyChanged += delegate (object? sender, PropertyChangedEventArgs args)
+                    logger.PropertyChanged += OnLoggerOnPropertyChanged;
+                    void OnLoggerOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
                     {
-                        if (!(sender is LoggerService logger))
-                            return;
                         switch (args.PropertyName)
                         {
                             case "Progress":
                             {
                                 if (logger.Progress.Item1 == 0)
                                 {
-                                    pb = new ConsoleProgressBar()
-                                    {
-                                        DisplayBars = true,
-                                        DisplayAnimation = false
-                                    };
+                                    pb = new ConsoleProgressBar() { DisplayBars = true, DisplayAnimation = false };
                                 }
+
                                 pb.Report(logger.Progress.Item1);
                                 if (logger.Progress.Item1 == 1)
                                 {
                                     System.Threading.Thread.Sleep(1000);
+
+                                    Console.WriteLine();
+                                    pb.Dispose();
+                                    pb = null;
                                 }
+
                                 break;
                             }
                             default:
                                 break;
                         }
-                    };
-
-   
+                    }
 
                     rootCommand.InvokeAsync(parsed.ToArray()).Wait();
 
                     await WriteLog();
+                    logger.PropertyChanged -= OnLoggerOnPropertyChanged;
                 }
 
             }
@@ -220,7 +249,7 @@ namespace CP77Tools
 
             watch.Stop();
 
-            logger.LogString($"Loaded {hashDictionary.Count} hashes in {watch.ElapsedMilliseconds}ms.", Logtype.Normal);
+            logger.LogString($"Loaded {hashDictionary.Count} hashes in {watch.ElapsedMilliseconds}ms.", Logtype.Success);
         }
     }
 }
