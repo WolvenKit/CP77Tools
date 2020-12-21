@@ -126,22 +126,22 @@ namespace CP77Tools.UI
         private void Archive_Checkbox_ArchiveExtract_Unchecked(object sender, RoutedEventArgs e) { data.Archive_Extract = false; }
         private void Archive_Checkbox_ArchiveDump_Unchecked(object sender, RoutedEventArgs e) { data.Archive_Dump = false; }
         private void Archive_Button_ArchiveStart_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(0); Main_OutputBox_UIElement_ComboBox.Items.Clear(); }
-        private void Archive_TextBox_ArchiveHash_TextChanged(object sender, TextChangedEventArgs e) { if (UIElement_TextBox_ArchiveHash.Text != null && data != null) { try { data.Archive_Hash = Convert.ToUInt64(UIElement_TextBox_ArchiveHash.Text); } catch { } } }
+        private void Archive_TextBox_ArchiveHash_TextChanged(object sender, TextChangedEventArgs e) { if (Archive_Hash_UIElement_TextBox.Text != null && data != null) { try { data.Archive_Hash = Convert.ToUInt64(Archive_Hash_UIElement_TextBox.Text); } catch { } } }
 
-        private void Archive_Button_ArchiveSelectArchive_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectArchive.Foreground = new SolidColorBrush(Colors.Black); }
-        private void Archive_Button_ArchiveSelectArchive_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectArchive.Foreground = new SolidColorBrush(ForeGroundTextColor); }
-        private void Archive_Button_ArchiveSelectOutputPath_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectOutputPath.Foreground = new SolidColorBrush(Colors.Black); }
-        private void Archive_Button_ArchiveSelectOutputPath_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_ArchiveSelectOutputPath.Foreground = new SolidColorBrush(ForeGroundTextColor); }
-        private void Archive_Button_ArchiveStart_MouseEnter(object sender, MouseEventArgs e) { UIElement_Button_ArchiveStart.Foreground = new SolidColorBrush(Colors.Black); }
-        private void Archive_Button_ArchiveStart_MouseLeave(object sender, MouseEventArgs e) { UIElement_Button_ArchiveStart.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Archive_Button_ArchiveSelectArchive_MouseEnter(object sender, MouseEventArgs e) { Archive_SelectArchive_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Archive_Button_ArchiveSelectArchive_MouseLeave(object sender, MouseEventArgs e) { Archive_SelectArchive_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Archive_Button_ArchiveSelectOutputPath_MouseEnter(object sender, MouseEventArgs e) { Archive_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Archive_Button_ArchiveSelectOutputPath_MouseLeave(object sender, MouseEventArgs e) { Archive_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Archive_Button_ArchiveStart_MouseEnter(object sender, MouseEventArgs e) { Archive_Start_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Archive_Button_ArchiveStart_MouseLeave(object sender, MouseEventArgs e) { Archive_Start_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void Archive_RadioButton_ArchiveJPG_Checked(object sender, RoutedEventArgs e) { data.Archive_UncookFileType = EUncookExtension.jpg; }
         private void Archive_RadioButton_ArchiveBMP_Checked(object sender, RoutedEventArgs e) { data.Archive_UncookFileType = EUncookExtension.bmp; }
         private void Archive_RadioButton_ArchiveJPEG_Checked(object sender, RoutedEventArgs e) { data.Archive_UncookFileType = EUncookExtension.jpeg; }
         private void Archive_RadioButton_ArchivePNG_Checked(object sender, RoutedEventArgs e) { data.Archive_UncookFileType = EUncookExtension.png; }
         private void Archive_RadioButton_ArchiveDDS_Checked(object sender, RoutedEventArgs e) { data.Archive_UncookFileType = EUncookExtension.dds; }
         private void Archive_RadioButton_ArchiveTGA_Checked(object sender, RoutedEventArgs e) { if (data != null) data.Archive_UncookFileType = EUncookExtension.tga; }
-        private void UIElement_TextBox_ArchivePattern_TextChanged(object sender, TextChangedEventArgs e) { if (UIElement_TextBox_ArchivePattern.Text != null && data != null) { data.Archive_Pattern = UIElement_TextBox_ArchivePattern.Text; } }
-        private void UIElement_TextBox_ArchiveRegex_TextChanged(object sender, TextChangedEventArgs e) { if (UIElement_TextBox_ArchiveRegex.Text != null && data != null) { data.Archive_Regex = UIElement_TextBox_ArchiveRegex.Text; } }
+        private void UIElement_TextBox_ArchivePattern_TextChanged(object sender, TextChangedEventArgs e) { if (Archive_Pattern_UIElement_TextBox.Text != null && data != null) { data.Archive_Pattern = Archive_Pattern_UIElement_TextBox.Text; } }
+        private void UIElement_TextBox_ArchiveRegex_TextChanged(object sender, TextChangedEventArgs e) { if (Archive_Regex_UIElement_TextBox.Text != null && data != null) { data.Archive_Regex = Archive_Regex_UIElement_TextBox.Text; } }
 
 
         //Dump Events (DEV ONLY)

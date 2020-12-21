@@ -68,7 +68,7 @@ namespace CP77Tools.UI.Functionality
                 switch (TypeIndicator)
                 {
                     case 0: // Archive
-                        app.UIElement_Archive_PathIndicator_Selected.Text = openFileDialog.SafeFileName;
+                        app.Archive_PathIndicator_Selected_UIElement_TextBlock.Text = openFileDialog.SafeFileName;
                         Array.Resize(ref app.data.Archive_Path, app.data.Archive_Path.Length + 1); app.data.Archive_Path[app.data.Archive_Path.Length - 1] = openFileDialog.FileName;
                         break;
                     case 1: // CR2W
@@ -159,7 +159,7 @@ namespace CP77Tools.UI.Functionality
                 switch (TypeIndicator)
                 {
                     case 0:
-                        app.UIElement_Archive_PathIndicator_Output.Text = dialog.FileName.ReverseTruncate(34);
+                        app.Archive_PathIndicator_Output_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
                         app.data.Archive_OutPath = dialog.FileName;
                         break;
                     case 1: // CR2W
@@ -185,14 +185,14 @@ namespace CP77Tools.UI.Functionality
         public void SetToolTips()
         {
             //Archive
-            app.UIElement_Button_ArchiveSelectArchive.ToolTip = app.data.ToolTipArchive_Path;
-            app.UIElement_Button_ArchiveSelectOutputPath.ToolTip = app.data.ToolTipArchive_OutputPath;
-            app.UIElement_Checkbox_ArchiveDump.ToolTip = app.data.ToolTipArchive_Dump;
-            app.UIElement_Checkbox_ArchiveExtract.ToolTip = app.data.ToolTipArchive_Extract;
-            app.UIElement_Checkbox_ArchiveList.ToolTip = app.data.ToolTipArchive_List;
-            app.UIElement_Checkbox_ArchiveUncook.ToolTip = app.data.ToolTipArchive_Uncook;
-            app.UIElement_TextBox_ArchiveHash.ToolTip = app.data.ToolTipArchive_Hash;
-            app.UIElement_Button_ArchiveStart.ToolTip = app.data.ToolTipArchive;
+            app.Archive_SelectArchive_UIElement_Button.ToolTip = app.data.ToolTipArchive_Path;
+            app.Archive_SelectOutputPath_UIElement_Button.ToolTip = app.data.ToolTipArchive_OutputPath;
+            app.Archive_Dump_UIElement_Checkbox.ToolTip = app.data.ToolTipArchive_Dump;
+            app.Archive_Extract_UIElement_Checkbox.ToolTip = app.data.ToolTipArchive_Extract;
+            app.Archive_List_UIElement_Checkbox.ToolTip = app.data.ToolTipArchive_List;
+            app.Archive_Uncook_UIElement_Checkbox.ToolTip = app.data.ToolTipArchive_Uncook;
+            app.Archive_Hash_UIElement_TextBox.ToolTip = app.data.ToolTipArchive_Hash;
+            app.Archive_Start_UIElement_Button.ToolTip = app.data.ToolTipArchive;
             //Dump
             app.Dump_PathIndicatorSelected_UIElement_TextBlock.ToolTip = app.data.ToolTipDump_Path;
             app.Dump_Imports_UIElement_CheckBox.ToolTip = app.data.ToolTipDump_Imports;
