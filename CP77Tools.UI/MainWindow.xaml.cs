@@ -26,6 +26,7 @@ using System.Windows.Threading;
 using CP77Tools.UI.Functionality;
 using CP77.Common.Services;
 using System.Runtime.InteropServices;
+using CP77Tools.UI.Functionality.Customs;
 
 namespace CP77Tools.UI
 {
@@ -183,16 +184,17 @@ namespace CP77Tools.UI
         private void Repack_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e)
         {
 
+            
         }
 
         private void Repack_SelectOutputPath_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
         {
-
+            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
         }
 
         private void Repack_SelectOutputPath_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
         {
-
+            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
         }
 
         private void Repack_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e)
@@ -202,27 +204,28 @@ namespace CP77Tools.UI
 
         private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
         {
-
+            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
         }
 
         private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
         {
-
+            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
         }
 
         private void Repack_Start_UIElement_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            ui.ThreadedTaskSender(2); Main_OutputBox_UIElement_ComboBox.Items.Clear();
         }
 
         private void Repack_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
         {
+            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
 
         }
 
         private void Repack_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
         {
-
+            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
         }
     }
 

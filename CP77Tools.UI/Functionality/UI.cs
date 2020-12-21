@@ -1,4 +1,5 @@
 ﻿using CP77Tools.Tasks;
+using CP77Tools.UI.Functionality.Customs;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
@@ -33,14 +34,16 @@ namespace CP77Tools.UI.Functionality
                     break;
 
                 case 1:
-                    if (app.data.CR2W_Path != "")
+                    if (app.data.CR2W_Path.Length > 0)
                     {
                         Task task = new Task(() => ConsoleFunctions.Cr2wTask(app.data.CR2W_Path, app.data.CR2W_OutPath, app.data.CR2W_All, app.data.CR2W_Chunks));
                         task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.CR2W);
                     }
                     break;
 
-                case 2: if (app.data.CR2W_Path != "" && app.data.CR2W_OutPath != "") { } break;
+                case 2: if (app.data.CR2W_Path.Length > 0)
+                    { } 
+                    break;
 
 
                 case 3: ConsoleFunctions.HashTask(app.data.Hash_Input, app.data.Hash_Missing); break;
@@ -159,6 +162,13 @@ namespace CP77Tools.UI.Functionality
                 switch (TypeIndicator)
                 {
                     case 0:
+                        var dialog1 = new OpenFileDialog();
+                        dialog1.ValidateNames = false;
+                        dialog1.CheckFileExists = false;
+                        dialog1.CheckPathExists = true;
+                        dialog1.FileName = "Folder Selection.";
+                        dialog1.ShowDialog(); // will allow both files and folders to be selected
+
                         app.Archive_PathIndicator_Output_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
                         app.data.Archive_OutPath = dialog.FileName;
                         break;
@@ -179,6 +189,14 @@ namespace CP77Tools.UI.Functionality
 
                 }
             }
+        }
+
+
+
+        public void OpenF(MainWindow.TaskType taskType)
+        {
+            OpenMultiDialog OMD_Selector = new Functionality.Customs.OpenMultiDialog(app.data, taskType);
+            OMD_Selector.Show();
         }
 
         // TooltipsSetter

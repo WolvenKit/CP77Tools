@@ -42,7 +42,7 @@ namespace CP77Tools.UI.Data
         public string ToolTipDump_Info = "Dump all xbm info.";
         public string ToolTipDump_ClassInfo = "";
 
-        public string Dump_Path = "";
+        public string[] Dump_Path;
         public string Dump_OutPath = "";
         public bool Dump_Imports = false;
         public bool Dump_MissingHashes = false;
@@ -56,7 +56,7 @@ namespace CP77Tools.UI.Data
         public string ToolTipCR2W_All = "Dump all information.";
         public string ToolTipCR2W_Chunks = "Dump all class information of file.";
 
-        public string CR2W_Path = "";
+        public string[] CR2W_Path;
         public string CR2W_OutPath = "";
         public bool CR2W_All = false;
         public bool CR2W_Chunks = false;
@@ -76,14 +76,17 @@ namespace CP77Tools.UI.Data
         public string ToolTipOodle_Path = "";
         public string ToolTipOodle_Decompress = "";
 
-        public string Oodle_Path;
+        public string[] Oodle_Path;
         public string Oodle_OutPath;
         public bool Oodle_Decompress = false;
 
 
+        //Repack
+        public string[] Repack_Path;
 
 
-
+        // OTHER
+        public string[] OMD_Output;
 
     }
 }
