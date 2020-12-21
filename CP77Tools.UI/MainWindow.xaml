@@ -200,6 +200,7 @@
                     <TextBlock   Background="{DynamicResource TextBlockBG}" x:Name="Repack_PathIndicatorOutput_UIElement_TextBlock" HorizontalAlignment="Left" Margin="128,29,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="230" Foreground="#FFE5D90C"/>
                     <Button   Background="{DynamicResource ItemBG_Bottom}" x:Name="Repack_SelectOutputPath_UIElement_Button" Content="Select Output Path" HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="128" Foreground="#FFE5D90C" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" Click="Repack_SelectOutputPath_UIElement_Button_Click" MouseEnter="Repack_SelectOutputPath_UIElement_Button_MouseEnter" MouseLeave="Repack_SelectOutputPath_UIElement_Button_MouseLeave"/>
                     <Button   x:Name="Repack_Start_UIElement_Button" Content="Start" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="358" Height="20" Background="{DynamicResource ItemBG_Bottom}" Click="Repack_Start_UIElement_Button_Click" MouseEnter="Repack_Start_UIElement_Button_MouseEnter" MouseLeave="Repack_Start_UIElement_Button_MouseLeave"/>
+                    <ComboBox x:Name="Repack_SelectedDropdown_UIElement_ComboBox" HorizontalAlignment="Left" Margin="342,6,0,0" VerticalAlignment="Top" Width="16" Height="16" MinWidth="10" MinHeight="10" FontFamily="Bahnschrift" FontSize="11"/>
                 </Grid>
             </Expander>
             <Expander x:Name="Dump_Item_UIElement_Expander"   Header="DUMP" Height="280" Width="360" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}" MouseDown="UIFunc_DragWindow">
@@ -244,7 +245,18 @@
             </Expander>
             <Expander   x:Name="Hash_Item_UIElement_Expander" Header="HASH" Height="280" Width="360" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}">
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <CheckBox   x:Name="Hash_Missing_UIElement_Checkbox" Content="Missing " HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" IsEnabled="False"/>
+                    <Rectangle x:Name="Oodle_OptionsPanel_UIElement_Rectangle_Copy" HorizontalAlignment="Center" Height="183" Stroke="{DynamicResource ButtonBackground_NewV2}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,70,0,0" StrokeThickness="2" Fill="#FF09739A">
+                        <Rectangle.RenderTransform>
+                            <MatrixTransform/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle x:Name="Oodle_Decompress_UIElement_Rectangle_Copy" HorizontalAlignment="Center" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,85,0,0" StrokeThickness="2">
+                        <Rectangle.RenderTransform>
+                            <MatrixTransform/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Label x:Name="Oodle_Options_UIElement_Label_Copy"   Content="Options" HorizontalContentAlignment="Center" Margin="0,67,0,164" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="74" Background="{x:Null}"/>
+                    <CheckBox   x:Name="Hash_Missing_UIElement_Checkbox" Content="Missing " HorizontalAlignment="Left" Margin="7,92,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" IsEnabled="False"/>
                     <TextBox   x:Name="Hash_InputString_UIElement_TextBox" HorizontalAlignment="Center" Margin="0,22,0,0" Text="Enter String" TextWrapping="Wrap" VerticalAlignment="Top" Width="358" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66" TextChanged="Hash_InputString_UIElement_TextBox_TextChanged"/>
                     <Rectangle   HorizontalAlignment="Center" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,5,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
