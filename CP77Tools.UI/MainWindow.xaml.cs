@@ -177,6 +177,53 @@ namespace CP77Tools.UI
         private void CR2W_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { CR2W_Start_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
         private void CR2W_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { CR2W_Start_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
 
+
+        //Repack
+
+        private void Repack_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Repack_SelectOutputPath_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Repack_SelectOutputPath_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Repack_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Repack_Start_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Repack_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Repack_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 
     public static class StringExt
