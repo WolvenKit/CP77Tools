@@ -36,7 +36,7 @@ namespace CP77Tools.UI.Functionality
                     if (app.data.CR2W_Path != "")
                     {
                         Task task = new Task(() => ConsoleFunctions.Cr2wTask(app.data.CR2W_Path, app.data.CR2W_OutPath, app.data.CR2W_All, app.data.CR2W_Chunks));
-                        task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);
+                        task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.CR2W);
                     }
                     break;
 
