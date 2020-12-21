@@ -111,8 +111,9 @@ namespace CP77Tools.UI.Functionality.Customs
             }
             else if (CurrentOMDType ==  Data.General.OMD_Type.Single)
             {
-                OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName);
                 OMD_SelectedListBox.Items.Clear();
+
+                OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName);
 
             }
      
