@@ -28,8 +28,8 @@ namespace CP77Tools.UI.Functionality
                 case 0:
                     if (app.data.Archive_Path.Length > 0)
                     {
-                        Task task = new Task(() => ConsoleFunctions.ArchiveTask(app.data.Archive_Path, app.data.Archive_OutPath, app.data.Archive_Extract, app.data.Archive_Dump, app.data.Archive_List, app.data.Archive_Uncook, app.data.Archive_UncookFileType, app.data.Archive_Hash, app.data.Archive_Pattern, app.data.Archive_Regex));
-                        task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);
+                        Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(app.data.Archive_Path, app.data.Archive_OutPath, app.data.Archive_Extract, app.data.Archive_Dump, app.data.Archive_List, app.data.Archive_Uncook, app.data.Archive_UncookFileType, app.data.Archive_Hash, app.data.Archive_Pattern, app.data.Archive_Regex));
+                        ATask.Start(); ATask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);
                         
                     }
                     break;
@@ -37,22 +37,49 @@ namespace CP77Tools.UI.Functionality
                 case 1:
                     if (app.data.CR2W_Path.Length > 0)
                     {
-                      //  Task task = new Task(() => ConsoleFunctions.Cr2wTask(app.data.CR2W_Path, app.data.CR2W_OutPath, app.data.CR2W_All, app.data.CR2W_Chunks));
-                       // task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.CR2W);
+                        Task CTask = new Task(() => ConsoleFunctions.Cr2wTask(app.data.CR2W_Path[0], app.data.CR2W_OutPath, app.data.CR2W_All, app.data.CR2W_Chunks)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
+                        CTask.Start(); CTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.CR2W);
                     }
                     break;
 
-                case 2: if (app.data.CR2W_Path.Length > 0)
-                    { } 
+                case 2: 
+                    if (app.data.Repack_Path.Length > 0)
+                    {
+                        Task RTask = new Task(() => ConsoleFunctions.PackTask(app.data.Repack_Path, ""));  // FIX THIS TOO 
+
+                        RTask.Start(); RTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Repack);
+                    } 
                     break;
 
+                case 3:
+                    if (app.data.Dump_Path.Length > 0)
+                    {
+                        Task DTask = new Task(() => ConsoleFunctions.DumpTask(app.data.Dump_Path[0],app.data.Dump_Imports, app.data.Dump_MissingHashes, app.data.Dump_Info, app.data.Dump_ClassInfo));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
+
+                        DTask.Start(); DTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Dump);
+
+
+                    }
+                    break;
 
                 case 4:
-                    Task task4 = new Task(() => ConsoleFunctions.HashTask(app.data.Hash_Input, app.data.Hash_Missing));
-                    app.data.InterceptLog = true;
-                    task4.Start();
-                    task4.Wait();
+                    if (app.data.Hash_Input != "")
+                    {
+                        Task HTask = new Task(() => ConsoleFunctions.HashTask(app.data.Hash_Input, app.data.Hash_Missing));
+                        app.data.InterceptLog = true;
+                        HTask.Start();
+                        HTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Hash);
+                    }              
+                    break;
 
+                case 5:
+                    if (app.data.Oodle_Path.Length > 0)
+                    {
+                        Task OTask = new Task(() => ConsoleFunctions.OodleTask(app.data.Oodle_Path[0], app.data.Oodle_OutPath, app.data.Oodle_Decompress)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
+
+                        OTask.Start(); OTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Oodle);
+
+                    }
                     break;
 
             }
@@ -168,13 +195,6 @@ namespace CP77Tools.UI.Functionality
                 switch (TypeIndicator)
                 {
                     case 0:
-                        var dialog1 = new OpenFileDialog();
-                        dialog1.ValidateNames = false;
-                        dialog1.CheckFileExists = false;
-                        dialog1.CheckPathExists = true;
-                        dialog1.FileName = "Folder Selection.";
-                        dialog1.ShowDialog(); // will allow both files and folders to be selected
-
                         app.Archive_PathIndicator_Output_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
                         app.data.Archive_OutPath = dialog.FileName;
                         break;
@@ -183,12 +203,18 @@ namespace CP77Tools.UI.Functionality
                         app.data.CR2W_OutPath = dialog.FileName;
                         break;
                     case 2: // REPACK
+                        app.Repack_PathIndicatorOutput_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
+                        app.data.Repack_OutPath = dialog.FileName;
                         break;
                     case 3: // Dump
+                        app.Dump_PathIndicatorOutput_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
+                        app.data.Dump_OutPath = dialog.FileName;
                         break;
                     case 4: // Hash
                         break;
                     case 5: // Oodle
+                        app.Oodle_PathOut_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
+                        app.data.Oodle_OutPath = dialog.FileName;
                         break;
 
 

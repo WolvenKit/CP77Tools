@@ -29,8 +29,8 @@ namespace CP77Tools.UI.Data
         public string ToolTipArchive_Uncook = "Uncooks textures from archive.";
         public string ToolTipArchive_Uext = "Uncook extension (tga, bmp, jpg, png, dds). Default is tga.";
         public string ToolTipArchive_Hash = "Extract single file with given hash.";
-        public string ToolTipArchive_Pattern = "";
-        public string ToolTipArchive_Regex = "";
+        public string ToolTipArchive_Pattern = "Use optional search pattern, e.g. *.ink.\nIf both regex and pattern is defined, pattern will be used first.";
+        public string ToolTipArchive_Regex = "Use optional regex pattern.\nIf both regex and pattern is defined, pattern will be used first.";
 
         public string[] Archive_Path = new string[0];
         public string Archive_OutPath = "";
@@ -50,7 +50,7 @@ namespace CP77Tools.UI.Data
         public string ToolTipDump_Imports = "Dump all imports (all filenames that are referenced by all files in the archive).";
         public string ToolTipDump_MissingHashes = "List all missing hashes of all input archives.";
         public string ToolTipDump_Info = "Dump all xbm info.";
-        public string ToolTipDump_ClassInfo = "";
+        public string ToolTipDump_ClassInfo = "Dump all class info.";
 
         public string[] Dump_Path;
         public string Dump_OutPath = "";
@@ -92,11 +92,18 @@ namespace CP77Tools.UI.Data
 
 
         //Repack
+        public string ToolTipRepack = "Pack a folder of files into an .archive file.";
+        public string ToolTipRepack_Path = "Input path. Can be a path to one .archive, or the content directory.\nIf this is a directory, all archives in it will be processed.";
+        public string ToolTipRepack_OutPath = "Output directory to extract files to.\nIf not specified, will output to a new child directory, in place.";
+
         public string[] Repack_Path;
 
 
         // OTHER
         public string[] OMD_Output;
 
+
+        //repack
+        public string Repack_OutPath;
     }
 }
