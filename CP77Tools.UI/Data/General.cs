@@ -9,6 +9,16 @@ namespace CP77Tools.UI.Data
 {
     public class General
     {
+
+        public enum OMD_Type
+        {
+            Single,
+            Multi
+        }
+
+
+
+
         //Archive 
         public string ToolTipArchive = "Target an archive to extract files or dump information.";
         public string ToolTipArchive_Path = "Input path to .archive.";

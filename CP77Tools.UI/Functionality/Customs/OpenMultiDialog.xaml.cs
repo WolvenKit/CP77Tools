@@ -29,21 +29,35 @@ namespace CP77Tools.UI.Functionality.Customs
     /// </summary>
     public partial class OpenMultiDialog : Window
     {
+
+        public enum ForF
+        {
+            File,
+            Folder
+        }
+        
+
         private void UIFunc_DragWindow(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
         public Color ForeGroundTextColor = (Color)ColorConverter.ConvertFromString("#FFE5D90C");
 
 
         private Data.General DataReference;
         private MainWindow.TaskType CurrentTaskType;
+        MainWindow app;
+        private Data.General.OMD_Type CurrentOMDType;
 
 
-        public OpenMultiDialog(Data.General InputDataRef, MainWindow.TaskType taskType)
+
+        public OpenMultiDialog(MainWindow mainWindow, MainWindow.TaskType taskType, Data.General.OMD_Type _OMD_Type)
         {
+            app = mainWindow;
+            
             CurrentTaskType = taskType;
-            DataReference = InputDataRef;
+            DataReference = app.data;
+            CurrentOMDType = _OMD_Type;
             InitializeComponent();
             InitializeFileSystemObjects();
-
+            TreeStrongSearch();
         }
         private void InitializeFileSystemObjects()
         {
@@ -60,6 +74,17 @@ namespace CP77Tools.UI.Functionality.Customs
 
         }
 
+
+        private ForF CheckIfFileOrFolder(string path)  // Maybe later :)
+        {
+            FileAttributes attr = File.GetAttributes(path);
+
+            if (attr.HasFlag(FileAttributes.Directory))
+                return ForF.Folder;
+            else
+                return ForF.File;
+        }
+
         private void FileSystemObject_AfterExplore(object sender, System.EventArgs e)
         {
             Cursor = Cursors.Arrow;
@@ -71,16 +96,33 @@ namespace CP77Tools.UI.Functionality.Customs
         }
 
 
- 
- 
+
+
         private void treeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var q = OMD_FileTreeView.SelectedItem as FileSystemObjectInfo;
-            OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName);
+            var b = CheckIfFileOrFolder(q.FileSystemInfo.FullName);
+
+            
+            if (CurrentOMDType == Data.General.OMD_Type.Multi)
+            {
+                OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName);
+                Trace.WriteLine(b);
+            }
+            else if (CurrentOMDType ==  Data.General.OMD_Type.Single)
+            {
+                OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName);
+                OMD_SelectedListBox.Items.Clear();
+
+            }
+     
         }
 
      
-
+        private void TreeStrongSearch()
+        {
+            Trace.WriteLine(OMD_FileTreeView.Items.Count);
+        }
 
 
 
@@ -104,6 +146,9 @@ namespace CP77Tools.UI.Functionality.Customs
             {
                 case MainWindow.TaskType.Archive:
                     DataReference.Archive_Path = d;
+                    app.Archive_PathIndicator_Selected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                    app.Archive_SelectedFilesDropDown_UIElement_ComboBox.Items.Clear();
+                    app.Archive_SelectedFilesDropDown_UIElement_ComboBox.ItemsSource = d.ToList();
                     break;
                 case MainWindow.TaskType.CR2W:
                     DataReference.CR2W_Path = d;
@@ -473,7 +518,7 @@ namespace CP77Tools.UI.Functionality.Customs
 
                 }
 
-                
+
             }
         }
 
@@ -496,15 +541,23 @@ namespace CP77Tools.UI.Functionality.Customs
             }
             if (FileSystemInfo is DirectoryInfo)
             {
-                var files = ((DirectoryInfo)FileSystemInfo).GetFiles();
-                foreach (var file in files.OrderBy(d => d.Name))
+                try
                 {
-                    if ((file.Attributes & FileAttributes.System) != FileAttributes.System &&
-                        (file.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
+                    var files = ((DirectoryInfo)FileSystemInfo).GetFiles();
+                    foreach (var file in files.OrderBy(d => d.Name))
                     {
-                        Children.Add(new FileSystemObjectInfo(file));
+                        if ((file.Attributes & FileAttributes.System) != FileAttributes.System &&
+                            (file.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
+                        {
+                            Children.Add(new FileSystemObjectInfo(file));
+                        }
                     }
                 }
+                catch (UnauthorizedAccessException e)
+                {
+
+                }
+
             }
         }
     }

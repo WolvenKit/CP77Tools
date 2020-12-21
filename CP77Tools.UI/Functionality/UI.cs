@@ -36,8 +36,8 @@ namespace CP77Tools.UI.Functionality
                 case 1:
                     if (app.data.CR2W_Path.Length > 0)
                     {
-                        Task task = new Task(() => ConsoleFunctions.Cr2wTask(app.data.CR2W_Path, app.data.CR2W_OutPath, app.data.CR2W_All, app.data.CR2W_Chunks));
-                        task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.CR2W);
+                      //  Task task = new Task(() => ConsoleFunctions.Cr2wTask(app.data.CR2W_Path, app.data.CR2W_OutPath, app.data.CR2W_All, app.data.CR2W_Chunks));
+                       // task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.CR2W);
                     }
                     break;
 
@@ -75,8 +75,8 @@ namespace CP77Tools.UI.Functionality
                         Array.Resize(ref app.data.Archive_Path, app.data.Archive_Path.Length + 1); app.data.Archive_Path[app.data.Archive_Path.Length - 1] = openFileDialog.FileName;
                         break;
                     case 1: // CR2W
-                        app.CR2W_PathIndicatorSelected_UIElement_TextBlock.Text = openFileDialog.SafeFileName;
-                        app.data.CR2W_Path = openFileDialog.FileName;
+                    //    app.CR2W_PathIndicatorSelected_UIElement_TextBlock.Text = openFileDialog.SafeFileName;
+                   //     app.data.CR2W_Path = openFileDialog.FileName;
                         break;
                     case 2: // REPACK
                         break;
@@ -193,9 +193,9 @@ namespace CP77Tools.UI.Functionality
 
 
 
-        public void OpenF(MainWindow.TaskType taskType)
+        public void OpenF(Data.General.OMD_Type oMD_Type,MainWindow.TaskType taskType)
         {
-            OpenMultiDialog OMD_Selector = new Functionality.Customs.OpenMultiDialog(app.data, taskType);
+            OpenMultiDialog OMD_Selector = new Functionality.Customs.OpenMultiDialog(app, taskType, oMD_Type);
             OMD_Selector.Show();
         }
 

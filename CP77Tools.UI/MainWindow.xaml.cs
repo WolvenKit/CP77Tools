@@ -116,8 +116,8 @@ namespace CP77Tools.UI
 
 
         //Archive events
-        private void Archive_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e) { ui.OpenFile(0); }
-        private void Archive_Button_ArchiveSelectOutputPath_Click(object sender, RoutedEventArgs e) { ui.OpenFolder(0); }
+        private void Archive_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e) { ui.OpenF( Data.General.OMD_Type.Multi, TaskType.Archive); }
+        private void Archive_Button_ArchiveSelectOutputPath_Click(object sender, RoutedEventArgs e) { ui.OpenFolder(0); } // Will become OpenF after singlepicker update.
         private void Archive_Checkbox_ArchiveExtract_Checked(object sender, RoutedEventArgs e) { data.Archive_Extract = true; }
         private void Archive_Checkbox_ArchiveDump_Checked(object sender, RoutedEventArgs e) { data.Archive_Dump = true; }
         private void Archive_Checkbox_ArchiveList_Checked(object sender, RoutedEventArgs e) { data.Archive_List = true; }
