@@ -82,8 +82,17 @@ namespace CP77Tools.UI
             UI_Logger.PropertyChanging += log.UI_Logger_PropertyChanging;
 
 
+
+
+            InitializeDefaults();
+
         }
 
+        private void InitializeDefaults()
+        {
+            data.Hash_Input = Hash_InputString_UIElement_TextBox.Text;
+
+        }
 
         private void UIFunc_DragWindow(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
 
@@ -226,6 +235,94 @@ namespace CP77Tools.UI
         private void Repack_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
         {
             CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
+        }
+
+        private void Hash_Start_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ui.ThreadedTaskSender(4); Main_OutputBox_UIElement_ComboBox.Items.Clear();
+        }
+
+        private void Hash_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Hash_Start_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
+
+        }
+
+        private void Hash_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Hash_Start_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
+
+        }
+
+        private void Hash_InputString_UIElement_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (data != null) { try { data.Hash_Input = Hash_InputString_UIElement_TextBox.Text; } catch { } }
+       
+        }
+
+        private void Oodle_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Oodle_SelectFile_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Oodle_SelectFile_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Oodle_SelectOut_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Oodle_SelectOut_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Oodle_SelectOut_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Oodle_Decompress_UIElement_CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Oodle_Decompress_UIElement_CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Oodle_Start_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Oodle_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Oodle_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Dump_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Dump_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

@@ -35,7 +35,7 @@ namespace CP77Tools.UI.Functionality.Customs
             File,
             Folder
         }
-        
+
 
         private void UIFunc_DragWindow(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
         public Color ForeGroundTextColor = (Color)ColorConverter.ConvertFromString("#FFE5D90C");
@@ -51,7 +51,7 @@ namespace CP77Tools.UI.Functionality.Customs
         public OpenMultiDialog(MainWindow mainWindow, MainWindow.TaskType taskType, Data.General.OMD_Type _OMD_Type)
         {
             app = mainWindow;
-            
+
             CurrentTaskType = taskType;
             DataReference = app.data;
             CurrentOMDType = _OMD_Type;
@@ -103,23 +103,23 @@ namespace CP77Tools.UI.Functionality.Customs
             var q = OMD_FileTreeView.SelectedItem as FileSystemObjectInfo;
             var b = CheckIfFileOrFolder(q.FileSystemInfo.FullName);
 
-            
+
             if (CurrentOMDType == Data.General.OMD_Type.Multi)
             {
                 OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName);
                 Trace.WriteLine(b);
             }
-            else if (CurrentOMDType ==  Data.General.OMD_Type.Single)
+            else if (CurrentOMDType == Data.General.OMD_Type.Single)
             {
                 OMD_SelectedListBox.Items.Clear();
 
                 OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName);
 
             }
-     
+
         }
 
-     
+
         private void TreeStrongSearch()
         {
             Trace.WriteLine(OMD_FileTreeView.Items.Count);
@@ -139,93 +139,61 @@ namespace CP77Tools.UI.Functionality.Customs
 
         private void OMD_ConfirmSelected_Click(object sender, RoutedEventArgs e)
         {
-            string[] clist = OMD_SelectedListBox.Items.OfType<string>().ToArray();
-            var d = clist.Distinct().ToArray();
-
-
-            switch(CurrentTaskType)
+            try
             {
-                case MainWindow.TaskType.Archive:
-                    DataReference.Archive_Path = d;
-                    app.Archive_PathIndicator_Selected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-                    app.Archive_SelectedFilesDropDown_UIElement_ComboBox.Items.Clear();
-                    app.Archive_SelectedFilesDropDown_UIElement_ComboBox.ItemsSource = d.ToList();
-                    break;
-                case MainWindow.TaskType.CR2W:
-                    DataReference.CR2W_Path = d;
-                    break;
-                case MainWindow.TaskType.Dump:
-                    DataReference.Dump_Path = d;
-                    break;
-                case MainWindow.TaskType.Hash:
-                    break;
-                case MainWindow.TaskType.Oodle:
-                    DataReference.Oodle_Path = d;
-                    break;
-                case MainWindow.TaskType.Repack:
-                    DataReference.Repack_Path = d;
-                    break;
+                string[] clist = OMD_SelectedListBox.Items.OfType<string>().ToArray();
+                var d = clist.Distinct().ToArray();
+
+
+                switch (CurrentTaskType)
+                {
+                    case MainWindow.TaskType.Archive:
+                        DataReference.Archive_Path = d;
+                        app.Archive_PathIndicator_Selected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                        app.Archive_SelectedFilesDropDown_UIElement_ComboBox.Items.Clear();
+                        app.Archive_SelectedFilesDropDown_UIElement_ComboBox.ItemsSource = d.ToList();
+                        break;
+                    case MainWindow.TaskType.CR2W:
+                        DataReference.CR2W_Path = d;
+                        break;
+                    case MainWindow.TaskType.Dump:
+                        DataReference.Dump_Path = d;
+                        break;
+                    case MainWindow.TaskType.Hash:
+                        break;
+                    case MainWindow.TaskType.Oodle:
+                        DataReference.Oodle_Path = d;
+                        break;
+                    case MainWindow.TaskType.Repack:
+                        DataReference.Repack_Path = d;
+                        break;
+                }
+
+
+                this.Close();
             }
-
-
-            this.Close();
+            catch { }
         }
 
-        private void OMD_Minimize_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+        private void OMD_Minimize_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { this.WindowState = WindowState.Minimized; }
 
-        private void OMD_Close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
+        private void OMD_Close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { this.Close(); }
 
-        private void OMD_Close_MouseEnter(object sender, MouseEventArgs e)
-        {
-            OMD_Close.Source = ImageCache.CloseSelected;
+        private void OMD_Close_MouseEnter(object sender, MouseEventArgs e) { OMD_Close.Source = ImageCache.CloseSelected; }
 
-        }
+        private void OMD_Close_MouseLeave(object sender, MouseEventArgs e) { OMD_Close.Source = ImageCache.Close; }
 
-        private void OMD_Close_MouseLeave(object sender, MouseEventArgs e)
-        {
-            OMD_Close.Source = ImageCache.Close;
+        private void OMD_Minimize_MouseEnter(object sender, MouseEventArgs e) { OMD_Minimize.Source = ImageCache.MinimizeSelected; }
 
-        }
+        private void OMD_Minimize_MouseLeave(object sender, MouseEventArgs e) { OMD_Minimize.Source = ImageCache.Minimize; }
 
-        private void OMD_Minimize_MouseEnter(object sender, MouseEventArgs e)
-        {
-            OMD_Minimize.Source = ImageCache.MinimizeSelected;
-        }
+        private void OMD_ClearSelected_MouseEnter(object sender, MouseEventArgs e) { OMD_ClearSelected.Foreground = new SolidColorBrush(Colors.Black); }
 
-        private void OMD_Minimize_MouseLeave(object sender, MouseEventArgs e)
-        {
-            OMD_Minimize.Source = ImageCache.Minimize;
+        private void OMD_ClearSelected_MouseLeave(object sender, MouseEventArgs e) { OMD_ClearSelected.Foreground = new SolidColorBrush(ForeGroundTextColor); }
 
-        }
+        private void OMD_ConfirmSelected_MouseEnter(object sender, MouseEventArgs e) { OMD_ConfirmSelected.Foreground = new SolidColorBrush(Colors.Black); }
 
-        private void OMD_ClearSelected_MouseEnter(object sender, MouseEventArgs e)
-        {
-            OMD_ClearSelected.Foreground = new SolidColorBrush(Colors.Black);
-
-        }
-
-        private void OMD_ClearSelected_MouseLeave(object sender, MouseEventArgs e)
-        {
-            OMD_ClearSelected.Foreground = new SolidColorBrush(ForeGroundTextColor);
-
-        }
-
-        private void OMD_ConfirmSelected_MouseEnter(object sender, MouseEventArgs e)
-        {
-            OMD_ConfirmSelected.Foreground = new SolidColorBrush(Colors.Black);
-
-        }
-
-        private void OMD_ConfirmSelected_MouseLeave(object sender, MouseEventArgs e)
-        {
-            OMD_ConfirmSelected.Foreground = new SolidColorBrush(ForeGroundTextColor);
-        }
+        private void OMD_ConfirmSelected_MouseLeave(object sender, MouseEventArgs e) { OMD_ConfirmSelected.Foreground = new SolidColorBrush(ForeGroundTextColor); }
 
         private void Window_Deactivated_1(object sender, EventArgs e)
         {

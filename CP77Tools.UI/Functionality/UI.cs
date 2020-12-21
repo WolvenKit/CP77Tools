@@ -30,6 +30,7 @@ namespace CP77Tools.UI.Functionality
                     {
                         Task task = new Task(() => ConsoleFunctions.ArchiveTask(app.data.Archive_Path, app.data.Archive_OutPath, app.data.Archive_Extract, app.data.Archive_Dump, app.data.Archive_List, app.data.Archive_Uncook, app.data.Archive_UncookFileType, app.data.Archive_Hash, app.data.Archive_Pattern, app.data.Archive_Regex));
                         task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);
+                        
                     }
                     break;
 
@@ -46,10 +47,14 @@ namespace CP77Tools.UI.Functionality
                     break;
 
 
-                case 3: ConsoleFunctions.HashTask(app.data.Hash_Input, app.data.Hash_Missing); break;
+                case 4:
+                    Task task4 = new Task(() => ConsoleFunctions.HashTask(app.data.Hash_Input, app.data.Hash_Missing));
+                    app.data.InterceptLog = true;
+                    task4.Start();
+                    task4.Wait();
 
-                case 4: break;
-                    // if (CR2W_Path != "" && CR2W_OutPath != "") { ConsoleFunctions.OodleTask(Oodle_Path, Oodle_OutPath, Oodle_Decompress); } 
+                    break;
+
             }
         }
 
@@ -83,6 +88,7 @@ namespace CP77Tools.UI.Functionality
                     case 3: // Dump
                         break;
                     case 4: // Hash
+
                         break;
                     case 5: // Oodle
                         break;

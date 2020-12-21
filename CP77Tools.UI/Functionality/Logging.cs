@@ -15,6 +15,8 @@ namespace CP77Tools.UI.Functionality
 {
     public class Logging
     {
+
+        
         private MainWindow app;
         public Logging(MainWindow mainWindow) { this.app = mainWindow; }
 
@@ -48,15 +50,26 @@ namespace CP77Tools.UI.Functionality
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                Logtype TYPE = e.Logtype;
-                string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + e.Message.ToString(); ;
-                if (e.Message.Contains("File  loaded"))
+                if (app.data.InterceptLog)
                 {
-                    OUTPUTSTRING = Regex.Replace(OUTPUTSTRING, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
-
+                    app.Hash_Output_UIElement_TextBox.Text = e.Message.ToString();
+                    app.data.InterceptLog = false;
                 }
-                app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
-                app.Main_OutputBox_UIElement_ComboBox.Items.Add(OUTPUTSTRING);
+                if (!app.data.InterceptLog)
+                {
+                    Logtype TYPE = e.Logtype;
+                    string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + e.Message.ToString(); ;
+                    if (e.Message.Contains("File  loaded"))
+                    {
+                        OUTPUTSTRING = Regex.Replace(OUTPUTSTRING, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
+
+                    }
+
+                    app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
+                    app.Main_OutputBox_UIElement_ComboBox.Items.Add(OUTPUTSTRING);
+                }
+      
+       
 
 
    

@@ -17,7 +17,7 @@ namespace CP77Tools.UI.Data
         }
 
 
-
+        public bool InterceptLog = false;
 
         //Archive 
         public string ToolTipArchive = "Target an archive to extract files or dump information.";
