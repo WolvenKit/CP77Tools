@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <None Remove="Fonts\Cyberpunk.ttf" />
+    <None Remove="lib\kraken.dll" />
+    <None Remove="lib\kraken.so" />
     <None Remove="Resources\Close.png" />
     <None Remove="Resources\CloseSelected.png" />
     <None Remove="Resources\Logo.png" />
@@ -20,6 +22,18 @@
     <None Remove="Resources\PanelShape_V3.png" />
     <None Remove="Resources\TopHeader.png" />
     <None Remove="TopHeader" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="lib\kraken.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="lib\kraken.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

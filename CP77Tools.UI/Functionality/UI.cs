@@ -35,11 +35,11 @@ namespace CP77Tools.UI.Functionality
                 case 1:
                     if (app.data.CR2W_Path != "")
                     {
-                        Task task = new Task(() => ConsoleFunctions.Cr2wTask(app.data.CR2W_Path,app.data.CR2W_OutPath,app.data.CR2W_All,app.data.CR2W_Chunks));
+                        Task task = new Task(() => ConsoleFunctions.Cr2wTask(app.data.CR2W_Path, app.data.CR2W_OutPath, app.data.CR2W_All, app.data.CR2W_Chunks));
                         task.Start(); task.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);
                     }
                     break;
- 
+
                 case 2: if (app.data.CR2W_Path != "" && app.data.CR2W_OutPath != "") { } break;
 
 
@@ -99,8 +99,7 @@ namespace CP77Tools.UI.Functionality
         }
 
 
-        // Items Page Handler  // If you can do the repeating lines in a simpler way let me know
-
+        // TopKek
         public int CurrentPageIndex = 0;
         public int Pagehandler(bool plus)
         {
@@ -112,16 +111,15 @@ namespace CP77Tools.UI.Functionality
                 if (CurrentPageIndex <= EnabledCount)
                 {
                     CurrentPageIndex += 2;
-                    if (CurrentPageIndex == 0) { CurrentPageIndex = 1; }
-                    if (CurrentPageIndex == 1) { CurrentPageIndex = 1; }
-                    if (CurrentPageIndex == 2) { CurrentPageIndex = 3; }
-                    if (CurrentPageIndex == 3) { CurrentPageIndex = 3; }
-                    if (CurrentPageIndex == 4) { CurrentPageIndex = 5; }
-                    if (CurrentPageIndex == 5) { CurrentPageIndex = 5; }
-                    if (CurrentPageIndex == 6) { CurrentPageIndex = 7; }
-                    if (CurrentPageIndex == 7) { CurrentPageIndex = 7; }
-                    if (CurrentPageIndex == 8) { CurrentPageIndex = 9; }
-                    if (CurrentPageIndex == 9) { CurrentPageIndex = 9; }
+                    CurrentPageIndex = CurrentPageIndex switch
+                    {
+                        <= 1 => 1,
+                        <= 3 => 3,
+                        <= 5 => 5,
+                        <= 7 => 7,
+                        <= 9 => 9,
+                        _ => CurrentPageIndex
+                    };
                 }
             }
             if (!plus)
@@ -129,15 +127,10 @@ namespace CP77Tools.UI.Functionality
                 if (CurrentPageIndex > lowest)
                 {
                     CurrentPageIndex -= 2;
-                    if (CurrentPageIndex == 0) { CurrentPageIndex = 0; }
                     if (CurrentPageIndex == 1) { CurrentPageIndex = 0; }
-                    if (CurrentPageIndex == 2) { CurrentPageIndex = 2; }
                     if (CurrentPageIndex == 3) { CurrentPageIndex = 2; }
-                    if (CurrentPageIndex == 4) { CurrentPageIndex = 4; }
                     if (CurrentPageIndex == 5) { CurrentPageIndex = 4; }
-                    if (CurrentPageIndex == 6) { CurrentPageIndex = 6; }
                     if (CurrentPageIndex == 7) { CurrentPageIndex = 6; }
-                    if (CurrentPageIndex == 8) { CurrentPageIndex = 8; }
                     if (CurrentPageIndex == 9) { CurrentPageIndex = 8; }
                 }
             }
@@ -176,10 +169,10 @@ namespace CP77Tools.UI.Functionality
             app.UIElement_TextBox_ArchiveHash.ToolTip = app.data.ToolTipArchive_Hash;
             app.UIElement_Button_ArchiveStart.ToolTip = app.data.ToolTipArchive;
             //Dump
-            app.UIElement_Dump_PathIndicator_Selected.ToolTip = app.data.ToolTipDump_Path;
-            app.UIElement_Checkbox_DumpImports.ToolTip = app.data.ToolTipDump_Imports;
-            app.UIElement_Checkbox_DumpMissingHashes.ToolTip = app.data.ToolTipDump_MissingHashes;
-            app.UIElement_Checkbox_DumpInfo.ToolTip = app.data.ToolTipDump_Info;
+            app.Dump_PathIndicatorSelected_UIElement_TextBlock.ToolTip = app.data.ToolTipDump_Path;
+            app.Dump_Imports_UIElement_CheckBox.ToolTip = app.data.ToolTipDump_Imports;
+            app.Dump_MissingHashes_UIElement_CheckBox.ToolTip = app.data.ToolTipDump_MissingHashes;
+            app.Dump_Info_UIElement_CheckBox.ToolTip = app.data.ToolTipDump_Info;
             //CR2W
             //Hash
             //Oodle

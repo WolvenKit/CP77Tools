@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Threading;
 using WolvenKit.Common.Services;
 using CP77Tools.UI;
+using System.Text.RegularExpressions;
 
 namespace CP77Tools.UI.Functionality
 {
@@ -45,10 +46,26 @@ namespace CP77Tools.UI.Functionality
 
         public void UI_Logger_OnStringLogged(object sender, LogStringEventArgs e)
         {
-            Trace.Write(e.Message + e.Logtype);
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+            {
+                Logtype TYPE = e.Logtype;
+                string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + e.Message.ToString(); ;
+                if (e.Message.Contains("File  loaded"))
+                {
+                    OUTPUTSTRING = Regex.Replace(OUTPUTSTRING, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
+
+                }
+                app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
+                app.Main_OutputBox_UIElement_ComboBox.Items.Add(OUTPUTSTRING);
+
+
+   
+
+            }));
+
         }
 
-        
+
 
 
 
@@ -61,14 +78,15 @@ namespace CP77Tools.UI.Functionality
             {
                 Logtype TYPE = _logger.Logtype;
                 var CURRENTTASK = TaskCounter;
-                string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + " - Working on Task : " + CURRENTTASK + Environment.NewLine;
+                string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + " - Working on Task : " + CURRENTTASK ;
                 app.Main_ProgressBar_UIElement_ProgressBar.Value += _logger.Progress.Item1;
                 app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
+
 
             }));
         }
 
-        // Reporting when finished.
+        // Reporting when finished. Should soon be unneeded
         public void TaskFinished(MainWindow.TaskType CurrentTaskType)
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
