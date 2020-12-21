@@ -125,7 +125,7 @@ namespace CP77Tools.UI
 
 
         //Archive events
-        private void Archive_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e) { ui.OpenF( Data.General.OMD_Type.Single, TaskType.Archive); }
+        private void Archive_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Single, TaskType.Archive); }
         private void Archive_Button_ArchiveSelectOutputPath_Click(object sender, RoutedEventArgs e) { ui.OpenFolder(0); } // Will become OpenF after singlepicker update.
         private void Archive_Checkbox_ArchiveExtract_Checked(object sender, RoutedEventArgs e) { data.Archive_Extract = true; }
         private void Archive_Checkbox_ArchiveDump_Checked(object sender, RoutedEventArgs e) { data.Archive_Dump = true; }
@@ -170,10 +170,14 @@ namespace CP77Tools.UI
         private void Dump_ClassInfo_UIElement_CheckBox_Checked(object sender, RoutedEventArgs e) { data.Dump_ClassInfo = true; }
         private void Dump_ClassInfo_UIElement_CheckBox_Unchecked(object sender, RoutedEventArgs e) { data.Dump_ClassInfo = false; }
         private void Dump_Start_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(3); Main_OutputBox_UIElement_ComboBox.Items.Clear(); }
+        private void Dump_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Multi, TaskType.Dump); }
+        private void Dump_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
         //CR2W
-        private void CR2W_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenFile(1); }
+        private void CR2W_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Multi, TaskType.CR2W); }
         private void CR2W_SelectFile_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { CR2W_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
         private void CR2W_SelectFile_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { CR2W_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void CR2W_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenFolder(1); }
@@ -193,137 +197,49 @@ namespace CP77Tools.UI
         private void Repack_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e)
         {
 
-            
-        }
-
-        private void Repack_SelectOutputPath_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
-        {
-            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
-        }
-
-        private void Repack_SelectOutputPath_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
-        {
-            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
-        }
-
-        private void Repack_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e)
-        {
 
         }
 
-        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
-        {
-            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
-        }
+        private void Repack_SelectOutputPath_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Repack_SelectOutputPath_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Repack_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Multi, TaskType.Repack); }
+        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Repack_Start_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(2); Main_OutputBox_UIElement_ComboBox.Items.Clear(); }
+        private void Repack_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Repack_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
 
-        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
-        {
-            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
-        }
 
-        private void Repack_Start_UIElement_Button_Click(object sender, RoutedEventArgs e)
-        {
-            ui.ThreadedTaskSender(2); Main_OutputBox_UIElement_ComboBox.Items.Clear();
-        }
+        // Hash
+        private void Hash_Start_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(4); Main_OutputBox_UIElement_ComboBox.Items.Clear(); }
+        private void Hash_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Hash_Start_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Hash_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { Hash_Start_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Hash_InputString_UIElement_TextBox_TextChanged(object sender, TextChangedEventArgs e) { if (data != null) { try { data.Hash_Input = Hash_InputString_UIElement_TextBox.Text; } catch { } } }
 
-        private void Repack_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
-        {
-            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
 
-        }
 
-        private void Repack_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
-        {
-            CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
-        }
 
-        private void Hash_Start_UIElement_Button_Click(object sender, RoutedEventArgs e)
-        {
-            ui.ThreadedTaskSender(4); Main_OutputBox_UIElement_ComboBox.Items.Clear();
-        }
-
-        private void Hash_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Hash_Start_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black);
-
-        }
-
-        private void Hash_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Hash_Start_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor);
-
-        }
-
-        private void Hash_InputString_UIElement_TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (data != null) { try { data.Hash_Input = Hash_InputString_UIElement_TextBox.Text; } catch { } }
-       
-        }
-
-        private void Oodle_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Oodle_SelectFile_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void Oodle_SelectFile_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void Oodle_SelectOut_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void Oodle_SelectOut_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
-        {
-
-        }
-
+        //Oodle
+        private void Oodle_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Multi, TaskType.Oodle); }
+        private void Oodle_SelectFile_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Oodle_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Oodle_SelectFile_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { Oodle_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Oodle_SelectOut_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Oodle_SelectOut_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Oodle_SelectOut_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { Oodle_SelectOut_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void Oodle_SelectOut_UIElement_Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Oodle_Decompress_UIElement_CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Oodle_Decompress_UIElement_CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        private void Oodle_Decompress_UIElement_CheckBox_Checked(object sender, RoutedEventArgs e) { data.Oodle_Decompress = true; }
+        private void Oodle_Decompress_UIElement_CheckBox_Unchecked(object sender, RoutedEventArgs e) { data.Oodle_Decompress = false; }
         private void Oodle_Start_UIElement_Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Oodle_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e)
-        {
+        private void Oodle_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Oodle_Start_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Oodle_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { Oodle_Start_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
 
-        }
-
-        private void Oodle_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void Dump_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Dump_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 
     public static class StringExt
