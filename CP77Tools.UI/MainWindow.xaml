@@ -68,7 +68,19 @@
                 </Style>
             </ListBox.ItemContainerStyle>
             <Expander   x:Name="Repack_Item_UIElement_Expander" Header="REPACK" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="360" Visibility="Visible" Background="{DynamicResource ItemBG_Top}">
-                <Grid Background="{DynamicResource ItemBG_Bottom}"/>
+                <Grid Background="{DynamicResource ItemBG_Bottom}">
+                    <Rectangle x:Name="Repack_OptionsPanel_UIElement_Rectangle" HorizontalAlignment="Center" Height="183" Stroke="{DynamicResource ButtonBackground_NewV2}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,48,0,0" StrokeThickness="2" Fill="#FF09739A">
+                        <Rectangle.RenderTransform>
+                            <MatrixTransform/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Label x:Name="Repack_Options_UIElement_Label"   Content="Options" HorizontalContentAlignment="Center" Margin="0,45,0,186" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="74" Background="{x:Null}"/>
+                    <TextBlock x:Name="Repack_PathIndicatorSelected_UIElement_TextBlock"   HorizontalAlignment="Left" Margin="128,8,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="230" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
+                    <Button   Background="{DynamicResource ItemBG_Bottom}" x:Name="Repack_SelectArchiveOrDirectory_UIElement_Button" Content="Select Archive/Directory" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="128" Margin="0,6,0,0" Height="16" MouseEnter="DumpSelectArchiveOrDir_MouseEnter" MouseLeave="DumpSelectArchiveOrDir_MouseLeave"/>
+                    <TextBlock   Background="{DynamicResource TextBlockBG}" x:Name="Repack_PathIndicatorOutput_UIElement_TextBlock" HorizontalAlignment="Left" Margin="128,29,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="230" Foreground="#FFE5D90C"/>
+                    <Button   Background="{DynamicResource ItemBG_Bottom}" x:Name="Repack_SelectOutputPath_UIElement_Button" Content="Select Output Path" HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="128" Foreground="#FFE5D90C" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" MouseEnter="DumpSelectOutputPath_MouseEnter" MouseLeave="DumpSelectOutputPath_MouseLeave"/>
+                    <Button   x:Name="Repack_Start_UIElement_Button" Content="Start" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="358" Height="20" Background="{DynamicResource ItemBG_Bottom}"/>
+                </Grid>
             </Expander>
             <Expander x:Name="Dump_Item_UIElement_Expander"   Header="DUMP" Height="280" Width="360" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}" MouseDown="UIFunc_DragWindow">
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
