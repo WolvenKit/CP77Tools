@@ -68,14 +68,7 @@
                 </Style>
             </ListBox.ItemContainerStyle>
             <Expander   x:Name="Repack_Item_UIElement_Expander" Header="REPACK" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="360" Visibility="Visible" Background="{DynamicResource ItemBG_Top}">
-                <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <Button   Content="Button" HorizontalAlignment="Left" Margin="52,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <Button   Content="Button" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
-                    <RadioButton   Content="RadioButton" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton   Content="RadioButton" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton   Content="RadioButton" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton   Content="RadioButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                </Grid>
+                <Grid Background="{DynamicResource ItemBG_Bottom}"/>
             </Expander>
             <Expander x:Name="Dump_Item_UIElement_Expander"   Header="DUMP" Height="280" Width="360" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}" MouseDown="UIFunc_DragWindow">
                 <Grid Background="{DynamicResource ItemBG_Bottom}">
@@ -266,54 +259,19 @@
                 </Grid>
             </Expander>
             <Expander   x:Name="UIElement_Expander_Placeholder_3" Header="HASH" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="360" Visibility="Hidden" Background="{DynamicResource ItemBG_Top}" IsEnabled="False">
-                <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <Button Content="Button" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                </Grid>
+                <Grid Background="{DynamicResource ItemBG_Bottom}"/>
             </Expander>
             <Expander x:Name="UIElement_Expander_Placeholder_4" Header="HASH" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="360" Visibility="Hidden" Background="{DynamicResource ItemBG_Top}" IsEnabled="False">
-                <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <Button Content="Button" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                </Grid>
+                <Grid Background="{DynamicResource ItemBG_Bottom}"/>
             </Expander>
             <Expander x:Name="UIElement_Expander_Placeholder_5" Header="HASH" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="360" Visibility="Hidden" Background="{DynamicResource ItemBG_Top}" IsEnabled="False">
-                <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <Button Content="Button" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                </Grid>
+                <Grid Background="{DynamicResource ItemBG_Bottom}"/>
             </Expander>
             <Expander x:Name="UIElement_Expander_Placeholder_6" Header="HASH" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="360" Visibility="Hidden" Background="{DynamicResource ItemBG_Top}" IsEnabled="False">
-                <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <Button Content="Button" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                </Grid>
+                <Grid Background="{DynamicResource ItemBG_Bottom}"/>
             </Expander>
             <Expander x:Name="UIElement_Expander_Placeholder_7" Header="HASH" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Height="280" Width="360" Visibility="Hidden" Background="{DynamicResource ItemBG_Top}" IsEnabled="False">
-                <Grid Background="{DynamicResource ItemBG_Bottom}">
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <Button Content="Button" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                    <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" Grid.ColumnSpan="2"/>
-                </Grid>
+                <Grid Background="{DynamicResource ItemBG_Bottom}"/>
             </Expander>
 
         </ListBox>
