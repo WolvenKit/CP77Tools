@@ -8,15 +8,16 @@ using Catel.IoC;
 using CP77Tools.Model;
 using CP77Tools.Services;
 using WolvenKit.Common.Tools.DDS;
+using WolvenKit.Common.Tools.Audio;
 using WolvenKit.CR2W.Types;
+using WolvenKit.Common.Tools.Video;
 
 namespace CP77Tools
 {
     public static partial class ConsoleFunctions
     {
-        
         public static void ArchiveTask(string path, string outpath, bool extract, bool dump, bool list, 
-            bool uncook, EUncookExtension uext, ulong hash, string pattern, string regex)
+            bool uncook, EUncookExtension uext, EAudioExtension aext, EVideoExtension vext, ulong hash, string pattern, string regex)
         {
             #region checks
 
@@ -74,7 +75,7 @@ namespace CP77Tools
                     {
                         if (extract)
                         {
-                            ar.ExtractSingle(hash, outDir);
+                            ar.ExtractSingle(hash, outDir, aext, vext);
                             Console.WriteLine($"{ar.Filepath}: Extracted one file: {hash}");
                         }
 
@@ -88,7 +89,7 @@ namespace CP77Tools
                     {
                         if (extract)
                         {
-                            var r = ar.ExtractAll(outDir, pattern, regex);
+                            var r = ar.ExtractAll(outDir, aext, vext, pattern, regex);
                             Console.WriteLine($"{ar.Filepath}: Extracted {r.Item1.Count}/{r.Item2} files.");
                         }
 

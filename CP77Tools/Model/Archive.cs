@@ -22,6 +22,8 @@ using WolvenKit.Common.Tools;
 using WolvenKit.Common.Tools.DDS;
 using WolvenKit.CR2W;
 using WolvenKit.CR2W.Types;
+using WolvenKit.Common.Tools.Audio;
+using WolvenKit.Common.Tools.Video;
 
 namespace CP77Tools.Model
 {
@@ -101,12 +103,12 @@ namespace CP77Tools.Model
         /// <param name="hash"></param>
         /// <param name="outDir"></param>
         /// <returns></returns>
-        public int ExtractSingle(ulong hash, DirectoryInfo outDir)
+        public int ExtractSingle(ulong hash, DirectoryInfo outDir, EAudioExtension aext, EVideoExtension vext)
         {
             using var mmf = MemoryMappedFile.CreateFromFile(Filepath, FileMode.Open, Mmfhash, 0,
                 MemoryMappedFileAccess.Read);
 
-            return ExtractSingleInner(mmf, hash, outDir);
+            return ExtractSingleInner(mmf, hash, outDir, aext, vext);
         }
         
         private int UncookSingleInner(MemoryMappedFile mmf, ulong hash, DirectoryInfo outDir, EUncookExtension uncookext = EUncookExtension.tga)
@@ -210,7 +212,7 @@ namespace CP77Tools.Model
             return uncooksuccess ? 1 : 0;
         }
 
-        private int ExtractSingleInner(MemoryMappedFile mmf, ulong hash, DirectoryInfo outDir)
+        private int ExtractSingleInner(MemoryMappedFile mmf, ulong hash, DirectoryInfo outDir, EAudioExtension aext, EVideoExtension vext)
         {
             var extractsuccess = false;
             var (file, buffers) = GetFileData(hash, mmf);
@@ -223,6 +225,16 @@ namespace CP77Tools.Model
                 name += ".bin";
             }
 
+            var is_audio_file = Path.GetExtension(name) == ".wem";
+
+            //todo: uncook Bink files to MP4
+            var is_video_file = Path.GetExtension(name) == ".bik";
+
+            if(is_audio_file && aext != EAudioExtension.wem)
+            {
+                name = Path.ChangeExtension(name, aext.ToString());
+            }
+
             var outfile = new FileInfo(Path.Combine(outDir.FullName,
                 $"{name}"));
             if (outfile.Directory == null)
@@ -230,8 +242,16 @@ namespace CP77Tools.Model
 
             // write main file
             Directory.CreateDirectory(outfile.Directory.FullName);
-            File.WriteAllBytes(outfile.FullName, file);
-            extractsuccess = true;
+
+            if(!is_audio_file || aext == EAudioExtension.wem)
+            {
+                File.WriteAllBytes(outfile.FullName, file);
+                extractsuccess = true;
+            }
+            else if(is_audio_file)
+            {
+
+            }
 
             // write buffers
             for (int j = 0; j < buffers.Count; j++)
@@ -252,7 +272,7 @@ namespace CP77Tools.Model
         /// <param name="outDir"></param>
         /// <param name="pattern"></param>
         /// <returns></returns>
-        public (List<string>, int) ExtractAll(DirectoryInfo outDir, string pattern = "", string regex = "")
+        public (List<string>, int) ExtractAll(DirectoryInfo outDir, EAudioExtension aext, EVideoExtension vext, string pattern = "", string regex = "")
         {
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
@@ -283,7 +303,7 @@ namespace CP77Tools.Model
 
             Parallel.ForEach(finalmatches, new ParallelOptions { MaxDegreeOfParallelism = 8 }, info =>
             {
-                int extracted = ExtractSingleInner(mmf, info.NameHash64, outDir);
+                int extracted = ExtractSingleInner(mmf, info.NameHash64, outDir, aext, vext);
 
                 if (extracted != 0)
                     extractedList.Add(info.NameStr);

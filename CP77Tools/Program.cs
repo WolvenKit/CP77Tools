@@ -21,6 +21,8 @@ using WolvenKit.Common.Services;
 using WolvenKit.Common.Tools.DDS;
 using System.Diagnostics;
 using Luna.ConsoleProgressBar;
+using WolvenKit.Common.Tools.Audio;
+using WolvenKit.Common.Tools.Video;
 
 namespace CP77Tools
 {
@@ -41,14 +43,6 @@ namespace CP77Tools
 
             #region commands
 
-
-
-
-
-
-
-
-
             var rootCommand = new RootCommand();
 
             var archive = new Command("archive", "Target an archive to extract files or dump information.")
@@ -62,10 +56,12 @@ namespace CP77Tools
                 new Option<bool>(new []{ "--list", "-l"}, "List contents of archive."),
                 new Option<bool>(new []{ "--uncook", "-u"}, "Uncooks textures from archive."),
                 new Option<EUncookExtension>(new []{ "--uext"}, "Uncook extension (tga, bmp, jpg, png, dds). Default is tga."),
+                new Option<EAudioExtension>(new []{"--audio-format", "-a"}, "Select audio format (ogg, wav, mp3, aac, flac, wem). Default is Wwise encoded media"),
+                new Option<EVideoExtension>(new []{"--video-format", "-v"}, "Select video format (bik, mp4, avi). Default is Bink"),
                 new Option<ulong>(new []{ "--hash"}, "Extract single file with given hash."),
             };
             rootCommand.Add(archive);
-            archive.Handler = CommandHandler.Create<string, string, bool, bool, bool, bool, EUncookExtension, ulong, string, string>
+            archive.Handler = CommandHandler.Create<string, string, bool, bool, bool, bool, EUncookExtension, EAudioExtension, EVideoExtension, ulong, string, string>
                 (ConsoleFunctions.ArchiveTask);
 
             var dump = new Command("dump", "Target an archive or a directory to dump archive information.")
