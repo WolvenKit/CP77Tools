@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CP77Tools.Services
+namespace CP77Tools.Common.Services
 {
     public interface IHashService
     {

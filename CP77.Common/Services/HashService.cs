@@ -4,11 +4,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Catel.IoC;
+using WolvenKit.Common.Services;
 
-namespace CP77Tools.Services
+namespace CP77Tools.Common.Services
 {
     public class HashService : IHashService
     {
+        private static readonly ILoggerService Logger = ServiceLocator.Default.ResolveType<ILoggerService>();
+        
         private readonly HttpClient _client = new HttpClient();
         
         private const string ResourceUrl = "https://nyxmods.com/cp77/files/archivehashes.csv";
@@ -32,7 +36,7 @@ namespace CP77Tools.Services
                 var response = await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
                 if (response.StatusCode == HttpStatusCode.NotModified)
                 {
-                    Console.WriteLine("Already using the latest Archive Hashes");
+                    Logger.LogString("Already using the latest Archive Hashes", Logtype.Success);
                     return false;
                 }
 
@@ -49,28 +53,28 @@ namespace CP77Tools.Services
                     return false;
                 }
 
-                Console.WriteLine("Downloading latest Archive Hashes...");
+                Logger.LogString("Downloading latest Archive Hashes...");
 
                 var stream = await response.Content.ReadAsStreamAsync();
 
                 await WriteHashes(stream);
                 await WriteEtag(serverEtag);
 
-                Console.WriteLine("Archive Hashes updated.");
+                Logger.LogString("Archive Hashes updated.", Logtype.Success);
 
                 return true;
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine("Update Archive Hashes Failed - Server may not be available");
+                Logger.LogString("Update Archive Hashes Failed - Server may not be available", Logtype.Error);
             }
             catch (FormatException)
             {
-                Console.WriteLine("Update Archive Hashes Failed - Server used unexpected eTag format");
+                Logger.LogString("Update Archive Hashes Failed - Server used unexpected eTag format", Logtype.Error);
             }
             catch (Exception)
             {
-                Console.WriteLine("Update Archive Hashes Failed - Unexpected Error");
+                Logger.LogString("Update Archive Hashes Failed - Unexpected Error", Logtype.Error);
             }
 
             return false;

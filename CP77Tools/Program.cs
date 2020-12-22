@@ -20,6 +20,7 @@ using WolvenKit.Common.Tools.DDS;
 using System.Diagnostics;
 using CP77.Common.Services;
 using CP77.Common.Tools.FNV1A;
+using CP77Tools.Common.Services;
 using CP77Tools.Extensions;
 using Luna.ConsoleProgressBar;
 
