@@ -87,7 +87,7 @@ namespace CP77Tools.Model
             Table1count = (uint)FileInfo.Count;
             Table2count = (uint)Offsets.Count;
             Table3count = (uint)Dependencies.Count;
-            tablewriter.Write(Checksum);
+            //tablewriter.Write(Checksum);
             tablewriter.Write(Table1count);
             tablewriter.Write(Table2count);
             tablewriter.Write(Table3count);
