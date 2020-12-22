@@ -14,19 +14,22 @@ namespace WolvenKit.Common.Tools.Video
 {
     public enum EVideoExtension
     {
-        bik,
+        bk2,
         mp4,
         avi
     }
 
     public static class VideoconvWrapper
     {
+        // DOES NOT WORK
+        // ffmpeg supports BIK not BK2
+
         public static string Convert(string outDir, string filepath, EVideoExtension filetype)
         {
             string ffmpegpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "avconv/ffmpeg.exe");
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
-            var filename = Path.Combine(outDir, $"{Path.GetFileNameWithoutExtension(filepath)}.{filetype}");
+            var filename = Path.ChangeExtension(Path.Combine(outDir, filepath), filetype.ToString());
 
             var proc = new ProcessStartInfo(ffmpegpath)
             {

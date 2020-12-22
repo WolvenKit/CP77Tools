@@ -262,15 +262,17 @@ namespace CP77Tools.Model
                     
                     if(aext == EAudioExtension.ogg)
                     {
+                        var filename = Path.ChangeExtension(Path.Combine(outDir.FullName, name), ".ogg");
+
                         // output as is
-                        File.WriteAllBytes(outfile.FullName, buffer);
+                        File.WriteAllBytes(filename, buffer);
                     }
                     else
                     {
                         // generate a temp file, convert to local directory
                         string temp_name = Path.GetTempFileName();
                         File.WriteAllBytes(temp_name, buffer);
-                        AudioconvWrapper.Convert(outDir.FullName, temp_name, aext);
+                        AudioconvWrapper.Convert(outDir.FullName, name, temp_name, aext);
                         File.Delete(temp_name);
                     }
 
@@ -281,7 +283,7 @@ namespace CP77Tools.Model
                     logger.LogString("Could not convert wem. " + ex.Message, Logtype.Error);
                 }
             }
-            else if(is_video_file && vext != EVideoExtension.bik)
+            else if(is_video_file && vext != EVideoExtension.bk2)
             {
                 try
                 {

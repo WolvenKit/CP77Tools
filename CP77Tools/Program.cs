@@ -74,7 +74,7 @@ namespace CP77Tools
                 new Option<bool>(new []{ "--uncook", "-u"}, "Uncooks textures from archive."),
                 new Option<EUncookExtension>(new []{ "--uext", "--texture-format", "-t"}, "Uncook extension (tga, bmp, jpg, png, dds). Default is tga."),
                 new Option<EAudioExtension>(new []{ "--audio-format", "-a"}, "Select audio format (ogg, wav, mp3, aac, flac, wem). Default is Wwise encoded media"),
-                new Option<EVideoExtension>(new []{ "--video-format", "-v"}, "Select video format (bik, mp4, avi). Default is Bink"),
+                /* new Option<EVideoExtension>(new []{ "--video-format", "-v"}, "Select video format (bk2, mp4, avi). Default is Bink"),*/
                 new Option<ulong>(new []{ "--hash"}, "Extract single file with given hash."),
             };
             rootCommand.Add(archive);
@@ -82,7 +82,8 @@ namespace CP77Tools
             archive.Handler = CommandHandler.Create((ArchiveOptions opt) => 
                     ConsoleFunctions.ArchiveTask(opt.path, opt.outpath, opt.extract, opt.dump, 
                                                  opt.list, opt.uncook, opt.uncook_ext, opt.audio_ext, 
-                                                 opt.video_ext, opt.hash, opt.pattern, opt.regex));
+                                                 EVideoExtension.bk2, opt.hash, opt.pattern, opt.regex));
+
 
             var dump = new Command("dump", "Target an archive or a directory to dump archive information.")
             {
