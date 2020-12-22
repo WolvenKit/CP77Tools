@@ -24,7 +24,7 @@ namespace CP77Tools.Services
             var lastEtag = GetLastEtag();
             if (!string.IsNullOrEmpty(lastEtag))
             {
-                request.Headers.Add("If-None-Match", $"\"{lastEtag}\"");
+                request.Headers.Add("If-None-Match", $"{lastEtag}");
             }
 
             try
@@ -32,6 +32,7 @@ namespace CP77Tools.Services
                 var response = await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
                 if (response.StatusCode == HttpStatusCode.NotModified)
                 {
+                    Console.WriteLine("Already using the latest Archive Hashes");
                     return false;
                 }
 
@@ -41,7 +42,7 @@ namespace CP77Tools.Services
                     throw new FormatException("Response etag had unexpected format");
                 }
 
-                var serverEtag = tags.Single().Trim('"');
+                var serverEtag = tags.Single();
                 if (!string.IsNullOrEmpty(lastEtag) && !string.IsNullOrEmpty(serverEtag) &&
                     string.Equals(lastEtag, serverEtag, StringComparison.OrdinalIgnoreCase))
                 {
