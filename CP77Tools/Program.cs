@@ -33,7 +33,7 @@ namespace CP77Tools
         // Limitation of CommandHandler, need to create an object
         private class ArchiveOptions 
         { 
-            public string path { get; set; }
+            public string[] path { get; set; }
             public string outpath { get; set; }
             public string pattern { get; set; }
             public string regex { get; set; }
@@ -42,8 +42,8 @@ namespace CP77Tools
             public bool list { get; set; }
             public bool uncook { get; set; }
             public EUncookExtension uncook_ext { get; set; }
-            public EAudioExtension audio_ext { get; set; }
-            public EVideoExtension video_ext { get; set; }
+            public EAudioExtension audioformat { get; set; }
+            public EVideoExtension videoformat { get; set; }
             public ulong hash { get; set; }
         }
 
@@ -109,15 +109,15 @@ namespace CP77Tools
                 new Option<bool>(new []{ "--list", "-l"}, "List contents of archive."),
                 new Option<bool>(new []{ "--uncook", "-u"}, "Uncooks textures from archive."),
                 new Option<EUncookExtension>(new []{ "--uext", "--texture-format", "-t"}, "Uncook extension (tga, bmp, jpg, png, dds). Default is tga."),
-                new Option<EAudioExtension>(new []{ "--audio-format", "-a"}, "Select audio format (ogg, wav, mp3, aac, flac, wem). Default is Wwise encoded media"),
-                /* new Option<EVideoExtension>(new []{ "--video-format", "-v"}, "Select video format (bk2, mp4, avi). Default is Bink"),*/
+                new Option<EAudioExtension>(new []{ "--audioformat", "-a"}, "Select audio format (ogg, wav, mp3, aac, flac, wem). Default is Wwise encoded media"),
+                /* new Option<EVideoExtension>(new []{ "--videoformat", "-v"}, "Select video format (bk2, mp4, avi). Default is Bink"),*/
                 new Option<ulong>(new []{ "--hash"}, "Extract single file with given hash."),
             };
             rootCommand.Add(archive);
 
             archive.Handler = CommandHandler.Create((ArchiveOptions opt) => 
                     Tasks.ConsoleFunctions.ArchiveTask(opt.path, opt.outpath, opt.extract, opt.dump, 
-                                                 opt.list, opt.uncook, opt.uncook_ext, opt.audio_ext, 
+                                                 opt.list, opt.uncook, opt.uncook_ext, opt.audioformat, 
                                                  EVideoExtension.bk2, opt.hash, opt.pattern, opt.regex));
 
 
