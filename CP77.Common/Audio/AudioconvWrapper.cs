@@ -23,15 +23,15 @@ namespace WolvenKit.Common.Tools.Audio
 
         public static string Convert(string outDir, string filepath, EAudioExtension filetype)
         {
-            string textconvpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "avconv/ffmpeg.exe");
+            string ffmpegpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "avconv/ffmpeg.exe");
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
             var filename = Path.Combine(outDir, $"{Path.GetFileNameWithoutExtension(filepath)}.{filetype}");
 
-            var proc = new ProcessStartInfo(textconvpath)
+            var proc = new ProcessStartInfo(ffmpegpath)
             {
-                WorkingDirectory = Path.GetDirectoryName(textconvpath),
-                Arguments = $" -i \"{filepath}\" \"{outDir}\"",
+                WorkingDirectory = Path.GetDirectoryName(ffmpegpath),
+                Arguments = $" -i \"{filepath}\" \"{filename}\"",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 CreateNoWindow = true,

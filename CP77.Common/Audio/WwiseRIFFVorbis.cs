@@ -70,7 +70,7 @@ namespace CP77.Common.Audio
         public long NextOffset() { return offset + HeaderSize() + size; }
     };
 
-    class WwiseRIFFVorbisFile
+    public class WwiseRIFFVorbisFile
     {
         public readonly string codebooks_name;
         public long file_size;
@@ -145,7 +145,7 @@ namespace CP77.Common.Audio
         }
     }
 
-    class WwiseRIFFVorbis
+    public class WwiseRIFFVorbis
     {
         public static void GenerateWem(string codebook_name, Stream in_stream, Stream out_stream)
         {
