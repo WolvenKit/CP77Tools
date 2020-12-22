@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Catel.IoC;
 using System.CommandLine;
-using System.CommandLine.Builder;
-using System.CommandLine.Invocation;
-using System.CommandLine.IO;
-using System.CommandLine.Parsing;
 using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
-using CP77Tools.Model;
 using WolvenKit.Common.Services;
-using WolvenKit.Common.Tools.DDS;
 using System.Diagnostics;
 using CP77.Common.Services;
 using CP77.Common.Tools.FNV1A;
@@ -67,13 +58,15 @@ namespace CP77Tools
             logger.LogString("Loading Hashes...", Logtype.Important);
             await Loadhashes();
 
-            var rootCommand = new RootCommand();
-            rootCommand.Add(new ArchiveCommand());
-            rootCommand.Add(new DumpCommand());
-            rootCommand.Add(new CR2WCommand());
-            rootCommand.Add(new HashCommand());
-            rootCommand.Add(new OodleCommand());
-
+            var rootCommand = new RootCommand
+            {
+                new PackCommand(),
+                new ArchiveCommand(),
+                new DumpCommand(),
+                new CR2WCommand(),
+                new HashCommand(),
+                new OodleCommand()
+            };
 
             // Run
             if (args == null || args.Length == 0)
@@ -164,7 +157,7 @@ namespace CP77Tools
         }
 
 
-        private static async Task Loadhashes()
+        internal static async Task Loadhashes()
         {
             var _maincontroller = ServiceLocator.Default.ResolveType<IMainController>();
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();

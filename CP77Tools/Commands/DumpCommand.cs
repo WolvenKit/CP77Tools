@@ -1,5 +1,6 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Invocation;
+using CP77Tools.Tasks;
 
 namespace CP77Tools.Commands
 {

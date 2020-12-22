@@ -1,5 +1,6 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Invocation;
+using CP77Tools.Tasks;
 using WolvenKit.Common.Tools.DDS;
 
 namespace CP77Tools.Commands
@@ -22,7 +23,7 @@ namespace CP77Tools.Commands
             AddOption(new Option<EUncookExtension>(new[] {"--uext"}, "Uncook extension (tga, bmp, jpg, png, dds). Default is tga."));
             AddOption(new Option<ulong>(new[] {"--hash"}, "Extract single file with given hash."));
             
-            Handler = CommandHandler.Create<string, string, bool, bool, bool, bool, EUncookExtension, ulong, string, string>(ConsoleFunctions.ArchiveTask);
+            Handler = CommandHandler.Create<string[], string, bool, bool, bool, bool, EUncookExtension, ulong, string, string>(ConsoleFunctions.ArchiveTask);
         }
     }
 }
