@@ -89,23 +89,25 @@ namespace CP77Tools.UI.Functionality
             TaskCounter += 1;
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
+                if (app.Main_ProgressBar_UIElement_ProgressBar.Value >= 1) { app.Main_ProgressBar_UIElement_ProgressBar.Value = 0; }
+
                 Logtype TYPE = _logger.Logtype;
                 var CURRENTTASK = TaskCounter;
                 string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + " - Working on Task : " + CURRENTTASK ;
                 app.Main_ProgressBar_UIElement_ProgressBar.Value += _logger.Progress.Item1;
                 app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
 
-
             }));
         }
 
-        // Reporting when finished. Should soon be unneeded
+        // Reporting when finished. Should soon be unneeded  (Maybe keep this for opening output after it finishes.)
         public void TaskFinished(MainWindow.TaskType CurrentTaskType)
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
                 app.Main_ProgressBar_UIElement_ProgressBar.Value = 0;
-                app.Main_ProgressOutput_UIElement_TextBlock.Text = "[Normal] - Finished : " + CurrentTaskType.ToString();
+                app.Main_ProgressOutput_UIElement_TextBlock.Text = "[Succes] - Finished : " + CurrentTaskType.ToString();
+                app.Main_OutputBox_UIElement_ComboBox.Items.Add("[Succes] - Finished : " + CurrentTaskType.ToString());
                 TaskCounter = 0;
             }));
         }

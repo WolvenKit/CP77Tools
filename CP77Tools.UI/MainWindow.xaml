@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="CP77Tools" Height="450" Width="839" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None">
 
-    <Grid Opacity="0.9">
+    <Grid x:Name="ContainerGrid" Opacity="0.9">
 
         <Rectangle x:Name="Main_Window_UIElement_Rectangle"  HorizontalAlignment="Center" Height="322" Margin="0,88,0,0" VerticalAlignment="Top" Width="803" MouseDown="UIFunc_DragWindow">
             <Rectangle.Effect>
@@ -75,73 +75,6 @@
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <TextBlock x:Name="Archive_PathIndicator_Selected_UIElement_TextBlock"   HorizontalAlignment="Left" Margin="98,8,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="244" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="Archive_SelectArchive_UIElement_Button"   Content="Select Archives" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="98" MouseEnter="Archive_Button_ArchiveSelectArchive_MouseEnter" MouseLeave="Archive_Button_ArchiveSelectArchive_MouseLeave" Margin="0,6,0,0" Height="16" Click="Archive_Button_ArchiveSelectArchive_Click"/>
-                    <Button x:Name="Archive_Start_UIElement_Button"   Content="Start" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="358" MouseEnter="Archive_Button_ArchiveStart_MouseEnter" MouseLeave="Archive_Button_ArchiveStart_MouseLeave" Height="20" Background="{DynamicResource ItemBG_Bottom}" Click="Archive_Button_ArchiveStart_Click"/>
-                    <TextBlock Background="{DynamicResource TextBlockBG}" x:Name="Archive_PathIndicator_Output_UIElement_TextBlock"   HorizontalAlignment="Left" Margin="98,29,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="260" Foreground="#FFE5D90C"/>
-                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="Archive_SelectOutputPath_UIElement_Button"   Content="Select Output Path" HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="98" Foreground="#FFE5D90C" MouseEnter="Archive_Button_ArchiveSelectOutputPath_MouseEnter" MouseLeave="Archive_Button_ArchiveSelectOutputPath_MouseLeave" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" Click="Archive_Button_ArchiveSelectOutputPath_Click"/>
-                    <CheckBox x:Name="Archive_Extract_UIElement_Checkbox"   Content="Extract" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="Archive_Checkbox_ArchiveExtract_Checked" Unchecked="Archive_Checkbox_ArchiveExtract_Unchecked"/>
-                    <CheckBox x:Name="Archive_Dump_UIElement_Checkbox"   Content="Dump" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="Archive_Checkbox_ArchiveDump_Checked" Unchecked="Archive_Checkbox_ArchiveDump_Unchecked"/>
-                    <CheckBox x:Name="Archive_List_UIElement_Checkbox"   Content="List" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="Archive_Checkbox_ArchiveList_Checked" Unchecked="Archive_Checkbox_ArchiveList_Unchecked"/>
-                    <CheckBox x:Name="Archive_Uncook_UIElement_Checkbox"   Content="Uncook" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="Archive_Checkbox_ArchiveUncook_Checked" Unchecked="Archive_Checkbox_ArchiveUncook_Unchecked"/>
-                    <TextBox x:Name="Archive_Hash_UIElement_TextBox"   HorizontalAlignment="Left" Margin="141,211,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66" TextChanged="Archive_TextBox_ArchiveHash_TextChanged"/>
-                    <Rectangle x:Name="Archive_Formats_UIElement_Rectangle" HorizontalAlignment="Center" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,89,0,0" StrokeThickness="2">
-                        <Rectangle.RenderTransform>
-                            <MatrixTransform/>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
-                    <Label x:Name="Archive_UncookFormat_UIElement_Label"   Content="Uncook File Format" HorizontalContentAlignment="Center" Margin="260,91,0,144" FontSize="9" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Left" Width="94" Background="{x:Null}"/>
-                    <Rectangle x:Name="Archive_Uncook_UIElement_Rectangle"   HorizontalAlignment="Left" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="285" RadiusX="4" RadiusY="4" Margin="73,89,0,0" StrokeThickness="2">
-                        <Rectangle.RenderTransform>
-                            <MatrixTransform/>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
-
-                    <RadioButton x:Name="Archive_JPG_UIElement_RadioButton"   Content=".jpg" HorizontalAlignment="Left" Margin="138,91,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="35" Checked="Archive_RadioButton_ArchiveJPG_Checked"/>
-                    <RadioButton x:Name="Archive_BMP_UIElement_RadioButton"   Content=".bmp" HorizontalAlignment="Left" Margin="218,100,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="37" Checked="Archive_RadioButton_ArchiveBMP_Checked"/>
-                    <RadioButton x:Name="Archive_JPEG_UIElement_RadioButton"   Content=".jpeg" HorizontalAlignment="Left" Margin="93,100,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="38" Checked="Archive_RadioButton_ArchiveJPEG_Checked"/>
-                    <RadioButton x:Name="Archive_PNG_UIElement_RadioButton"   Content=".png" HorizontalAlignment="Left" Margin="153,100,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="37" Checked="Archive_RadioButton_ArchivePNG_Checked"/>
-                    <RadioButton x:Name="Archive_DDS_UIElement_RadioButton"   Content=".dds" HorizontalAlignment="Left" Margin="204,91,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="36" Checked="Archive_RadioButton_ArchiveDDS_Checked"/>
-                    <RadioButton x:Name="Archive_TGA_UIElement_RadioButton"   Content=".tga" HorizontalAlignment="Left" Margin="78,91,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="33" IsChecked="True" Checked="Archive_RadioButton_ArchiveTGA_Checked"/>
-                    <Label x:Name="Archive_Hash_UIElement_Label"   Content="Extract Single File By Hash" HorizontalContentAlignment="Center" Margin="-7,207,0,24" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Left" Width="158" Background="{x:Null}"/>
-                    <Rectangle x:Name="Archive_Hash_UIElement_Rectangle"   HorizontalAlignment="Left" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="143" RadiusX="4" RadiusY="4" Margin="0,209,0,0" StrokeThickness="2">
-                        <Rectangle.RenderTransform>
-                            <MatrixTransform/>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
-                    <TextBox x:Name="Archive_Regex_UIElement_TextBox"   HorizontalAlignment="Left" Margin="80,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66" TextChanged="UIElement_TextBox_ArchiveRegex_TextChanged"/>
-                    <Rectangle x:Name="Archive_Regex_UIElement_Rectangle"   HorizontalAlignment="Left" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="83" RadiusX="4" RadiusY="4" Margin="0,136,0,0" StrokeThickness="2">
-                        <Rectangle.RenderTransform>
-                            <MatrixTransform/>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
-                    <Label x:Name="Archive_Regex_UIElement_Label"   Content="Regex" HorizontalContentAlignment="Center" Margin="14,134,0,101" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Left" Width="54" Background="{x:Null}"/>
-                    <TextBox x:Name="Archive_Pattern_UIElement_TextBox"   HorizontalAlignment="Left" Margin="80,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66" TextChanged="UIElement_TextBox_ArchivePattern_TextChanged"/>
-                    <Rectangle x:Name="Archive_Pattern_UIElement_Rectangle"   HorizontalAlignment="Left" Height="16" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="82" RadiusX="4" RadiusY="4" Margin="0,118,0,0" StrokeThickness="2">
-                        <Rectangle.RenderTransform>
-                            <MatrixTransform/>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
-                    <Label x:Name="Archive_Pattern_UIElement_Label"   Content="Pattern" HorizontalContentAlignment="Center" Margin="4,116,0,115" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Left" Width="74" Background="{x:Null}"/>
-                    <ComboBox x:Name="Archive_SelectedFilesDropDown_UIElement_ComboBox" HorizontalAlignment="Left" Margin="342,6,0,0" VerticalAlignment="Top" Width="16" Height="16" MinWidth="10" MinHeight="10" FontFamily="Bahnschrift" FontSize="11">
-                        <ComboBoxItem/>
-                        <ComboBoxItem Content="Lol"/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem Content="Lol"/>
-                        <ComboBoxItem Content="Lol"/>
-                        <ComboBoxItem Content="Lol"/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem Content="C;///343/43/243/2/efsefe/feff/ef/es/fesf//f23/f/32f432'f"/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                    </ComboBox>
-                    <Label x:Name="Archive_Options_UIElement_Label"   Content="Options" HorizontalContentAlignment="Center" Margin="0,45,0,186" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="74" Background="{x:Null}"/>
                     <Rectangle x:Name="UIElement_Rectangle_ArchiveFormats_Copy1" HorizontalAlignment="Center" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,63,0,0" StrokeThickness="2">
                         <Rectangle.RenderTransform>
                             <MatrixTransform/>
@@ -157,6 +90,56 @@
                             <MatrixTransform/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
+                    <Rectangle x:Name="Archive_Hash_UIElement_Rectangle"   HorizontalAlignment="Left" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="143" RadiusX="4" RadiusY="4" Margin="0,209,0,0" StrokeThickness="2">
+                        <Rectangle.RenderTransform>
+                            <MatrixTransform/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle x:Name="Archive_Regex_UIElement_Rectangle"   HorizontalAlignment="Left" Height="17" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="83" RadiusX="4" RadiusY="4" Margin="0,136,0,0" StrokeThickness="2">
+                        <Rectangle.RenderTransform>
+                            <MatrixTransform/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle x:Name="Archive_Pattern_UIElement_Rectangle"   HorizontalAlignment="Left" Height="16" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="82" RadiusX="4" RadiusY="4" Margin="0,118,0,0" StrokeThickness="2">
+                        <Rectangle.RenderTransform>
+                            <MatrixTransform/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle x:Name="Archive_Uncook_UIElement_Rectangle"   HorizontalAlignment="Left" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="285" RadiusX="4" RadiusY="4" Margin="73,89,0,0" StrokeThickness="2">
+                        <Rectangle.RenderTransform>
+                            <MatrixTransform/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle x:Name="Archive_Formats_UIElement_Rectangle" HorizontalAlignment="Center" Height="26" Stroke="{DynamicResource ItemBG_Top}" VerticalAlignment="Top" Width="358" RadiusX="4" RadiusY="4" Margin="0,89,0,0" StrokeThickness="2">
+                        <Rectangle.RenderTransform>
+                            <MatrixTransform/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <TextBlock x:Name="Archive_PathIndicator_Selected_UIElement_TextBlock"   HorizontalAlignment="Left" Margin="98,8,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="244" Background="{DynamicResource TextBlockBG}" Foreground="#FFE5D90C"/>
+                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="Archive_SelectArchive_UIElement_Button"   Content="Select Archives" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="98" MouseEnter="Archive_Button_ArchiveSelectArchive_MouseEnter" MouseLeave="Archive_Button_ArchiveSelectArchive_MouseLeave" Margin="0,6,0,0" Height="16" Click="Archive_Button_ArchiveSelectArchive_Click"/>
+                    <Button x:Name="Archive_Start_UIElement_Button"   Content="Start" HorizontalAlignment="Center" Margin="0,231,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="12" BorderBrush="{DynamicResource ItemBG_Top}" Foreground="#FFE5D90C" Width="358" MouseEnter="Archive_Button_ArchiveStart_MouseEnter" MouseLeave="Archive_Button_ArchiveStart_MouseLeave" Height="20" Background="{DynamicResource ItemBG_Bottom}" Click="Archive_Button_ArchiveStart_Click"/>
+                    <TextBlock Background="{DynamicResource TextBlockBG}" x:Name="Archive_PathIndicator_Output_UIElement_TextBlock"   HorizontalAlignment="Left" Margin="98,29,0,0" Text="-" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="12" Width="260" Foreground="#FFE5D90C"/>
+                    <Button Background="{DynamicResource ItemBG_Bottom}" x:Name="Archive_SelectOutputPath_UIElement_Button"   Content="Select Output Path" HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11" Width="98" Foreground="#FFE5D90C" MouseEnter="Archive_Button_ArchiveSelectOutputPath_MouseEnter" MouseLeave="Archive_Button_ArchiveSelectOutputPath_MouseLeave" Height="16" BorderBrush="{DynamicResource ItemBG_Top}" Click="Archive_Button_ArchiveSelectOutputPath_Click"/>
+                    <CheckBox x:Name="Archive_Extract_UIElement_Checkbox"   Content="Extract" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="Archive_Checkbox_ArchiveExtract_Checked" Unchecked="Archive_Checkbox_ArchiveExtract_Unchecked"/>
+                    <CheckBox x:Name="Archive_Dump_UIElement_Checkbox"   Content="Dump" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="Archive_Checkbox_ArchiveDump_Checked" Unchecked="Archive_Checkbox_ArchiveDump_Unchecked"/>
+                    <CheckBox x:Name="Archive_List_UIElement_Checkbox"   Content="List" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="Archive_Checkbox_ArchiveList_Checked" Unchecked="Archive_Checkbox_ArchiveList_Unchecked"/>
+                    <CheckBox x:Name="Archive_Uncook_UIElement_Checkbox"   Content="Uncook" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" Background="#FFE5D90C" Checked="Archive_Checkbox_ArchiveUncook_Checked" Unchecked="Archive_Checkbox_ArchiveUncook_Unchecked"/>
+                    <TextBox x:Name="Archive_Hash_UIElement_TextBox"   HorizontalAlignment="Left" Margin="141,211,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66" TextChanged="Archive_TextBox_ArchiveHash_TextChanged"/>
+                    <Label x:Name="Archive_UncookFormat_UIElement_Label"   Content="Uncook File Format" HorizontalContentAlignment="Center" Margin="260,91,0,144" FontSize="9" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Left" Width="94" Background="{x:Null}"/>
+
+                    <RadioButton x:Name="Archive_JPG_UIElement_RadioButton"   Content=".jpg" HorizontalAlignment="Left" Margin="138,91,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="35" Checked="Archive_RadioButton_ArchiveJPG_Checked"/>
+                    <RadioButton x:Name="Archive_BMP_UIElement_RadioButton"   Content=".bmp" HorizontalAlignment="Left" Margin="218,100,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="37" Checked="Archive_RadioButton_ArchiveBMP_Checked"/>
+                    <RadioButton x:Name="Archive_JPEG_UIElement_RadioButton"   Content=".jpeg" HorizontalAlignment="Left" Margin="93,100,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="38" Checked="Archive_RadioButton_ArchiveJPEG_Checked"/>
+                    <RadioButton x:Name="Archive_PNG_UIElement_RadioButton"   Content=".png" HorizontalAlignment="Left" Margin="153,100,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="37" Checked="Archive_RadioButton_ArchivePNG_Checked"/>
+                    <RadioButton x:Name="Archive_DDS_UIElement_RadioButton"   Content=".dds" HorizontalAlignment="Left" Margin="204,91,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="36" Checked="Archive_RadioButton_ArchiveDDS_Checked"/>
+                    <RadioButton x:Name="Archive_TGA_UIElement_RadioButton"   Content=".tga" HorizontalAlignment="Left" Margin="78,91,0,0" VerticalAlignment="Top" Foreground="#FFE5D90C" FontFamily="Bahnschrift" FontSize="8" Background="#FFE5D90C" Width="33" IsChecked="True" Checked="Archive_RadioButton_ArchiveTGA_Checked"/>
+                    <Label x:Name="Archive_Hash_UIElement_Label"   Content="Extract Single File By Hash" HorizontalContentAlignment="Center" Margin="-7,207,0,24" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Left" Width="158" Background="{x:Null}"/>
+                    <TextBox x:Name="Archive_Regex_UIElement_TextBox"   HorizontalAlignment="Left" Margin="80,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66" TextChanged="UIElement_TextBox_ArchiveRegex_TextChanged"/>
+                    <Label x:Name="Archive_Regex_UIElement_Label"   Content="Regex" HorizontalContentAlignment="Center" Margin="14,134,0,101" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Left" Width="54" Background="{x:Null}"/>
+                    <TextBox x:Name="Archive_Pattern_UIElement_TextBox"   HorizontalAlignment="Left" Margin="80,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279" Height="14" Background="{DynamicResource TextBlockBG}" BorderBrush="{x:Null}" FontSize="11" FontFamily="Bahnschrift" ToolTip="Enter a hash." Foreground="#FFE5D90C" SelectionBrush="#FF064C66" TextChanged="UIElement_TextBox_ArchivePattern_TextChanged"/>
+                    <Label x:Name="Archive_Pattern_UIElement_Label"   Content="Pattern" HorizontalContentAlignment="Center" Margin="4,116,0,115" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Left" Width="74" Background="{x:Null}"/>
+                    <ComboBox x:Name="Archive_SelectedFilesDropDown_UIElement_ComboBox" HorizontalAlignment="Left" Margin="342,6,0,0" VerticalAlignment="Top" Width="16" Height="16" MinWidth="10" MinHeight="10" FontFamily="Bahnschrift" FontSize="11"/>
+                    <Label x:Name="Archive_Options_UIElement_Label"   Content="Options" HorizontalContentAlignment="Center" Margin="0,45,0,186" FontSize="11" FontFamily="Bahnschrift" Foreground="#FFE5D90C" HorizontalAlignment="Center" Width="74" Background="{x:Null}"/>
                 </Grid>
             </Expander>
             <Expander   x:Name="CR2W_Item_UIElement_Expander" Header="CRzW" Height="280" Width="360" FontFamily="Cyberpunk" Foreground="#FFE5D90C" FontSize="16" Background="{DynamicResource ItemBG_Top}">
@@ -351,5 +334,6 @@
         <ProgressBar   x:Name="Main_ProgressBar_UIElement_ProgressBar" HorizontalAlignment="Left" Height="7" Margin="432,400,0,0" VerticalAlignment="Top" Width="389" Foreground="#FFE5D90C" BorderBrush="{x:Null}" Background="#FF077DA9" Maximum="1" LargeChange="0.1"/>
         <ComboBox x:Name="Main_OutputBox_UIElement_ComboBox" HorizontalAlignment="Left" Margin="781,415,0,0" VerticalAlignment="Top" Width="16" Height="16" MinWidth="10" MinHeight="10" FontFamily="Bahnschrift" FontSize="11">
         </ComboBox>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Click="Button_Click" Background="#FF02061B" IsEnabled="False" Visibility="Hidden"/>
     </Grid>
 </Window>

@@ -78,6 +78,8 @@ namespace CP77Tools.UI.Functionality
         }
 
 
+        
+
 
         // Creates Thread and sends TaskIndicator to taskmanager to run task on thread.
         public void ThreadedTaskSender(int item) { Thread worker = new Thread(() => TaskManager(item)); worker.IsBackground = true; worker.Start(); }

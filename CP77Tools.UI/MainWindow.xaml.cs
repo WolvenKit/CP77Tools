@@ -27,6 +27,7 @@ using CP77Tools.UI.Functionality;
 using CP77.Common.Services;
 using System.Runtime.InteropServices;
 using CP77Tools.UI.Functionality.Customs;
+using CP77Tools.UI.Resources;
 
 namespace CP77Tools.UI
 {
@@ -53,14 +54,14 @@ namespace CP77Tools.UI
         public Functionality.Logging log;
         public Functionality.UI ui;
         public Data.General data;
+        public ThemeManager thm;
         public string[] InputFileTypes = { "Archives (*.archive)|*.archive" };
 
         public enum TaskType { Archive, Dump, CR2W, Hash, Oodle, Repack, }
 
         public Color ForeGroundTextColor = (Color)ColorConverter.ConvertFromString("#FFE5D90C");
 
-
-
+   
 
         public MainWindow()
         {
@@ -74,7 +75,7 @@ namespace CP77Tools.UI
             log = new Functionality.Logging(this);
             ui = new Functionality.UI(this);
             data = new Data.General();
-
+            thm = new ThemeManager();
             ui.SetToolTips();
 
             UI_Logger.PropertyChanged += log.UI_Logger_PropertyChanged;
@@ -85,6 +86,12 @@ namespace CP77Tools.UI
 
 
             InitializeDefaults();
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            thm.ApplyThemeDark(this);
 
         }
 
@@ -185,14 +192,14 @@ namespace CP77Tools.UI
 
         //Repack
         private void Repack_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenFolder(2); }
-        private void Repack_SelectOutputPath_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
-        private void Repack_SelectOutputPath_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Repack_SelectOutputPath_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Repack_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Repack_SelectOutputPath_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { Repack_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void Repack_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Multi, TaskType.Repack); }
-        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
-        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Repack_SelectArchiveOrDirectory_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Repack_SelectArchiveOrDirectory_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { Repack_SelectArchiveOrDirectory_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void Repack_Start_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(2); Main_OutputBox_UIElement_ComboBox.Items.Clear(); }
-        private void Repack_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
-        private void Repack_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { CR2W_SelectOutputPath_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+        private void Repack_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Repack_Start_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
+        private void Repack_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { Repack_Start_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
 
         // Hash
         private void Hash_Start_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(4); Main_OutputBox_UIElement_ComboBox.Items.Clear(); }
@@ -212,6 +219,7 @@ namespace CP77Tools.UI
         private void Oodle_Start_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(5); Main_OutputBox_UIElement_ComboBox.Items.Clear(); }
         private void Oodle_Start_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Oodle_Start_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
         private void Oodle_Start_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { Oodle_Start_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
+
 
     }
 
