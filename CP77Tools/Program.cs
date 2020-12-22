@@ -29,6 +29,9 @@ namespace CP77Tools
         [STAThread]
         public static async Task Main(string[] args)
         {
+            var hashService = new HashService();
+            await hashService.Refresh();
+            
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
             ServiceLocator.Default.RegisterType<IMainController, MainController>();
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
