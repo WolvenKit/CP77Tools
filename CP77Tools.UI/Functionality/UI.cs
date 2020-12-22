@@ -44,7 +44,7 @@ namespace CP77Tools.UI.Functionality
                 case 2: 
                     if (app.data.Repack_Path.Length > 0)
                     {
-                        Task RTask = new Task(() => ConsoleFunctions.PackTask(app.data.Repack_Path, ""));  // FIX THIS TOO 
+                        Task RTask = new Task(() => ConsoleFunctions.PackTask(app.data.Repack_Path, app.data.Repack_OutPath));  // FIX THIS TOO 
                         RTask.Start(); RTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Repack);
                     } 
                     break;

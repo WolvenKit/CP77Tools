@@ -122,7 +122,7 @@ namespace CP77Tools.UI
         private void Main_PreviousItems_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { ui.GoToFirstItemInView(); }
 
         //Archive events
-        private void Archive_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Single, TaskType.Archive); }
+        private void Archive_Button_ArchiveSelectArchive_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Multi, TaskType.Archive); }
         private void Archive_Button_ArchiveSelectOutputPath_Click(object sender, RoutedEventArgs e) { ui.OpenFolder(0); } // Will become OpenF after singlepicker update.
         private void Archive_Checkbox_ArchiveExtract_Checked(object sender, RoutedEventArgs e) { data.Archive_Extract = true; }
         private void Archive_Checkbox_ArchiveDump_Checked(object sender, RoutedEventArgs e) { data.Archive_Dump = true; }
@@ -165,11 +165,11 @@ namespace CP77Tools.UI
         private void Dump_ClassInfo_UIElement_CheckBox_Checked(object sender, RoutedEventArgs e) { data.Dump_ClassInfo = true; }
         private void Dump_ClassInfo_UIElement_CheckBox_Unchecked(object sender, RoutedEventArgs e) { data.Dump_ClassInfo = false; }
         private void Dump_Start_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.ThreadedTaskSender(3); Main_OutputBox_UIElement_ComboBox.Items.Clear(); }
-        private void Dump_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Multi, TaskType.Dump); }
+        private void Dump_SelectArchiveOrDirectory_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Single, TaskType.Dump); }
         private void Dump_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenFolder(3); }
 
         //CR2W
-        private void CR2W_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Multi, TaskType.CR2W); }
+        private void CR2W_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Single, TaskType.CR2W); }
         private void CR2W_SelectFile_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { CR2W_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
         private void CR2W_SelectFile_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { CR2W_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void CR2W_SelectOutputPath_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenFolder(1); }
@@ -201,7 +201,7 @@ namespace CP77Tools.UI
         private void Hash_InputString_UIElement_TextBox_TextChanged(object sender, TextChangedEventArgs e) { if (data != null) { try { data.Hash_Input = Hash_InputString_UIElement_TextBox.Text; } catch { } } }
 
         //Oodle
-        private void Oodle_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Multi, TaskType.Oodle); }
+        private void Oodle_SelectFile_UIElement_Button_Click(object sender, RoutedEventArgs e) { ui.OpenF(Data.General.OMD_Type.Single, TaskType.Oodle); }
         private void Oodle_SelectFile_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Oodle_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
         private void Oodle_SelectFile_UIElement_Button_MouseLeave(object sender, MouseEventArgs e) { Oodle_SelectFile_UIElement_Button.Foreground = new SolidColorBrush(ForeGroundTextColor); }
         private void Oodle_SelectOut_UIElement_Button_MouseEnter(object sender, MouseEventArgs e) { Oodle_SelectOut_UIElement_Button.Foreground = new SolidColorBrush(Colors.Black); }
