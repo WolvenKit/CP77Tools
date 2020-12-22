@@ -29,9 +29,6 @@ namespace CP77Tools
         [STAThread]
         public static async Task Main(string[] args)
         {
-            var hashService = new HashService();
-            await hashService.Refresh();
-            
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
             ServiceLocator.Default.RegisterType<IMainController, MainController>();
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
@@ -39,7 +36,7 @@ namespace CP77Tools
 
             // get csv data
             Console.WriteLine("Loading Hashes...");
-            await Loadhashes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/archivehashes.csv"));
+            await Loadhashes();
 
 
             #region commands
@@ -95,6 +92,16 @@ namespace CP77Tools
             {
                 new Option<string>(new []{"--input", "-i"}, "Create FNV1A hash of given string"),
                 new Option<bool>(new []{"--missing", "-m"}, ""),
+                new Command("update", "Update the Archived Hashes")
+                {
+                    Handler = CommandHandler.Create(async () =>
+                    {
+                        if (await new HashService().RefreshAsync())
+                        {
+                            await Loadhashes();
+                        }
+                    })
+                }
             };
             rootCommand.Add(hashTask);
             hashTask.Handler = CommandHandler.Create<string, bool>(ConsoleFunctions.HashTask);
@@ -187,7 +194,7 @@ namespace CP77Tools
         }
 
 
-        private static async Task Loadhashes(string path)
+        private static async Task Loadhashes()
         {
             var _maincontroller = ServiceLocator.Default.ResolveType<IMainController>();
 
@@ -196,7 +203,7 @@ namespace CP77Tools
 
             var hashDictionary = new ConcurrentDictionary<ulong,string>();
 
-            Parallel.ForEach(File.ReadLines(path), line =>
+            Parallel.ForEach(File.ReadLines(Constants.ArchiveHashesPath), line =>
             {
                 // check line
                 line = line.Split(',', StringSplitOptions.RemoveEmptyEntries).First();

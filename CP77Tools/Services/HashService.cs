@@ -17,7 +17,7 @@ namespace CP77Tools.Services
         private readonly string _eTagPath =
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/archivehashes-etag.txt");
 
-        public async Task Refresh()
+        public async Task<bool> RefreshAsync()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, ResourceUrl);
 
@@ -32,7 +32,7 @@ namespace CP77Tools.Services
                 var response = await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
                 if (response.StatusCode == HttpStatusCode.NotModified)
                 {
-                    return;
+                    return false;
                 }
 
                 var tags = response.Headers.GetValues("etag").ToList();
@@ -45,7 +45,7 @@ namespace CP77Tools.Services
                 if (!string.IsNullOrEmpty(lastEtag) && !string.IsNullOrEmpty(serverEtag) &&
                     string.Equals(lastEtag, serverEtag, StringComparison.OrdinalIgnoreCase))
                 {
-                    return;
+                    return false;
                 }
 
                 Console.WriteLine("Downloading latest Archive Hashes...");
@@ -56,6 +56,8 @@ namespace CP77Tools.Services
                 await WriteEtag(serverEtag);
 
                 Console.WriteLine("Archive Hashes updated.");
+
+                return true;
             }
             catch (HttpRequestException e)
             {
@@ -69,19 +71,21 @@ namespace CP77Tools.Services
             {
                 Console.WriteLine("Update Archive Hashes Failed - Unexpected Error");
             }
+
+            return false;
         }
 
         private async Task WriteHashes(Stream source)
         {
-            await using var hashesFs = File.Create(_resourcePath);
-            await source.CopyToAsync(hashesFs);
+            await using var fs = File.Create(_resourcePath);
+            await source.CopyToAsync(fs);
         }
 
         private async Task WriteEtag(string etag)
         {
-            await using var etagFs = File.Create(_eTagPath);
-            await using var etagWriter = new StreamWriter(etagFs);
-            await etagWriter.WriteLineAsync(etag);
+            await using var fs = File.Create(_eTagPath);
+            await using var writer = new StreamWriter(fs);
+            await writer.WriteLineAsync(etag);
         }
 
         private string GetLastEtag()
