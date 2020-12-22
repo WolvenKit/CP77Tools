@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -18,26 +19,56 @@ namespace CP77Tools.Services
 
         public async Task Refresh()
         {
-            var etag = GetCurrentEtag();
-            
             var request = new HttpRequestMessage(HttpMethod.Get, ResourceUrl);
-            var response = await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
-            var serverEtag = response.Headers.GetValues("etag").Single().Trim('"');
-            
-            if (!string.IsNullOrEmpty(etag) && !string.IsNullOrEmpty(serverEtag) && string.Equals(etag, serverEtag, StringComparison.OrdinalIgnoreCase))
+            var lastEtag = GetLastEtag();
+            if (!string.IsNullOrEmpty(lastEtag))
             {
-                return;
+                request.Headers.Add("If-None-Match", $"\"{lastEtag}\"");
             }
-            
-            Console.WriteLine("Downloading latest Archive Hashes...");
-            
-            var stream = await response.Content.ReadAsStreamAsync();
 
-            await WriteHashes(stream);
-            await WriteEtag(serverEtag);
-            
-            Console.WriteLine("Archive Hashes updated.");
+            try
+            {
+                var response = await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                if (response.StatusCode == HttpStatusCode.NotModified)
+                {
+                    return;
+                }
+
+                var tags = response.Headers.GetValues("etag").ToList();
+                if (tags.Count != 1)
+                {
+                    throw new FormatException("Response etag had unexpected format");
+                }
+
+                var serverEtag = tags.Single().Trim('"');
+                if (!string.IsNullOrEmpty(lastEtag) && !string.IsNullOrEmpty(serverEtag) &&
+                    string.Equals(lastEtag, serverEtag, StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
+                Console.WriteLine("Downloading latest Archive Hashes...");
+
+                var stream = await response.Content.ReadAsStreamAsync();
+
+                await WriteHashes(stream);
+                await WriteEtag(serverEtag);
+
+                Console.WriteLine("Archive Hashes updated.");
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine("Update Archive Hashes Failed - Server may not be available");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Update Archive Hashes Failed - Server used unexpected eTag format");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Update Archive Hashes Failed - Unexpected Error");
+            }
         }
 
         private async Task WriteHashes(Stream source)
@@ -53,7 +84,7 @@ namespace CP77Tools.Services
             await etagWriter.WriteLineAsync(etag);
         }
 
-        private string GetCurrentEtag()
+        private string GetLastEtag()
         {
             if (!File.Exists(_eTagPath)) return null;
             
