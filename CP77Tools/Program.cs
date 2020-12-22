@@ -30,8 +30,11 @@ namespace CP77Tools
         public static async Task Main(string[] args)
         {
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
+            ServiceLocator.Default.RegisterType<IHashService, HashService>();
             ServiceLocator.Default.RegisterType<IMainController, MainController>();
+
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
+            
 
 
             // get csv data
@@ -96,7 +99,8 @@ namespace CP77Tools
                 {
                     Handler = CommandHandler.Create(async () =>
                     {
-                        if (await new HashService().RefreshAsync())
+                        var hashService = ServiceLocator.Default.ResolveType<IHashService>();
+                        if (await hashService.RefreshAsync())
                         {
                             await Loadhashes();
                         }

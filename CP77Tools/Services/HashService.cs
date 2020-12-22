@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CP77Tools.Services
 {
-    public class HashService
+    public class HashService : IHashService
     {
         private readonly HttpClient _client = new HttpClient();
         
