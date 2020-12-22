@@ -9,6 +9,8 @@ using WolvenKit.Common.Tools.DDS;
 using CP77Tools;
 using Catel.IoC;
 using WolvenKit.Common.Services;
+using WolvenKit.Common.Tools.Audio;
+using WolvenKit.Common.Tools.Video;
 
 namespace CP77Tools.Tasks
 {
@@ -17,7 +19,7 @@ namespace CP77Tools.Tasks
         private static readonly ILoggerService logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
         public static void ArchiveTask(string[] path, string outpath, bool extract, bool dump, bool list,
-            bool uncook, EUncookExtension uext, ulong hash, string pattern, string regex)
+            bool uncook, EUncookExtension uext, EAudioExtension aext, EVideoExtension vext, ulong hash, string pattern, string regex)
         {
             if (path == null || path.Length < 1)
             {
@@ -28,14 +30,14 @@ namespace CP77Tools.Tasks
             Parallel.ForEach(path, file =>
             {
                 ArchiveTaskInner(file, outpath, extract, dump, list,
-                    uncook, uext, hash, pattern, regex);
+                    uncook, uext, aext, vext, hash, pattern, regex);
             });
 
         }
 
 
         private static void ArchiveTaskInner(string path, string outpath, bool extract, bool dump, bool list, 
-            bool uncook, EUncookExtension uext, ulong hash, string pattern, string regex)
+            bool uncook, EUncookExtension uext, EAudioExtension aext, EVideoExtension vext, ulong hash, string pattern, string regex)
         {
             #region checks
 
@@ -109,7 +111,7 @@ namespace CP77Tools.Tasks
                         {
                             if (extract)
                             {
-                                ar.ExtractSingle(hash, outDir);
+                                ar.ExtractSingle(hash, outDir, aext, vext);
                                 logger.LogString($" {ar.Filepath}: Extracted one file: {hash}", Logtype.Success);
                             }
 
@@ -123,7 +125,7 @@ namespace CP77Tools.Tasks
                         {
                             if (extract)
                             {
-                                var r = ar.ExtractAll(outDir, pattern, regex);
+                                var r = ar.ExtractAll(outDir, aext, vext, pattern, regex);
                                 logger.LogString($"{ar.Filepath}: Extracted {r.Item1.Count}/{r.Item2} files.", Logtype.Success);
                             }
 
