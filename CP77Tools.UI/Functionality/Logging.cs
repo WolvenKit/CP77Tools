@@ -67,20 +67,9 @@ namespace CP77Tools.UI.Functionality
 
                     app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
                     app.Main_OutputBox_UIElement_ComboBox.Items.Add(OUTPUTSTRING);
-                }
-      
-       
-
-
-   
-
+                }    
             }));
-
         }
-
-
-
-
 
         // Progress Reporting.
         private int TaskCounter = 0;
@@ -103,6 +92,26 @@ namespace CP77Tools.UI.Functionality
         // Reporting when finished. Should soon be unneeded  (Maybe keep this for opening output after it finishes.)
         public void TaskFinished(MainWindow.TaskType CurrentTaskType)
         {
+            switch (CurrentTaskType)
+            {
+                case MainWindow.TaskType.Archive:
+                    Process.Start("explorer.exe", app.data.Archive_OutPath);
+                    break;
+                case MainWindow.TaskType.CR2W:
+                    Process.Start("explorer.exe", app.data.CR2W_OutPath);
+                    break;
+                case MainWindow.TaskType.Dump:
+                    Process.Start("explorer.exe", app.data.Dump_OutPath);
+                    break;
+                case MainWindow.TaskType.Hash:
+                    break;
+                case MainWindow.TaskType.Oodle:
+                    Process.Start("explorer.exe", app.data.Oodle_OutPath);
+                    break;
+                case MainWindow.TaskType.Repack:
+                    Process.Start("explorer.exe", app.data.Repack_OutPath);
+                    break;
+            }
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
                 app.Main_ProgressBar_UIElement_ProgressBar.Value = 0;

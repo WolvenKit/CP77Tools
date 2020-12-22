@@ -30,28 +30,17 @@ namespace CP77Tools.UI.Functionality.Customs
     public partial class OpenMultiDialog : Window
     {
 
-        public enum ForF
-        {
-            File,
-            Folder
-        }
-
-
+        public enum ForF { File, Folder }
         private void UIFunc_DragWindow(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
         public Color ForeGroundTextColor = (Color)ColorConverter.ConvertFromString("#FFE5D90C");
-
-
         private Data.General DataReference;
         private MainWindow.TaskType CurrentTaskType;
         MainWindow app;
         private Data.General.OMD_Type CurrentOMDType;
 
-
-
         public OpenMultiDialog(MainWindow mainWindow, MainWindow.TaskType taskType, Data.General.OMD_Type _OMD_Type)
         {
             app = mainWindow;
-
             CurrentTaskType = taskType;
             DataReference = app.data;
             CurrentOMDType = _OMD_Type;
@@ -67,84 +56,28 @@ namespace CP77Tools.UI.Functionality.Customs
                 var fileSystemObject = new FileSystemObjectInfo(drive);
                 fileSystemObject.BeforeExplore += FileSystemObject_BeforeExplore;
                 fileSystemObject.AfterExplore += FileSystemObject_AfterExplore;
-
                 OMD_FileTreeView.Items.Add(fileSystemObject);
-
             });
-
         }
-
-
-        private ForF CheckIfFileOrFolder(string path)  // Maybe later :)
-        {
-            FileAttributes attr = File.GetAttributes(path);
-
-            if (attr.HasFlag(FileAttributes.Directory))
-                return ForF.Folder;
-            else
-                return ForF.File;
-        }
-
-        private void FileSystemObject_AfterExplore(object sender, System.EventArgs e)
-        {
-            Cursor = Cursors.Arrow;
-        }
-
-        private void FileSystemObject_BeforeExplore(object sender, System.EventArgs e)
-        {
-            Cursor = Cursors.Wait;
-        }
-
-
-
-
+        private ForF CheckIfFileOrFolder(string path) { FileAttributes attr = File.GetAttributes(path); if (attr.HasFlag(FileAttributes.Directory)) return ForF.Folder; else return ForF.File; }
+        private void FileSystemObject_AfterExplore(object sender, System.EventArgs e) { Cursor = Cursors.Arrow; }
+        private void FileSystemObject_BeforeExplore(object sender, System.EventArgs e) { Cursor = Cursors.Wait; }
         private void treeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var q = OMD_FileTreeView.SelectedItem as FileSystemObjectInfo;
             var b = CheckIfFileOrFolder(q.FileSystemInfo.FullName);
-
-
-            if (CurrentOMDType == Data.General.OMD_Type.Multi)
-            {
-                OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName);
-                Trace.WriteLine(b);
-            }
-            else if (CurrentOMDType == Data.General.OMD_Type.Single)
-            {
-                OMD_SelectedListBox.Items.Clear();
-
-                OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName);
-
-            }
-
+            if (CurrentOMDType == Data.General.OMD_Type.Multi) { OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName); Trace.WriteLine(b); }
+            else if (CurrentOMDType == Data.General.OMD_Type.Single) { OMD_SelectedListBox.Items.Clear(); OMD_SelectedListBox.Items.Add(q.FileSystemInfo.FullName); }
         }
-
-
-        private void TreeStrongSearch()
-        {
-            Trace.WriteLine(OMD_FileTreeView.Items.Count);
-        }
-
-
-
-        private void OMD_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            OMD_SelectedListBox.Items.Remove(OMD_SelectedListBox.SelectedItem);
-        }
-
-        private void OMD_ClearSelected_Click(object sender, RoutedEventArgs e)
-        {
-            OMD_SelectedListBox.Items.Clear();
-        }
-
+        private void TreeStrongSearch() { Trace.WriteLine(OMD_FileTreeView.Items.Count); }
+        private void OMD_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) { OMD_SelectedListBox.Items.Remove(OMD_SelectedListBox.SelectedItem); }
+        private void OMD_ClearSelected_Click(object sender, RoutedEventArgs e) { OMD_SelectedListBox.Items.Clear(); }
         private void OMD_ConfirmSelected_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 string[] clist = OMD_SelectedListBox.Items.OfType<string>().ToArray();
                 var d = clist.Distinct().ToArray();
-
-
                 switch (CurrentTaskType)
                 {
                     case MainWindow.TaskType.Archive:
@@ -180,38 +113,22 @@ namespace CP77Tools.UI.Functionality.Customs
                         app.Repack_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
                         break;
                 }
-
-
                 this.Close();
             }
             catch { }
         }
 
         private void OMD_Minimize_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { this.WindowState = WindowState.Minimized; }
-
         private void OMD_Close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { this.Close(); }
-
         private void OMD_Close_MouseEnter(object sender, MouseEventArgs e) { OMD_Close.Source = ImageCache.CloseSelected; }
-
         private void OMD_Close_MouseLeave(object sender, MouseEventArgs e) { OMD_Close.Source = ImageCache.Close; }
-
         private void OMD_Minimize_MouseEnter(object sender, MouseEventArgs e) { OMD_Minimize.Source = ImageCache.MinimizeSelected; }
-
         private void OMD_Minimize_MouseLeave(object sender, MouseEventArgs e) { OMD_Minimize.Source = ImageCache.Minimize; }
-
         private void OMD_ClearSelected_MouseEnter(object sender, MouseEventArgs e) { OMD_ClearSelected.Foreground = new SolidColorBrush(Colors.Black); }
-
         private void OMD_ClearSelected_MouseLeave(object sender, MouseEventArgs e) { OMD_ClearSelected.Foreground = new SolidColorBrush(ForeGroundTextColor); }
-
         private void OMD_ConfirmSelected_MouseEnter(object sender, MouseEventArgs e) { OMD_ConfirmSelected.Foreground = new SolidColorBrush(Colors.Black); }
-
         private void OMD_ConfirmSelected_MouseLeave(object sender, MouseEventArgs e) { OMD_ConfirmSelected.Foreground = new SolidColorBrush(ForeGroundTextColor); }
-
-        private void Window_Deactivated_1(object sender, EventArgs e)
-        {
-            Window window = (Window)sender;
-            window.Topmost = true;
-        }
+        private void Window_Deactivated_1(object sender, EventArgs e) { Window window = (Window)sender; window.Topmost = true; }
     }
 
 
@@ -224,41 +141,18 @@ namespace CP77Tools.UI.Functionality.Customs
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        protected void OnPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
     }
     [Serializable]
     public abstract class BaseObject : PropertyNotifier
     {
         private IDictionary<string, object> m_values = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-
-        public T GetValue<T>(string key)
-        {
-            var value = GetValue(key);
-            return (value is T) ? (T)value : default(T);
-        }
-
-        private object GetValue(string key)
-        {
-            if (string.IsNullOrEmpty(key))
-            {
-                return null;
-            }
-            return m_values.ContainsKey(key) ? m_values[key] : null;
-        }
-
+        public T GetValue<T>(string key) { var value = GetValue(key); return (value is T) ? (T)value : default(T); }
+        private object GetValue(string key) { if (string.IsNullOrEmpty(key)) { return null; } return m_values.ContainsKey(key) ? m_values[key] : null; }
         public void SetValue(string key, object value)
         {
-            if (!m_values.ContainsKey(key))
-            {
-                m_values.Add(key, value);
-            }
-            else
-            {
-                m_values[key] = value;
-            }
+            if (!m_values.ContainsKey(key)) { m_values.Add(key, value); }
+            else { m_values[key] = value; }
             OnPropertyChanged(key);
         }
     }
@@ -278,90 +172,31 @@ namespace CP77Tools.UI.Functionality.Customs
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
     public struct ShellFileInfo
     {
-        public IntPtr hIcon;
-
-        public int iIcon;
-
-        public uint dwAttributes;
-
+        public IntPtr hIcon; public int iIcon; public uint dwAttributes;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
         public string szDisplayName;
-
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
         public string szTypeName;
     }
-    public enum FileAttribute : uint
-    {
-        Directory = 16,
-        File = 256
-    }
+    public enum FileAttribute : uint { Directory = 16, File = 256 }
     [Flags]
     public enum ShellAttribute : uint
     {
-        LargeIcon = 0,              // 0x000000000
-        SmallIcon = 1,              // 0x000000001
-        OpenIcon = 2,               // 0x000000002
-        ShellIconSize = 4,          // 0x000000004
-        Pidl = 8,                   // 0x000000008
-        UseFileAttributes = 16,     // 0x000000010
-        AddOverlays = 32,           // 0x000000020
-        OverlayIndex = 64,          // 0x000000040
-        Others = 128,               // Not defined, really?
-        Icon = 256,                 // 0x000000100  
-        DisplayName = 512,          // 0x000000200
-        TypeName = 1024,            // 0x000000400
-        Attributes = 2048,          // 0x000000800
-        IconLocation = 4096,        // 0x000001000
-        ExeType = 8192,             // 0x000002000
-        SystemIconIndex = 16384,    // 0x000004000
-        LinkOverlay = 32768,        // 0x000008000 
-        Selected = 65536,           // 0x000010000
-        AttributeSpecified = 131072 // 0x000020000
+        LargeIcon = 0, SmallIcon = 1, OpenIcon = 2,
+        ShellIconSize = 4, Pidl = 8, UseFileAttributes = 16, AddOverlays = 32, OverlayIndex = 64, Others = 128, Icon = 256, DisplayName = 512, TypeName = 1024, Attributes = 2048, IconLocation = 4096, ExeType = 8192, SystemIconIndex = 16384, LinkOverlay = 32768, Selected = 65536, AttributeSpecified = 131072
     }
-    public enum IconSize : short
-    {
-        Small,
-        Large
-    }
-    public enum ItemState : short
-    {
-        Undefined,
-        Open,
-        Close
-    }
-    public enum ItemType
-    {
-        Drive,
-        Folder,
-        File
-    }
-
+    public enum IconSize : short { Small, Large }
+    public enum ItemState : short { Undefined, Open, Close }
+    public enum ItemType { Drive, Folder, File }
     public class FileSystemObjectInfo : BaseObject
     {
-        public FileSystemObjectInfo(DriveInfo drive)
-            : this(drive.RootDirectory)
-        {
-        }
+        public FileSystemObjectInfo(DriveInfo drive) : this(drive.RootDirectory) { }
         public FileSystemObjectInfo(FileSystemInfo info)
         {
-            if (this is DummyFileSystemObjectInfo)
-            {
-                return;
-            }
-
-            Children = new ObservableCollection<FileSystemObjectInfo>();
-            FileSystemInfo = info;
-
-            if (info is DirectoryInfo)
-            {
-                ImageSource = FolderManager.GetImageSource(info.FullName, ItemState.Close);
-                AddDummy();
-            }
-            else if (info is FileInfo)
-            {
-                ImageSource = FileManager.GetImageSource(info.FullName);
-            }
-
+            if (this is DummyFileSystemObjectInfo) { return; }
+            Children = new ObservableCollection<FileSystemObjectInfo>(); FileSystemInfo = info;
+            if (info is DirectoryInfo) { ImageSource = FolderManager.GetImageSource(info.FullName, ItemState.Close); AddDummy(); }
+            else if (info is FileInfo) { ImageSource = FileManager.GetImageSource(info.FullName); }
             PropertyChanged += new PropertyChangedEventHandler(FileSystemObjectInfo_PropertyChanged);
             void FileSystemObjectInfo_PropertyChanged(object sender, PropertyChangedEventArgs e)
             {
@@ -373,109 +208,34 @@ namespace CP77Tools.UI.Functionality.Customs
                         if (IsExpanded)
                         {
                             ImageSource = FolderManager.GetImageSource(FileSystemInfo.FullName, ItemState.Open);
-                            if (HasDummy())
-                            {
-                                RaiseBeforeExplore();
-                                RemoveDummy();
-                                ExploreDirectories();
-                                ExploreFiles();
-                                RaiseAfterExplore();
-                            }
+                            if (HasDummy()) { RaiseBeforeExplore(); RemoveDummy(); ExploreDirectories(); ExploreFiles(); RaiseAfterExplore(); }
                         }
-                        else
-                        {
-                            ImageSource = FolderManager.GetImageSource(FileSystemInfo.FullName, ItemState.Close);
-                        }
+                        else { ImageSource = FolderManager.GetImageSource(FileSystemInfo.FullName, ItemState.Close); }
                         RaiseAfterExpand();
                     }
                 }
             }
         }
         public event EventHandler BeforeExpand;
-
         public event EventHandler AfterExpand;
-
         public event EventHandler BeforeExplore;
-
         public event EventHandler AfterExplore;
-
-        private void RaiseBeforeExpand()
-        {
-            BeforeExpand?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void RaiseAfterExpand()
-        {
-            AfterExpand?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void RaiseBeforeExplore()
-        {
-            BeforeExplore?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void RaiseAfterExplore()
-        {
-            AfterExplore?.Invoke(this, EventArgs.Empty);
-        }
-        public ObservableCollection<FileSystemObjectInfo> Children
-        {
-            get { return base.GetValue<ObservableCollection<FileSystemObjectInfo>>("Children"); }
-            private set { base.SetValue("Children", value); }
-        }
-
-        public ImageSource ImageSource
-        {
-            get { return base.GetValue<ImageSource>("ImageSource"); }
-            private set { base.SetValue("ImageSource", value); }
-        }
-
-        public bool IsExpanded
-        {
-            get { return base.GetValue<bool>("IsExpanded"); }
-            set { base.SetValue("IsExpanded", value); }
-        }
-
-        public FileSystemInfo FileSystemInfo
-        {
-            get { return base.GetValue<FileSystemInfo>("FileSystemInfo"); }
-            private set { base.SetValue("FileSystemInfo", value); }
-        }
-
-        private DriveInfo Drive
-        {
-            get { return base.GetValue<DriveInfo>("Drive"); }
-            set { base.SetValue("Drive", value); }
-        }
-
-        private void AddDummy()
-        {
-            this.Children.Add(new DummyFileSystemObjectInfo());
-        }
-
-        private bool HasDummy()
-        {
-            return !object.ReferenceEquals(this.GetDummy(), null);
-        }
-
-        private DummyFileSystemObjectInfo GetDummy()
-        {
-            var list = this.Children.OfType<DummyFileSystemObjectInfo>().ToList();
-            if (list.Count > 0) return list.First();
-            return null;
-        }
-
-        private void RemoveDummy()
-        {
-            this.Children.Remove(this.GetDummy());
-        }
-
+        private void RaiseBeforeExpand() { BeforeExpand?.Invoke(this, EventArgs.Empty); }
+        private void RaiseAfterExpand() { AfterExpand?.Invoke(this, EventArgs.Empty); }
+        private void RaiseBeforeExplore() { BeforeExplore?.Invoke(this, EventArgs.Empty); }
+        private void RaiseAfterExplore() { AfterExplore?.Invoke(this, EventArgs.Empty); }
+        public ObservableCollection<FileSystemObjectInfo> Children { get { return base.GetValue<ObservableCollection<FileSystemObjectInfo>>("Children"); } private set { base.SetValue("Children", value); } }
+        public ImageSource ImageSource { get { return base.GetValue<ImageSource>("ImageSource"); } private set { base.SetValue("ImageSource", value); } }
+        public bool IsExpanded { get { return base.GetValue<bool>("IsExpanded"); } set { base.SetValue("IsExpanded", value); } }
+        public FileSystemInfo FileSystemInfo { get { return base.GetValue<FileSystemInfo>("FileSystemInfo"); } private set { base.SetValue("FileSystemInfo", value); } }
+        private DriveInfo Drive { get { return base.GetValue<DriveInfo>("Drive"); } set { base.SetValue("Drive", value); } }
+        private void AddDummy() { this.Children.Add(new DummyFileSystemObjectInfo()); }
+        private bool HasDummy() { return !object.ReferenceEquals(this.GetDummy(), null); }
+        private DummyFileSystemObjectInfo GetDummy() { var list = this.Children.OfType<DummyFileSystemObjectInfo>().ToList(); if (list.Count > 0) return list.First(); return null; }
+        private void RemoveDummy() { this.Children.Remove(this.GetDummy()); }
         private void ExploreDirectories()
         {
-            if (Drive?.IsReady == false)
-            {
-                return;
-            }
+            if (Drive?.IsReady == false) { return; }
             if (FileSystemInfo is DirectoryInfo)
             {
                 try
@@ -487,39 +247,21 @@ namespace CP77Tools.UI.Functionality.Customs
                             (directory.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
                         {
                             var fileSystemObject = new FileSystemObjectInfo(directory);
-
                             fileSystemObject.BeforeExplore += FileSystemObject_BeforeExplore;
                             fileSystemObject.AfterExplore += FileSystemObject_AfterExplore;
                             Children.Add(fileSystemObject);
                         }
                     }
                 }
-                catch (UnauthorizedAccessException e)
-                {
-
-                }
-
-
+                catch (UnauthorizedAccessException e) { }
             }
         }
 
-        private void FileSystemObject_AfterExplore(object sender, EventArgs e)
-        {
-            RaiseAfterExplore();
-        }
-
-        private void FileSystemObject_BeforeExplore(object sender, EventArgs e)
-        {
-            RaiseBeforeExplore();
-        }
-
-
+        private void FileSystemObject_AfterExplore(object sender, EventArgs e) { RaiseAfterExplore(); }
+        private void FileSystemObject_BeforeExplore(object sender, EventArgs e) { RaiseBeforeExplore(); }
         private void ExploreFiles()
         {
-            if (Drive?.IsReady == false)
-            {
-                return;
-            }
+            if (Drive?.IsReady == false) { return; }
             if (FileSystemInfo is DirectoryInfo)
             {
                 try
@@ -527,79 +269,36 @@ namespace CP77Tools.UI.Functionality.Customs
                     var files = ((DirectoryInfo)FileSystemInfo).GetFiles();
                     foreach (var file in files.OrderBy(d => d.Name))
                     {
-                        if ((file.Attributes & FileAttributes.System) != FileAttributes.System &&
-                            (file.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
-                        {
-                            Children.Add(new FileSystemObjectInfo(file));
-                        }
+                        if ((file.Attributes & FileAttributes.System) != FileAttributes.System && (file.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden) { Children.Add(new FileSystemObjectInfo(file)); }
                     }
                 }
-                catch (UnauthorizedAccessException e)
-                {
-
-                }
-
+                catch (UnauthorizedAccessException e) { }
             }
         }
     }
-    internal class DummyFileSystemObjectInfo : FileSystemObjectInfo
-    {
-        public DummyFileSystemObjectInfo()
-            : base(new DirectoryInfo("DummyFileSystemObjectInfo"))
-        {
-        }
-    }
+    internal class DummyFileSystemObjectInfo : FileSystemObjectInfo { public DummyFileSystemObjectInfo() : base(new DirectoryInfo("DummyFileSystemObjectInfo")) { } }
     public class ShellManager
     {
         public static Icon GetIcon(string path, ItemType type, IconSize iconSize, ItemState state)
         {
             var attributes = (uint)(type == ItemType.Folder ? FileAttribute.Directory : FileAttribute.File);
             var flags = (uint)(ShellAttribute.Icon | ShellAttribute.UseFileAttributes);
-
-            if (type == ItemType.Folder && state == ItemState.Open)
-            {
-                flags = flags | (uint)ShellAttribute.OpenIcon;
-            }
-            if (iconSize == IconSize.Small)
-            {
-                flags = flags | (uint)ShellAttribute.SmallIcon;
-            }
-            else
-            {
-                flags = flags | (uint)ShellAttribute.LargeIcon;
-            }
-
+            if (type == ItemType.Folder && state == ItemState.Open) { flags = flags | (uint)ShellAttribute.OpenIcon; }
+            if (iconSize == IconSize.Small) { flags = flags | (uint)ShellAttribute.SmallIcon; }
+            else { flags = flags | (uint)ShellAttribute.LargeIcon; }
             var fileInfo = new ShellFileInfo();
             var size = (uint)Marshal.SizeOf(fileInfo);
             var result = Interop.SHGetFileInfo(path, attributes, out fileInfo, size, flags);
-
-            if (result == IntPtr.Zero)
-            {
-                throw Marshal.GetExceptionForHR(Marshal.GetHRForLastWin32Error());
-            }
-
-            try
-            {
-                return (Icon)Icon.FromHandle(fileInfo.hIcon).Clone();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                Interop.DestroyIcon(fileInfo.hIcon);
-            }
+            if (result == IntPtr.Zero) { throw Marshal.GetExceptionForHR(Marshal.GetHRForLastWin32Error()); }
+            try { return (Icon)Icon.FromHandle(fileInfo.hIcon).Clone(); }
+            catch { throw; }
+            finally { Interop.DestroyIcon(fileInfo.hIcon); }
         }
     }
 
     public static class FolderManager
     {
-        public static ImageSource GetImageSource(string directory, ItemState folderType)
-        {
-            return GetImageSource(directory, new System.Drawing.Size(16, 16), folderType);
-        }
-
+        public static ImageSource GetImageSource(string directory, ItemState folderType) { return GetImageSource(directory, new System.Drawing.Size(16, 16), folderType); }
         public static ImageSource GetImageSource(string directory, System.Drawing.Size size, ItemState folderType)
         {
             using (var icon = ShellManager.GetIcon(directory, ItemType.Folder, IconSize.Large, folderType))
@@ -612,11 +311,7 @@ namespace CP77Tools.UI.Functionality.Customs
     }
     public static class FileManager
     {
-        public static ImageSource GetImageSource(string filename)
-        {
-            return GetImageSource(filename, new System.Drawing.Size(16, 16));
-        }
-
+        public static ImageSource GetImageSource(string filename) { return GetImageSource(filename, new System.Drawing.Size(16, 16)); }
         public static ImageSource GetImageSource(string filename, System.Drawing.Size size)
         {
             using (var icon = ShellManager.GetIcon(System.IO.Path.GetExtension(filename), ItemType.File, IconSize.Small, ItemState.Undefined))

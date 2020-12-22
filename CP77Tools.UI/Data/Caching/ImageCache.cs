@@ -7,10 +7,6 @@ using System.Windows.Media.Imaging;
 
 namespace CP77Tools.UI.Data.Caching
 {
-
-
-
-
     public static class ImageCache
     {
 

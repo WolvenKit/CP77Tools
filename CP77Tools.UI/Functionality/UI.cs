@@ -29,7 +29,7 @@ namespace CP77Tools.UI.Functionality
                     if (app.data.Archive_Path.Length > 0)
                     {
                         Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(app.data.Archive_Path, app.data.Archive_OutPath, app.data.Archive_Extract, app.data.Archive_Dump, app.data.Archive_List, app.data.Archive_Uncook, app.data.Archive_UncookFileType, app.data.Archive_Hash, app.data.Archive_Pattern, app.data.Archive_Regex));
-                        ATask.Start(); ATask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);                        
+                        ATask.Start(); ATask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);
                     }
                     break;
 
@@ -41,18 +41,18 @@ namespace CP77Tools.UI.Functionality
                     }
                     break;
 
-                case 2: 
+                case 2:
                     if (app.data.Repack_Path.Length > 0)
                     {
                         Task RTask = new Task(() => ConsoleFunctions.PackTask(app.data.Repack_Path, app.data.Repack_OutPath));  // FIX THIS TOO 
                         RTask.Start(); RTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Repack);
-                    } 
+                    }
                     break;
 
                 case 3:
                     if (app.data.Dump_Path.Length > 0)
                     {
-                        Task DTask = new Task(() => ConsoleFunctions.DumpTask(app.data.Dump_Path[0],app.data.Dump_Imports, app.data.Dump_MissingHashes, app.data.Dump_Info, app.data.Dump_ClassInfo));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
+                        Task DTask = new Task(() => ConsoleFunctions.DumpTask(app.data.Dump_Path[0], app.data.Dump_Imports, app.data.Dump_MissingHashes, app.data.Dump_Info, app.data.Dump_ClassInfo));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
                         DTask.Start(); DTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Dump);
                     }
                     break;
@@ -64,7 +64,7 @@ namespace CP77Tools.UI.Functionality
                         app.data.InterceptLog = true;
                         HTask.Start();
                         HTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Hash);
-                    }              
+                    }
                     break;
 
                 case 5:
@@ -78,28 +78,23 @@ namespace CP77Tools.UI.Functionality
         }
 
 
-        
+
 
 
         // Creates Thread and sends TaskIndicator to taskmanager to run task on thread.
         public void ThreadedTaskSender(int item) { Thread worker = new Thread(() => TaskManager(item)); worker.IsBackground = true; worker.Start(); }
 
-        public void NextItemsInView()
-        {
-            app.Main_NextItems_UIElement_Button.Opacity = 0.6;
-            app.Main_ItemList_UIElement_ListBox.ScrollIntoView(app.Main_ItemList_UIElement_ListBox.Items[app.ui.Pagehandler(true)]);
+        public void NextItemsInView() 
+        { 
+            app.Main_NextItems_UIElement_Button.Opacity = 0.6; app.Main_ItemList_UIElement_ListBox.ScrollIntoView(app.Main_ItemList_UIElement_ListBox.Items[app.ui.Pagehandler(true)]); 
         }
         public void PreviousItemsInView()
         {
-            app.Main_PreviousItems_UIElement_Button.Opacity = 0.6;
-            if (app.ui.CurrentPageIndex > 0)
-            {
-                app.Main_ItemList_UIElement_ListBox.ScrollIntoView(app.Main_ItemList_UIElement_ListBox.Items[app.ui.Pagehandler(false)]);
-            }
+            app.Main_PreviousItems_UIElement_Button.Opacity = 0.6; if (app.ui.CurrentPageIndex > 0) { app.Main_ItemList_UIElement_ListBox.ScrollIntoView(app.Main_ItemList_UIElement_ListBox.Items[app.ui.Pagehandler(false)]); }
         }
-        public void GoToFirstItemInView()
-        {
-            app.Main_ItemList_UIElement_ListBox.ScrollIntoView(app.Main_ItemList_UIElement_ListBox.Items[0]);
+        public void GoToFirstItemInView() 
+        { 
+            app.Main_ItemList_UIElement_ListBox.ScrollIntoView(app.Main_ItemList_UIElement_ListBox.Items[0]); 
         }
 
 
@@ -182,7 +177,7 @@ namespace CP77Tools.UI.Functionality
 
 
 
-        public void OpenF(Data.General.OMD_Type oMD_Type,MainWindow.TaskType taskType)
+        public void OpenF(Data.General.OMD_Type oMD_Type, MainWindow.TaskType taskType)
         {
             switch (taskType)
             {
@@ -234,15 +229,5 @@ namespace CP77Tools.UI.Functionality
             //Hash
             //Oodle
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
