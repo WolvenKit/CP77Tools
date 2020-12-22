@@ -1,17 +1,28 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Catel.IoC;
 using System.CommandLine;
+using System.CommandLine.Builder;
+using System.CommandLine.Invocation;
+using System.CommandLine.IO;
+using System.CommandLine.Parsing;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using CP77Tools.Services;
-using WolvenKit.Common.FNV1A;
+using CP77Tools.Model;
 using WolvenKit.Common.Services;
+using WolvenKit.Common.Tools.DDS;
 using System.Diagnostics;
+using CP77.Common.Services;
+using CP77.Common.Tools.FNV1A;
 using CP77Tools.Commands;
+using CP77Tools.Common.Services;
+using CP77Tools.Extensions;
 using Luna.ConsoleProgressBar;
 
 namespace CP77Tools
@@ -22,19 +33,47 @@ namespace CP77Tools
         public static async Task Main(string[] args)
         {
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
+            ServiceLocator.Default.RegisterType<IHashService, HashService>();
             ServiceLocator.Default.RegisterType<IMainController, MainController>();
+
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
+            logger.OnStringLogged += delegate (object? sender, LogStringEventArgs args)
+            {
+                switch (args.Logtype)
+                {
+                    
+                    case Logtype.Error:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        break;
+                    case Logtype.Important:
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        break;
+                    case Logtype.Success:
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        break;
+                    case Logtype.Normal:
+                    case Logtype.Wcc:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
+                Console.WriteLine("[" + args.Logtype + "]" + args.Message);
+                Console.ResetColor();
+            };
+
             // get csv data
-            Console.WriteLine("Loading Hashes...");
-            await Loadhashes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/archivehashes.csv"));
-            
+            logger.LogString("Loading Hashes...", Logtype.Important);
+            await Loadhashes();
+
             var rootCommand = new RootCommand();
             rootCommand.Add(new ArchiveCommand());
             rootCommand.Add(new DumpCommand());
             rootCommand.Add(new CR2WCommand());
             rootCommand.Add(new HashCommand());
             rootCommand.Add(new OodleCommand());
+
 
             // Run
             if (args == null || args.Length == 0)
@@ -45,40 +84,52 @@ namespace CP77Tools
                 while (true)
                 {
                     string line = System.Console.ReadLine();
+                    
 
                     if (line == "q()")
                         return;
 
-                    var parsed = CommandLineExtensions.ParseText(line, ' ', '"');
-
-                    using var pb = new ConsoleProgressBar()
+                    var pb = new ConsoleProgressBar()
                     {
-                        DisplayBars = true,
+                        DisplayBars = false,
+                        DisplayPercentComplete = false,
                         DisplayAnimation = false
                     };
+                    var parsed = CommandLineExtensions.ParseText(line, ' ', '"');
 
-
-                    logger.PropertyChanged += delegate (object? sender, PropertyChangedEventArgs args)
+                    logger.PropertyChanged += OnLoggerOnPropertyChanged;
+                    void OnLoggerOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
                     {
-                        if (sender is LoggerService _logger)
+                        switch (args.PropertyName)
                         {
-                            switch (args.PropertyName)
+                            case "Progress":
                             {
-                                case "Progress":
+                                if (logger.Progress.Item1 == 0)
                                 {
-                                    pb.Report(_logger.Progress.Item1);
-                                    break;
+                                    pb = new ConsoleProgressBar() { DisplayBars = true, DisplayAnimation = false };
                                 }
-                                default:
-                                    break;
-                            }
-                        }
-                    };
 
+                                pb.Report(logger.Progress.Item1);
+                                if (logger.Progress.Item1 == 1)
+                                {
+                                    System.Threading.Thread.Sleep(1000);
+
+                                    Console.WriteLine();
+                                    pb.Dispose();
+                                    pb = null;
+                                }
+
+                                break;
+                            }
+                            default:
+                                break;
+                        }
+                    }
 
                     rootCommand.InvokeAsync(parsed.ToArray()).Wait();
 
                     await WriteLog();
+                    logger.PropertyChanged -= OnLoggerOnPropertyChanged;
                 }
 
             }
@@ -113,16 +164,16 @@ namespace CP77Tools
         }
 
 
-        private static async Task Loadhashes(string path)
+        private static async Task Loadhashes()
         {
             var _maincontroller = ServiceLocator.Default.ResolveType<IMainController>();
-
+            var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
             Stopwatch watch = new Stopwatch();
             watch.Restart();
 
             var hashDictionary = new ConcurrentDictionary<ulong,string>();
 
-            Parallel.ForEach(File.ReadLines(path), line =>
+            Parallel.ForEach(File.ReadLines(Constants.ArchiveHashesPath), line =>
             {
                 // check line
                 line = line.Split(',', StringSplitOptions.RemoveEmptyEntries).First();
@@ -139,7 +190,7 @@ namespace CP77Tools
 
             watch.Stop();
 
-            Console.WriteLine($"Loaded {hashDictionary.Count} hashes in {watch.ElapsedMilliseconds}ms.");
+            logger.LogString($"Loaded {hashDictionary.Count} hashes in {watch.ElapsedMilliseconds}ms.", Logtype.Success);
         }
     }
 }
