@@ -21,6 +21,9 @@ using WolvenKit.Common.Tools.DDS;
 using WolvenKit.CR2W;
 using WolvenKit.CR2W.SRT;
 using WolvenKit.CR2W.Types;
+using WolvenKit.Common.Tools.Audio;
+using WolvenKit.Common.Tools.Video;
+using CP77.Common.Audio;
 using StreamExtensions = Catel.IO.StreamExtensions;
 
 namespace CP77.CR2W.Archive
@@ -325,12 +328,12 @@ namespace CP77.CR2W.Archive
         /// <param name="hash"></param>
         /// <param name="outDir"></param>
         /// <returns></returns>
-        public int ExtractSingle(ulong hash, DirectoryInfo outDir)
+        public int ExtractSingle(ulong hash, DirectoryInfo outDir, EAudioExtension aext, EVideoExtension vext)
         {
             using var mmf = MemoryMappedFile.CreateFromFile(Filepath, FileMode.Open, Mmfhash, 0,
                 MemoryMappedFileAccess.Read);
 
-            return ExtractSingleInner(mmf, hash, outDir);
+            return ExtractSingleInner(mmf, hash, outDir, aext, vext);
         }
         
         private int UncookSingleInner(MemoryMappedFile mmf, ulong hash, DirectoryInfo outDir, EUncookExtension uncookext = EUncookExtension.tga)
@@ -434,8 +437,10 @@ namespace CP77.CR2W.Archive
             return uncooksuccess ? 1 : 0;
         }
 
-        private int ExtractSingleInner(MemoryMappedFile mmf, ulong hash, DirectoryInfo outDir)
+        private int ExtractSingleInner(MemoryMappedFile mmf, ulong hash, DirectoryInfo outDir, EAudioExtension aext, EVideoExtension vext)
         {
+            var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
+
             var extractsuccess = false;
             var (file, buffers) = GetFileData(hash, mmf);
 
@@ -447,6 +452,19 @@ namespace CP77.CR2W.Archive
                 name += ".bin";
             }
 
+            var is_audio_file = Path.GetExtension(name) == ".wem";
+
+            var is_video_file = Path.GetExtension(name) == ".bik";
+
+            //if(is_audio_file && aext != EAudioExtension.wem)
+            //{
+            //    name = Path.ChangeExtension(name, aext.ToString());
+            //}
+            //else if(is_video_file && vext != EVideoExtension.bik)
+            //{
+            //    name = Path.ChangeExtension(name, vext.ToString());
+            //}
+
             var outfile = new FileInfo(Path.Combine(outDir.FullName,
                 $"{name}"));
             if (outfile.Directory == null)
@@ -454,8 +472,58 @@ namespace CP77.CR2W.Archive
 
             // write main file
             Directory.CreateDirectory(outfile.Directory.FullName);
-            File.WriteAllBytes(outfile.FullName, file);
-            extractsuccess = true;
+
+            if(is_audio_file && aext != EAudioExtension.wem)
+            {
+                MemoryStream in_stream = new MemoryStream(file);
+                MemoryStream out_stream = new MemoryStream();
+                try
+                {
+                    WwiseRIFFVorbis.GenerateOgg("packed_codebooks_aoTuV_603.bin", in_stream, out_stream);
+
+                    var buffer = out_stream.GetBuffer();
+                    Array.Resize(ref buffer, (int)out_stream.Length);
+                    
+                    if(aext == EAudioExtension.ogg)
+                    {
+                        var filename = Path.ChangeExtension(Path.Combine(outDir.FullName, name), ".ogg");
+
+                        // output as is
+                        File.WriteAllBytes(filename, buffer);
+                    }
+                    else
+                    {
+                        // generate a temp file, convert to local directory
+                        string temp_name = Path.GetTempFileName();
+                        File.WriteAllBytes(temp_name, buffer);
+                        AudioconvWrapper.Convert(outDir.FullName, name, temp_name, aext);
+                        File.Delete(temp_name);
+                    }
+
+                    extractsuccess = true;
+                }
+                catch(Exception ex)
+                {
+                    logger.LogString("Could not convert wem. " + ex.Message, Logtype.Error);
+                }
+            }
+            else if(is_video_file && vext != EVideoExtension.bk2)
+            {
+                try
+                {
+                    VideoconvWrapper.Convert(outDir.FullName, name, vext);
+                    extractsuccess = true;
+                }
+                catch(Exception ex)
+                {
+                    logger.LogString("Could not convert bik. " + ex.Message, Logtype.Error);
+                }
+            }
+            else
+            {
+                File.WriteAllBytes(outfile.FullName, file);
+                extractsuccess = true;
+            }
 
             // write buffers
             for (int j = 0; j < buffers.Count; j++)
@@ -476,7 +544,7 @@ namespace CP77.CR2W.Archive
         /// <param name="outDir"></param>
         /// <param name="pattern"></param>
         /// <returns></returns>
-        public (List<string>, int) ExtractAll(DirectoryInfo outDir, string pattern = "", string regex = "")
+        public (List<string>, int) ExtractAll(DirectoryInfo outDir, EAudioExtension aext, EVideoExtension vext, string pattern = "", string regex = "")
         {
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
@@ -511,7 +579,7 @@ namespace CP77.CR2W.Archive
 
             Parallel.ForEach(finalmatches, info =>
             {
-                int extracted = ExtractSingleInner(mmf, info.NameHash64, outDir);
+                int extracted = ExtractSingleInner(mmf, info.NameHash64, outDir, aext, vext);
 
                 if (extracted != 0)
                     extractedList.Add(info.NameStr);
