@@ -29,8 +29,7 @@ namespace CP77Tools.UI.Functionality
                     if (app.data.Archive_Path.Length > 0)
                     {
                         Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(app.data.Archive_Path, app.data.Archive_OutPath, app.data.Archive_Extract, app.data.Archive_Dump, app.data.Archive_List, app.data.Archive_Uncook, app.data.Archive_UncookFileType, app.data.Archive_Hash, app.data.Archive_Pattern, app.data.Archive_Regex));
-                        ATask.Start(); ATask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);
-                        
+                        ATask.Start(); ATask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Archive);                        
                     }
                     break;
 
@@ -46,7 +45,6 @@ namespace CP77Tools.UI.Functionality
                     if (app.data.Repack_Path.Length > 0)
                     {
                         Task RTask = new Task(() => ConsoleFunctions.PackTask(app.data.Repack_Path, ""));  // FIX THIS TOO 
-
                         RTask.Start(); RTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Repack);
                     } 
                     break;
@@ -55,10 +53,7 @@ namespace CP77Tools.UI.Functionality
                     if (app.data.Dump_Path.Length > 0)
                     {
                         Task DTask = new Task(() => ConsoleFunctions.DumpTask(app.data.Dump_Path[0],app.data.Dump_Imports, app.data.Dump_MissingHashes, app.data.Dump_Info, app.data.Dump_ClassInfo));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
-
                         DTask.Start(); DTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Dump);
-
-
                     }
                     break;
 
@@ -76,12 +71,9 @@ namespace CP77Tools.UI.Functionality
                     if (app.data.Oodle_Path.Length > 0)
                     {
                         Task OTask = new Task(() => ConsoleFunctions.OodleTask(app.data.Oodle_Path[0], app.data.Oodle_OutPath, app.data.Oodle_Decompress)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
-
                         OTask.Start(); OTask.Wait(); app.log.TaskFinished(MainWindow.TaskType.Oodle);
-
                     }
                     break;
-
             }
         }
 
@@ -89,43 +81,6 @@ namespace CP77Tools.UI.Functionality
 
         // Creates Thread and sends TaskIndicator to taskmanager to run task on thread.
         public void ThreadedTaskSender(int item) { Thread worker = new Thread(() => TaskManager(item)); worker.IsBackground = true; worker.Start(); }
-
-        // Open file dialog with filter based on typeindicator.
-        public void OpenFile(int TypeIndicator)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog(); openFileDialog.Multiselect = true;
-
-            if (TypeIndicator == 0) { string FileFilter = app.InputFileTypes[TypeIndicator]; openFileDialog.Filter = FileFilter; }
-
-            var result = openFileDialog.ShowDialog();
-            if (result.HasValue && result.Value)
-            {
-                switch (TypeIndicator)
-                {
-                    case 0: // Archive
-                        app.Archive_PathIndicator_Selected_UIElement_TextBlock.Text = openFileDialog.SafeFileName;
-                        Array.Resize(ref app.data.Archive_Path, app.data.Archive_Path.Length + 1); app.data.Archive_Path[app.data.Archive_Path.Length - 1] = openFileDialog.FileName;
-                        break;
-                    case 1: // CR2W
-                    //    app.CR2W_PathIndicatorSelected_UIElement_TextBlock.Text = openFileDialog.SafeFileName;
-                   //     app.data.CR2W_Path = openFileDialog.FileName;
-                        break;
-                    case 2: // REPACK
-                        break;
-                    case 3: // Dump
-                        break;
-                    case 4: // Hash
-
-                        break;
-                    case 5: // Oodle
-                        break;
-                }
-            }
-        }
-
-
-
-
 
         public void NextItemsInView()
         {
@@ -227,6 +182,31 @@ namespace CP77Tools.UI.Functionality
 
         public void OpenF(Data.General.OMD_Type oMD_Type,MainWindow.TaskType taskType)
         {
+            switch (taskType)
+            {
+                case MainWindow.TaskType.Archive:
+                    app.Archive_SelectedFilesDropDown_UIElement_ComboBox.ItemsSource = null;
+
+                    break;
+                case MainWindow.TaskType.CR2W:
+                    app.CR2W_SelectedDropdown_UIElement_ComboBox.ItemsSource = null;
+
+                    break;
+                case MainWindow.TaskType.Dump:
+                    app.Dump_SelectedDropdown_UIElement_ComboBox.ItemsSource = null;
+
+                    break;
+                case MainWindow.TaskType.Hash:
+                    break;
+                case MainWindow.TaskType.Oodle:
+                    app.Oodle_SelectedDropdown_UIElement_ComboBox.ItemsSource = null;
+
+                    break;
+                case MainWindow.TaskType.Repack:
+                    app.Repack_SelectedDropdown_UIElement_ComboBox.ItemsSource = null;
+
+                    break;
+            }
             OpenMultiDialog OMD_Selector = new Functionality.Customs.OpenMultiDialog(app, taskType, oMD_Type);
             OMD_Selector.Show();
         }

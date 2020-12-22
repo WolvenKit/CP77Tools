@@ -155,17 +155,29 @@ namespace CP77Tools.UI.Functionality.Customs
                         break;
                     case MainWindow.TaskType.CR2W:
                         DataReference.CR2W_Path = d;
+                        app.CR2W_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                        app.CR2W_SelectedDropdown_UIElement_ComboBox.Items.Clear();
+                        app.CR2W_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
                         break;
                     case MainWindow.TaskType.Dump:
                         DataReference.Dump_Path = d;
+                        app.Dump_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                        app.Dump_SelectedDropdown_UIElement_ComboBox.Items.Clear();
+                        app.Dump_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
                         break;
                     case MainWindow.TaskType.Hash:
                         break;
                     case MainWindow.TaskType.Oodle:
                         DataReference.Oodle_Path = d;
+                        app.Oodle_PathIndicator_Selected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                        app.Oodle_SelectedDropdown_UIElement_ComboBox.Items.Clear();
+                        app.Oodle_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
                         break;
                     case MainWindow.TaskType.Repack:
                         DataReference.Repack_Path = d;
+                        app.Repack_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                        app.Repack_SelectedDropdown_UIElement_ComboBox.Items.Clear();
+                        app.Repack_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
                         break;
                 }
 
