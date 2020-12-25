@@ -130,9 +130,9 @@ namespace CP77.CR2W.Archive
             {
                 // buffer path e.g. stand__rh_hold_tray__serve_milkshakes__01.scenerid.7.buffer
                 // removes 7 characters (".buffer") and then removes the extension (".7")
-                var relpath = fileInfo.FullName.Substring(infolder.FullName.Length + 1);
-                var bufferParentfile = Path.GetFileNameWithoutExtension(relpath.Remove(relpath.Length - 7));
-                var hash = FNV1A64HashAlgorithm.HashString(bufferParentfile);
+                var relpath = fileInfo.FullName[(infolder.FullName.Length + 1)..];
+                relpath = Path.ChangeExtension(relpath.Remove(relpath.Length - 7), "").TrimEnd('.');
+                var hash = FNV1A64HashAlgorithm.HashString(relpath);
 
                 // add buffer
                 if (!buffersDict.ContainsKey(hash))
@@ -151,16 +151,19 @@ namespace CP77.CR2W.Archive
 
             var parentfiles = allfiles.Where(_ => _.Extension != ".buffer");
             //Parallel.ForEach(parentfiles, fileInfo =>
-            var fileInfos = parentfiles.ToList();
+            var fileInfos = parentfiles
+                .OrderBy(_ => FNV1A64HashAlgorithm.HashString(GetRelpath(_)) )
+                .ToList();
+            
+            // local
+            string GetRelpath(FileInfo infi) => infi.FullName[(infolder.FullName.Length + 1)..];
+
             foreach (var fileInfo in fileInfos)
             {
-                var relpath = fileInfo.FullName[(infolder.FullName.Length + 1)..];
+                var relpath = GetRelpath(fileInfo);
                 var hash = FNV1A64HashAlgorithm.HashString(relpath);
                 
-
-
                 // read the cr2w and get imports
-
                 var cr2w = new CR2WFile();
                 using var cr2wfs = new FileStream(fileInfo.FullName, FileMode.Open);
                 using var cr2wbr = new BinaryReader(cr2wfs);
@@ -183,7 +186,7 @@ namespace CP77.CR2W.Archive
                         ar._table.Dependencies.Add(
                             new HashEntry(FNV1A64HashAlgorithm.HashString(cr2WImportWrapper.DepotPathStr)));
                 }
-                uint lastimportidx = (uint)ar._table.Dependencies.Count + 1;
+                uint lastimportidx = (uint)ar._table.Dependencies.Count;
 
                 // kraken the file and write
                 var cr2winbuffer = StreamExtensions.ToByteArray(cr2wbr.BaseStream);
@@ -194,13 +197,17 @@ namespace CP77.CR2W.Archive
                 // get buffers
                 var buffers = new List<FileInfo>();
                 if (buffersDict.ContainsKey(hash))
-                    buffers = buffersDict[hash].OrderBy(x => x).ToList();
-                uint firstoffsetidx = (uint)ar._table.Offsets.Count;
+                    buffers = buffersDict[hash]
+                        .OrderBy(x => x.FullName.Length)
+                        .ThenBy(x => x.FullName)
+                        .ToList();
+                uint firstoffsetidx = (uint)ar._table.Offsets.Count - 1;
                 foreach (var inputbuffer in buffers.Select(b => File.ReadAllBytes(b.FullName)))
                 {
                     CompressAndWrite(inputbuffer);
                 }
-                uint lastoffsetidx = (uint)ar._table.Offsets.Count + 1;
+
+                uint lastoffsetidx = (uint)ar._table.Offsets.Count;
 
                 // save table data
                 var sha1 = new System.Security.Cryptography.SHA1Managed();
@@ -271,12 +278,12 @@ namespace CP77.CR2W.Archive
                     {
                         0x4B, 0x41, 0x52, 0x4B  //KRAKEN, TODO: make this variable and dependent on the compression algo
                     };
-                    writelist.AddRange(BitConverter.GetBytes(zsize));
+                    writelist.AddRange(BitConverter.GetBytes(size));
                     writelist.AddRange(outBuffer.Take(r));
                     
                     ar._table.Offsets.Add(new OffsetEntry(
                         (ulong)bw.BaseStream.Position,
-                        (uint)zsize, 
+                        (uint)r+8,
                         size));
                     bw.Write(writelist.ToArray());
                 }
@@ -529,7 +536,6 @@ namespace CP77.CR2W.Archive
         {
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
-            int progress = 0;
             var extractedList = new ConcurrentBag<string>();
             var failedList = new ConcurrentBag<string>();
             int all = 0;
@@ -556,6 +562,7 @@ namespace CP77.CR2W.Archive
             }
 
             Thread.Sleep(1000);
+            int progress = 0;
             logger.LogProgress(0);
 
             Parallel.ForEach(finalmatches, info =>
