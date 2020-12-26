@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CP77Tools.UI.Data.Tasks;
+using CP77Tools.UI.Functionality;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,42 +12,37 @@ namespace CP77Tools.UI.Data
     public class General
     {
 
+   
+
+
+        
+        public enum TaskType { Archive, Dump, CR2W, Hash, Oodle, Repack, }
+
+        // OTHER
+        public string[] OMD_Output;
+
+
         public enum OMD_Type        {            Single,            Multi        }
 
-        public enum ArchiveTaskType { Extract,Dump,Uncook,List,Single,Custom}
+
+        public bool InterceptLog = false;
+
+
+
+
+
+
+
         public enum DumpTaskType {Imports,MissingHashes,Info,ClassInfo,Custom }
         public enum CR2WTaskType { All,Chunks,Custom}
         public enum HashTaskType { Convert,Missing,Custom}
         public enum OodleTaskType { Decompress, Custom}
         public enum RepackTaskType {Repack, Custom}
-        public enum TaskType { Archive, Dump, CR2W, Hash, Oodle, Repack, }
+        
 
 
-        public bool InterceptLog = false;
 
-        //Archive 
-        public string ToolTipArchive = "Target an archive to extract files or dump information.";
-        public string ToolTipArchive_Path = "Input path to .archive.";
-        public string ToolTipArchive_OutputPath = "Output directory to extract files to.";
-        public string ToolTipArchive_Extract = "Extract files from archive.";
-        public string ToolTipArchive_Dump = "Dump archive information.";
-        public string ToolTipArchive_List = "List contents of archive.";
-        public string ToolTipArchive_Uncook = "Uncooks textures from archive.";
-        public string ToolTipArchive_Uext = "Uncook extension (tga, bmp, jpg, png, dds). Default is tga.";
-        public string ToolTipArchive_Hash = "Extract single file with given hash.";
-        public string ToolTipArchive_Pattern = "Use optional search pattern, e.g. *.ink.\nIf both regex and pattern is defined, pattern will be used first.";
-        public string ToolTipArchive_Regex = "Use optional regex pattern.\nIf both regex and pattern is defined, pattern will be used first.";
-
-        public string[] Archive_Path = new string[0];
-        public string Archive_OutPath = "";
-        public bool Archive_Extract = false;
-        public bool Archive_Dump = false;
-        public bool Archive_List = false;
-        public bool Archive_Uncook = false;
-        public EUncookExtension Archive_UncookFileType = EUncookExtension.tga;
-        public ulong Archive_Hash = 0;
-        public string Archive_Pattern = "";
-        public string Archive_Regex = "";
+       
 
         //Dump
         public string ToolTipDump = "Target an archive or a directory to dump archive information.";
@@ -103,8 +100,6 @@ namespace CP77Tools.UI.Data
         public string[] Repack_Path;
 
 
-        // OTHER
-        public string[] OMD_Output;
 
 
         //repack

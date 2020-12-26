@@ -1,11 +1,18 @@
-﻿using ControlzEx.Theming;
+﻿using Catel.IoC;
+using ControlzEx.Theming;
+using CP77.Common.Services;
+using CP77Tools.UI.Data;
 using CP77Tools.UI.Navigation;
 using CP77Tools.UI.ViewModels;
+using CP77Tools.UI.Functionality;
 using MahApps.Metro.Controls;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
+using WolvenKit.Common.Services;
+using CP77Tools.UI.Data.Tasks;
+using CP77Tools.UI.Views;
 
 namespace CP77Tools.UI
 {
@@ -15,14 +22,39 @@ namespace CP77Tools.UI
     public partial class SUI : MetroWindow
     {
         private readonly NavigationServiceEx navigationServiceEx;
+        public ILoggerService UI_Logger;
+  
+        public General generaldata;
+
+        public static SUI sui; // Pfft
+        public ArchiveData archivedata;
+        public Logging log;
+        public UserInterfaceLogic ui;
+
+
+   
+
 
         public SUI()
         {
             InitializeComponent();
+            Tools a = new Tools();
+
+         
             ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
             this.navigationServiceEx = new NavigationServiceEx();
             this.navigationServiceEx.Navigated += this.NavigationServiceEx_OnNavigated;
             this.HamburgerMenuControl.Content = this.navigationServiceEx.Frame;
+            ServiceLocator.Default.RegisterType<IMainController, MainController>();
+            ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
+            UI_Logger = ServiceLocator.Default.ResolveType<ILoggerService>();
+
+
+            sui = this;
+            archivedata = new ArchiveData();
+            log = new Logging(sui);
+            ui = new UserInterfaceLogic(sui);
+            
 
             // Navigate to the home page.
             this.Loaded += (sender, args) => this.navigationServiceEx.Navigate(new Uri("Views/Pages/MainPage.xaml", UriKind.RelativeOrAbsolute));

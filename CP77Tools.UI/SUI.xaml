@@ -13,11 +13,11 @@
 
         Title=""
         Height="650"
-        Width="1200"
+        Width="1350"
         WindowTransitionsEnabled="False"
 
         GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" Icon="/Resources/LogoNoBox.png" IconOverlayBehavior="HiddenTitleBar" MinWidth="1200" MinHeight="650">
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Icon="/Resources/LogoNoBox.png" IconOverlayBehavior="HiddenTitleBar" MinWidth="1350" MinHeight="650">
 
     <controls:MetroWindow.DataContext>
         <viewModels:ShellViewModel />

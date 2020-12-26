@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Functionality\Customs\OpenMultiDialog.xaml.cs" />
+    <Compile Remove="MainWindow.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Close.png" />
     <None Remove="Resources\CloseSelected.png" />
     <None Remove="Resources\CPLogo.png" />
@@ -20,6 +25,11 @@
     <None Remove="Resources\MinimizeSelected.png" />
     <None Remove="Resources\ToolsBorderedLogo.png" />
     <None Remove="TopHeader" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Functionality\Customs\OpenMultiDialog.xaml" />
+    <Page Remove="MainWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>

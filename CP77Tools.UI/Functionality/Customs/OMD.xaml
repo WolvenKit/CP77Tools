@@ -1,0 +1,62 @@
+﻿<mah:MetroWindow  x:Class="CP77Tools.UI.Functionality.Customs.OMD"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:classes="clr-namespace:CP77Tools.UI.Functionality.Customs"
+
+                 Title="Select Path(s)"
+                 Height="650"
+                 Width="800"   WindowTransitionsEnabled="False"
+
+        GlowBrush="{DynamicResource MahApps.Brushes.Accent}" MinWidth="800" MinHeight="650">
+    <mah:MetroWindow.Resources>
+        <ControlTemplate x:Key="TreeViewControlTemplate1" TargetType="{x:Type TreeView}">
+            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                <ScrollViewer x:Name="_tv_scrollviewer_" Background="{TemplateBinding Background}" CanContentScroll="False" Focusable="False" HorizontalScrollBarVisibility="Hidden" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalScrollBarVisibility="Hidden" Foreground="{DynamicResource MahApps.Brushes.IdealForeground}">
+                    <ItemsPresenter/>
+                </ScrollViewer>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
+                    <Setter Property="CanContentScroll" TargetName="_tv_scrollviewer_" Value="True"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="TreeViewItemStyle1" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+            <Setter Property="KeyboardNavigation.AcceptsReturn" Value="True" />
+        </Style>
+    </mah:MetroWindow.Resources>
+
+    <Grid>
+        <TreeView x:Name="OMD_FileTreeView" Margin="10,10,350,10"  Template="{DynamicResource TreeViewControlTemplate1}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" ItemContainerStyle="{DynamicResource TreeViewItemStyle1}" Background="{x:Null}"  BorderThickness="2,2,2,2" Height="Auto" SelectedItemChanged="OMD_FileTreeView_SelectedItemChanged">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type classes:FileSystemObjectInfo}" ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding ImageSource, UpdateSourceTrigger=PropertyChanged}" Margin="0,1,8,1"/>
+                        <TextBlock Text="{Binding FileSystemInfo.Name}"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+        <ListBox x:Name="OMD_ListboxSelected" Margin="450,41,5,55" BorderBrush="{DynamicResource MahApps.Brushes.ComboBox.Border.Focus}" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" SelectionChanged="OMD_ListboxSelected_SelectionChanged"/>
+        <Label Content="Selected Paths" HorizontalAlignment="Left" Margin="450,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="93"/>
+        <Separator HorizontalAlignment="Left" Margin="450,36,0,0" VerticalAlignment="Top" Height="3" RenderTransformOrigin="0.5,0.5" Width="350">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Button x:Name="OMD_ClearButton" Content="Clear" HorizontalAlignment="Left" Margin="449,584,0,0" VerticalAlignment="Top" Width="173" Click="OMD_ClearButton_Click"/>
+        <Button x:Name="OMD_ConfirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="622,584,0,0" VerticalAlignment="Top" Width="173" Click="OMD_ConfirmButton_Click"/>
+        <!-- your content -->
+
+    </Grid>
+</mah:MetroWindow>                 

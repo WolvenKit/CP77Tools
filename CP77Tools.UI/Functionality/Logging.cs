@@ -10,6 +10,7 @@ using System.Windows.Threading;
 using WolvenKit.Common.Services;
 using CP77Tools.UI;
 using System.Text.RegularExpressions;
+using CP77Tools.UI.Data;
 
 namespace CP77Tools.UI.Functionality
 {
@@ -17,8 +18,8 @@ namespace CP77Tools.UI.Functionality
     {
 
         
-        private MainWindow app;
-        public Logging(MainWindow mainWindow) { this.app = mainWindow; }
+        private SUI app;
+        public Logging(SUI _SUI) { this.app = _SUI; }
 
 
         public void UI_Logger_PropertyChanging(object sender, PropertyChangingEventArgs e)
@@ -50,12 +51,12 @@ namespace CP77Tools.UI.Functionality
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                if (app.data.InterceptLog)
+                if (app.generaldata.InterceptLog)
                 {
-                    app.Hash_Output_UIElement_TextBox.Text = e.Message.ToString();
-                    app.data.InterceptLog = false;
+                  //  app.Hash_Output_UIElement_TextBox.Text = e.Message.ToString();
+                    app.generaldata.InterceptLog = false;
                 }
-                if (!app.data.InterceptLog)
+                if (!app.generaldata.InterceptLog)
                 {
                     Logtype TYPE = e.Logtype;
                     string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + e.Message.ToString(); ;
@@ -65,8 +66,8 @@ namespace CP77Tools.UI.Functionality
 
                     }
 
-                    app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
-                    app.Main_OutputBox_UIElement_ComboBox.Items.Add(OUTPUTSTRING);
+                 //   app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
+                 //   app.Main_OutputBox_UIElement_ComboBox.Items.Add(OUTPUTSTRING);
                 }    
             }));
         }
@@ -78,45 +79,45 @@ namespace CP77Tools.UI.Functionality
             TaskCounter += 1;
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                if (app.Main_ProgressBar_UIElement_ProgressBar.Value >= 1) { app.Main_ProgressBar_UIElement_ProgressBar.Value = 0; }
+              //  if (app.Main_ProgressBar_UIElement_ProgressBar.Value >= 1) { app.Main_ProgressBar_UIElement_ProgressBar.Value = 0; }
 
                 Logtype TYPE = _logger.Logtype;
                 var CURRENTTASK = TaskCounter;
                 string OUTPUTSTRING = "[" + TYPE.ToString() + "]" + " - Working on Task : " + CURRENTTASK ;
-                app.Main_ProgressBar_UIElement_ProgressBar.Value += _logger.Progress.Item1;
-                app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
+              //  app.Main_ProgressBar_UIElement_ProgressBar.Value += _logger.Progress.Item1;
+               // app.Main_ProgressOutput_UIElement_TextBlock.Text = OUTPUTSTRING;
 
             }));
         }
 
         // Reporting when finished. Should soon be unneeded  (Maybe keep this for opening output after it finishes.)
-        public void TaskFinished(MainWindow.TaskType CurrentTaskType)
+        public void TaskFinished(General.TaskType CurrentTaskType)
         {
             switch (CurrentTaskType)
             {
-                case MainWindow.TaskType.Archive:
-                    Process.Start("explorer.exe", app.data.Archive_OutPath);
+                case General.TaskType.Archive:
+                 //   Process.Start("explorer.exe", app.generaldata.Archive_OutPath);
                     break;
-                case MainWindow.TaskType.CR2W:
-                    Process.Start("explorer.exe", app.data.CR2W_OutPath);
+                case General.TaskType.CR2W:
+                    Process.Start("explorer.exe", app.generaldata.CR2W_OutPath);
                     break;
-                case MainWindow.TaskType.Dump:
-                    Process.Start("explorer.exe", app.data.Dump_OutPath);
+                case General.TaskType.Dump:
+                    Process.Start("explorer.exe", app.generaldata.Dump_OutPath);
                     break;
-                case MainWindow.TaskType.Hash:
+                case General.TaskType.Hash:
                     break;
-                case MainWindow.TaskType.Oodle:
-                    Process.Start("explorer.exe", app.data.Oodle_OutPath);
+                case General.TaskType.Oodle:
+                    Process.Start("explorer.exe", app.generaldata.Oodle_OutPath);
                     break;
-                case MainWindow.TaskType.Repack:
-                    Process.Start("explorer.exe", app.data.Repack_OutPath);
+                case General.TaskType.Repack:
+                    Process.Start("explorer.exe", app.generaldata.Repack_OutPath);
                     break;
             }
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-                app.Main_ProgressBar_UIElement_ProgressBar.Value = 0;
-                app.Main_ProgressOutput_UIElement_TextBlock.Text = "[Succes] - Finished : " + CurrentTaskType.ToString();
-                app.Main_OutputBox_UIElement_ComboBox.Items.Add("[Succes] - Finished : " + CurrentTaskType.ToString());
+           //     app.Main_ProgressBar_UIElement_ProgressBar.Value = 0;
+              //  app.Main_ProgressOutput_UIElement_TextBlock.Text = "[Succes] - Finished : " + CurrentTaskType.ToString();
+            //    app.Main_OutputBox_UIElement_ComboBox.Items.Add("[Succes] - Finished : " + CurrentTaskType.ToString());
                 TaskCounter = 0;
             }));
         }

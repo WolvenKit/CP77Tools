@@ -7,7 +7,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Functionality\Customs\OpenMultiDialog.xaml.cs">
+    <Compile Update="Functionality\Customs\OMD.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="SUI.xaml.cs">
@@ -21,10 +21,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Functionality\Customs\OpenMultiDialog.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Functionality\Customs\OMD.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="SUI.xaml">

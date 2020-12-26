@@ -92,7 +92,7 @@
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <TextBlock   x:Name="OMD_Title" Margin="10,5,49,0" Text="Select File(s) And or Folder(s)" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="10" Height="14" Foreground="#FFE5D90C" FontWeight="Bold" MouseDown="UIFunc_DragWindow"/>
+        <TextBlock   x:Name="OMD_Title" Margin="10,5,49,0" Text="Select File(s) And or Folder(s)" TextWrapping="Wrap" VerticalAlignment="Top" MouseDown="UIFunc_DragWindow"/>
         <Rectangle x:Name="OMD_SelectedFilesTitle" HorizontalAlignment="Left" Height="22" Stroke="{DynamicResource ButtonBackground_NewV2}" VerticalAlignment="Top" Width="243" RadiusX="4" RadiusY="4" StrokeThickness="2" Fill="#FF09739A" Margin="444,22,0,0">
             <Rectangle.RenderTransform>
                 <MatrixTransform/>
