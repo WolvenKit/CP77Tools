@@ -27,9 +27,11 @@ namespace CP77Tools.UI.Views.Pages
             ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
             MainUpdateInfoTextBlock.Text = "Update: Version 0.5.4 - Beta\n" +
                 "\n" +
-                "- Archive Tasks work now.\n" +
-                "- Preset Preparation.\n" +
-                "\n" +
+                "- WIP.\n" +
+                "- " +
+                "Todo : \n" +
+                "Preset Preparation.\n" +
+                "- \n" +
                 "\n" +
                 "\n" +
                 "\n" +

@@ -6,10 +6,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CP77Tools.UI.Views.Pages"
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:ui="http://schemas.modernwpf.com/2019" 
-      xmlns:uc="clr-namespace:CP77Tools.UI.Views.Tabs.Archive"
+      xmlns:ucArchive="clr-namespace:CP77Tools.UI.Views.Tabs.Archive"
+      xmlns:ucCR2W="clr-namespace:CP77Tools.UI.Views.Tabs.CR2W"
+
       x:Class="CP77Tools.UI.Views.Pages.Tools"
-      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-      Style="{DynamicResource PageStyle}"
+      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
+      xmlns:ucRepack="clr-namespace:CP77Tools.UI.Views.Tabs.Repack" xmlns:ucDump="clr-namespace:CP77Tools.UI.Views.Tabs.Dump" xmlns:ucHash="clr-namespace:CP77Tools.UI.Views.Tabs.Hash" xmlns:ucOodle="clr-namespace:CP77Tools.UI.Views.Tabs.Oodle"
+    Style="{DynamicResource PageStyle}"
 
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1100"
@@ -33,22 +36,22 @@
 
                                 <mah:MetroTabControl x:Name="ArhiveBottomTab" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
                                     <TabItem Header="New Task">
-                                        <uc:CustomTab/>
+                                        <ucArchive:CustomTab/>
                                     </TabItem>
                                     <TabItem Header="Extract">
-                                        <uc:ExtractTab/>
+                                        <ucArchive:ExtractTab/>
                                     </TabItem>
                                     <TabItem Header="Uncook">
-                                        <uc:UncookTab/>
+                                        <ucArchive:UncookTab/>
                                     </TabItem>
                                     <TabItem Header="Dump">
-                                        <uc:DumpTab/>
+                                        <ucArchive:DumpTab/>
                                     </TabItem>
                                     <TabItem Header="List">
-                                        <uc:ListTab/>
+                                        <ucArchive:ListTab/>
                                     </TabItem>
                                     <TabItem Header="Extract Single">
-                                        <uc:ExtractSingleTab/>
+                                        <ucArchive:ExtractSingleTab/>
                                     </TabItem>
                                 </mah:MetroTabControl>
                             </Grid>
@@ -64,102 +67,18 @@
                             <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                                 <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
                                     <TabItem Header="New Task">
-                                        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}" Margin="0,0,0,-39">
-                                            <Button x:Name="ArchiveSelectInputButton_Copy2" Content="Select Input" Margin="5,19,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" />
-
-                                            <Button x:Name="ArchiveSelectOutpathButton_Copy2" Content="Select OutPath" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" />
-
-
-
-
-
-                                            <Label x:Name="ArchiveOutpathLabel_Copy2" Content="None Selected" Margin="104,52,550,0" Height="27" VerticalAlignment="Top" Background="{x:Null}" MinWidth="350" BorderBrush="White"/>
-                                            <Label x:Name="ArchiveInputLabel_Copy2" Content="None Selected" Margin="104,19,550,0" Height="27" VerticalAlignment="Top" Background="{x:Null}" MinWidth="350" BorderBrush="White"/>
-                                            <Grid Margin="149,101,551,0" VerticalAlignment="Top">
-
-                                                <controls:ToggleSwitch x:Name="CR2WAllSwitch1" Header="All Info" Height="70" Width="100" Margin="5,5,0,0" Canvas.Left="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" />
-                                                <controls:ToggleSwitch x:Name="ArchiveDumpSwitch2" Header="All Class Info" Height="70" Width="100" Margin="110,5,0,0" Canvas.Left="20" VerticalAlignment="Top" FontSize="14" />
-                                            </Grid>
-                                            <Label Content="General Options" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" FontWeight="Bold" HorizontalContentAlignment="Right" Width="134" VerticalContentAlignment="Center" Height="40"/>
-                                            <Separator Margin="0,77,0,0" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.5,0.5" MinWidth="550">
-                                                <Separator.RenderTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform ScaleY="-1"/>
-                                                        <SkewTransform/>
-                                                        <RotateTransform/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </Separator.RenderTransform>
-                                            </Separator>
-                                            <Separator RenderTransformOrigin="0.5,0.5" Margin="144,87,0,39" MinWidth="0" HorizontalAlignment="Left"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" MinHeight="300" Visibility="Hidden">
-
-                                                <Separator.RenderTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform ScaleY="-1"/>
-                                                        <SkewTransform/>
-                                                        <RotateTransform Angle="0"/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </Separator.RenderTransform>
-                                            </Separator>
-                                            <Separator Margin="0,-19,0,0" VerticalAlignment="Top" Height="60" RenderTransformOrigin="0.5,0.5" MinWidth="329" HorizontalContentAlignment="Stretch">
-                                                <Separator.RenderTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform ScaleY="-1"/>
-                                                        <SkewTransform/>
-                                                        <RotateTransform/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </Separator.RenderTransform>
-                                            </Separator>
-                                            <Separator RenderTransformOrigin="0.5,0.5" Margin="145,200,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top">
-
-                                                <Separator.RenderTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform ScaleY="-1"/>
-                                                        <SkewTransform/>
-                                                        <RotateTransform Angle="0"/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </Separator.RenderTransform>
-                                            </Separator>
-                                            <Separator RenderTransformOrigin="0.5,0.5" Margin="145,125,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top">
-
-                                                <Separator.RenderTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform ScaleY="-1"/>
-                                                        <SkewTransform/>
-                                                        <RotateTransform Angle="0"/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </Separator.RenderTransform>
-                                            </Separator>
-                                            <Button x:Name="ArchiveLaunchTaskButton2" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="48,285,0,0" HorizontalAlignment="Left" Width="301"/>
-                                            <Label Content="Selected Input" HorizontalAlignment="Left" Margin="48,200,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                                            <ComboBox x:Name="ArchiveSelectedInputConceptDropDown3" Margin="155,207,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194"/>
-                                        </Grid>
+                                        <ucCR2W:CustomTab/>
                                     </TabItem>
-                                    <TabItem Header="Extract">
-                                        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
+                                    <TabItem Header="All Information">
+                                        <ucCR2W:AllInfoTab/>
                                     </TabItem>
-                                    <TabItem Header="Uncook">
-                                        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
+                                    <TabItem Header="Class Information">
+                                        <ucCR2W:ClassInfoTab/>
                                     </TabItem>
-                                    <TabItem Header="Dump">
-                                        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                                    </TabItem>
-                                    <TabItem Header="List">
-                                        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                                    </TabItem>
-                                    <TabItem Header="Extract Single">
-                                        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                                    </TabItem>
+                            
                                 </controls:MetroTabControl>
                             </Grid>
-                        </TabItem>
-                        <TabItem Header="TabItem">
-                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                        </TabItem>
+                        </TabItem>             
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
@@ -168,66 +87,15 @@
                     <mah:MetroTabControl>
                         <TabItem Header="Create Task">
                             <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
-                                <Button x:Name="ArchiveSelectInputButton_Copy1" Content="Select Input" Margin="5,19,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" />
-
-                                <Button x:Name="ArchiveSelectOutpathButton_Copy1" Content="Select OutPath" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" />
-
-
-
-
-
-                                <Label x:Name="ArchiveOutpathLabel_Copy1" Content="None Selected" Margin="104,52,550,0" Height="27" VerticalAlignment="Top" Background="{x:Null}" MinWidth="350" BorderBrush="White"/>
-                                <Label x:Name="ArchiveInputLabel_Copy1" Content="None Selected" Margin="104,19,550,0" Height="27" VerticalAlignment="Top" Background="{x:Null}" MinWidth="350" BorderBrush="White"/>
-                                <Separator Margin="0,77,0,0" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.5,0.5" MinWidth="550">
-                                    <Separator.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleY="-1"/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </Separator.RenderTransform>
-                                </Separator>
-                                <Separator RenderTransformOrigin="0.5,0.5" Margin="144,87,0,39" MinWidth="0" HorizontalAlignment="Left"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" MinHeight="300" Visibility="Hidden">
-
-                                    <Separator.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleY="-1"/>
-                                            <SkewTransform/>
-                                            <RotateTransform Angle="0"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </Separator.RenderTransform>
-                                </Separator>
-                                <Separator Margin="0,-19,0,0" VerticalAlignment="Top" Height="60" RenderTransformOrigin="0.5,0.5" MinWidth="329" HorizontalContentAlignment="Stretch">
-                                    <Separator.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleY="-1"/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </Separator.RenderTransform>
-                                </Separator>
-                                <Separator RenderTransformOrigin="0.5,0.5" Margin="145,111,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top">
-
-                                    <Separator.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleY="-1"/>
-                                            <SkewTransform/>
-                                            <RotateTransform Angle="0"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </Separator.RenderTransform>
-                                </Separator>
-                                <Button x:Name="ArchiveLaunchTaskButton1_Copy" Content="Launch Task" VerticalAlignment="Top" Height="26" Margin="48,196,0,0" HorizontalAlignment="Left" Width="301"/>
-                                <Label Content="Selected Input" HorizontalAlignment="Left" Margin="48,111,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                                <ComboBox x:Name="ArchiveSelectedInputConceptDropDown2_Copy" Margin="155,118,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194"/>
+                                <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy2" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
+                                    <TabItem Header="Repack">
+                                        <ucRepack:RepackTab/>
+                                    </TabItem>                    
+                                </controls:MetroTabControl>
                             </Grid>
+
                         </TabItem>
-                        <TabItem Header="TabItem">
-                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                        </TabItem>
+            
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
@@ -235,35 +103,65 @@
                 <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                     <mah:MetroTabControl>
                         <TabItem Header="Create Task">
-                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                        </TabItem>
-                        <TabItem Header="TabItem">
-                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                        </TabItem>
+                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
+                                <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy3" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
+                                    <TabItem Header="New Task">
+                                        <ucDump:CustomTab/>
+                                    </TabItem>
+                                    <TabItem Header="All Information">
+                                        <ucDump:ImportsTab/>
+                                    </TabItem>
+                                    <TabItem Header="Class Information">
+                                        <ucDump:ClassInfoTab/>
+                                    </TabItem>
+                                    <TabItem Header="Missing Hashes">
+                                        <ucDump:MissingHashesTab/>
+                                    </TabItem>
+                                    <TabItem Header="XBM Information">
+                                        <ucDump:XbmInfoTab/>
+                                    </TabItem>
+
+                                </controls:MetroTabControl>
+                            </Grid>
+                        </TabItem>        
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
             <TabItem Header="Hash">
                 <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                     <mah:MetroTabControl>
-                        <TabItem Header="TabItem">
-                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                        </TabItem>
-                        <TabItem Header="TabItem">
-                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                        </TabItem>
+                        <TabItem Header="Create Task">
+                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
+                                <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy34" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
+                                    <TabItem Header="New Task">
+                                        <ucHash:ConvertTab/>
+                                    </TabItem>
+                                    <TabItem Header="Missing Hashes">
+                                        <ucHash:MissingTab/>
+                                    </TabItem>
+                                    <TabItem Header="Update Hashes">
+                                        <ucHash:UpdateTab/>
+                                    </TabItem>
+                 
+                                </controls:MetroTabControl>
+                            </Grid>
+                        </TabItem>                       
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
             <TabItem Header="Oodle">
                 <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                     <mah:MetroTabControl>
-                        <TabItem Header="TabItem">
-                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                        </TabItem>
-                        <TabItem Header="TabItem">
-                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}"/>
-                        </TabItem>
+                        <TabItem Header="Create Task">
+                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
+                                <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy32" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
+                                    <TabItem Header="New Task">
+                                        <ucOodle:DecompressTab/>
+                                    </TabItem>
+                                   
+                                </controls:MetroTabControl>
+                            </Grid>
+                        </TabItem>                   
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>

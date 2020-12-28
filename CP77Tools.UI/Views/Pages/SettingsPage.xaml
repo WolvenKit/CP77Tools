@@ -13,6 +13,7 @@
         <Grid Margin="10,10,10,10">
             <Label Content="Settings" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <mah:ToggleSwitch Header="Theme" Height="100" Margin="30,50,0,0" VerticalAlignment="Top" Width="100" OffContent="Dark" OnContent="Light"/>
+            <Separator Margin="0,30,0,0" VerticalAlignment="Top" Height="15"/>
         </Grid>
 
     </Grid>

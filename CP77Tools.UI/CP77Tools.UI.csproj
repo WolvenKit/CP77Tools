@@ -62,10 +62,4 @@
     <Resource Include="Resources\ToolsBorderedLogo.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Collection\Data\" />
-    <Folder Include="Collection\Informative\" />
-    <Folder Include="Collection\Functions\" />
-  </ItemGroup>
-
 </Project>

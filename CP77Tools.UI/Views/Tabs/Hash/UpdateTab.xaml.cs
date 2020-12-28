@@ -1,5 +1,4 @@
-﻿using ControlzEx.Theming;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CP77Tools.UI.Views.Pages
+namespace CP77Tools.UI.Views.Tabs.Hash
 {
     /// <summary>
-    /// Interaction logic for AboutPage.xaml
+    /// Interaction logic for UpdateTab.xaml
     /// </summary>
-    public partial class AboutPage : Page
+    public partial class UpdateTab : UserControl
     {
-        public AboutPage()
+        public UpdateTab()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
-                
-     
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using ControlzEx.Theming;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CP77Tools.UI.Views.Pages
+namespace CP77Tools.UI.Views.Tabs.Hash
 {
     /// <summary>
-    /// Interaction logic for AboutPage.xaml
+    /// Interaction logic for MissingTab.xaml
     /// </summary>
-    public partial class AboutPage : Page
+    public partial class MissingTab : UserControl
     {
-        public AboutPage()
+        public MissingTab()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
-                
-     
         }
     }
 }

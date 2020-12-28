@@ -38,7 +38,7 @@ namespace CP77Tools.UI.Functionality
                 case 1:
                     if (sui.generaldata.CR2W_Path.Length > 0)
                     {
-                        Task CTask = new Task(() => ConsoleFunctions.Cr2wTask(sui.generaldata.CR2W_Path[0], sui.generaldata.CR2W_OutPath, sui.generaldata.CR2W_All, sui.generaldata.CR2W_Chunks)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
+                        Task CTask = new Task(() => ConsoleFunctions.Cr2wTask(sui.generaldata.CR2W_Path, sui.generaldata.CR2W_OutPath, sui.generaldata.CR2W_All, sui.generaldata.CR2W_Chunks)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
                         CTask.Start(); CTask.Wait(); sui.log.TaskFinished(General.TaskType.CR2W);
                     }
                     break;
@@ -54,7 +54,7 @@ namespace CP77Tools.UI.Functionality
                 case 3:
                     if (sui.generaldata.Dump_Path.Length > 0)
                     {
-                        Task DTask = new Task(() => ConsoleFunctions.DumpTask(sui.generaldata.Dump_Path[0], sui.generaldata.Dump_Imports, sui.generaldata.Dump_MissingHashes, sui.generaldata.Dump_Info, sui.generaldata.Dump_ClassInfo));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
+                        Task DTask = new Task(() => ConsoleFunctions.DumpTask(sui.generaldata.Dump_Path, sui.generaldata.Dump_Imports, sui.generaldata.Dump_MissingHashes, sui.generaldata.Dump_Info, sui.generaldata.Dump_ClassInfo));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
                         DTask.Start(); DTask.Wait(); sui.log.TaskFinished(General.TaskType.Dump);
                     }
                     break;
@@ -62,10 +62,10 @@ namespace CP77Tools.UI.Functionality
                 case 4:
                     if (sui.generaldata.Hash_Input != "")
                     {
-                        Task HTask = new Task(() => ConsoleFunctions.HashTask(sui.generaldata.Hash_Input, sui.generaldata.Hash_Missing));
-                        sui.generaldata.InterceptLog = true;
-                        HTask.Start();
-                        HTask.Wait(); sui.log.TaskFinished(General.TaskType.Hash);
+                        //Task HTask = new Task(() => ConsoleFunctions.HashTask(sui.generaldata.Hash_Input, sui.generaldata.Hash_Missing));
+                        //sui.generaldata.InterceptLog = true;
+                        //HTask.Start();
+                        //HTask.Wait(); sui.log.TaskFinished(General.TaskType.Hash);
                     }
                     break;
 

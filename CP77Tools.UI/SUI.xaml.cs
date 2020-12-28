@@ -46,7 +46,7 @@ namespace CP77Tools.UI
             this.navigationServiceEx = new NavigationServiceEx();
             this.navigationServiceEx.Navigated += this.NavigationServiceEx_OnNavigated;
             this.HamburgerMenuControl.Content = this.navigationServiceEx.Frame;
-            ServiceLocator.Default.RegisterType<IMainController, MainController>();
+            ServiceLocator.Default.RegisterType<IAppSettingsService, AppSettingsService>();
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
             UI_Logger = ServiceLocator.Default.ResolveType<ILoggerService>();
 
