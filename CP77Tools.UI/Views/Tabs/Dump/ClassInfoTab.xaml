@@ -79,7 +79,7 @@
                     </TransformGroup>
                 </Separator.RenderTransform>
             </Separator>
-            <Label Content="Selected Input" HorizontalAlignment="Left" Margin="49,0,0,525" VerticalAlignment="Bottom" FontWeight="Bold" Height="40" Width="91" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Label Content="Selected Input" HorizontalAlignment="Left" Margin="49,125,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="91" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <ComboBox x:Name="ArchiveSelectedInputConceptDropDown1" Margin="160,132,10,0" VerticalAlignment="Top" IsReadOnly="False" StaysOpenOnEdit="True" SelectedIndex="0"/>
             <Button x:Name="ArchiveLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="159,207,10,0"/>
 

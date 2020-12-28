@@ -9,7 +9,7 @@
      d:DesignHeight="700" d:DesignWidth="1100"      Title="AboutPage">
 
     <Grid>
-        <Grid Margin="10,10,10,0">
+        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
 
             <Label Content="About" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <Separator Margin="0,30,0,0" VerticalAlignment="Top" Height="15"/>

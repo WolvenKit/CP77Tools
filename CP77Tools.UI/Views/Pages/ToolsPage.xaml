@@ -133,15 +133,10 @@
                         <TabItem Header="Create Task">
                             <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                                 <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy34" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
-                                    <TabItem Header="New Task">
-                                        <ucHash:ConvertTab/>
+                                    <TabItem Header="Hashes">
+                                        <ucHash:HashTab/>
                                     </TabItem>
-                                    <TabItem Header="Missing Hashes">
-                                        <ucHash:MissingTab/>
-                                    </TabItem>
-                                    <TabItem Header="Update Hashes">
-                                        <ucHash:UpdateTab/>
-                                    </TabItem>
+                              
                  
                                 </controls:MetroTabControl>
                             </Grid>
@@ -155,7 +150,7 @@
                         <TabItem Header="Create Task">
                             <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                                 <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy32" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
-                                    <TabItem Header="New Task">
+                                    <TabItem Header="Decompress">
                                         <ucOodle:DecompressTab/>
                                     </TabItem>
                                    

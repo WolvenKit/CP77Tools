@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CP77Tools.UI.Views.Tabs.Hash
 {
     /// <summary>
-    /// Interaction logic for UpdateTab.xaml
+    /// Interaction logic for ConvertTab.xaml
     /// </summary>
-    public partial class UpdateTab : UserControl
+    public partial class HashTab : UserControl
     {
-        public UpdateTab()
+        public HashTab()
         {
             InitializeComponent();
         }

@@ -61,13 +61,7 @@
     <Compile Update="Views\Tabs\Dump\XbmInfoTab.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Tabs\Hash\ConvertTab.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Tabs\Hash\MissingTab.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Tabs\Hash\UpdateTab.xaml.cs">
+    <Compile Update="Views\Tabs\Hash\HashTab.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Tabs\Oodle\DecompressTab.xaml.cs">
@@ -141,13 +135,7 @@
     <Page Update="Views\Tabs\Dump\XbmInfoTab.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Tabs\Hash\ConvertTab.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Tabs\Hash\MissingTab.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Tabs\Hash\UpdateTab.xaml">
+    <Page Update="Views\Tabs\Hash\HashTab.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Tabs\Oodle\DecompressTab.xaml">

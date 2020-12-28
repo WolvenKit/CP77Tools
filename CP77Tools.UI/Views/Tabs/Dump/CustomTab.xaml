@@ -33,7 +33,7 @@
                 <mah:ToggleSwitch x:Name="ArchiveListSwitch" Header="Class Info" Height="70" Width="100" Canvas.Left="340" Canvas.Top="5" Margin="199,5,0,0" VerticalAlignment="Top" FontSize="14" />
                 <mah:ToggleSwitch x:Name="ArchiveUncookSwitch" Header="Missing Hashes" Height="70" Width="100" Canvas.Left="235" Canvas.Top="5" Margin="301,5,0,0" VerticalAlignment="Top" FontSize="14" />
             </Grid>
-            <Label Content="General Options" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" FontWeight="Bold" HorizontalContentAlignment="Right" Width="134" VerticalContentAlignment="Center" Height="40"/>
+            <Label Content="General Options" HorizontalAlignment="Left" Margin="6,125,0,0" VerticalAlignment="Top" FontWeight="Bold" HorizontalContentAlignment="Right" Width="134" VerticalContentAlignment="Center" Height="40"/>
             <Separator HorizontalAlignment="Stretch" Margin="0,77,0,0" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.5,0.5" MinWidth="550">
                 <Separator.RenderTransform>
                     <TransformGroup>
@@ -98,7 +98,7 @@
                     </TransformGroup>
                 </Separator.RenderTransform>
             </Separator>
-            <Label Content="Selected Input" HorizontalAlignment="Left" Margin="49,0,0,450" VerticalAlignment="Bottom" FontWeight="Bold" Height="40" Width="91" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Label Content="Selected Input" HorizontalAlignment="Left" Margin="49,200,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="91" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <ComboBox x:Name="ArchiveSelectedInputConceptDropDown1" Margin="160,207,10,0" VerticalAlignment="Top" IsReadOnly="False" StaysOpenOnEdit="True" SelectedIndex="0"/>
             <Button x:Name="ArchiveLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="159,282,10,0"/>
 
