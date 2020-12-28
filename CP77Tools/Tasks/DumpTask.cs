@@ -59,9 +59,24 @@ namespace CP77Tools.Tasks
 
     public static partial class ConsoleFunctions
     {
-        private static byte[] MAGIC = new byte[] {0x43, 0x52, 0x32, 0x57};
+        private static byte[] MAGIC = {0x43, 0x52, 0x32, 0x57};
 
-        public static int DumpTask(string path, bool imports, bool missinghashes, bool texinfo, bool classinfo)
+        public static void DumpTask(string[] path, bool imports, bool missinghashes, bool texinfo, bool classinfo)
+        {
+            if (path == null || path.Length < 1)
+            {
+                logger.LogString("Please fill in an input path", Logtype.Error);
+                return;
+            }
+
+            Parallel.ForEach(path, file =>
+            {
+                DumpTaskInner(file, imports, missinghashes, texinfo, classinfo);
+            });
+
+        }
+
+        public static int DumpTaskInner(string path, bool imports, bool missinghashes, bool texinfo, bool classinfo)
         {
             #region checks
 
@@ -98,7 +113,7 @@ namespace CP77Tools.Tasks
 
             
 
-            var mainController = ServiceLocator.Default.ResolveType<IMainController>();
+            var mainController = ServiceLocator.Default.ResolveType<IHashService>();
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
             var typedict = new ConcurrentDictionary<string, IEnumerable<string>>();
 

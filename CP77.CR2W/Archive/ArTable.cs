@@ -178,13 +178,13 @@ namespace CP77Tools.Model
         public HashEntry(BinaryReader br, int idx)
         {
             _idx = idx;
-            var mainController = ServiceLocator.Default.ResolveType<IMainController>();
+            var mainController = ServiceLocator.Default.ResolveType<IHashService>();
 
             Read(br, mainController);
             
         }
 
-        private void Read(BinaryReader br, IMainController mainController)
+        private void Read(BinaryReader br, IHashService mainController)
         {
             _hash = br.ReadUInt64();
 
