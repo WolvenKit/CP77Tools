@@ -78,8 +78,19 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
-        <Button x:Name="ArchiveLaunchTaskButton2" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="48,285,0,0" HorizontalAlignment="Left" Width="301"/>
+        <Button x:Name="ArchiveLaunchTaskButton2" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="155,282,0,0" HorizontalAlignment="Left" MinWidth="194"/>
         <Label Content="Selected Input" HorizontalAlignment="Left" Margin="48,200,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
         <ComboBox x:Name="ArchiveSelectedInputConceptDropDown3" Margin="155,207,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194"/>
+        <Separator RenderTransformOrigin="0.5,0.5" Margin="145,275,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
     </Grid>
 </UserControl>

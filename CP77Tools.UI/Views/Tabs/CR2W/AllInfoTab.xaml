@@ -1,12 +1,78 @@
-﻿<UserControl x:Class="CP77Tools.UI.Views.Tabs.CR2W.AllInfoTab"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CP77Tools.UI.Views.Tabs.CR2W"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="CP77Tools.UI.Views.Tabs.CR2W.AllInfoTab"
              mc:Ignorable="d" 
             d:DesignHeight="700" d:DesignWidth="1100">
-    <Grid>
-            
+    <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}" Margin="0,0,0,-39">
+        <Button x:Name="ArchiveSelectInputButton_Copy2" Content="Select Input" Margin="5,19,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" />
+
+        <Button x:Name="ArchiveSelectOutpathButton_Copy2" Content="Select OutPath" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" />
+
+
+
+
+
+        <Label x:Name="ArchiveOutpathLabel_Copy2" Content="None Selected" Margin="104,52,550,0" Height="27" VerticalAlignment="Top" Background="{x:Null}" MinWidth="350" BorderBrush="White"/>
+        <Label x:Name="ArchiveInputLabel_Copy2" Content="None Selected" Margin="104,19,550,0" Height="27" VerticalAlignment="Top" Background="{x:Null}" MinWidth="350" BorderBrush="White"/>
+        <Separator Margin="0,77,0,0" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.5,0.5" MinWidth="550">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Separator RenderTransformOrigin="0.5,0.5" Margin="144,87,0,39" MinWidth="0" HorizontalAlignment="Left"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" MinHeight="300" Visibility="Hidden">
+
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Separator Margin="0,-19,0,0" VerticalAlignment="Top" Height="60" RenderTransformOrigin="0.5,0.5" MinWidth="329" HorizontalContentAlignment="Stretch">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Separator RenderTransformOrigin="0.5,0.5" Margin="145,200,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Separator RenderTransformOrigin="0.5,0.5" Margin="145,125,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Button x:Name="ArchiveLaunchTaskButton2" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="155,207,0,0" HorizontalAlignment="Left" MinWidth="194"/>
+        <Label Content="Selected Input" HorizontalAlignment="Left" Margin="48,125,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <ComboBox x:Name="ArchiveSelectedInputConceptDropDown3" Margin="155,132,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="194"/>
     </Grid>
 </UserControl>
