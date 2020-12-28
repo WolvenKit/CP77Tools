@@ -17,6 +17,8 @@
     <None Remove="Resources\CloseSelected.png" />
     <None Remove="Resources\CPLogo.png" />
     <None Remove="Resources\CPLogoBlock.png" />
+    <None Remove="Resources\Cyberpunk-2077-Jun-25th-Screenshots-9-2060x1159.jpg" />
+    <None Remove="Resources\cyberpunk-2077-new-pictures-e1602557321835.jpg" />
     <None Remove="Resources\IconNew.png" />
     <None Remove="Resources\Logo.png" />
     <None Remove="Resources\LogoNoBox.png" />
@@ -49,6 +51,8 @@
     <Resource Include="Resources\CloseSelected.png" />
     <Resource Include="Resources\CPLogo.png" />
     <Resource Include="Resources\CPLogoBlock.png" />
+    <Resource Include="Resources\Cyberpunk-2077-Jun-25th-Screenshots-9-2060x1159.jpg" />
+    <Resource Include="Resources\cyberpunk-2077-new-pictures-e1602557321835.jpg" />
     <Resource Include="Resources\IconNew.png" />
     <Resource Include="Resources\Logo.png" />
     <Resource Include="Resources\LogoNoBox.png" />
@@ -62,7 +66,6 @@
     <Folder Include="Collection\Data\" />
     <Folder Include="Collection\Informative\" />
     <Folder Include="Collection\Functions\" />
-    <Folder Include="Views\Tasks\" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using WolvenKit.Common.Tools.DDS;
+using static CP77Tools.UI.Data.General;
 
 namespace CP77Tools.UI.Data.Tasks
 {
     public class ArchiveData
     {
         public enum TaskType { Extract, Dump, Uncook, List, Single, Custom }
-
+        public static Dictionary<string, string> ArchiveConceptTaskDict = new Dictionary<string, string>();
+        public static List<Preset> presets = new List<Preset>();
         //Archive 
         public string ToolTipArchive = "Target an archive to extract files or dump information.";
         public string ToolTipArchive_Path = "Input path to .archive.";

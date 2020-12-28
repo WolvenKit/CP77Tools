@@ -1,4 +1,4 @@
-﻿using CP77Tools.UI.Views;
+﻿using CP77Tools.UI.Views.Pages;
 using MahApps.Metro.IconPacks;
 using Prism.Mvvm;
 using System;
@@ -23,43 +23,43 @@ namespace CP77Tools.UI.ViewModels
                 Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Tool },
                 Label = "Tools",
                 NavigationType = typeof(Tools),
-                NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
+                NavigationDestination = new Uri("Views/Pages/ToolsPage.xaml", UriKind.RelativeOrAbsolute)
             });
-            this.Menu.Add(new MenuItem()
-            {
-                Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Database },
-                Label = "Modding Databank",
-                NavigationType = typeof(Tools),
-                NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
-            });
-            this.Menu.Add(new MenuItem()
-            {
-                Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Database },
-                Label = "Modding Databank",
-                NavigationType = typeof(Tools),
-                NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
-            });
-            this.Menu.Add(new MenuItem()
-            {
-                Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Database },
-                Label = "Modding Databank",
-                NavigationType = typeof(Tools),
-                NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
-            });
+            //this.Menu.Add(new MenuItem()
+            //{
+            //    Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Database },
+            //    Label = "Modding Databank",
+            //    NavigationType = typeof(Tools),
+            //    NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
+            //});
+            //this.Menu.Add(new MenuItem()
+            //{
+            //    Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Database },
+            //    Label = "Modding Databank",
+            //    NavigationType = typeof(Tools),
+            //    NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
+            //});
+            //this.Menu.Add(new MenuItem()
+            //{
+            //    Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Database },
+            //    Label = "Modding Databank",
+            //    NavigationType = typeof(Tools),
+            //    NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
+            //});
 
             this.OptionsMenu.Add(new MenuItem()
             {
                 Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Settings },
                 Label = "Settings",
                 NavigationType = typeof(Tools),
-                NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
+                NavigationDestination = new Uri("Views/Pages/SettingsPage.xaml", UriKind.RelativeOrAbsolute)
             });
             this.OptionsMenu.Add(new MenuItem()
             {
                 Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Info },
                 Label = "About",
                 NavigationType = typeof(Tools),
-                //   NavigationDestination = new Uri("Views/AboutPage.xaml", UriKind.RelativeOrAbsolute)
+                NavigationDestination = new Uri("Views/Pages/AboutPage.xaml", UriKind.RelativeOrAbsolute)
             });
         }
 

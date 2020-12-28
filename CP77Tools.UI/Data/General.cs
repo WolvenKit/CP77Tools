@@ -12,14 +12,35 @@ namespace CP77Tools.UI.Data
     public class General
     {
 
-   
 
 
-        
+       
+        public class Preset
+        {
+            internal string name;
+            internal Dictionary<string,string> Pdata;
+            public General.TaskType Type { get; set; }
+            public string Name { get; set; }
+            public Dictionary<string, string> PresetData { get; set; }
+
+            public Preset(General.TaskType taskType, string _name, Dictionary<string, string> data)
+            {
+                Type = taskType;
+                Name = _name;
+                name = _name;
+                PresetData = data;
+                Pdata = data;
+            }
+
+        }
+
+
+  
+
         public enum TaskType { Archive, Dump, CR2W, Hash, Oodle, Repack, }
 
         // OTHER
-        public string[] OMD_Output;
+        public static string[] OMD_Output;
 
 
         public enum OMD_Type        {            Single,            Multi        }

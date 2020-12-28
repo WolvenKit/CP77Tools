@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,8 @@ using ControlzEx.Theming;
 using CP77Tools.UI.Data;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Views;
+using CP77Tools.UI.Views.Pages;
+using CP77Tools.UI.Views.Tabs.Archive;
 using MahApps.Metro.Controls;
 using Color = System.Windows.Media.Color;
 
@@ -32,27 +35,34 @@ namespace CP77Tools.UI.Functionality.Customs
     public partial class OMD : MetroWindow
     {
 
+
+
+        public General.OMD_Type OMD_CurrentOMDType;  // Multi Or Single
+        public CustomTab ArchiveCustomTab;
+        public DumpTab ArchiveDumpTab;
+
+
+
+
+
         public enum ForF { File, Folder }
-                private void UIFunc_DragWindow(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
-                public Color ForeGroundTextColor = (Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFE5D90C");
-                private ArchiveData DataReference;
-                private General.TaskType CurrentTaskType;
-                private SUI sui;
+        private void UIFunc_DragWindow(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
+        public Color ForeGroundTextColor = (Color)System.Windows.Media.ColorConverter.ConvertFromString("#FFE5D90C");
+        private General.TaskType CurrentTaskType;
+        private SUI sui;
+        private bool OutputSelector;
+        private CustomTab tools;
+        private General.OMD_Type CurrentOMDType;
 
-                private Tools tools;
-                private General.OMD_Type CurrentOMDType;
-
-        public OMD(Tools _tools,SUI _sui, General.TaskType taskType, General.OMD_Type _OMD_Type)
+        public OMD(General.OMD_Type _OMD_Type, bool _OutputSelector)
         {
-            tools = _tools;
-            sui = _sui; 
-            CurrentTaskType = taskType;
-            DataReference = sui.archivedata;
+            
+
             CurrentOMDType = _OMD_Type;
+            OutputSelector = _OutputSelector;
             InitializeComponent();
             InitializeFileSystemObjects();
             ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
-
         }
 
 
@@ -73,8 +83,8 @@ namespace CP77Tools.UI.Functionality.Customs
         private void OMD_FileTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var q = OMD_FileTreeView.SelectedItem as FileSystemObjectInfo;
-                        if (CurrentOMDType == Data.General.OMD_Type.Multi) { OMD_ListboxSelected.Items.Add(q.FileSystemInfo.FullName);}
-                        else if (CurrentOMDType == Data.General.OMD_Type.Single) { OMD_ListboxSelected.Items.Clear(); OMD_ListboxSelected.Items.Add(q.FileSystemInfo.FullName); }
+            if (CurrentOMDType == General.OMD_Type.Multi) { OMD_ListboxSelected.Items.Add(q.FileSystemInfo.FullName); }
+            else if (CurrentOMDType == General.OMD_Type.Single) { OMD_ListboxSelected.Items.Clear(); OMD_ListboxSelected.Items.Add(q.FileSystemInfo.FullName); }
         }
 
         private void OMD_ListboxSelected_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -84,47 +94,81 @@ namespace CP77Tools.UI.Functionality.Customs
 
         private void OMD_ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            
+           
                 string[] clist = OMD_ListboxSelected.Items.OfType<string>().ToArray();
                 var d = clist.Distinct().ToArray();
-                switch (CurrentTaskType)
+                General.OMD_Output = d;
+
+            foreach (string a in d)
+            {
+                Trace.Write(a);
+            }
+
+            switch (CurrentTaskType)
                 {
                     case General.TaskType.Archive:
-                        DataReference.Archive_Path = d;
-                        tools.ArchiveSelectedInputConceptDropDown.Items.Clear();
-                        tools.ArchiveSelectedInputConceptDropDown.ItemsSource = d.ToList();
-                        break;
-                    //case MainWindow.TaskType.CR2W:
-                    //    DataReference.CR2W_Path = d;
-                    //    //     app.CR2W_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-                    //    app.CR2W_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-                    //    app.CR2W_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-                    //    break;
-                    //case MainWindow.TaskType.Dump:
-                    //    DataReference.Dump_Path = d;
-                    //    //         app.Dump_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-                    //    app.Dump_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-                    //    app.Dump_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-                    //    break;
-                    //case MainWindow.TaskType.Hash:
-                    //    break;
-                    //case MainWindow.TaskType.Oodle:
-                    //    DataReference.Oodle_Path = d;
-                    //    //      app.Oodle_PathIndicator_Selected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-                    //    app.Oodle_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-                    //    app.Oodle_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-                    //    break;
-                    //case MainWindow.TaskType.Repack:
-                    //    DataReference.Repack_Path = d;
-                    //    //       app.Repack_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-                    //    app.Repack_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-                    //    app.Repack_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-                    //    break;
+                    if (OutputSelector)
+                    {
+                        SUI.sui.archivedata.Archive_OutPath = d[0];
+                        ArchiveCustomTab.ChangeCollectionData("Selected Outpath", d[0]);
+
+
+                    }
+                    else
+                    {
+                        string newzz = "";
+                        foreach (string a in d)
+                        {
+                            newzz += a;
+                            Trace.Write(a);
+                            
+                            ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Add((string)a);
+                        }
+
+                        ArchiveData.ArchiveConceptTaskDict.Add("Selected Input", newzz);
+                        ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = null;
+                        ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = ArchiveData.ArchiveConceptTaskDict;
+
+                       // ArchiveCustomTab.ArchiveTaskConceptGrid.Items.Add();
+                      //  ArchiveCustomTab.ArchiveInputLabel.Content = d[0];
+                     //   ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+              
+                       // ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+
+                    }
+
+                    break;
+                        //case MainWindow.TaskType.CR2W:
+                        //    DataReference.CR2W_Path = d;
+                        //    //     app.CR2W_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                        //    app.CR2W_SelectedDropdown_UIElement_ComboBox.Items.Clear();
+                        //    app.CR2W_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
+                        //    break;
+                        //case MainWindow.TaskType.Dump:
+                        //    DataReference.Dump_Path = d;
+                        //    //         app.Dump_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                        //    app.Dump_SelectedDropdown_UIElement_ComboBox.Items.Clear();
+                        //    app.Dump_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
+                        //    break;
+                        //case MainWindow.TaskType.Hash:
+                        //    break;
+                        //case MainWindow.TaskType.Oodle:
+                        //    DataReference.Oodle_Path = d;
+                        //    //      app.Oodle_PathIndicator_Selected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                        //    app.Oodle_SelectedDropdown_UIElement_ComboBox.Items.Clear();
+                        //    app.Oodle_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
+                        //    break;
+                        //case MainWindow.TaskType.Repack:
+                        //    DataReference.Repack_Path = d;
+                        //    //       app.Repack_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
+                        //    app.Repack_SelectedDropdown_UIElement_ComboBox.Items.Clear();
+                        //    app.Repack_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
+                        //    break;
                 }
                 this.Close();
-            }
-            catch { }
+            
+            
         }
 
         private void OMD_ClearButton_Click(object sender, RoutedEventArgs e)

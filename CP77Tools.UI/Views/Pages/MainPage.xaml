@@ -3,18 +3,27 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CP77Tools.UI.Views"
-      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="CP77Tools.UI.Views.MainPage"
+      xmlns:local="clr-namespace:CP77Tools.UI.Views.Pages"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="CP77Tools.UI.Views.Pages.MainPage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
 
     <Grid>
-        <WrapPanel>
-            <mah:FlipView Margin="10,170,395,10" MouseHoverBorderBrush="{x:Null}" Foreground="{DynamicResource MahApps.Brushes.Text}" BannerText="Latest Update : Version 0.5.4-Beta"/>
+
+        <mah:FlipView MouseHoverBorderBrush="{x:Null}" Foreground="{DynamicResource MahApps.Brushes.Text}" BannerText="Latest Update : Version 0.5.4-Beta" Margin="10,10,390,4">
+            <Image Source="/Resources/Cyberpunk-2077-Jun-25th-Screenshots-9-2060x1159.jpg" Stretch="Fill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        </mah:FlipView>
+        <TextBlock x:Name="MainUpdateInfoTextBlock" Text="Update : Version 0.5.4-Beta" TextWrapping="Wrap" Margin="0,15,10,180" MinWidth="375" MinHeight="240" HorizontalAlignment="Right" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Grid Margin="0,0,10,8" VerticalAlignment="Bottom" Height="165" HorizontalAlignment="Right" Width="375">
+            <Button Content="Visit the Github page for this Project" VerticalAlignment="Top" Height="40"/>
+            <Button Content="Visit the CP77 Modding Discord" VerticalAlignment="Center" Height="40"/>
+            <Button Content="Visit the CDPR Modding Community Discord" Margin="0,125,0,0" VerticalAlignment="Top" Height="40"/>
+
+        </Grid>
 
 
-        </WrapPanel>
+
 
 
 

@@ -13,10 +13,67 @@
     <Compile Update="SUI.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\AboutPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Pages\SettingsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Archive\CustomTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Archive\DumpTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Archive\ExtractSingleTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Archive\ExtractTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Archive\ListTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Archive\UncookTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\CR2W\AllInfoTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\CR2W\ClassInfoTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\CR2W\CustomTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Dump\ClassInfoTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Dump\CustomTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Dump\ImportsTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Dump\MissingHashesTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Dump\XbmInfoTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Oodle\DecompressTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Repack\RepackTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tasks\TaskTemplate.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\MainPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Pages\Tools.xaml.cs">
+    <Compile Update="Views\Pages\ToolsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -27,10 +84,67 @@
     <Page Update="SUI.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Pages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Archive\CustomTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Archive\DumpTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Archive\ExtractSingleTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Archive\ExtractTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Archive\ListTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Archive\UncookTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\CR2W\AllInfoTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\CR2W\ClassInfoTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\CR2W\CustomTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Dump\ClassInfoTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Dump\CustomTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Dump\ImportsTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Dump\MissingHashesTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Dump\XbmInfoTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Oodle\DecompressTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Repack\RepackTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tasks\TaskTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Pages\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Pages\Tools.xaml">
+    <Page Update="Views\Pages\ToolsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

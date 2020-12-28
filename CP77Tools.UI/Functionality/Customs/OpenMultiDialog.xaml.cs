@@ -74,48 +74,7 @@
 //        private void OMD_ClearSelected_Click(object sender, RoutedEventArgs e) { OMD_SelectedListBox.Items.Clear(); }
 //        private void OMD_ConfirmSelected_Click(object sender, RoutedEventArgs e)
 //        {
-//            try
-//            {
-//                string[] clist = OMD_SelectedListBox.Items.OfType<string>().ToArray();
-//                var d = clist.Distinct().ToArray();
-//                switch (CurrentTaskType)
-//                {
-//                    case MainWindow.TaskType.Archive:
-//                     //   DataReference.Archive_Path = d;
-//                  //      app.Archive_PathIndicator_Selected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-//                        app.Archive_SelectedFilesDropDown_UIElement_ComboBox.Items.Clear();
-//                        app.Archive_SelectedFilesDropDown_UIElement_ComboBox.ItemsSource = d.ToList();
-//                        break;
-//                    case MainWindow.TaskType.CR2W:
-//                        DataReference.CR2W_Path = d;
-//                   //     app.CR2W_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-//                        app.CR2W_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-//                        app.CR2W_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-//                        break;
-//                    case MainWindow.TaskType.Dump:
-//                        DataReference.Dump_Path = d;
-//               //         app.Dump_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-//                        app.Dump_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-//                        app.Dump_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-//                        break;
-//                    case MainWindow.TaskType.Hash:
-//                        break;
-//                    case MainWindow.TaskType.Oodle:
-//                        DataReference.Oodle_Path = d;
-//                  //      app.Oodle_PathIndicator_Selected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-//                        app.Oodle_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-//                        app.Oodle_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-//                        break;
-//                    case MainWindow.TaskType.Repack:
-//                        DataReference.Repack_Path = d;
-//                 //       app.Repack_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-//                        app.Repack_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-//                        app.Repack_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-//                        break;
-//                }
-//                this.Close();
-//            }
-//            catch { }
+//            
 //        }
 
 //        private void OMD_Minimize_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { this.WindowState = WindowState.Minimized; }

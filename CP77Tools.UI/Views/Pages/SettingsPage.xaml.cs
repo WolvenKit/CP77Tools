@@ -17,24 +17,15 @@ using System.Windows.Shapes;
 namespace CP77Tools.UI.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    /// Interaction logic for SettingsPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class SettingsPage : Page
     {
-        public MainPage()
+        public SettingsPage()
         {
             InitializeComponent();
             ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
-            MainUpdateInfoTextBlock.Text = "Update: Version 0.5.4 - Beta\n" +
-                "\n" +
-                "- Archive Tasks work now.\n" +
-                "- Preset Preparation.\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "\n";
+
         }
     }
 }

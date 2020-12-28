@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using WolvenKit.Common.Services;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Views;
+using CP77Tools.UI.Views.Pages;
 
 namespace CP77Tools.UI
 {

@@ -55,7 +55,6 @@ namespace CP77Tools.UI
         public Data.General data;
         public string[] InputFileTypes = { "Archives (*.archive)|*.archive" };
 
-        public enum TaskType { Archive, Dump, CR2W, Hash, Oodle, Repack, }
 
         public Color ForeGroundTextColor = (Color)ColorConverter.ConvertFromString("#FFE5D90C");
 
