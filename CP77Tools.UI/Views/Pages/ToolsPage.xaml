@@ -11,7 +11,7 @@
 
       x:Class="CP77Tools.UI.Views.Pages.Tools"
       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
-      xmlns:ucRepack="clr-namespace:CP77Tools.UI.Views.Tabs.Repack" xmlns:ucDump="clr-namespace:CP77Tools.UI.Views.Tabs.Dump" xmlns:ucHash="clr-namespace:CP77Tools.UI.Views.Tabs.Hash" xmlns:ucOodle="clr-namespace:CP77Tools.UI.Views.Tabs.Oodle"
+      xmlns:ucRepack="clr-namespace:CP77Tools.UI.Views.Tabs.Repack" xmlns:ucDump="clr-namespace:CP77Tools.UI.Views.Tabs.Dump" xmlns:ucHash="clr-namespace:CP77Tools.UI.Views.Tabs.Hash" xmlns:ucOodle="clr-namespace:CP77Tools.UI.Views.Tabs.Oodle" xmlns:ucLogs="clr-namespace:CP77Tools.UI.Views.Tabs.Logs"
     Style="{DynamicResource PageStyle}"
 
       mc:Ignorable="d" 
@@ -26,6 +26,7 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
+
 
         <mah:MetroTabControl x:Name="ToolsTab" Background="{DynamicResource MahApps.Brushes.Badged.Foreground.Disabled}"             >
             <TabItem Header="Archive">
@@ -75,10 +76,10 @@
                                     <TabItem Header="Class Information">
                                         <ucCR2W:ClassInfoTab/>
                                     </TabItem>
-                            
+
                                 </controls:MetroTabControl>
                             </Grid>
-                        </TabItem>             
+                        </TabItem>
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
@@ -90,12 +91,12 @@
                                 <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy2" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
                                     <TabItem Header="Repack">
                                         <ucRepack:RepackTab/>
-                                    </TabItem>                    
+                                    </TabItem>
                                 </controls:MetroTabControl>
                             </Grid>
 
                         </TabItem>
-            
+
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
@@ -123,7 +124,7 @@
 
                                 </controls:MetroTabControl>
                             </Grid>
-                        </TabItem>        
+                        </TabItem>
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
@@ -136,11 +137,11 @@
                                     <TabItem Header="Hashes">
                                         <ucHash:HashTab/>
                                     </TabItem>
-                              
-                 
+
+
                                 </controls:MetroTabControl>
                             </Grid>
-                        </TabItem>                       
+                        </TabItem>
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
@@ -153,10 +154,10 @@
                                     <TabItem Header="Decompress">
                                         <ucOodle:DecompressTab/>
                                     </TabItem>
-                                   
+
                                 </controls:MetroTabControl>
                             </Grid>
-                        </TabItem>                   
+                        </TabItem>
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
@@ -165,5 +166,15 @@
                                        Margin="0,10,10,424"
                                        Foreground="{DynamicResource MahApps.Brushes.AccentBase}"
                                        Kind="Tool" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <iconPacks:PackIconFeatherIcons Width="42"
+                                       Margin="0,0,5,4"
+                                       Foreground="{DynamicResource MahApps.Brushes.AccentBase}"
+                                       Kind="ArrowLeftCircle"  HorizontalAlignment="Right" MouseDown="PackIconFeatherIcons_MouseDown" Height="40" VerticalAlignment="Bottom" />
+        <mah:FlyoutsControl HorizontalAlignment="Right" >
+            <mah:Flyout x:Name="ToolsLogFlyOut" IsOpen="True" Header="Tools Log" Position="Right" IsOpenChanged="ToolsLogFlyOut_IsOpenChanged" Margin="800,0,0,0" HorizontalAlignment="Left" Width="300">
+                <ucLogs:ToolLogFlyout Width="295"/>
+            </mah:Flyout>
+        </mah:FlyoutsControl>
+        <Label x:Name="LogsLabel" Content="Logs" HorizontalAlignment="Right" Margin="0,0,52,9" VerticalAlignment="Bottom" Height="30" FontWeight="Bold"/>
     </Grid>
 </Page>

@@ -64,6 +64,12 @@
     <Compile Update="Views\Tabs\Hash\HashTab.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Tabs\Logs\LogItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs\Logs\ToolLogFlyout.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Tabs\Oodle\DecompressTab.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -136,6 +142,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Tabs\Hash\HashTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Logs\LogItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs\Logs\ToolLogFlyout.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Tabs\Oodle\DecompressTab.xaml">

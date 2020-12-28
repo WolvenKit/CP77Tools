@@ -4,22 +4,47 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CP77Tools.UI.Views.Pages"
-      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:ucTest="clr-namespace:CP77Tools.UI.Views.Tabs.Dump" x:Class="CP77Tools.UI.Views.Pages.AboutPage"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:ucTest="clr-namespace:CP77Tools.UI.Views.Tabs.Dump" 
+    x:Class="CP77Tools.UI.Views.Pages.AboutPage"
       mc:Ignorable="d" 
      d:DesignHeight="700" d:DesignWidth="1100"      Title="AboutPage">
 
     <Grid>
-        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
+        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}" Margin="0,20,0,-20">
 
             <Label Content="About" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <Separator Margin="0,30,0,0" VerticalAlignment="Top" Height="15"/>
-            <Image HorizontalAlignment="Right" Height="86" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="232" Source="/Resources/Logo.png"/>
+            <Image HorizontalAlignment="Right" Height="86" Margin="0,0,25,25" VerticalAlignment="Bottom" Width="232" Source="/Resources/Logo.png"/>
 
 
-          
+
+
 
 
         </Grid>
+        <Separator  Margin="145,75,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Credits" HorizontalAlignment="Left" Margin="49,225,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="91" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <Separator  Margin="145,150,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="CP77Tools Version" HorizontalAlignment="Left" Margin="24,150,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="116" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <Separator  Margin="145,225,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="UI Standalone Version" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="140" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <Label Content="CP77Tools Functionality By Rfuzzo | UI by R503B(Offline)" HorizontalAlignment="Left" Margin="151,225,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="40" Width="309" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="Preview - 0.1.4.0 Hotfix 3" HorizontalAlignment="Left" Margin="151,150,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="40" Width="279" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="0.5.4-Beta" HorizontalAlignment="Left" Margin="151,75,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="40" Width="279" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="About this Tool" HorizontalAlignment="Left" Margin="15,310,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="290" Width="125" HorizontalContentAlignment="Right" VerticalContentAlignment="Top"/>
+        <Separator  Margin="145,300,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="290" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="This tool is a set of tools to help with modding Cyberpunk 2077." HorizontalAlignment="Left" Margin="151,305,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="30" Width="359" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="This tool requires oo2ext_7_win64.dll to work. " HorizontalAlignment="Left" Margin="151,335,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="30" Width="559" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="Copy and paste the dll into the application folder." HorizontalAlignment="Left" Margin="151,395,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="30" Width="359" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+
+        <Label Content="It can be found here: Cyberpunk 2077\bin\x64\oo2ext_7_win64.dll" HorizontalAlignment="Left" Margin="151,365,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="30" Width="369" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="Latest Release on Github : " HorizontalAlignment="Left" Margin="151,470,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="40" Width="149" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="Community Discord : " HorizontalAlignment="Left" Margin="151,515,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="40" Width="124" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="Modding Tools Discord : " HorizontalAlignment="Left" Margin="151,560,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="40" Width="139" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <TextBlock x:Name="Githublink" Text="https://github.com/WolvenKit/CP77Tools/tree/ui-standalone" HorizontalAlignment="Left" Margin="300,482,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="15" Width="330"  MouseLeftButtonDown="Githublink_MouseLeftButtonDown" Foreground="{DynamicResource MahApps.Brushes.SystemControlHyperlinkText}" MouseEnter="Githublink_MouseEnter" TextAlignment="Justify" MouseLeave="Githublink_MouseLeave"></TextBlock>
+        <TextBlock x:Name="CommunityLink" Text="https://discord.gg/USZwxxFrKa" HorizontalAlignment="Left" Margin="275,527,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="15" Width="184"  MouseLeftButtonDown="CommunityLink_MouseLeftButtonDown"  Foreground="{DynamicResource MahApps.Brushes.SystemControlHyperlinkText}" TextAlignment="Justify" MouseEnter="CommunityLink_MouseEnter" MouseLeave="CommunityLink_MouseLeave"></TextBlock>
+        <TextBlock x:Name="ModdingToolsDiscordLink" Text="https://discord.gg/Epkq79kd96" HorizontalAlignment="Left" Margin="290,572,0,0" VerticalAlignment="Top" FontWeight="Normal" Height="15" Width="175" MouseLeftButtonDown="ModdingToolsDiscordLink_MouseLeftButtonDown"  Foreground="{DynamicResource MahApps.Brushes.SystemControlHyperlinkText}" TextAlignment="Justify" MouseEnter="ModdingToolsDiscordLink_MouseEnter" MouseLeave="ModdingToolsDiscordLink_MouseLeave"></TextBlock>
+
 
     </Grid>
 </Page>

@@ -103,6 +103,25 @@ namespace CP77Tools.UI.Views.Pages
         {
       
         }
+
+        private void PackIconFeatherIcons_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ToolsLogFlyOut.IsOpen = true;
+        }
+
+        private void ToolsLogFlyOut_IsOpenChanged(object sender, RoutedEventArgs e)
+        {
+            if (ToolsLogFlyOut.IsOpen)
+            {
+                LogsLabel.Visibility = Visibility.Hidden;
+
+            }
+            else
+            {
+                LogsLabel.Visibility = Visibility.Visible;
+
+            }
+        }
     }
 
 
