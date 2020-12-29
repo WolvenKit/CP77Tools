@@ -29,7 +29,8 @@ namespace CP77Tools.UI.Views.Tabs.Dump
     {
         public MissingHashesTab()
         {
-            InitializeComponent();
+            InitializeComponent(); SUI.sui.dumpdata.Dump_MissingHashes = true;
+
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)
         {

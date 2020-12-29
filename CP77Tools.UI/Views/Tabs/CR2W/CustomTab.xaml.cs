@@ -29,6 +29,7 @@ namespace CP77Tools.UI.Views.Tabs.CR2W
         public CustomTab()
         {
             InitializeComponent();
+
         }
 
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)

@@ -30,6 +30,7 @@ namespace CP77Tools.UI.Views.Tabs.Dump
         public CustomTab()
         {
             InitializeComponent();
+
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)
         {

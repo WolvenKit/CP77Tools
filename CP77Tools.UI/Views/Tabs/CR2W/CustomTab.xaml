@@ -17,9 +17,9 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button x:Name="ArchiveSelectInputButton" Content="Select Input" Margin="5,19,0,0" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" />
+            <Button x:Name="ArchiveSelectInputButton" Content="Select Input" Margin="5,19,0,0" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Click="ArchiveSelectInputButton_Click" />
 
-            <Button x:Name="ArchiveSelectOutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" />
+            <Button x:Name="ArchiveSelectOutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" Click="ArchiveSelectOutpathButton_Click" />
 
 
 
@@ -30,7 +30,7 @@
             <Grid Margin="149,101,1,0" VerticalAlignment="Top">
 
                 <controls:ToggleSwitch x:Name="ArchiveExtractSwitch" Header="All Info" Height="70" Width="100" Margin="5,5,0,0" Canvas.Left="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Toggled="ArchiveExtractSwitch_Toggled" />
-                <controls:ToggleSwitch x:Name="ArchiveDumpSwitch" Header="Class Info" Height="70" Width="100" Margin="98,5,0,0" Canvas.Left="20" VerticalAlignment="Top" FontSize="14" Toggled="ArchiveDumpSwitch_Toggled" />
+                <controls:ToggleSwitch x:Name="cr2wclassinfoswitch" Header="Class Info" Height="70" Width="100" Margin="98,5,0,0" Canvas.Left="20" VerticalAlignment="Top" FontSize="14" Toggled="ArchiveDumpSwitch_Toggled" />
             </Grid>
             <Label Content="General Options" HorizontalAlignment="Left" Margin="6,125,0,0" VerticalAlignment="Top" FontWeight="Bold" HorizontalContentAlignment="Right" Width="134" VerticalContentAlignment="Center" Height="40"/>
             <Separator HorizontalAlignment="Stretch" Margin="0,77,0,0" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.5,0.5" MinWidth="550">
@@ -99,7 +99,7 @@
             </Separator>
             <Label Content="Selected Input" HorizontalAlignment="Left" Margin="49,200,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="91" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <ComboBox x:Name="ArchiveSelectedInputConceptDropDown1" Margin="160,207,10,0" VerticalAlignment="Top" IsReadOnly="False" StaysOpenOnEdit="True" SelectedIndex="0"/>
-            <Button x:Name="ArchiveLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="159,282,10,0"/>
+            <Button x:Name="ArchiveLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="159,282,10,0" Click="ArchiveLaunchTaskButton_Click"/>
 
 
 

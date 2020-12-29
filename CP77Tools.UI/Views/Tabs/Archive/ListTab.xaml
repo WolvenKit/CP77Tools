@@ -17,7 +17,7 @@
 
             <Button x:Name="SelectInputButton" Content="Select Input" Margin="5,19,0,0" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" />
 
-            <Button x:Name="SelectOutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" />
+            <Button x:Name="SelectOutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" Click="ArchiveSelectOutpathButton_Click" />
 
 
 

@@ -16,9 +16,9 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button x:Name="ArchiveSelectInputButton" Content="Select Input" Margin="5,19,0,0" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" />
+            <Button x:Name="ArchiveSelectInputButton" Content="Select Input" Margin="5,19,0,0" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Click="ArchiveSelectInputButton_Click" />
 
-            <Button x:Name="ArchiveSelectOutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" />
+            <Button x:Name="ArchiveSelectOutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" Click="ArchiveSelectOutpathButton_Click" />
 
 
 
@@ -28,10 +28,10 @@
             <Label x:Name="ArchiveInputLabel" Content="None Selected" Margin="104,19,0,0" Height="27" VerticalAlignment="Top" Background="{x:Null}" MinWidth="350" BorderBrush="White"/>
             <Grid Margin="149,101,1,0" VerticalAlignment="Top">
 
-                <mah:ToggleSwitch x:Name="ArchiveExtractSwitch" Header="Imports" Height="70" Width="100" Margin="5,5,0,0" Canvas.Left="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" />
-                <mah:ToggleSwitch x:Name="ArchiveDumpSwitch" Header="XBM Info" Height="70" Width="100" Margin="98,5,0,0" Canvas.Left="20" VerticalAlignment="Top" FontSize="14" />
-                <mah:ToggleSwitch x:Name="ArchiveListSwitch" Header="Class Info" Height="70" Width="100" Canvas.Left="340" Canvas.Top="5" Margin="199,5,0,0" VerticalAlignment="Top" FontSize="14" />
-                <mah:ToggleSwitch x:Name="ArchiveUncookSwitch" Header="Missing Hashes" Height="70" Width="100" Canvas.Left="235" Canvas.Top="5" Margin="301,5,0,0" VerticalAlignment="Top" FontSize="14" />
+                <mah:ToggleSwitch x:Name="ImportsSwitch" Header="Imports" Height="70" Width="100" Margin="5,5,0,0" Canvas.Left="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Toggled="ArchiveDumpSwitch_Toggled" />
+                <mah:ToggleSwitch x:Name="XBMSwitch" Header="XBM Info" Height="70" Width="100" Margin="98,5,0,0" Canvas.Left="20" VerticalAlignment="Top" FontSize="14" Toggled="ArchiveDumpSwitch_Toggled2" />
+                <mah:ToggleSwitch x:Name="ClassSwitch" Header="Class Info" Height="70" Width="100" Canvas.Left="340" Canvas.Top="5" Margin="199,5,0,0" VerticalAlignment="Top" FontSize="14" Toggled="ArchiveExtractSwitch_Toggled" />
+                <mah:ToggleSwitch x:Name="MissingSwitch" Header="Missing Hashes" Height="70" Width="100" Canvas.Left="235" Canvas.Top="5" Margin="301,5,0,0" VerticalAlignment="Top" FontSize="14" Toggled="ArchiveExtractSwitch_Toggled2" />
             </Grid>
             <Label Content="General Options" HorizontalAlignment="Left" Margin="6,125,0,0" VerticalAlignment="Top" FontWeight="Bold" HorizontalContentAlignment="Right" Width="134" VerticalContentAlignment="Center" Height="40"/>
             <Separator HorizontalAlignment="Stretch" Margin="0,77,0,0" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.5,0.5" MinWidth="550">
@@ -100,7 +100,7 @@
             </Separator>
             <Label Content="Selected Input" HorizontalAlignment="Left" Margin="49,200,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="91" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <ComboBox x:Name="ArchiveSelectedInputConceptDropDown1" Margin="160,207,10,0" VerticalAlignment="Top" IsReadOnly="False" StaysOpenOnEdit="True" SelectedIndex="0"/>
-            <Button x:Name="ArchiveLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="159,282,10,0"/>
+            <Button x:Name="ArchiveLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="159,282,10,0" Click="ArchiveLaunchTaskButton_Click"/>
 
 
 

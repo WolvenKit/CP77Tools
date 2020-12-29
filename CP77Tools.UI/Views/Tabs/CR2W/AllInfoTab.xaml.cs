@@ -28,6 +28,7 @@ namespace CP77Tools.UI.Views.Tabs.CR2W
         public AllInfoTab()
         {
             InitializeComponent();
+            SUI.sui.cr2wdata.CR2W_All = true;
         }
 
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)

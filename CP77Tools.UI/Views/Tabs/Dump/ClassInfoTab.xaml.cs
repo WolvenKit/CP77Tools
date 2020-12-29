@@ -30,6 +30,7 @@ namespace CP77Tools.UI.Views.Tabs.Dump
         public ClassInfoTab()
         {
             InitializeComponent();
+            SUI.sui.dumpdata.Dump_ClassInfo = true;
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)
         {

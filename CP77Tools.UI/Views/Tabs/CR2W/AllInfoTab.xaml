@@ -16,9 +16,9 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button x:Name="ArchiveSelectInputButton" Content="Select Input" Margin="5,19,0,0" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" />
+            <Button x:Name="ArchiveSelectInputButton" Content="Select Input" Margin="5,19,0,0" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Click="ArchiveSelectInputButton_Click" />
 
-            <Button x:Name="ArchiveSelectOutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" />
+            <Button x:Name="ArchiveSelectOutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" Click="ArchiveSelectOutpathButton_Click" />
 
 
 
@@ -81,7 +81,7 @@
             </Separator>
             <Label Content="Selected Input" HorizontalAlignment="Left" Margin="48,125,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="91" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <ComboBox x:Name="ArchiveSelectedInputConceptDropDown1" Margin="160,132,10,0" VerticalAlignment="Top" IsReadOnly="False" StaysOpenOnEdit="True" SelectedIndex="0"/>
-            <Button x:Name="ArchiveLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="159,207,10,0"/>
+            <Button x:Name="ArchiveLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="159,207,10,0" Click="ArchiveLaunchTaskButton_Click"/>
 
 
 

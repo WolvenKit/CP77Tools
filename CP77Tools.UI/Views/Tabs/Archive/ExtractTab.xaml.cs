@@ -32,6 +32,8 @@ namespace CP77Tools.UI.Views.Tabs.Archive
             {
                 return;
             }
+            SUI.sui.archivedata.Archive_Extract = true;
+
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)
         {

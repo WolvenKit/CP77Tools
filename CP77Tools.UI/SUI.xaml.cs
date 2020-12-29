@@ -10,10 +10,10 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
-using WolvenKit.Common.Services;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Views;
 using CP77Tools.UI.Views.Pages;
+using CP77.CR2W.Resources;
 
 namespace CP77Tools.UI
 {
@@ -53,9 +53,10 @@ namespace CP77Tools.UI
             this.navigationServiceEx = new NavigationServiceEx();
             this.navigationServiceEx.Navigated += this.NavigationServiceEx_OnNavigated;
             this.HamburgerMenuControl.Content = this.navigationServiceEx.Frame;
-            ServiceLocator.Default.RegisterType<IAppSettingsService, AppSettingsService>();
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
             ServiceLocator.Default.RegisterType<IHashService, HashService>();
+            ServiceLocator.Default.RegisterType<IAppSettingsService, AppSettingsService>();
+
             UI_Logger = ServiceLocator.Default.ResolveType<ILoggerService>();
             var hashService = ServiceLocator.Default.ResolveType<IHashService>();
             hashService.ReloadLocally();

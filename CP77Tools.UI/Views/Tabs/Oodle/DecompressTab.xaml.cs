@@ -30,6 +30,8 @@ namespace CP77Tools.UI.Views.Tabs.Oodle
         public DecompressTab()
         {
             InitializeComponent();
+            SUI.sui.oodledata.Oodle_Decompress = true;
+
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)
         {

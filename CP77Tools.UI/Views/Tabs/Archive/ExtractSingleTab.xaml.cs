@@ -32,6 +32,7 @@ namespace CP77Tools.UI.Views.Tabs.Archive
             {
                 return;
             }
+
         }
 
         private void HashTextBox_TextChanged(object sender, TextChangedEventArgs e)

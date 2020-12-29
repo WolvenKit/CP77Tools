@@ -28,6 +28,8 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         public UncookTab()
         {
             InitializeComponent();
+            SUI.sui.archivedata.Archive_Uncook = true;
+
         }
 
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)

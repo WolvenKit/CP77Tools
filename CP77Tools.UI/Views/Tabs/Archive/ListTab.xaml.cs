@@ -28,6 +28,8 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         public ListTab()
         {
             InitializeComponent();
+            SUI.sui.archivedata.Archive_List = true;
+
         }
 
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)

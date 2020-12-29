@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using WolvenKit.Common.Services;
 using CP77Tools.UI;
 using System.Text.RegularExpressions;
 using CP77Tools.UI.Data;
+using CP77.Common.Services;
 
 namespace CP77Tools.UI.Functionality
 {
