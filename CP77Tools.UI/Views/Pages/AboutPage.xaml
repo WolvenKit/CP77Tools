@@ -14,7 +14,7 @@
 
             <Label Content="About" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <Separator Margin="0,30,0,0" VerticalAlignment="Top" Height="15"/>
-            <Image HorizontalAlignment="Right" Height="86" Margin="0,0,25,25" VerticalAlignment="Bottom" Width="232" Source="/Resources/Logo.png"/>
+            <Image HorizontalAlignment="Right" Height="214" Margin="0,0,25,25" VerticalAlignment="Bottom" Width="577" Source="/Resources/TestLogo.png"/>
 
 
 

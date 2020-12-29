@@ -29,8 +29,8 @@
             <Label x:Name="ArchiveInputLabel" Content="None Selected" Margin="104,19,0,0" Height="27" VerticalAlignment="Top" Background="{x:Null}" MinWidth="350" BorderBrush="White"/>
             <Grid Margin="149,101,1,0" VerticalAlignment="Top">
 
-                <controls:ToggleSwitch x:Name="ArchiveExtractSwitch" Header="All Info" Height="70" Width="100" Margin="5,5,0,0" Canvas.Left="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" />
-                <controls:ToggleSwitch x:Name="ArchiveDumpSwitch" Header="Class Info" Height="70" Width="100" Margin="98,5,0,0" Canvas.Left="20" VerticalAlignment="Top" FontSize="14" />
+                <controls:ToggleSwitch x:Name="ArchiveExtractSwitch" Header="All Info" Height="70" Width="100" Margin="5,5,0,0" Canvas.Left="125" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Toggled="ArchiveExtractSwitch_Toggled" />
+                <controls:ToggleSwitch x:Name="ArchiveDumpSwitch" Header="Class Info" Height="70" Width="100" Margin="98,5,0,0" Canvas.Left="20" VerticalAlignment="Top" FontSize="14" Toggled="ArchiveDumpSwitch_Toggled" />
             </Grid>
             <Label Content="General Options" HorizontalAlignment="Left" Margin="6,125,0,0" VerticalAlignment="Top" FontWeight="Bold" HorizontalContentAlignment="Right" Width="134" VerticalContentAlignment="Center" Height="40"/>
             <Separator HorizontalAlignment="Stretch" Margin="0,77,0,0" VerticalAlignment="Top" Height="19" RenderTransformOrigin="0.5,0.5" MinWidth="550">

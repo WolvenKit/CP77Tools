@@ -28,6 +28,10 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         public ExtractSingleTab()
         {
             InitializeComponent();
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
         }
 
         private void HashTextBox_TextChanged(object sender, TextChangedEventArgs e)
