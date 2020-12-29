@@ -7,7 +7,7 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="CP77Tools.UI.Views.Tabs.Logs.ToolLogFlyout"
              mc:Ignorable="d" 
              d:DesignHeight="450" Width="443">
-    <Grid>
+    <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
         <ScrollViewer VerticalScrollBarVisibility="Visible">
 
             <WrapPanel x:Name="LogItemWrapPanel" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" Orientation="Vertical" ScrollViewer.CanContentScroll="True" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Width="419"/>

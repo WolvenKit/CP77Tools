@@ -39,10 +39,12 @@ namespace CP77Tools.UI
         public SUI()
         {
             InitializeComponent();
-            Tools a = new Tools();
-
+            //Tools a = new Tools();
+            generaldata = new General();
          
-            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
+            ThemeManager.Current.ChangeTheme(this, generaldata.ThemeHelper("Dark.Steel"));
+
+
             this.navigationServiceEx = new NavigationServiceEx();
             this.navigationServiceEx.Navigated += this.NavigationServiceEx_OnNavigated;
             this.HamburgerMenuControl.Content = this.navigationServiceEx.Frame;
@@ -52,6 +54,7 @@ namespace CP77Tools.UI
 
 
             sui = this;
+
             archivedata = new ArchiveData();
             log = new Logging(sui);
             ui = new UserInterfaceLogic(sui);

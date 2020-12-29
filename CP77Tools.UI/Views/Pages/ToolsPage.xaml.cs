@@ -34,12 +34,14 @@ namespace CP77Tools.UI.Views.Pages
     {
         private SUI sui;
         private ArchiveData.TaskType selectedTaskType;
-
+        public static int darklight { get; set; }
         public Tools()
         {
             InitializeComponent();
 
-            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+            this.DataContext = this;
+     
 
         }
 
@@ -122,6 +124,8 @@ namespace CP77Tools.UI.Views.Pages
 
             }
         }
+
+
     }
 
 

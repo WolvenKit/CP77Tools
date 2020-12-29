@@ -1,4 +1,5 @@
-﻿using CP77Tools.UI.Data.Tasks;
+﻿using ControlzEx.Theming;
+using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Functionality;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,33 @@ namespace CP77Tools.UI.Data
 
 
 
-       
+        public enum ColorShade
+        {
+            Dark,
+            Light
+        }
+
+        public string[] Colors2 = new string[]
+        {
+            "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna"
+        };
+
+        public string CurrentTheme = "Dark.Steel";
+
+        public string ThemeFinder()
+        {
+            return CurrentTheme;
+        }
+        public string ThemeHelper(string Theme)
+        {
+
+            CurrentTheme = Theme;
+
+            return Theme;
+            
+        }
+
+
         public class Preset
         {
             internal string name;

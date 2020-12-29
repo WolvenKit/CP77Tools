@@ -28,7 +28,7 @@
     <Grid>
 
 
-        <mah:MetroTabControl x:Name="ToolsTab" Background="{DynamicResource MahApps.Brushes.Badged.Foreground.Disabled}"             >
+        <mah:MetroTabControl x:Name="ToolsTab" Background="{DynamicResource MahApps.HamburgerMenu.Pane.Background}" >
             <TabItem Header="Archive">
                 <Grid Background="{DynamicResource MahApps.Brushes.MenuItem.Background}">
                     <mah:MetroTabControl x:Name="ArchiveSubTab">
@@ -170,9 +170,9 @@
                                        Margin="0,0,5,4"
                                        Foreground="{DynamicResource MahApps.Brushes.AccentBase}"
                                        Kind="ArrowLeftCircle"  HorizontalAlignment="Right" MouseDown="PackIconFeatherIcons_MouseDown" Height="40" VerticalAlignment="Bottom" />
-        <mah:FlyoutsControl HorizontalAlignment="Right" >
-            <mah:Flyout x:Name="ToolsLogFlyOut" IsOpen="True" Header="Tools Log" Position="Right" IsOpenChanged="ToolsLogFlyOut_IsOpenChanged" Margin="800,0,0,0" HorizontalAlignment="Left" Width="300">
-                <ucLogs:ToolLogFlyout Width="295"/>
+        <mah:FlyoutsControl HorizontalAlignment="Right" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" >
+            <mah:Flyout Theme="Adapt" x:Name="ToolsLogFlyOut" IsOpen="True" Header="Tools Log" Position="Right" IsOpenChanged="ToolsLogFlyOut_IsOpenChanged" Margin="800,0,0,0" HorizontalAlignment="Left" Width="300" Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                <ucLogs:ToolLogFlyout Width="295" Background="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </mah:Flyout>
         </mah:FlyoutsControl>
         <Label x:Name="LogsLabel" Content="Logs" HorizontalAlignment="Right" Margin="0,0,52,9" VerticalAlignment="Bottom" Height="30" FontWeight="Bold"/>

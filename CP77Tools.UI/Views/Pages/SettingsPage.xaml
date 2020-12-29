@@ -12,8 +12,10 @@
     <Grid>
         <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}" >
             <Label Content="Settings" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <mah:ToggleSwitch Header="Theme" Height="100" Margin="30,50,0,0" VerticalAlignment="Top" Width="100" OffContent="Dark" OnContent="Light"/>
+            <mah:ToggleSwitch x:Name="ThemeDarkLightToggle" Header="Theme" Height="100" Margin="30,50,0,0" VerticalAlignment="Top" Width="100" OffContent="Dark" OnContent="Light" Toggled="ThemeDarkLightToggle_Toggled"/>
             <Separator Margin="0,30,0,0" VerticalAlignment="Top" Height="15"/>
+            <ComboBox x:Name="AccentBox" HorizontalAlignment="Left" Margin="160,74,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="AccentBox_SelectionChanged"/>
+            <Label Content="Accent" HorizontalAlignment="Left" Margin="160,48,0,0" VerticalAlignment="Top" FontSize="14"/>
         </Grid>
 
     </Grid>

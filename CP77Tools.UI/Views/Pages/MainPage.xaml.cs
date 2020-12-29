@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,19 +25,28 @@ namespace CP77Tools.UI.Views.Pages
         public MainPage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
-            MainUpdateInfoTextBlock.Text = "Update: Version 0.5.4 - Beta\n" +
-                "\n" +
-                "- WIP.\n" +
-                "- " +
-                "Todo : \n" +
-                "Preset Preparation.\n" +
-                "- \n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "\n";
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+        }
+
+
+
+
+        private void Githublink_MouseLeftButtonDown(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(new ProcessStartInfo(Githublink.Text.ToString()) { UseShellExecute = true });
+
+        }
+
+        private void ModdingToolsDiscordLink_MouseLeftButtonDown(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(new ProcessStartInfo(ModdingToolsDiscordLink.Text.ToString()) { UseShellExecute = true });
+
+        }
+
+        private void CommunityLink_MouseLeftButtonDown(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(new ProcessStartInfo(CommunityLink.Text.ToString()) { UseShellExecute = true });
+
         }
     }
 }

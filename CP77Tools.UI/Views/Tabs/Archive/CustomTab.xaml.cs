@@ -35,7 +35,11 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         public CustomTab()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
 
             ArchiveFunc.LoadCollectionData();
             ArchiveTaskConceptGrid.ItemsSource = ArchiveData.ArchiveConceptTaskDict;
@@ -276,7 +280,7 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         private void ArchivePresetComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
           //  ArchiveLoadPresets(ArchivePresetComboBox.SelectedItem.ToString()) ;
-           Trace.WriteLine(ArchivePresetComboBox.SelectedItem.ToString());
+        //   Trace.WriteLine(ArchivePresetComboBox.SelectedItem.ToString());
         }
         private ArchiveData.TaskType selectedTaskType;
 

@@ -1,4 +1,5 @@
 ﻿using ControlzEx.Theming;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,62 @@ namespace CP77Tools.UI.Views.Pages
     /// </summary>
     public partial class SettingsPage : Page
     {
+        public string localaccent;
         public SettingsPage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+            AccentBox.ItemsSource = SUI.sui.generaldata.Colors2;
 
+           
+             
+
+
+
+        }
+
+
+
+
+        private void ThemeDarkLightToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            string[] LightODark = SUI.sui.generaldata.CurrentTheme.Split('.');
+            localaccent = LightODark[1];
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn == true)
+                {
+                    ThemeManager.Current.ChangeTheme(SUI.sui, SUI.sui.generaldata.ThemeHelper("Light."+ localaccent));
+
+                    ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
+                    ThemeManager.Current.SyncTheme();
+
+                 
+                }
+                else
+                {
+                    ThemeManager.Current.ChangeTheme(SUI.sui, SUI.sui.generaldata.ThemeHelper("Dark." + localaccent));
+
+                    ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
+                    ThemeManager.Current.SyncTheme();
+
+                }
+            }
+        }
+
+        private void AccentBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string[] LightODark = SUI.sui.generaldata.CurrentTheme.Split('.');
+            var localtheme = LightODark[0];
+            ComboBox toggleSwitch = sender as ComboBox;
+            if (toggleSwitch != null)
+            {
+                ThemeManager.Current.ChangeTheme(SUI.sui, SUI.sui.generaldata.ThemeHelper(localtheme + "." + AccentBox.SelectedItem));
+
+                ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
+                ThemeManager.Current.SyncTheme();
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace CP77Tools.UI.Views.Pages
         public AboutPage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
 
 
         }
