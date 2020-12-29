@@ -23,65 +23,84 @@ namespace CP77Tools.UI.Functionality
 
 
         // Creates Tasks based on Taskindex.
-        private void TaskManager(int taskindex)
+        private void TaskManager(General.TaskType taskindex)
         {
             switch (taskindex)
             {
-                case 0:
-                    if (sui.archivedata.Archive_Path.Length > 0)
-                    {
-
-                        Trace.Write("Hello?");
-                        Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(sui.archivedata.Archive_Path, sui.archivedata.Archive_OutPath, sui.archivedata.Archive_Extract, sui.archivedata.Archive_Dump, sui.archivedata.Archive_List, sui.archivedata.Archive_Uncook, sui.archivedata.Archive_UncookFileType, sui.archivedata.Archive_Hash, sui.archivedata.Archive_Pattern, sui.archivedata.Archive_Regex));
-                        ATask.Start();
-                      //  sui.archivedata.resetarchivedata();
-                        ATask.Wait();
-                        sui.log.TaskFinished(General.TaskType.Archive);
-                    }
-                   break;
-
-                case 1:
-                    if (sui.generaldata.CR2W_Path.Length > 0)
-                    {
-                        Task CTask = new Task(() => ConsoleFunctions.Cr2wTask(sui.generaldata.CR2W_Path, sui.generaldata.CR2W_OutPath, sui.generaldata.CR2W_All, sui.generaldata.CR2W_Chunks)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
-                        CTask.Start(); CTask.Wait(); sui.log.TaskFinished(General.TaskType.CR2W);
-                    }
+                case General.TaskType.Archive:
+                    if (sui.archivedata.Archive_Path.Length > 0) { StartArchiveTask(); }
                     break;
 
-                case 2:
-                    if (sui.generaldata.Repack_Path.Length > 0)
-                    {
-                        Task RTask = new Task(() => ConsoleFunctions.PackTask(sui.generaldata.Repack_Path, sui.generaldata.Repack_OutPath));  // FIX THIS TOO 
-                        RTask.Start(); RTask.Wait(); sui.log.TaskFinished(General.TaskType.Repack);
-                    }
+                case General.TaskType.CR2W:
+                    if (sui.cr2wdata.CR2W_Path.Length > 0) { StartCR2WTask(); }
                     break;
 
-                case 3:
-                    if (sui.generaldata.Dump_Path.Length > 0)
-                    {
-                        Task DTask = new Task(() => ConsoleFunctions.DumpTask(sui.generaldata.Dump_Path, sui.generaldata.Dump_Imports, sui.generaldata.Dump_MissingHashes, sui.generaldata.Dump_Info, sui.generaldata.Dump_ClassInfo));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
-                        DTask.Start(); DTask.Wait(); sui.log.TaskFinished(General.TaskType.Dump);
-                    }
+                case General.TaskType.Repack:
+                    if (sui.repackdata.Repack_Path.Length > 0) { StartRepackTask(); }
                     break;
 
-                case 4:
-                    if (sui.generaldata.Hash_Input != "")
-                    {
-                        //Task HTask = new Task(() => ConsoleFunctions.HashTask(sui.generaldata.Hash_Input, sui.generaldata.Hash_Missing));
-                        //sui.generaldata.InterceptLog = true;
-                        //HTask.Start();
-                        //HTask.Wait(); sui.log.TaskFinished(General.TaskType.Hash);
-                    }
+                case General.TaskType.Dump:
+                    if (sui.dumpdata.Dump_Path.Length > 0) { StartDumpTask(); }
                     break;
 
-                case 5:
-                    if (sui.generaldata.Oodle_Path.Length > 0)
-                    {
-                        Task OTask = new Task(() => ConsoleFunctions.OodleTask(sui.generaldata.Oodle_Path[0], sui.generaldata.Oodle_OutPath, sui.generaldata.Oodle_Decompress)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
-                        OTask.Start(); OTask.Wait(); sui.log.TaskFinished(General.TaskType.Oodle);
-                    }
+                case General.TaskType.Hash:
+                    if (sui.hashdata.Hash_Input != "") { StartHashTask(); }
+                    break;
+
+                case General.TaskType.Oodle:
+                    if (sui.oodledata.Oodle_Path.Length > 0) { StartOodleTask(); }
                     break;
             }
+        }
+
+        private void StartOodleTask()
+        {
+            Task OTask = new Task(() => ConsoleFunctions.OodleTask(sui.oodledata.Oodle_Path[0], sui.oodledata.Oodle_OutPath, sui.oodledata.Oodle_Decompress)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
+            OTask.Start(); 
+            
+            OTask.Wait(); sui.log.TaskFinished(General.TaskType.Oodle);
+        }
+
+        private void StartHashTask()
+        {
+            //Task HTask = new Task(() => ConsoleFunctions.HashTask(sui.generaldata.Hash_Input, sui.generaldata.Hash_Missing));
+            //sui.generaldata.InterceptLog = true;
+            //HTask.Start();
+            //HTask.Wait(); sui.log.TaskFinished(General.TaskType.Hash);
+        }
+
+        private void StartDumpTask()
+        {
+            Task DTask = new Task(() => ConsoleFunctions.DumpTask(sui.dumpdata.Dump_Path, sui.dumpdata.Dump_Imports, sui.dumpdata.Dump_MissingHashes, sui.dumpdata.Dump_Info, sui.dumpdata.Dump_ClassInfo));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
+            DTask.Start(); 
+            
+            DTask.Wait(); sui.log.TaskFinished(General.TaskType.Dump);
+        }
+
+        private void StartRepackTask()
+        {
+
+            Task RTask = new Task(() => ConsoleFunctions.PackTask(sui.repackdata.Repack_Path, sui.repackdata.Repack_OutPath));  // FIX THIS TOO 
+            RTask.Start(); 
+            
+            RTask.Wait(); sui.log.TaskFinished(General.TaskType.Repack);
+        }
+
+        private void StartCR2WTask()
+        {
+            Task CTask = new Task(() => ConsoleFunctions.Cr2wTask(sui.cr2wdata.CR2W_Path, sui.cr2wdata.CR2W_OutPath, sui.cr2wdata.CR2W_All, sui.cr2wdata.CR2W_Chunks)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
+            CTask.Start(); 
+            
+            CTask.Wait(); sui.log.TaskFinished(General.TaskType.CR2W);
+        }
+
+        private void StartArchiveTask()
+        {
+            Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(sui.archivedata.Archive_Path, sui.archivedata.Archive_OutPath, sui.archivedata.Archive_Extract, sui.archivedata.Archive_Dump, sui.archivedata.Archive_List, sui.archivedata.Archive_Uncook, sui.archivedata.Archive_UncookFileType, sui.archivedata.Archive_Hash, sui.archivedata.Archive_Pattern, sui.archivedata.Archive_Regex));
+            ATask.Start();
+            sui.archivedata.resetarchivedata();
+            ATask.Wait();                               // sui.log.TaskFinished(General.TaskType.Archive);
+
         }
 
 
@@ -89,81 +108,13 @@ namespace CP77Tools.UI.Functionality
 
 
         // Creates Thread and sends TaskIndicator to taskmanager to run task on thread.
-        public void ThreadedTaskSender(int item) { Thread worker = new Thread(() => TaskManager(item)); worker.IsBackground = true; worker.Start(); }
+        public void ThreadedTaskSender(General.TaskType item) { Thread worker = new Thread(() => TaskManager(item)); worker.IsBackground = true; worker.Start(); }
 
    
 
        
 
-        // Open Folder Dialog, change UI based on typeindicator.
-        public void OpenFolder(int TypeIndicator)
-        {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog(); dialog.IsFolderPicker = true;
-            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-            {
-                switch (TypeIndicator)
-                {
-                    case 0:
-                  //      sui.Archive_PathIndicator_Output_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
-                     //   sui.generaldata.Archive_OutPath = dialog.FileName;
-                        break;
-                    case 1: // CR2W
-                   //     sui.CR2W_PathIndicator_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
-                        sui.generaldata.CR2W_OutPath = dialog.FileName;
-                        break;
-                    case 2: // REPACK
-                //        sui.Repack_PathIndicatorOutput_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
-                        sui.generaldata.Repack_OutPath = dialog.FileName;
-                        break;
-                    case 3: // Dump
-                //        sui.Dump_PathIndicatorOutput_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
-                        sui.generaldata.Dump_OutPath = dialog.FileName;
-                        break;
-                    case 4: // Hash
-                        break;
-                    case 5: // Oodle
-                   //     sui.Oodle_PathOut_UIElement_TextBlock.Text = dialog.FileName.ReverseTruncate(34);
-                        sui.generaldata.Oodle_OutPath = dialog.FileName;
-                        break;
 
-
-
-                }
-            }
-        }
-
-
-
-        public void OpenF(Data.General.OMD_Type oMD_Type, General.TaskType taskType)
-        {
-            switch (taskType)
-            {
-                case General.TaskType.Archive:
-            //        sui.Archive_SelectedFilesDropDown_UIElement_ComboBox.ItemsSource = null;
-
-                    break;
-                case General.TaskType.CR2W:
-              //      sui.CR2W_SelectedDropdown_UIElement_ComboBox.ItemsSource = null;
-
-                    break;
-                case General.TaskType.Dump:
-              //      sui.Dump_SelectedDropdown_UIElement_ComboBox.ItemsSource = null;
-
-                    break;
-                case General.TaskType.Hash:
-                    break;
-                case General.TaskType.Oodle:
-             //       sui.Oodle_SelectedDropdown_UIElement_ComboBox.ItemsSource = null;
-
-                    break;
-                case General.TaskType.Repack:
-                 //   sui.Repack_SelectedDropdown_UIElement_ComboBox.ItemsSource = null;
-
-                    break;
-            }
-        //    OpenMultiDialog OMD_Selector = new Functionality.Customs.OpenMultiDialog(app, taskType, oMD_Type);
-           // OMD_Selector.Show();
-        }
 
         // TooltipsSetter
         public void SetToolTips()

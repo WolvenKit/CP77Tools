@@ -42,7 +42,7 @@ namespace CP77Tools.UI.Views.Tabs.Logs
         {
             LogItem logItem = new LogItem(type);
             logItem.SenderLabel.Content = Sender;
-            logItem.SenderText.Text = "Error Found at Pipi Smoll \n Try launching the task again.";
+            logItem.SenderText.Text = "TESTING : Error Found during Task\n Try launching the task again.";
 
             LogItemWrapPanel.Children.Add(logItem);
         }

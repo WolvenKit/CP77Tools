@@ -24,6 +24,8 @@ using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Views;
 using CP77Tools.UI.Views.Pages;
 using CP77Tools.UI.Views.Tabs.Archive;
+using CP77Tools.UI.Views.Tabs.CR2W;
+
 using MahApps.Metro.Controls;
 using Color = System.Windows.Media.Color;
 
@@ -38,11 +40,28 @@ namespace CP77Tools.UI.Functionality.Customs
 
 
         public General.OMD_Type OMD_CurrentOMDType;  // Multi Or Single
-        public CustomTab ArchiveCustomTab;
-        public DumpTab ArchiveDumpTab;
+        public Views.Tabs.Archive.CustomTab ArchiveCustomTab;
+        public Views.Tabs.Archive.DumpTab ArchiveDumpTab;
+        public Views.Tabs.Archive.ExtractSingleTab ArchiveSingleTab;
+        public Views.Tabs.Archive.ExtractTab ArchiveExtractTab;
+        public Views.Tabs.Archive.ListTab ArchiveListTab;
+        public Views.Tabs.Archive.UncookTab ArchiveUncookTab;
+
+        public Views.Tabs.CR2W.CustomTab Cr2wCustomTab;
+        public Views.Tabs.CR2W.ClassInfoTab Cr2WClassInfoTab;
+        public Views.Tabs.CR2W.AllInfoTab Cr2wAllInfoTab;
 
 
+        public Views.Tabs.Dump.ClassInfoTab DumpClassInfoTab;
+        public Views.Tabs.Dump.CustomTab DumpCustomTab;
+        public Views.Tabs.Dump.ImportsTab DumpImportsTab;
+        public Views.Tabs.Dump.MissingHashesTab DumpMissingTab;
+        public Views.Tabs.Dump.XbmInfoTab DumpXbmTab;
 
+
+        public Views.Tabs.Hash.HashTab HashHashTab;
+        public Views.Tabs.Oodle.DecompressTab OodleDecompressTab;
+        public Views.Tabs.Repack.RepackTab RepackRepackTab;
 
 
         public enum ForF { File, Folder }
@@ -51,7 +70,6 @@ namespace CP77Tools.UI.Functionality.Customs
         private General.TaskType CurrentTaskType;
         private SUI sui;
         private bool OutputSelector;
-        private CustomTab tools;
         private General.OMD_Type CurrentOMDType;
 
         public OMD(General.TaskType GivenTaskType,General.OMD_Type _OMD_Type, bool _OutputSelector)
@@ -92,80 +110,341 @@ namespace CP77Tools.UI.Functionality.Customs
             OMD_ListboxSelected.Items.Remove(OMD_ListboxSelected.SelectedItem);
         }
 
+        public ArchiveData.TaskType archivesubtasktype;
+        public DumpData.DumpTaskType dumpsubtasktype;
+        public OodleData.OodleTaskType oodlesubtasktype;
+        public CR2WData.CR2WTaskType cr2wsubtasktype;
+        public RepackData.RepackTaskType repacksubtasktype;
+        public HashData.HashTaskType hashsubtrasktype;
+
         private void OMD_ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            
            
-                string[] clist = OMD_ListboxSelected.Items.OfType<string>().ToArray();
-                var d = clist.Distinct().ToArray();
-                General.OMD_Output = d;
 
-            foreach (string a in d)
-            {
-                Trace.Write(a);
-            }
+            string[] clist = OMD_ListboxSelected.Items.OfType<string>().ToArray();
+            var d = clist.Distinct().ToArray();
+            General.OMD_Output = d;
 
             switch (CurrentTaskType)
-                {
-                    case General.TaskType.Archive:
-                    if (OutputSelector)
+            {
+                case General.TaskType.Archive:
+
+                    switch (archivesubtasktype)
                     {
-                        SUI.sui.archivedata.Archive_OutPath = d[0];
-                        ArchiveCustomTab.ChangeCollectionData("Selected Outpath", d[0]);
-                        ArchiveCustomTab.ArchiveOutpathLabel.Content = d[0];
+                        case ArchiveData.TaskType.Custom:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.archivedata.Archive_OutPath = d[0];
+                                ArchiveCustomTab.ChangeCollectionData("Selected Outpath", d[0]);
+                                ArchiveCustomTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                if (ArchiveData.ArchiveConceptTaskDict.ContainsKey("Selected Input"))
+                                {
+                                    ArchiveData.ArchiveConceptTaskDict.Remove("Selected Input");
+                                }
+                                SUI.sui.archivedata.Archive_Path = d;
+                                ArchiveData.ArchiveConceptTaskDict.Add("Selected Input", d[0] + " (+" + (d.Length - 1) + ")");
+                                ArchiveCustomTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
 
+                                ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = null;
+                                ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = ArchiveData.ArchiveConceptTaskDict;
+
+                                ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case ArchiveData.TaskType.Dump:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.archivedata.Archive_OutPath = d[0];
+                                ArchiveDumpTab.OutpathLabel.Content = d[0];
+                            }
+                            else
+                            {                
+                                SUI.sui.archivedata.Archive_Path = d;
+                                ArchiveDumpTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                ArchiveDumpTab.DumpSelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveDumpTab.DumpSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                ArchiveDumpTab.DumpSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case ArchiveData.TaskType.Extract:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.archivedata.Archive_OutPath = d[0];
+                                ArchiveExtractTab.OutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.archivedata.Archive_Path = d;
+                                ArchiveExtractTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                ArchiveExtractTab.SelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveExtractTab.SelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                ArchiveExtractTab.SelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case ArchiveData.TaskType.List:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.archivedata.Archive_OutPath = d[0];
+                                ArchiveListTab.OutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.archivedata.Archive_Path = d;
+                                ArchiveListTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                ArchiveListTab.SelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveListTab.SelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                ArchiveListTab.SelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case ArchiveData.TaskType.Single:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.archivedata.Archive_OutPath = d[0];
+                                ArchiveSingleTab.OutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.archivedata.Archive_Path = d;
+                                ArchiveSingleTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                ArchiveSingleTab.SelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveSingleTab.SelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                ArchiveSingleTab.SelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case ArchiveData.TaskType.Uncook:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.archivedata.Archive_OutPath = d[0];
+                                ArchiveUncookTab.OutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.archivedata.Archive_Path = d;
+                                ArchiveUncookTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                ArchiveUncookTab.SelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveUncookTab.SelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                ArchiveUncookTab.SelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
                     }
-                    else
-                    {
-
-                        if (ArchiveData.ArchiveConceptTaskDict.ContainsKey("Selected Input"))
-                        {
-                            ArchiveData.ArchiveConceptTaskDict.Remove("Selected Input");
-                        }
-                        SUI.sui.archivedata.Archive_Path = d;
-                        ArchiveData.ArchiveConceptTaskDict.Add("Selected Input", d[0] + " (+" + (d.Length-1) + ")" );
-                        ArchiveCustomTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-
-                        ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = null;
-                        ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = ArchiveData.ArchiveConceptTaskDict;
-
-                        ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
-                        ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
-                        ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
-
-                    }
+                   
 
                     break;
-                        //case MainWindow.TaskType.CR2W:
-                        //    DataReference.CR2W_Path = d;
-                        //    //     app.CR2W_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-                        //    app.CR2W_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-                        //    app.CR2W_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-                        //    break;
-                        //case MainWindow.TaskType.Dump:
-                        //    DataReference.Dump_Path = d;
-                        //    //         app.Dump_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-                        //    app.Dump_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-                        //    app.Dump_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-                        //    break;
-                        //case MainWindow.TaskType.Hash:
-                        //    break;
-                        //case MainWindow.TaskType.Oodle:
-                        //    DataReference.Oodle_Path = d;
-                        //    //      app.Oodle_PathIndicator_Selected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-                        //    app.Oodle_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-                        //    app.Oodle_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-                        //    break;
-                        //case MainWindow.TaskType.Repack:
-                        //    DataReference.Repack_Path = d;
-                        //    //       app.Repack_PathIndicatorSelected_UIElement_TextBlock.Text = DataReference.Archive_Path[0];
-                        //    app.Repack_SelectedDropdown_UIElement_ComboBox.Items.Clear();
-                        //    app.Repack_SelectedDropdown_UIElement_ComboBox.ItemsSource = d.ToList();
-                        //    break;
-                }
-                this.Close();
+                case General.TaskType.CR2W:
+
+                    switch (cr2wsubtasktype)
+                    {
+                        case CR2WData.CR2WTaskType.All:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.cr2wdata.CR2W_OutPath = d[0];
+                                Cr2wAllInfoTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.cr2wdata.CR2W_Path = d;
+
+                                Cr2wAllInfoTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                Cr2wAllInfoTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                Cr2wAllInfoTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                Cr2wAllInfoTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+
+                            break;
+                        case CR2WData.CR2WTaskType.Chunks:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.cr2wdata.CR2W_OutPath = d[0];
+                                Cr2WClassInfoTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.cr2wdata.CR2W_Path = d;
+
+                                Cr2WClassInfoTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                Cr2WClassInfoTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                Cr2WClassInfoTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                Cr2WClassInfoTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case CR2WData.CR2WTaskType.Custom:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.cr2wdata.CR2W_OutPath = d[0];
+                                Cr2wCustomTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.cr2wdata.CR2W_Path = d;
+
+                                Cr2wCustomTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                Cr2wCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                Cr2wCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                Cr2wCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                    }
             
-            
+                    break;
+                case General.TaskType.Dump:
+                    switch (dumpsubtasktype)
+                    {
+                        case DumpData.DumpTaskType.ClassInfo:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.dumpdata.Dump_OutPath = d[0];
+                                DumpClassInfoTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.dumpdata.Dump_Path = d;
+                                DumpClassInfoTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                DumpClassInfoTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpClassInfoTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                DumpClassInfoTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case DumpData.DumpTaskType.Custom:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.dumpdata.Dump_OutPath = d[0];
+                                DumpCustomTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.dumpdata.Dump_Path = d;
+                                DumpCustomTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                DumpCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                DumpCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case DumpData.DumpTaskType.Imports:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.dumpdata.Dump_OutPath = d[0];
+                                DumpImportsTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.dumpdata.Dump_Path = d;
+                                DumpImportsTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                DumpImportsTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpImportsTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                DumpImportsTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case DumpData.DumpTaskType.Info:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.dumpdata.Dump_OutPath = d[0];
+                                DumpXbmTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.dumpdata.Dump_Path = d;
+                                DumpXbmTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                DumpXbmTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpXbmTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                DumpXbmTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                        case DumpData.DumpTaskType.MissingHashes:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.dumpdata.Dump_OutPath = d[0];
+                                DumpMissingTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.dumpdata.Dump_Path = d;
+                                DumpMissingTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                DumpMissingTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpMissingTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                DumpMissingTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                    }
+                
+                    break;
+
+
+
+                case General.TaskType.Hash:
+                    switch (hashsubtrasktype)
+                    {
+                        case HashData.HashTaskType.Custom:
+                            if (OutputSelector)
+                            {
+                            }
+                            else
+                            {
+
+                            }
+                            break;              
+                    }
+                    /////// HASH DO SOMETHING HERE
+                    break;
+
+
+
+
+
+
+                case General.TaskType.Oodle:
+                    switch (oodlesubtasktype)
+                    {               
+                        case OodleData.OodleTaskType.Decompress:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.oodledata.Oodle_OutPath = d[0];
+                                OodleDecompressTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                SUI.sui.oodledata.Oodle_Path = d;
+                                OodleDecompressTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                OodleDecompressTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                OodleDecompressTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                OodleDecompressTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                    }
+                 
+                    break;
+
+
+
+                case General.TaskType.Repack:
+                    switch (repacksubtasktype)
+                    {
+                        case RepackData.RepackTaskType.Repack:
+                            if (OutputSelector)
+                            {
+                                SUI.sui.repackdata.Repack_OutPath = d[0];
+                                RepackRepackTab.ArchiveOutpathLabel.Content = d[0];
+                            }
+                            else
+                            {
+                                                    SUI.sui.repackdata.Repack_Path = d;
+                                RepackRepackTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+                                RepackRepackTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                RepackRepackTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                                RepackRepackTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                            }
+                            break;
+                    }
+                    
+                    break;
+            }
+            this.Close();
+
+
         }
 
         private void OMD_ClearButton_Click(object sender, RoutedEventArgs e)

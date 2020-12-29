@@ -32,7 +32,6 @@ namespace CP77Tools.UI.Views.Pages
     /// </summary>
     public partial class Tools : Page
     {
-        private SUI sui;
         private ArchiveData.TaskType selectedTaskType;
         public static int darklight { get; set; }
         public Tools()

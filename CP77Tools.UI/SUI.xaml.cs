@@ -29,6 +29,11 @@ namespace CP77Tools.UI
 
         public static SUI sui; // Pfft
         public ArchiveData archivedata;
+        public DumpData dumpdata;
+        public OodleData oodledata;
+        public CR2WData cr2wdata;
+        public HashData hashdata;
+        public RepackData repackdata;
         public Logging log;
         public UserInterfaceLogic ui;
 
@@ -58,6 +63,11 @@ namespace CP77Tools.UI
             sui = this;
 
             archivedata = new ArchiveData();
+            dumpdata = new DumpData();
+            oodledata = new OodleData();
+            cr2wdata = new CR2WData();
+            hashdata = new HashData();
+            repackdata = new RepackData();
             log = new Logging(sui);
             ui = new UserInterfaceLogic(sui);
             

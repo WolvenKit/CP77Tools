@@ -22,37 +22,65 @@ namespace CP77Tools.UI.Views.Tasks
     /// </summary>
     public partial class TaskTemplate : UserControl
     {
-        public TaskTemplate(General.TaskType maintype, ArchiveData.TaskType subtype)
+        public TaskTemplate(General.TaskType maintype)
         {
             InitializeComponent();
 
             switch (maintype)
             {
                 case General.TaskType.Archive:
-                    StartArchiveTask(subtype);
+                    StartArchiveTask();
                     break;
+                case General.TaskType.CR2W:
+                    StartCR2WTask();
+                    break;
+                case General.TaskType.Dump:
+                    StartDumpTask();
+                    break;
+                case General.TaskType.Repack:
+                    StartRepackTask();
+                    break;
+                case General.TaskType.Oodle:
+                    StartOodleTask();
+                    break;
+                case General.TaskType.Hash:
+                    StartHashTask();
+                    break;
+
             }
         }
 
-
-        public void StartArchiveTask(ArchiveData.TaskType subtype)
+        private void StartHashTask()
         {
+            SUI.sui.ui.ThreadedTaskSender( General.TaskType.Hash);
+        }
 
+        private void StartOodleTask()
+        {
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Oodle);
+        }
 
-            switch (subtype)
-            {
-                case ArchiveData.TaskType.Custom:
-                    SUI.sui.ui.ThreadedTaskSender(0);
-                    break;
-            }
+        private void StartRepackTask()
+        {
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Repack);
+        }
 
+        private void StartDumpTask()
+        {
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Dump);
+        }
 
+        private void StartCR2WTask()
+        {
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.CR2W);
+        }
+
+        public void StartArchiveTask()
+        {
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Archive);
         }
 
 
-        public void StartCustomArchiveTask()
-        {
-        }
 
         public void AddToTaskLog(int type, string text)
         {

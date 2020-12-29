@@ -265,17 +265,17 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
         private void ArchiveLaunchTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            CreateArchiveTask(selectedTaskType);
+            CreateArchiveTask();
 
 
 
         }
 
-        private void CreateArchiveTask(ArchiveData.TaskType taskType)
+        private void CreateArchiveTask()
         {
             TabItem NewTask = new TabItem();
             NewTask.Header = "[" + ArchiveData.TaskType.Custom + "]";
-            var sometask = new TaskTemplate(General.TaskType.Archive, ArchiveData.TaskType.Custom);
+            var sometask = new TaskTemplate(General.TaskType.Archive);
             sometask.ArchiveTaskConceptGrid.ItemsSource = null;
             sometask.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
             sometask.TaskFinalGroup.Header = "Custom Archive Task Settings";
@@ -291,6 +291,8 @@ namespace CP77Tools.UI.Views.Tabs.Archive
             OMD OutPathSelector = new OMD( TaskType.Archive, OMD_Type.Single, true);
             OutPathSelector.Title = "Select Outpath";
             OutPathSelector.ArchiveCustomTab = this;
+            OutPathSelector.archivesubtasktype = ArchiveData.TaskType.Custom;
+
 
             OutPathSelector.Show();
 
@@ -305,6 +307,7 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         {
             OMD InputSelector = new OMD(TaskType.Archive, OMD_Type.Multi, false);
             InputSelector.ArchiveCustomTab = this;
+            InputSelector.archivesubtasktype = ArchiveData.TaskType.Custom;
 
             InputSelector.Show();
         }

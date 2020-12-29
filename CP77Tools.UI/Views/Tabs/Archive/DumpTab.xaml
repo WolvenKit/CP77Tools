@@ -17,9 +17,9 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button x:Name="InputButton" Content="Select Input" Margin="5,19,0,0" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" />
+            <Button x:Name="InputButton" Content="Select Input" Margin="5,19,0,0" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Click="ArchiveSelectInputButton_Click" />
 
-            <Button x:Name="OutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" />
+            <Button x:Name="OutpathButton" Content="Select OutPath" Canvas.Left="10" Canvas.Top="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,52,0,0" Click="ArchiveSelectOutpathButton_Click" />
 
 
 
@@ -80,7 +80,7 @@
                     </TransformGroup>
                 </Separator.RenderTransform>
             </Separator>
-            <Button x:Name="DumpLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="151,207,0,0" HorizontalContentAlignment="Center"/>
+            <Button x:Name="DumpLaunchTaskButton" Content="Launch Task" VerticalAlignment="Top" Height="26"  Margin="151,207,0,0" HorizontalContentAlignment="Center" Click="ArchiveLaunchTaskButton_Click"/>
             <Label Content="Selected Input" HorizontalAlignment="Left" Margin="48,125,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="91" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <ComboBox x:Name="DumpSelectedInputConceptDropDown1" Margin="151,132,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
 

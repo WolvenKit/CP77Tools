@@ -99,18 +99,18 @@ namespace CP77Tools.UI.Functionality
                  //   Process.Start("explorer.exe", app.generaldata.Archive_OutPath);
                     break;
                 case General.TaskType.CR2W:
-                    Process.Start("explorer.exe", app.generaldata.CR2W_OutPath);
+                    Process.Start("explorer.exe", app.cr2wdata.CR2W_OutPath);
                     break;
                 case General.TaskType.Dump:
-                    Process.Start("explorer.exe", app.generaldata.Dump_OutPath);
+                    Process.Start("explorer.exe", app.dumpdata.Dump_OutPath);
                     break;
                 case General.TaskType.Hash:
                     break;
                 case General.TaskType.Oodle:
-                    Process.Start("explorer.exe", app.generaldata.Oodle_OutPath);
+                    Process.Start("explorer.exe", app.oodledata.Oodle_OutPath);
                     break;
                 case General.TaskType.Repack:
-                    Process.Start("explorer.exe", app.generaldata.Repack_OutPath);
+                    Process.Start("explorer.exe", app.repackdata.Repack_OutPath);
                     break;
             }
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
