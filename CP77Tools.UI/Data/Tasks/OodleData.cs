@@ -21,7 +21,9 @@ namespace CP77Tools.UI.Data.Tasks
 
         internal void resetoodledata()
         {
-            throw new NotImplementedException();
+            Oodle_Path = null;
+            Oodle_OutPath = null;
+            Oodle_Decompress = false;
         }
     }
 }

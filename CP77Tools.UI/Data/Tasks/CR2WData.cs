@@ -23,7 +23,10 @@ namespace CP77Tools.UI.Data.Tasks
 
         internal void resetcr2wdata()
         {
-            throw new NotImplementedException();
+            CR2W_Path = null;
+            CR2W_OutPath = "";
+            CR2W_All = false;
+            CR2W_Chunks = false;
         }
     }
 }

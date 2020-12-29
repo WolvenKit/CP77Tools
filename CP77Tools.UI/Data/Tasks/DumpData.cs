@@ -29,7 +29,12 @@ namespace CP77Tools.UI.Data.Tasks
 
         internal void resetdumpdata()
         {
-            throw new NotImplementedException();
+            Dump_Path = null;
+            Dump_OutPath = "";
+            Dump_Imports = false;
+            Dump_MissingHashes = false;
+            Dump_Info = false;
+            Dump_ClassInfo = false;
         }
     }
 }
