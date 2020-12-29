@@ -28,12 +28,17 @@ namespace CP77Tools.UI.Functionality
             switch (taskindex)
             {
                 case 0:
-                //    if (sui.generaldata.Archive_Path.Length > 0)
-                 //   {
-                   //     Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(sui.generaldata.Archive_Path, sui.generaldata.Archive_OutPath, sui.generaldata.Archive_Extract, sui.generaldata.Archive_Dump, sui.generaldata.Archive_List, sui.generaldata.Archive_Uncook, sui.generaldata.Archive_UncookFileType, sui.generaldata.Archive_Hash, sui.generaldata.Archive_Pattern, sui.generaldata.Archive_Regex));
-                 //       ATask.Start(); ATask.Wait(); sui.log.TaskFinished(MainWindow.TaskType.Archive);
-                  //  }
-               //     break;
+                    if (sui.archivedata.Archive_Path.Length > 0)
+                    {
+
+                        Trace.Write("Hello?");
+                        Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(sui.archivedata.Archive_Path, sui.archivedata.Archive_OutPath, sui.archivedata.Archive_Extract, sui.archivedata.Archive_Dump, sui.archivedata.Archive_List, sui.archivedata.Archive_Uncook, sui.archivedata.Archive_UncookFileType, sui.archivedata.Archive_Hash, sui.archivedata.Archive_Pattern, sui.archivedata.Archive_Regex));
+                        ATask.Start();
+                      //  sui.archivedata.resetarchivedata();
+                        ATask.Wait();
+                        sui.log.TaskFinished(General.TaskType.Archive);
+                    }
+                   break;
 
                 case 1:
                     if (sui.generaldata.CR2W_Path.Length > 0)

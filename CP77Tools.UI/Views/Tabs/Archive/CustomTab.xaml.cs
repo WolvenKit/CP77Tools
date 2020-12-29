@@ -35,6 +35,8 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         public CustomTab()
         {
             InitializeComponent();
+            sui = SUI.sui;
+
             if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 return;
@@ -43,7 +45,6 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
             ArchiveFunc.LoadCollectionData();
             ArchiveTaskConceptGrid.ItemsSource = ArchiveData.ArchiveConceptTaskDict;
-            sui = SUI.sui;
 
         }
 
@@ -68,7 +69,19 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         {
 
             SwitchHelper(sender, "Extract");
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn == true)
+                {
+                    sui.archivedata.Archive_Extract = true;
+                }
+                else
+                {
+                    sui.archivedata.Archive_Extract = false;
 
+                }
+            }
         }
 
         private void SwitchHelper(object sender, string a)
@@ -78,12 +91,10 @@ namespace CP77Tools.UI.Views.Tabs.Archive
             {
                 if (toggleSwitch.IsOn == true)
                 {
-                    sui.archivedata.Archive_Extract = true;
                     ChangeCollectionData(a, "Enabled");
                 }
                 else
                 {
-                    sui.archivedata.Archive_Extract = false;
                     ChangeCollectionData(a, "Disabled");
 
                 }
@@ -101,19 +112,55 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         private void ArchiveDumpSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             SwitchHelper(sender, "Dump");
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn == true)
+                {
+                    sui.archivedata.Archive_Dump = true;
+                }
+                else
+                {
+                    sui.archivedata.Archive_Dump = false;
 
+                }
+            }
         }
 
         private void ArchiveListSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             SwitchHelper(sender, "List");
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn == true)
+                {
+                    sui.archivedata.Archive_List = true;
+                }
+                else
+                {
+                    sui.archivedata.Archive_List = false;
 
+                }
+            }
         }
 
         private void ArchiveUncookSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             SwitchHelper(sender, "Uncook");
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn == true)
+                {
+                    sui.archivedata.Archive_Uncook = true;
+                }
+                else
+                {
+                    sui.archivedata.Archive_Uncook = false;
 
+                }
+            }
         }
 
         private void ArchiveTGARadioButton_Checked(object sender, RoutedEventArgs e)
@@ -167,13 +214,22 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
         private void ArchivePatternTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ChangeCollectionData("Pattern", ArchivePatternTextBox.Text);
+            if (IsLoaded)
+            {
+                sui.archivedata.Archive_Pattern = ArchivePatternTextBox.Text;
+                ChangeCollectionData("Pattern", ArchivePatternTextBox.Text);
+            }
+
 
         }
 
         private void ArchiveRegexTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (IsLoaded)
+            {
+                sui.archivedata.Archive_Regex = ArchivePatternTextBox.Text;
             ChangeCollectionData("Regex", ArchiveRegexTextBox.Text);
+            }
 
         }
 
@@ -219,16 +275,20 @@ namespace CP77Tools.UI.Views.Tabs.Archive
         {
             TabItem NewTask = new TabItem();
             NewTask.Header = "[" + ArchiveData.TaskType.Custom + "]";
-            NewTask.Content = new TaskTemplate();
+            var sometask = new TaskTemplate(General.TaskType.Archive, ArchiveData.TaskType.Custom);
+            sometask.ArchiveTaskConceptGrid.ItemsSource = null;
+            sometask.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
+            sometask.TaskFinalGroup.Header = "Custom Archive Task Settings";
+            sometask.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
+            NewTask.Content = sometask;  
+            SUI.sui.generaldata.ToolsInstance.ArchiveSubTab.Items.Add(NewTask);
 
-
-           // ArchiveSubTab.Items.Add(NewTask);
 
         }
 
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)
         {
-            OMD OutPathSelector = new OMD(OMD_Type.Single, true);
+            OMD OutPathSelector = new OMD( TaskType.Archive, OMD_Type.Single, true);
             OutPathSelector.Title = "Select Outpath";
             OutPathSelector.ArchiveCustomTab = this;
 
@@ -243,7 +303,7 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
         private void ArchiveSelectInputButton_Click(object sender, RoutedEventArgs e)
         {
-            OMD InputSelector = new OMD(OMD_Type.Multi, false);
+            OMD InputSelector = new OMD(TaskType.Archive, OMD_Type.Multi, false);
             InputSelector.ArchiveCustomTab = this;
 
             InputSelector.Show();

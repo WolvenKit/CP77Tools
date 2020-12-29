@@ -50,8 +50,10 @@ namespace CP77Tools.UI
             this.HamburgerMenuControl.Content = this.navigationServiceEx.Frame;
             ServiceLocator.Default.RegisterType<IAppSettingsService, AppSettingsService>();
             ServiceLocator.Default.RegisterType<ILoggerService, LoggerService>();
+            ServiceLocator.Default.RegisterType<IHashService, HashService>();
             UI_Logger = ServiceLocator.Default.ResolveType<ILoggerService>();
-
+            var hashService = ServiceLocator.Default.ResolveType<IHashService>();
+            hashService.ReloadLocally();
 
             sui = this;
 

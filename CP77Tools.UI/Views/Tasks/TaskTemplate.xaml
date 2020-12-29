@@ -6,8 +6,26 @@
              xmlns:local="clr-namespace:CP77Tools.UI"
              mc:Ignorable="d" 
             d:DesignHeight="700" d:DesignWidth="1100">
-    <Grid>
+    <Grid Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
         <Label Content="Task : " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <ScrollViewer Margin="0,41,0,70" HorizontalAlignment="Left" Width="660">
+            <WrapPanel x:Name="TaskLogWrap" HorizontalAlignment="Stretch" Orientation="Vertical"/>
+        </ScrollViewer>
+        <GroupBox x:Name="TaskFinalGroup" Header="Task Concept" Margin="665,11,10,70">
+            <Grid>
+                <DataGrid x:Name="ArchiveTaskConceptGrid" AutoGenerateColumns="False" Margin="0,4,0,41" SelectionMode="Single" SelectionUnit="Cell" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Collapsed">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Setting" Binding="{Binding Key}" />
+                        <DataGridTextColumn Header="Value" Binding="{Binding Value}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Label Content="Selected Input" HorizontalAlignment="Left" Margin="10,0,0,31" VerticalAlignment="Bottom" FontWeight="Bold"/>
+                <ComboBox x:Name="ArchiveSelectedInputConceptDropDown1" Margin="112,0,0,29" VerticalAlignment="Bottom" IsReadOnly="False" StaysOpenOnEdit="True" SelectedIndex="0"/>
+
+
+            </Grid>
+
+        </GroupBox>
 
     </Grid>
 </UserControl>

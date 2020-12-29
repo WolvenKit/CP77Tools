@@ -54,10 +54,10 @@ namespace CP77Tools.UI.Functionality.Customs
         private CustomTab tools;
         private General.OMD_Type CurrentOMDType;
 
-        public OMD(General.OMD_Type _OMD_Type, bool _OutputSelector)
+        public OMD(General.TaskType GivenTaskType,General.OMD_Type _OMD_Type, bool _OutputSelector)
         {
-            
 
+            CurrentTaskType = GivenTaskType;
             CurrentOMDType = _OMD_Type;
             OutputSelector = _OutputSelector;
             InitializeComponent();
@@ -112,29 +112,26 @@ namespace CP77Tools.UI.Functionality.Customs
                     {
                         SUI.sui.archivedata.Archive_OutPath = d[0];
                         ArchiveCustomTab.ChangeCollectionData("Selected Outpath", d[0]);
-
+                        ArchiveCustomTab.ArchiveOutpathLabel.Content = d[0];
 
                     }
                     else
                     {
-                        string newzz = "";
-                        foreach (string a in d)
-                        {
-                            newzz += a;
-                            Trace.Write(a);
-                            
-                            ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Add((string)a);
-                        }
 
-                        ArchiveData.ArchiveConceptTaskDict.Add("Selected Input", newzz);
+                        if (ArchiveData.ArchiveConceptTaskDict.ContainsKey("Selected Input"))
+                        {
+                            ArchiveData.ArchiveConceptTaskDict.Remove("Selected Input");
+                        }
+                        SUI.sui.archivedata.Archive_Path = d;
+                        ArchiveData.ArchiveConceptTaskDict.Add("Selected Input", d[0] + " (+" + (d.Length-1) + ")" );
+                        ArchiveCustomTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
+
                         ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = null;
                         ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = ArchiveData.ArchiveConceptTaskDict;
 
-                       // ArchiveCustomTab.ArchiveTaskConceptGrid.Items.Add();
-                      //  ArchiveCustomTab.ArchiveInputLabel.Content = d[0];
-                     //   ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
-              
-                       // ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
+                        ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                        ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
+                        ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
 
                     }
 

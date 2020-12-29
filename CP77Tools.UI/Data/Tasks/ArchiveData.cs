@@ -33,5 +33,23 @@ namespace CP77Tools.UI.Data.Tasks
         public ulong Archive_Hash = 0;
         public string Archive_Pattern = "";
         public string Archive_Regex = "";
+
+
+
+
+        public void resetarchivedata()
+        {
+            Archive_Path = new string[0];
+             Archive_OutPath = "";
+             Archive_Extract = false;
+             Archive_Dump = false;
+             Archive_List = false;
+             Archive_Uncook = false;
+             Archive_UncookFileType = EUncookExtension.tga;
+             Archive_Hash = 0;
+             Archive_Pattern = "";
+             Archive_Regex = "";
+        }
+    
     }
 }

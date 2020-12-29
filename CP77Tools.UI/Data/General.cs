@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Functionality;
+using CP77Tools.UI.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -152,5 +153,7 @@ namespace CP77Tools.UI.Data
 
         //repack
         public string Repack_OutPath;
+
+        public Tools ToolsInstance { get; internal set; }
     }
 }

@@ -38,7 +38,7 @@ namespace CP77Tools.UI.Views.Pages
         public Tools()
         {
             InitializeComponent();
-
+            SUI.sui.generaldata.ToolsInstance = this;
             ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
             this.DataContext = this;
      
