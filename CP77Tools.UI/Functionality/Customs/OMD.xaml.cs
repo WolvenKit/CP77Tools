@@ -151,7 +151,7 @@ namespace CP77Tools.UI.Functionality.Customs
                                 ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = null;
                                 ArchiveCustomTab.ArchiveTaskConceptGrid.ItemsSource = ArchiveData.ArchiveConceptTaskDict;
 
-                                ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 ArchiveCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -166,7 +166,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {                
                                 SUI.sui.archivedata.Archive_Path = d;
                                 ArchiveDumpTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                ArchiveDumpTab.DumpSelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveDumpTab.DumpSelectedInputConceptDropDown1.ItemsSource = null;
                                 ArchiveDumpTab.DumpSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 ArchiveDumpTab.DumpSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -181,7 +181,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.archivedata.Archive_Path = d;
                                 ArchiveExtractTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                ArchiveExtractTab.SelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveExtractTab.SelectedInputConceptDropDown1.ItemsSource = null;
                                 ArchiveExtractTab.SelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 ArchiveExtractTab.SelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -196,7 +196,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.archivedata.Archive_Path = d;
                                 ArchiveListTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                ArchiveListTab.SelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveListTab.SelectedInputConceptDropDown1.ItemsSource = null;
                                 ArchiveListTab.SelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 ArchiveListTab.SelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -211,7 +211,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.archivedata.Archive_Path = d;
                                 ArchiveSingleTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                ArchiveSingleTab.SelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveSingleTab.SelectedInputConceptDropDown1.ItemsSource = null;
                                 ArchiveSingleTab.SelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 ArchiveSingleTab.SelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -226,7 +226,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.archivedata.Archive_Path = d;
                                 ArchiveUncookTab.InputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                ArchiveUncookTab.SelectedInputConceptDropDown1.Items.Clear();
+                                ArchiveUncookTab.SelectedInputConceptDropDown1.ItemsSource = null;
                                 ArchiveUncookTab.SelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 ArchiveUncookTab.SelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -250,7 +250,7 @@ namespace CP77Tools.UI.Functionality.Customs
                                 SUI.sui.cr2wdata.CR2W_Path = d;
 
                                 Cr2wAllInfoTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                Cr2wAllInfoTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                Cr2wAllInfoTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 Cr2wAllInfoTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 Cr2wAllInfoTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -267,7 +267,7 @@ namespace CP77Tools.UI.Functionality.Customs
                                 SUI.sui.cr2wdata.CR2W_Path = d;
 
                                 Cr2WClassInfoTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                Cr2WClassInfoTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                Cr2WClassInfoTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 Cr2WClassInfoTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 Cr2WClassInfoTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -283,7 +283,7 @@ namespace CP77Tools.UI.Functionality.Customs
                                 SUI.sui.cr2wdata.CR2W_Path = d;
 
                                 Cr2wCustomTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                Cr2wCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                Cr2wCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 Cr2wCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 Cr2wCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -304,7 +304,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.dumpdata.Dump_Path = d;
                                 DumpClassInfoTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                DumpClassInfoTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpClassInfoTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 DumpClassInfoTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 DumpClassInfoTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -319,7 +319,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.dumpdata.Dump_Path = d;
                                 DumpCustomTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                DumpCustomTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 DumpCustomTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 DumpCustomTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -334,7 +334,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.dumpdata.Dump_Path = d;
                                 DumpImportsTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                DumpImportsTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpImportsTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 DumpImportsTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 DumpImportsTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -349,7 +349,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.dumpdata.Dump_Path = d;
                                 DumpXbmTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                DumpXbmTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpXbmTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 DumpXbmTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 DumpXbmTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -364,7 +364,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.dumpdata.Dump_Path = d;
                                 DumpMissingTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                DumpMissingTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                DumpMissingTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 DumpMissingTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 DumpMissingTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -409,7 +409,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                 SUI.sui.oodledata.Oodle_Path = d;
                                 OodleDecompressTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                OodleDecompressTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                OodleDecompressTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 OodleDecompressTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 OodleDecompressTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }
@@ -433,7 +433,7 @@ namespace CP77Tools.UI.Functionality.Customs
                             {
                                                     SUI.sui.repackdata.Repack_Path = d;
                                 RepackRepackTab.ArchiveInputLabel.Content = d[0] + " (+" + (d.Length - 1) + ")";
-                                RepackRepackTab.ArchiveSelectedInputConceptDropDown1.Items.Clear();
+                                RepackRepackTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = null;
                                 RepackRepackTab.ArchiveSelectedInputConceptDropDown1.ItemsSource = d.ToList();
                                 RepackRepackTab.ArchiveSelectedInputConceptDropDown1.SelectedIndex = 0;
                             }

@@ -20,5 +20,9 @@ namespace CP77Tools.UI.Data.Tasks
         //repack
         public string Repack_OutPath;
 
+        internal void resetrepackdata()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace CP77Tools.UI.Functionality
         {
             if (sender is LoggerService _logger)
             {
+                Trace.Write(e.PropertyName);
+
                 switch (e.PropertyName)
                 {
                     case "Progress":
@@ -51,6 +53,8 @@ namespace CP77Tools.UI.Functionality
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
+
+                Trace.Write(e.Message);
                 if (app.generaldata.InterceptLog)
                 {
                   //  app.Hash_Output_UIElement_TextBox.Text = e.Message.ToString();

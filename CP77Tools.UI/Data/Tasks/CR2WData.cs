@@ -20,5 +20,10 @@ namespace CP77Tools.UI.Data.Tasks
         public string CR2W_OutPath = "";
         public bool CR2W_All = false;
         public bool CR2W_Chunks = false;
+
+        internal void resetcr2wdata()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

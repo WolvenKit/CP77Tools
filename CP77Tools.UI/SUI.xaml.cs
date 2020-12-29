@@ -45,6 +45,8 @@ namespace CP77Tools.UI
         {
             InitializeComponent();
             //Tools a = new Tools();
+            sui = this;
+            log = new Logging(sui);
             generaldata = new General();
          
             ThemeManager.Current.ChangeTheme(this, generaldata.ThemeHelper("Dark.Steel"));
@@ -61,7 +63,9 @@ namespace CP77Tools.UI
             var hashService = ServiceLocator.Default.ResolveType<IHashService>();
             hashService.ReloadLocally();
 
-            sui = this;
+            UI_Logger.PropertyChanged += log.UI_Logger_PropertyChanged;
+            UI_Logger.OnStringLogged += log.UI_Logger_OnStringLogged;
+            UI_Logger.PropertyChanging += log.UI_Logger_PropertyChanging;
 
             archivedata = new ArchiveData();
             dumpdata = new DumpData();
@@ -69,7 +73,7 @@ namespace CP77Tools.UI
             cr2wdata = new CR2WData();
             hashdata = new HashData();
             repackdata = new RepackData();
-            log = new Logging(sui);
+       
             ui = new UserInterfaceLogic(sui);
             
 

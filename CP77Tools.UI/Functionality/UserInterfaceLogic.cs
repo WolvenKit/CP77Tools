@@ -55,10 +55,17 @@ namespace CP77Tools.UI.Functionality
 
         private void StartOodleTask()
         {
-            Task OTask = new Task(() => ConsoleFunctions.OodleTask(sui.oodledata.Oodle_Path[0], sui.oodledata.Oodle_OutPath, sui.oodledata.Oodle_Decompress)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
+            var p1 = sui.oodledata.Oodle_Path[0];
+            var p2 = sui.oodledata.Oodle_OutPath;
+            var p3 = sui.oodledata.Oodle_Decompress;
+            sui.oodledata.resetoodledata();
+
+            Task OTask = new Task(() => ConsoleFunctions.OodleTask(p1,p2,p3)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
             OTask.Start(); 
             
-            OTask.Wait(); sui.log.TaskFinished(General.TaskType.Oodle);
+            OTask.Wait(); sui.log.TaskFinished(General.TaskType.Oodle); 
+            sui.log.TaskFinished(General.TaskType.Oodle);
+
         }
 
         private void StartHashTask()
@@ -71,35 +78,68 @@ namespace CP77Tools.UI.Functionality
 
         private void StartDumpTask()
         {
-            Task DTask = new Task(() => ConsoleFunctions.DumpTask(sui.dumpdata.Dump_Path, sui.dumpdata.Dump_Imports, sui.dumpdata.Dump_MissingHashes, sui.dumpdata.Dump_Info, sui.dumpdata.Dump_ClassInfo));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
+            var p1 = sui.dumpdata.Dump_Path;
+            var p2 = sui.dumpdata.Dump_Imports;
+            var p3 = sui.dumpdata.Dump_MissingHashes;
+            var p4 = sui.dumpdata.Dump_Info;
+            var p5 = sui.dumpdata.Dump_ClassInfo;
+            sui.dumpdata.resetdumpdata();
+
+            Task DTask = new Task(() => ConsoleFunctions.DumpTask(p1,p2,p3,p4,p5));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
             DTask.Start(); 
             
-            DTask.Wait(); sui.log.TaskFinished(General.TaskType.Dump);
+            DTask.Wait(); sui.log.TaskFinished(General.TaskType.Dump); 
+            sui.log.TaskFinished(General.TaskType.Dump);
+
         }
 
         private void StartRepackTask()
         {
-
-            Task RTask = new Task(() => ConsoleFunctions.PackTask(sui.repackdata.Repack_Path, sui.repackdata.Repack_OutPath));  // FIX THIS TOO 
+            var p1 = sui.repackdata.Repack_Path;
+            var p2 = sui.repackdata.Repack_OutPath;
+            sui.repackdata.resetrepackdata();
+            Task RTask = new Task(() => ConsoleFunctions.PackTask(p1,p2));  // FIX THIS TOO 
             RTask.Start(); 
             
-            RTask.Wait(); sui.log.TaskFinished(General.TaskType.Repack);
+            RTask.Wait(); sui.log.TaskFinished(General.TaskType.Repack); 
+            sui.log.TaskFinished(General.TaskType.Repack);
+
         }
 
         private void StartCR2WTask()
         {
-            Task CTask = new Task(() => ConsoleFunctions.Cr2wTask(sui.cr2wdata.CR2W_Path, sui.cr2wdata.CR2W_OutPath, sui.cr2wdata.CR2W_All, sui.cr2wdata.CR2W_Chunks)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
+            var p1 = sui.cr2wdata.CR2W_Path;
+            var p2 = sui.cr2wdata.CR2W_OutPath;
+            var p3 = sui.cr2wdata.CR2W_All;
+            var p4 = sui.cr2wdata.CR2W_Chunks;
+            sui.cr2wdata.resetcr2wdata();
+
+            Task CTask = new Task(() => ConsoleFunctions.Cr2wTask(p1,p2,p3,p4)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
             CTask.Start(); 
             
-            CTask.Wait(); sui.log.TaskFinished(General.TaskType.CR2W);
+            CTask.Wait(); sui.log.TaskFinished(General.TaskType.CR2W); 
+            sui.log.TaskFinished(General.TaskType.CR2W);
+
         }
 
         private void StartArchiveTask()
         {
-            Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(sui.archivedata.Archive_Path, sui.archivedata.Archive_OutPath, sui.archivedata.Archive_Extract, sui.archivedata.Archive_Dump, sui.archivedata.Archive_List, sui.archivedata.Archive_Uncook, sui.archivedata.Archive_UncookFileType, sui.archivedata.Archive_Hash, sui.archivedata.Archive_Pattern, sui.archivedata.Archive_Regex));
-            ATask.Start();
+            var p1 = sui.archivedata.Archive_Path;
+            var p2 = sui.archivedata.Archive_OutPath;
+            var p3 = sui.archivedata.Archive_Extract;
+            var p4 = sui.archivedata.Archive_Dump;
+            var p5 = sui.archivedata.Archive_List; 
+            var p6 = sui.archivedata.Archive_Uncook;
+            var p7 = sui.archivedata.Archive_UncookFileType;
+            var p8 = sui.archivedata.Archive_Hash;
+            var p9 = sui.archivedata.Archive_Pattern;
+            var p10 = sui.archivedata.Archive_Regex;
             sui.archivedata.resetarchivedata();
-            ATask.Wait();                               // sui.log.TaskFinished(General.TaskType.Archive);
+
+            Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10));
+            ATask.Start();
+            ATask.Wait();                               
+            sui.log.TaskFinished(General.TaskType.Archive);
 
         }
 

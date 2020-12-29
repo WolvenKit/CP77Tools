@@ -26,5 +26,10 @@ namespace CP77Tools.UI.Data.Tasks
         public bool Dump_MissingHashes = false;
         public bool Dump_Info = false;
         public bool Dump_ClassInfo = false;
+
+        internal void resetdumpdata()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

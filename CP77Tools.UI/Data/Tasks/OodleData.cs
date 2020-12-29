@@ -18,5 +18,10 @@ namespace CP77Tools.UI.Data.Tasks
         public string[] Oodle_Path;
         public string Oodle_OutPath;
         public bool Oodle_Decompress = false;
+
+        internal void resetoodledata()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
