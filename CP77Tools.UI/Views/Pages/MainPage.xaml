@@ -12,6 +12,7 @@
     <Grid>
 
         <mah:FlipView MouseHoverBorderBrush="{x:Null}" Foreground="{DynamicResource MahApps.Brushes.Text}" BannerText="Latest Update : Version 0.5.4-Beta" Margin="10,10,390,4">
+            <Image Source="/Resources/NewMainPageImage.png" Stretch="Fill" StretchDirection="DownOnly" Margin="0,0,0,20"></Image>
             <Image Source="/Resources/Cyberpunk-2077-Jun-25th-Screenshots-9-2060x1159.jpg" Stretch="Fill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
         </mah:FlipView>
         <TextBlock x:Name="MainUpdateInfoTextBlock"  TextWrapping="Wrap" Margin="0,15,10,180" MinWidth="375" MinHeight="240" HorizontalAlignment="Right" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"/>

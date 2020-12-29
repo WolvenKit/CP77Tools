@@ -25,6 +25,7 @@
     <None Remove="Resources\LogoTest.png" />
     <None Remove="Resources\Minimize.png" />
     <None Remove="Resources\MinimizeSelected.png" />
+    <None Remove="Resources\NewMainPageImage.png" />
     <None Remove="Resources\TestLogo.png" />
     <None Remove="Resources\ToolsBorderedLogo.png" />
     <None Remove="TopHeader" />
@@ -60,6 +61,7 @@
     <Resource Include="Resources\LogoTest.png" />
     <Resource Include="Resources\Minimize.png" />
     <Resource Include="Resources\MinimizeSelected.png" />
+    <Resource Include="Resources\NewMainPageImage.png" />
     <Resource Include="Resources\TestLogo.png" />
     <Resource Include="Resources\ToolsBorderedLogo.png" />
   </ItemGroup>
