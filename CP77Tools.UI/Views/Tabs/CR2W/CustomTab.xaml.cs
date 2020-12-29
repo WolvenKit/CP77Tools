@@ -29,6 +29,10 @@ namespace CP77Tools.UI.Views.Tabs.CR2W
         public CustomTab()
         {
             InitializeComponent();
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
 
         }
 

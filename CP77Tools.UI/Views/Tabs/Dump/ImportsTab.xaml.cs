@@ -27,7 +27,12 @@ namespace CP77Tools.UI.Views.Tabs.Dump
     {
         public ImportsTab()
         {
-            InitializeComponent(); SUI.sui.dumpdata.Dump_Imports = true;
+            InitializeComponent();
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
+            SUI.sui.dumpdata.Dump_Imports = true;
 
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)

@@ -30,6 +30,10 @@ namespace CP77Tools.UI.Views.Tabs.Oodle
         public DecompressTab()
         {
             InitializeComponent();
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
             SUI.sui.oodledata.Oodle_Decompress = true;
 
         }

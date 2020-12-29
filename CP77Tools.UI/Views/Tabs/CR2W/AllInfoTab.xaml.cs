@@ -28,6 +28,10 @@ namespace CP77Tools.UI.Views.Tabs.CR2W
         public AllInfoTab()
         {
             InitializeComponent();
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
             SUI.sui.cr2wdata.CR2W_All = true;
         }
 

@@ -9,7 +9,7 @@
     <Grid Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
         <Label Content="Task : " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <ScrollViewer Margin="0,41,0,70" HorizontalAlignment="Left" Width="660">
-            <WrapPanel x:Name="TaskLogWrap" HorizontalAlignment="Stretch" Orientation="Vertical"/>
+            <WrapPanel x:Name="TaskLogWrap" HorizontalAlignment="Stretch" Orientation="Vertical" ItemWidth="646" SizeChanged="TaskLogWrap_SizeChanged"/>
         </ScrollViewer>
         <GroupBox x:Name="TaskFinalGroup" Header="Task Concept" Margin="665,11,10,70">
             <Grid>

@@ -23,6 +23,10 @@ namespace CP77Tools.UI.Views.Tabs.Hash
         public HashTab()
         {
             InitializeComponent();
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
         }
     }
 }

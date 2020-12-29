@@ -10,7 +10,7 @@
     <Grid Background="{DynamicResource MahApps.Brushes.Accent4}">
         <ScrollViewer VerticalScrollBarVisibility="Visible">
 
-            <WrapPanel x:Name="LogItemWrapPanel" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" Orientation="Vertical" ScrollViewer.CanContentScroll="True" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Width="419"/>
+            <WrapPanel x:Name="LogItemWrapPanel" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" Orientation="Vertical" ScrollViewer.CanContentScroll="True" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Width="443" SizeChanged="LogItemWrapPanel_SizeChanged"/>
         </ScrollViewer>
     </Grid>
 </UserControl>

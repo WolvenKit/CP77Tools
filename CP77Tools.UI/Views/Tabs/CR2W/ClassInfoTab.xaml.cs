@@ -27,7 +27,11 @@ namespace CP77Tools.UI.Views.Tabs.CR2W
     {
         public ClassInfoTab()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
             SUI.sui.cr2wdata.CR2W_Chunks = true;
 
         }

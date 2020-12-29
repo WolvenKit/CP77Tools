@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CP77Tools.UI.Views.Tabs.Logs
 {
@@ -24,12 +25,18 @@ namespace CP77Tools.UI.Views.Tabs.Logs
         public LogItem(int type)
         {
             InitializeComponent();
-            CurrentTimeStamp.Content = DateTime.Now;
-            SetColor(type);
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+            {
+                CurrentTimeStamp.Content = DateTime.Now;
+                SetColor(type);
+
+            }));
+       
         }
 
         private void SetColor(int type)
         {
+
             switch (type)
             {
                 case 1:

@@ -30,6 +30,10 @@ namespace CP77Tools.UI.Views.Tabs.Dump
         public CustomTab()
         {
             InitializeComponent();
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
 
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)

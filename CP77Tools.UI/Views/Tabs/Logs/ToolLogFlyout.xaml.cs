@@ -40,11 +40,15 @@ namespace CP77Tools.UI.Views.Tabs.Logs
 
         public void CreateNewLogItem(string Sender, int type)
         {
+
             LogItem logItem = new LogItem(type);
             logItem.SenderLabel.Content = Sender;
             logItem.SenderText.Text = "TESTING : Error Found during Task\n Try launching the task again.";
-
             LogItemWrapPanel.Children.Add(logItem);
+        }
+
+        private void LogItemWrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
         }
     }
 }

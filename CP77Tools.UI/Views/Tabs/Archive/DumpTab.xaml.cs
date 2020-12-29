@@ -27,7 +27,11 @@ namespace CP77Tools.UI.Views.Tabs.Archive
     {
         public DumpTab()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
             SUI.sui.archivedata.Archive_Dump = true;
         }
 

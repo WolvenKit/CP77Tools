@@ -30,6 +30,10 @@ namespace CP77Tools.UI.Views.Tabs.Dump
         public XbmInfoTab()
         {
             InitializeComponent();
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
             SUI.sui.dumpdata.Dump_Info = true;
 
         }
