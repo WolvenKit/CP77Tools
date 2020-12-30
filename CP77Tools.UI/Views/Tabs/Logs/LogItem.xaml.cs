@@ -24,13 +24,13 @@ namespace CP77Tools.UI.Views.Tabs.Logs
     {
         public LogItem(int type)
         {
-            InitializeComponent();
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-            {
+            
+                InitializeComponent();
+          
                 CurrentTimeStamp.Content = DateTime.Now;
                 SetColor(type);
 
-            }));
+            
        
         }
 

@@ -2,10 +2,13 @@
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Functionality;
 using CP77Tools.UI.Views.Pages;
+using CP77Tools.UI.Views.Tabs.Logs;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using WolvenKit.Common.Tools.DDS;
 
@@ -14,10 +17,19 @@ namespace CP77Tools.UI.Data
     public class General
     {
 
+        public static List<int> TaskIDList = new List<int>();
 
+        public int TaskIDGen()
+        {
+            var a = TaskIDList.Count + 1;
+            TaskIDList.Add(a);
+            return a;
+
+        }
 
         public enum ColorShade
         {
+            
             Dark,
             Light
         }
@@ -58,6 +70,8 @@ namespace CP77Tools.UI.Data
                 name = _name;
                 PresetData = data;
                 Pdata = data;
+
+
             }
 
         }
@@ -77,8 +91,13 @@ namespace CP77Tools.UI.Data
         public bool InterceptLog = false;
 
 
-        public Tools ToolsInstance { get; internal set; }
+        public Tools ToolsInstance { get; set; }
 
-        
+        public ToolLogFlyout toolLogFlyoutInstance { get; set; }
+
+         public static ConcurrentQueue<Task> cq = new ConcurrentQueue<Task>();
+
     }
+
+
 }

@@ -68,11 +68,12 @@ namespace CP77Tools.UI.Views.Tabs.Oodle
         private void CreateDumpTaskk()
         {
             TabItem NewTask = new TabItem();
-            NewTask.Header = "[" + OodleData.OodleTaskType.Decompress + "]";
+            NewTask.Header = "[" + OodleData.OodleTaskType.Decompress + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
             var sometask = new TaskTemplate(General.TaskType.Oodle);
             sometask.ArchiveTaskConceptGrid.ItemsSource = null;
             //      sometask.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;   // LETS ADD THIS LATER JUST INFO THO 
-            sometask.TaskFinalGroup.Header = "Decompress Task Settings";
+            sometask.TaskFinalGroup.Header = "Decompress Task Settings"; sometask.TaskTitleLabel.Content = "Task : Oodle Decompress Task";
+
             sometask.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
             NewTask.Content = sometask;
             SUI.sui.generaldata.ToolsInstance.ArchiveSubTab.Items.Add(NewTask);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CP77Tools.UI.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,29 +23,26 @@ namespace CP77Tools.UI.Views.Tabs.Logs
     {
         public ToolLogFlyout()
         {
-            InitializeComponent();
-            CreateNewLogItem("Archive",2);
-            CreateNewLogItem("Error", 1);
-            CreateNewLogItem("Archive", 2);
-            CreateNewLogItem("Error", 1); 
-            CreateNewLogItem("Archive", 2);
-            CreateNewLogItem("Error", 1); 
-            CreateNewLogItem("Archive", 7);
-            CreateNewLogItem("Error", 7); 
-            CreateNewLogItem("Archive", 2);
-            CreateNewLogItem("Error", 1);
+            InitializeComponent(); if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
 
+            SUI.sui.generaldata.toolLogFlyoutInstance = this;
+             SUI.sui.log.flyoutInstance = SUI.sui.generaldata.toolLogFlyoutInstance;
 
         }
 
-
-        public void CreateNewLogItem(string Sender, int type)
+        public void CreateNewLogItem(General.TaskType taskType)
         {
-
-            LogItem logItem = new LogItem(type);
-            logItem.SenderLabel.Content = Sender;
-            logItem.SenderText.Text = "TESTING : Error Found during Task\n Try launching the task again.";
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                LogItem logItem = new LogItem(2);
+            logItem.SenderLabel.Content = taskType.ToString();
+            logItem.SenderText.Text = "A task with type : " + taskType.ToString() + " has finished.";
             LogItemWrapPanel.Children.Add(logItem);
+            }));
+
         }
 
         private void LogItemWrapPanel_SizeChanged(object sender, SizeChangedEventArgs e)

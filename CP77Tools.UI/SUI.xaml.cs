@@ -14,6 +14,8 @@ using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Views;
 using CP77Tools.UI.Views.Pages;
 using CP77.CR2W.Resources;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CP77Tools.UI
 {
@@ -38,7 +40,6 @@ namespace CP77Tools.UI
         public UserInterfaceLogic ui;
 
 
-   
 
 
         public SUI()
@@ -48,7 +49,8 @@ namespace CP77Tools.UI
             sui = this;
             log = new Logging(sui);
             generaldata = new General();
-         
+            Properties.Settings.Default.Save();
+
             ThemeManager.Current.ChangeTheme(this, generaldata.ThemeHelper("Dark.Steel"));
 
 
@@ -75,7 +77,8 @@ namespace CP77Tools.UI
             repackdata = new RepackData();
        
             ui = new UserInterfaceLogic(sui);
-            
+
+            Thread worker = new Thread(backgroundworker); worker.IsBackground = true; worker.Start();
 
             // Navigate to the home page.
             this.Loaded += (sender, args) => this.navigationServiceEx.Navigate(new Uri("Views/Pages/MainPage.xaml", UriKind.RelativeOrAbsolute));
@@ -85,6 +88,30 @@ namespace CP77Tools.UI
             if (e.InvokedItem is MenuItem menuItem && menuItem.IsNavigation)
             {
                 this.navigationServiceEx.Navigate(menuItem.NavigationDestination);
+            }
+        }
+
+
+        public void backgroundworker()
+        {
+            while (true)
+            {
+            
+                    Thread.Sleep(100);
+                    if (General.cq.IsEmpty)
+                    {
+
+                    }
+                    else
+                    {
+                        Task retvalue;
+                        var a = General.cq.TryDequeue(out retvalue);
+                        retvalue.Start();
+                        retvalue.Wait();
+                    }
+                
+                
+              
             }
         }
 

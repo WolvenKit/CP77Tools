@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
             d:DesignHeight="700" d:DesignWidth="1100">
     <Grid Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
-        <Label Content="Task : " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ScrollViewer Margin="0,41,0,70" HorizontalAlignment="Left" Width="660">
-            <WrapPanel x:Name="TaskLogWrap" HorizontalAlignment="Stretch" Orientation="Vertical" ItemWidth="646" SizeChanged="TaskLogWrap_SizeChanged"/>
+        <Label x:Name="TaskTitleLabel" Content="Task : " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <ScrollViewer x:Name="ScrollViewerTaskLog" Margin="10,41,445,70" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <WrapPanel x:Name="TaskLogWrap" HorizontalAlignment="Stretch" Orientation="Vertical" SizeChanged="TaskLogWrap_SizeChanged" VerticalAlignment="Stretch"/>
         </ScrollViewer>
-        <GroupBox x:Name="TaskFinalGroup" Header="Task Concept" Margin="665,11,10,70">
+        <GroupBox x:Name="TaskFinalGroup" Header="Task Concept" Margin="0,11,10,70" HorizontalAlignment="Right" Width="430">
             <Grid>
                 <DataGrid x:Name="ArchiveTaskConceptGrid" AutoGenerateColumns="False" Margin="0,4,0,41" SelectionMode="Single" SelectionUnit="Cell" CanUserDeleteRows="False" CanUserResizeRows="False" RowDetailsVisibilityMode="Collapsed">
                     <DataGrid.Columns>

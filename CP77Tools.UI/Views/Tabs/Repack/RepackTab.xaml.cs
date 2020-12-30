@@ -65,9 +65,10 @@ namespace CP77Tools.UI.Views.Tabs.Repack
         private void CreateDumpTaskk()
         {
             TabItem NewTask = new TabItem();
-            NewTask.Header = "[" + RepackData.RepackTaskType.Repack + "]";
+            NewTask.Header = "[" + RepackData.RepackTaskType.Repack + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
             var sometask = new TaskTemplate(General.TaskType.Repack);
-            sometask.ArchiveTaskConceptGrid.ItemsSource = null;
+            sometask.ArchiveTaskConceptGrid.ItemsSource = null;            sometask.TaskTitleLabel.Content = "Task : Repack Task";
+
             //      sometask.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;   // LETS ADD THIS LATER JUST INFO THO 
             sometask.TaskFinalGroup.Header = "Repack Task Settings";
             sometask.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;

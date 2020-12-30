@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Data;
+using System.Collections.Concurrent;
 
 namespace CP77Tools.UI.Functionality
 {
@@ -122,13 +123,13 @@ namespace CP77Tools.UI.Functionality
 
         }
 
-        private void StartArchiveTask()
+        private async void StartArchiveTask()
         {
             var p1 = sui.archivedata.Archive_Path;
             var p2 = sui.archivedata.Archive_OutPath;
             var p3 = sui.archivedata.Archive_Extract;
             var p4 = sui.archivedata.Archive_Dump;
-            var p5 = sui.archivedata.Archive_List; 
+            var p5 = sui.archivedata.Archive_List;
             var p6 = sui.archivedata.Archive_Uncook;
             var p7 = sui.archivedata.Archive_UncookFileType;
             var p8 = sui.archivedata.Archive_Hash;
@@ -136,10 +137,9 @@ namespace CP77Tools.UI.Functionality
             var p10 = sui.archivedata.Archive_Regex;
             sui.archivedata.resetarchivedata();
 
-            Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10));
-            ATask.Start();
-            ATask.Wait();                               
-            sui.log.TaskFinished(General.TaskType.Archive);
+            Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));       
+            General.cq.Enqueue(ATask);
+           // sui.log.TaskFinished(General.TaskType.Archive);
 
         }
 

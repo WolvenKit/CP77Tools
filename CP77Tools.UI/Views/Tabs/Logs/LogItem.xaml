@@ -8,7 +8,7 @@
     <Grid x:Name="BackGround" Background="{DynamicResource MahApps.Brushes.Accent4}" Margin="0,5,0,5">
         <Label x:Name="SenderLabel" Content="Sender" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Separator Margin="0,20,0,0" VerticalAlignment="Top" Height="6"/>
-        <TextBlock x:Name="SenderText" HorizontalAlignment="Stretch" Margin="0,26,0,0" Text="Some Example message here" TextWrapping="Wrap" VerticalAlignment="Top" Height="34"/>
+        <TextBlock x:Name="SenderText" HorizontalAlignment="Stretch" Margin="0,26,0,0" Text="Some Example message here" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" TextAlignment="Left" Padding="5,0,0,0"/>
         <Label x:Name="CurrentTimeStamp" Content="Sender" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,-6,0,0" FontSize="10" Height="21" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"/>
 
     </Grid>

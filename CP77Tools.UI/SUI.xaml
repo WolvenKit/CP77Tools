@@ -17,7 +17,7 @@
         WindowTransitionsEnabled="False"
 
         GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" Icon="/Resources/LogoNoBox.png" IconOverlayBehavior="HiddenTitleBar" MinWidth="1350" MinHeight="650">
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Icon="/Resources/ThickLogo.png" IconOverlayBehavior="HiddenTitleBar" MinWidth="1350" MinHeight="650" TitleBarHeight="40"  IconBitmapScalingMode="HighQuality">
 
     <controls:MetroWindow.DataContext>
         <viewModels:ShellViewModel />

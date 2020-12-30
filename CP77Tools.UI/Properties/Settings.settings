@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CP77Tools.UI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Theme" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Dark</Value>
+    </Setting>
+    <Setting Name="ThemeAccent" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Steel</Value>
+    </Setting>
+    <Setting Name="DefaultOutPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OpenOutDir" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Preview - 0.5.4.1</Value>
+    </Setting>
+    <Setting Name="EnablePopUps" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LastUpdateDate" Type="System.DateTime" Scope="Application">
+      <Value Profile="(Default)">12/30/2020 00:41:00</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

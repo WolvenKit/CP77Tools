@@ -11,6 +11,7 @@ using CP77Tools.UI;
 using System.Text.RegularExpressions;
 using CP77Tools.UI.Data;
 using CP77.Common.Services;
+using CP77Tools.UI.Views.Tabs.Logs;
 
 namespace CP77Tools.UI.Functionality
 {
@@ -20,6 +21,8 @@ namespace CP77Tools.UI.Functionality
         
         private SUI app;
         public Logging(SUI _SUI) { this.app = _SUI; }
+
+        public ToolLogFlyout flyoutInstance;
 
 
         public void UI_Logger_PropertyChanging(object sender, PropertyChangingEventArgs e)
@@ -100,20 +103,31 @@ namespace CP77Tools.UI.Functionality
             switch (CurrentTaskType)
             {
                 case General.TaskType.Archive:
-                 //   Process.Start("explorer.exe", app.generaldata.Archive_OutPath);
+                    flyoutInstance.CreateNewLogItem(General.TaskType.Archive);
+                    Process.Start("explorer.exe", app.archivedata.Archive_OutPath);
                     break;
                 case General.TaskType.CR2W:
+                    flyoutInstance.CreateNewLogItem(General.TaskType.CR2W);
+
                     Process.Start("explorer.exe", app.cr2wdata.CR2W_OutPath);
                     break;
                 case General.TaskType.Dump:
+                    flyoutInstance.CreateNewLogItem(General.TaskType.Dump);
+
                     Process.Start("explorer.exe", app.dumpdata.Dump_OutPath);
                     break;
                 case General.TaskType.Hash:
+                    flyoutInstance.CreateNewLogItem(General.TaskType.Hash);
+
                     break;
                 case General.TaskType.Oodle:
+                    flyoutInstance.CreateNewLogItem(General.TaskType.Oodle);
+
                     Process.Start("explorer.exe", app.oodledata.Oodle_OutPath);
                     break;
                 case General.TaskType.Repack:
+                    flyoutInstance.CreateNewLogItem(General.TaskType.Repack);
+
                     Process.Start("explorer.exe", app.repackdata.Repack_OutPath);
                     break;
             }

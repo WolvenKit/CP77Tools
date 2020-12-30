@@ -12,10 +12,21 @@
     <Grid>
         <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}" >
             <Label Content="Settings" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <mah:ToggleSwitch x:Name="ThemeDarkLightToggle" Header="Theme" Height="100" Margin="30,50,0,0" VerticalAlignment="Top" Width="100" OffContent="Dark" OnContent="Light" Toggled="ThemeDarkLightToggle_Toggled"/>
+            <mah:ToggleSwitch x:Name="ThemeDarkLightToggle" Header="Theme" Height="54" Margin="155,68,0,0" VerticalAlignment="Top" Width="100" OffContent="Dark" OnContent="Light" Toggled="ThemeDarkLightToggle_Toggled"/>
             <Separator Margin="0,30,0,0" VerticalAlignment="Top" Height="15"/>
-            <ComboBox x:Name="AccentBox" HorizontalAlignment="Left" Margin="160,74,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="AccentBox_SelectionChanged"/>
-            <Label Content="Accent" HorizontalAlignment="Left" Margin="160,48,0,0" VerticalAlignment="Top" FontSize="14"/>
+            <ComboBox x:Name="AccentBox" HorizontalAlignment="Left" Margin="260,95,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="AccentBox_SelectionChanged"/>
+            <Label Content="Accent" HorizontalAlignment="Left" Margin="255,63,0,0" VerticalAlignment="Top" FontSize="14"/>
+            <Separator  Margin="145,75,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Content="Enviroment" HorizontalAlignment="Left" Margin="24,225,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="116" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Separator  Margin="145,150,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Content="Default Outpath" HorizontalAlignment="Left" Margin="24,150,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="116" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Separator  Margin="145,225,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Content="Application Theme" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="140" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Label Content="Task" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="130" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Separator  Margin="145,300,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox x:Name="ArchivePatternTextBox" Margin="155,157,550,0" Text="Enter Outpath" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" MinWidth="350"/>
+            <mah:ToggleSwitch x:Name="ThemeDarkLightToggle_Copy" Header="Desktop Popups" Height="54" Margin="155,218,0,0" VerticalAlignment="Top" Width="133" Toggled="ThemeDarkLightToggle_Toggled" OffContent="Disabled" OnContent="Enabled"/>
+            <mah:ToggleSwitch x:Name="ThemeDarkLightToggle_Copy1" Header="Open Output directory when task finishes." Height="54" Margin="155,293,0,0" VerticalAlignment="Top" Width="265" Toggled="ThemeDarkLightToggle_Toggled" OnContent="Enabled" OffContent="Disabled"/>
         </Grid>
 
     </Grid>
