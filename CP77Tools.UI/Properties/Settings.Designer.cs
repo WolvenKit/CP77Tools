@@ -106,5 +106,17 @@ namespace CP77Tools.UI.Properties {
                 this["LastUpdateDate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HasSeenNewYear {
+            get {
+                return ((bool)(this["HasSeenNewYear"]));
+            }
+            set {
+                this["HasSeenNewYear"] = value;
+            }
+        }
     }
 }

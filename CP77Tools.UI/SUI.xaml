@@ -9,7 +9,6 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
         x:Class="CP77Tools.UI.SUI"
         mc:Ignorable="d"
-        xmlns:viewModels="clr-namespace:CP77Tools.UI.ViewModels"
         xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:UCMainPage="clr-namespace:CP77Tools.UI.Views.Pages" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     Title=""
         Height="700"

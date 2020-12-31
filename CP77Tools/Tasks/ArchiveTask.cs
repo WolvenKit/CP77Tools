@@ -24,6 +24,7 @@ namespace CP77Tools.Tasks
             {
                 logger.LogString("Please fill in an input path", Logtype.Error);
                 return;
+              
             }
 
             Parallel.ForEach(path, file =>

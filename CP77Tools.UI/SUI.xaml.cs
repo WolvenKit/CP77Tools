@@ -153,9 +153,10 @@ namespace CP77Tools.UI
             UI_Logger.PropertyChanging += log.UI_Logger_PropertyChanging;
 
 
-            this.ShowMessageAsync("Happy New Year!", 
+            var NewYear = this.ShowMessageAsync("Happy New Year!", 
                 "The CP77Tools and CDPR Modding Community wish you a happy new year!");
-
+            Properties.Settings.Default.HasSeenNewYear = true;
+            Properties.Settings.Default.Save();
 
 
          // backgroundworker();

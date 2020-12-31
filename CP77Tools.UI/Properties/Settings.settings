@@ -23,5 +23,8 @@
     <Setting Name="LastUpdateDate" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">12/30/2020 00:41:00</Value>
     </Setting>
+    <Setting Name="HasSeenNewYear" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
