@@ -1,4 +1,5 @@
-﻿using CP77Tools.UI.Data;
+﻿using ControlzEx.Theming;
+using CP77Tools.UI.Data;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Functionality.Customs;
 using CP77Tools.UI.Views.Tasks;
@@ -28,11 +29,14 @@ namespace CP77Tools.UI.Views.Tabs.Dump
         public ImportsTab()
         {
             InitializeComponent();
+
             if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 return;
             }
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
             SUI.sui.dumpdata.Dump_Imports = true;
+            SUI.sui.DumpImportsTab = this;
 
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)

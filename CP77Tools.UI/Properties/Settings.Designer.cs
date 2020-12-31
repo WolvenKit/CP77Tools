@@ -23,66 +23,87 @@ namespace CP77Tools.UI.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Dark")]
         public string Theme {
             get {
                 return ((string)(this["Theme"]));
             }
+            set {
+                this["Theme"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Steel")]
         public string ThemeAccent {
             get {
                 return ((string)(this["ThemeAccent"]));
             }
+            set {
+                this["ThemeAccent"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DefaultOutPath {
             get {
                 return ((string)(this["DefaultOutPath"]));
             }
+            set {
+                this["DefaultOutPath"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool OpenOutDir {
             get {
                 return ((bool)(this["OpenOutDir"]));
             }
+            set {
+                this["OpenOutDir"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Preview - 0.5.4.1")]
         public string Version {
             get {
                 return ((string)(this["Version"]));
             }
+            set {
+                this["Version"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool EnablePopUps {
             get {
                 return ((bool)(this["EnablePopUps"]));
             }
+            set {
+                this["EnablePopUps"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("12/30/2020 00:41:00")]
         public global::System.DateTime LastUpdateDate {
             get {
                 return ((global::System.DateTime)(this["LastUpdateDate"]));
+            }
+            set {
+                this["LastUpdateDate"] = value;
             }
         }
     }

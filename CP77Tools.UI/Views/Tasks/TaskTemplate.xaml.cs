@@ -1,6 +1,7 @@
 ﻿using CP77.Common.Services;
 using CP77Tools.UI.Data;
 using CP77Tools.UI.Data.Tasks;
+using CP77Tools.UI.Views.Notifications;
 using CP77Tools.UI.Views.Tabs.Logs;
 using System;
 using System.Collections.Concurrent;
@@ -66,27 +67,34 @@ namespace CP77Tools.UI.Views.Tasks
         {
         }
 
+
+        public List<KeyValuePair<Logtype,string>> LOGDict = new List<KeyValuePair<Logtype,string>>();
+
         private void UI_Logger_OnStringLogged(object sender, CP77.Common.Services.LogStringEventArgs e)
         {
 
-         //   if (e.Logtype != Logtype.Error) {
-        //    var a = new StaTaskScheduler(2);
-
-            
-         //  Task.Factory.StartNew(() =>
-        //    {
-               // AddToTaskLog(e.Logtype, e.Message);
-       //     }, CancellationToken.None, TaskCreationOptions.None, a);
+            if (e.Logtype != Logtype.Error)
+            {
+                var a = new StaTaskScheduler(2);
 
 
+                if (SUI.sui.archivedata.Archive_List)
+                {
+                    var KV = new KeyValuePair<Logtype,string>(e.Logtype,e.Message);
 
-                //Task newtask = new Task(() => AddToTaskLog(e.Logtype, e.Message));
+                    LOGDict.Add(KV);
+                }
+                else
+                {
+                    Task.Factory.StartNew(() =>
+                    {
+                        AddToTaskLog(e.Logtype, e.Message);
+                    }, CancellationToken.None, TaskCreationOptions.None, a);
+
+                }
 
 
-                //Task.Factory.StartNew(() => AddToTaskLog(e.Logtype, e.Message)).ContinueWith(r => AddToTaskLog(e.Logtype, e.Message), scheduler);
-
-
-       //     }
+            }
 
 
 
@@ -94,12 +102,10 @@ namespace CP77Tools.UI.Views.Tasks
 
         }
 
-        private void AddToTaskLog(Logtype logtype, string message)
+        public void AddToTaskLog(Logtype logtype, string message)
         {
-            //    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-            //    {
-            //    var logtype = e.Logtype;
-            //   var message = e.Message;
+ 
+
             if (logtype.ToString() == "Error")
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
@@ -137,7 +143,6 @@ namespace CP77Tools.UI.Views.Tasks
                     TaskLogWrap.Children.Add(TaskLogItem);
                 }));
             }
-            //   }));
         }
 
         private void UI_Logger_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

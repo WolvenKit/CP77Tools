@@ -1,4 +1,5 @@
-﻿using CP77Tools.UI.Data;
+﻿using ControlzEx.Theming;
+using CP77Tools.UI.Data;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Functionality.Customs;
 using CP77Tools.UI.Views.Tasks;
@@ -32,7 +33,9 @@ namespace CP77Tools.UI.Views.Tabs.CR2W
             {
                 return;
             }
-            SUI.sui.cr2wdata.CR2W_Chunks = true;
+            SUI.sui.cr2wdata.CR2W_Chunks = true; ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+            SUI.sui.Cr2WClassInfoTab = this;
+
 
         }
 

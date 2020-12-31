@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static CP77Tools.UI.Data.General;
+using ControlzEx.Theming;
 
 namespace CP77Tools.UI.Views.Tabs.Dump
 {
@@ -30,10 +31,13 @@ namespace CP77Tools.UI.Views.Tabs.Dump
         public CustomTab()
         {
             InitializeComponent();
+
             if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 return;
             }
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+            SUI.sui.DumpCustomTab = this;
 
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)

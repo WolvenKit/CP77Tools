@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:CP77Tools.UI.Views.Pages"
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="CP77Tools.UI.Views.Pages.SettingsPage"
       mc:Ignorable="d" 
-     d:DesignHeight="700" d:DesignWidth="1100"
+     d:DesignHeight="700" d:DesignWidth="1100" Loaded="UserControl_Loaded"
    >
 
     <Grid>
@@ -24,9 +24,9 @@
             <Label Content="Application Theme" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="140" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <Label Content="Task" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="40" Width="130" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <Separator  Margin="145,300,0,0" MinWidth="0"  VerticalContentAlignment="Stretch" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" MinHeight="40" Width="1" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="ArchivePatternTextBox" Margin="155,157,550,0" Text="Enter Outpath" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" MinWidth="350"/>
-            <mah:ToggleSwitch x:Name="ThemeDarkLightToggle_Copy" Header="Desktop Popups" Height="54" Margin="155,218,0,0" VerticalAlignment="Top" Width="133" Toggled="ThemeDarkLightToggle_Toggled" OffContent="Disabled" OnContent="Enabled"/>
-            <mah:ToggleSwitch x:Name="ThemeDarkLightToggle_Copy1" Header="Open Output directory when task finishes." Height="54" Margin="155,293,0,0" VerticalAlignment="Top" Width="265" Toggled="ThemeDarkLightToggle_Toggled" OnContent="Enabled" OffContent="Disabled"/>
+            <TextBox x:Name="Defaultoutpathsettings" Margin="155,157,550,0" Text="Enter Outpath" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" MinWidth="350" TextChanged="Defaultoutpathsettings_TextChanged" mah:TextBoxHelper.AutoWatermark="True"/>
+            <mah:ToggleSwitch x:Name="DesktopPopupsToggle" Header="Desktop Popups" Height="54" Margin="155,218,0,0" VerticalAlignment="Top" Width="133" OffContent="Disabled" OnContent="Enabled" Toggled="DesktopPopupsToggle_Toggled"/>
+            <mah:ToggleSwitch x:Name="OutputDirToggle" Header="Open Output directory when task finishes." Height="54" Margin="155,293,0,0" VerticalAlignment="Top" Width="265" OnContent="Enabled" OffContent="Disabled" Toggled="OutputDirToggle_Toggled"/>
         </Grid>
 
     </Grid>

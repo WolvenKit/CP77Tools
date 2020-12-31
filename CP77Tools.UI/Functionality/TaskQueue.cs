@@ -11,7 +11,7 @@ namespace CP77Tools.UI.Functionality
 
     public class TaskQueue
     {
-        
+        // Not used afaik will check later.
     }
 
 

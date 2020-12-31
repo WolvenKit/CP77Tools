@@ -25,18 +25,14 @@ namespace CP77Tools.UI.Views.Notifications
         public ToastNotification(string Title, string Text, int NotiType)
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, ("Dark.Steel"));
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
 
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             this.Left = desktopWorkingArea.Right - this.Width;
             this.Top = desktopWorkingArea.Bottom - this.Height;
-
             NoteTExt.Text = Text;
             Header.Header = Title;
             SetColor(NotiType);
-
-
-
         }
 
         private void SetColor(int type)
@@ -49,7 +45,6 @@ namespace CP77Tools.UI.Views.Notifications
                     break;
                 case 2:
                     BackGround.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF1F4D1A")); // Succes
-
                     break;
             }
         }

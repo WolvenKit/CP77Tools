@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static CP77Tools.UI.Data.General;
+using ControlzEx.Theming;
 
 namespace CP77Tools.UI.Views.Tabs.Oodle
 {
@@ -34,7 +35,11 @@ namespace CP77Tools.UI.Views.Tabs.Oodle
             {
                 return;
             }
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+
             SUI.sui.oodledata.Oodle_Decompress = true;
+            SUI.sui.OodleDecompressTab = this;
+
 
         }
         private void ArchiveSelectOutpathButton_Click(object sender, RoutedEventArgs e)

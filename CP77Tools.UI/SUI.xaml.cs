@@ -2,8 +2,6 @@
 using ControlzEx.Theming;
 using CP77.Common.Services;
 using CP77Tools.UI.Data;
-using CP77Tools.UI.Navigation;
-using CP77Tools.UI.ViewModels;
 using CP77Tools.UI.Functionality;
 using MahApps.Metro.Controls;
 using System;
@@ -17,7 +15,6 @@ using CP77.CR2W.Resources;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using MenuItem = CP77Tools.UI.ViewModels.MenuItem;
 using System.ComponentModel;
 using MahApps.Metro.Controls.Dialogs;
 using CP77Tools.UI.Views.Notifications;
@@ -52,9 +49,40 @@ namespace CP77Tools.UI
         public Logging log;
         public UserInterfaceLogic ui;
 
+
+        //tabs
+        public Views.Tabs.Archive.CustomTab ArchiveCustomTab;
+        public Views.Tabs.Archive.DumpTab ArchiveDumpTab;
+        public Views.Tabs.Archive.ExtractSingleTab ArchiveSingleTab;
+        public Views.Tabs.Archive.ExtractTab ArchiveExtractTab;
+        public Views.Tabs.Archive.ListTab ArchiveListTab;
+        public Views.Tabs.Archive.UncookTab ArchiveUncookTab;
+
+        public Views.Tabs.CR2W.CustomTab Cr2wCustomTab;
+        public Views.Tabs.CR2W.ClassInfoTab Cr2WClassInfoTab;
+        public Views.Tabs.CR2W.AllInfoTab Cr2wAllInfoTab;
+
+
+        public Views.Tabs.Dump.ClassInfoTab DumpClassInfoTab;
+        public Views.Tabs.Dump.CustomTab DumpCustomTab;
+        public Views.Tabs.Dump.ImportsTab DumpImportsTab;
+        public Views.Tabs.Dump.MissingHashesTab DumpMissingTab;
+        public Views.Tabs.Dump.XbmInfoTab DumpXbmTab;
+
+
+        public Views.Tabs.Hash.HashTab HashHashTab;
+        public Views.Tabs.Oodle.DecompressTab OodleDecompressTab;
+        public Views.Tabs.Repack.RepackTab RepackRepackTab;
+
+
+
+
+        //
+
         public Tools tools;
-
-
+        public AboutPage about;
+        public SettingsPage settings;
+        public MainPage main;
         public SUI()
         {
 
@@ -77,9 +105,10 @@ namespace CP77Tools.UI
 
 
              tools = new Tools();
-            SettingsPage settings = new SettingsPage();
+             settings = new SettingsPage();
 
-            AboutPage about = new AboutPage();
+             about = new AboutPage();
+            main = (MainPage)tab1.Content;
             tab2.Content = tools;
             tab3.Content = settings;
             tab4.Content = about;
@@ -105,8 +134,8 @@ namespace CP77Tools.UI
             ItemContainerTemplate a = new ItemContainerTemplate();
 
 
-            ThemeManager.Current.ChangeTheme(this, ("Dark.Steel"));
-
+            ThemeManager.Current.ChangeTheme(this, (Properties.Settings.Default.Theme + "." + Properties.Settings.Default.ThemeAccent));
+            tools.RefreshTheme();
 
             //  this.navigationServiceEx = new NavigationServiceEx();
             // this.navigationServiceEx.Navigated += this.NavigationServiceEx_OnNavigated;
@@ -143,15 +172,6 @@ namespace CP77Tools.UI
         
            
         
-
-        private void HamburgerMenuControl_OnItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
-        {
-            if (e.InvokedItem is ViewModels.MenuItem menuItem && menuItem.IsNavigation)
-            {
-               // this.navigationServiceEx.Navigate(menuItem.NavigationDestination);
-            }
-        }
-
 
 
 
@@ -310,6 +330,11 @@ namespace CP77Tools.UI
                 LastSelectedPageIndex = TabControlMain.SelectedIndex;
 
             }
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Button_Click_1();
         }
     }
 }

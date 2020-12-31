@@ -1,4 +1,5 @@
-﻿using CP77Tools.UI.Data;
+﻿using ControlzEx.Theming;
+using CP77Tools.UI.Data;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Functionality.Customs;
 using CP77Tools.UI.Views.Tasks;
@@ -31,8 +32,14 @@ namespace CP77Tools.UI.Views.Tabs.Archive
             {
                 return;
             }
+
             InitializeComponent();
-         
+
+
+
+      
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+            SUI.sui.ArchiveSingleTab = this;
 
         }
 

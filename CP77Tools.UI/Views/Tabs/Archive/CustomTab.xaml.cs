@@ -3,6 +3,7 @@ using CP77Tools.UI.Data;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Functionality.Customs;
 using CP77Tools.UI.Functionality.ToolsWindow;
+using CP77Tools.UI.Views.Notifications;
 using CP77Tools.UI.Views.Tasks;
 using MahApps.Metro.Controls;
 using System;
@@ -46,6 +47,7 @@ namespace CP77Tools.UI.Views.Tabs.Archive
             ArchiveFunc.LoadCollectionData();
             ArchiveTaskConceptGrid.ItemsSource = ArchiveData.ArchiveConceptTaskDict;
 
+            SUI.sui.ArchiveCustomTab = this;
         }
 
 
@@ -129,6 +131,9 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
         private void ArchiveListSwitch_Toggled(object sender, RoutedEventArgs e)
         {
+            GeneralNotification notification = new GeneralNotification("Warning", "Listing large archives is unsupported and most likely will require restarting the application.");
+
+            notification.Show();
             SwitchHelper(sender, "List");
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
             if (toggleSwitch != null)

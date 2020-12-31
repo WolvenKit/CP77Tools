@@ -129,23 +129,6 @@
                     </mah:MetroTabControl>
                 </Grid>
             </TabItem>
-            <TabItem Header="Hash">
-                <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
-                    <mah:MetroTabControl x:Name="HashSubTab">
-                        <TabItem Header="Create Task">
-                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
-                                <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy34" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
-                                    <TabItem Header="Hashes">
-                                        <ucHash:HashTab/>
-                                    </TabItem>
-
-
-                                </controls:MetroTabControl>
-                            </Grid>
-                        </TabItem>
-                    </mah:MetroTabControl>
-                </Grid>
-            </TabItem>
             <TabItem Header="Oodle">
                 <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                     <mah:MetroTabControl x:Name="OodleSubTab">
@@ -160,6 +143,23 @@
                             </Grid>
                         </TabItem>
                     </mah:MetroTabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Hash" Visibility="Hidden">
+                <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
+                    <controls:MetroTabControl x:Name="HashSubTab">
+                        <TabItem Header="Create Task">
+                            <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
+                                <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy34" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
+                                    <TabItem Header="Hashes">
+                                        <ucHash:HashTab/>
+                                    </TabItem>
+
+
+                                </controls:MetroTabControl>
+                            </Grid>
+                        </TabItem>
+                    </controls:MetroTabControl>
                 </Grid>
             </TabItem>
         </mah:MetroTabControl>

@@ -26,8 +26,9 @@ namespace CP77Tools.UI.Views.Tabs.Logs
         {
             
                 InitializeComponent();
-          
-                CurrentTimeStamp.Content = DateTime.Now;
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+
+            CurrentTimeStamp.Content = DateTime.Now;
                 SetColor(type);
 
             

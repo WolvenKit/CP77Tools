@@ -1,4 +1,5 @@
-﻿using CP77Tools.UI.Data;
+﻿using ControlzEx.Theming;
+using CP77Tools.UI.Data;
 using CP77Tools.UI.Functionality;
 using CP77Tools.UI.Views.Notifications;
 using System;
@@ -29,6 +30,7 @@ namespace CP77Tools.UI.Views.Tabs.Logs
             {
                 return;
             }
+            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
 
             SUI.sui.generaldata.toolLogFlyoutInstance = this;
              SUI.sui.log.flyoutInstance = SUI.sui.generaldata.toolLogFlyoutInstance;
@@ -46,9 +48,12 @@ namespace CP77Tools.UI.Views.Tabs.Logs
 
 
 
-                 // THIS IS AN OPTION NEED A IF BOOL FROM SETTIGNS ok ? Ok ? 
-                ToastNotification notification = new ToastNotification(taskType.ToString() + " Task Finished", "The " + taskType.ToString() + " has finished" + "\n" + "You can see the results on the task page.", 1);
-                notification.Show();
+           if(Properties.Settings.Default.EnablePopUps)
+            {
+                    ToastNotification notification = new ToastNotification(taskType.ToString() + " Task Finished", "The " + taskType.ToString() + " has finished" + "\n" + "You can see the results on the task page.", 1);
+                    notification.Show();
+                }
+             
 
 
                 UserInterfaceLogic.controller.CloseAsync();

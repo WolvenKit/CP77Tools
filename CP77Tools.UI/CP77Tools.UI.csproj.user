@@ -13,6 +13,12 @@
     <Compile Update="SUI.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Notifications\GeneralNotification.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Notifications\ListNotification.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Notifications\ToastNotification.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,6 +100,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="SUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Notifications\GeneralNotification.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Notifications\ListNotification.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Notifications\ToastNotification.xaml">

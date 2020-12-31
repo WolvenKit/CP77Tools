@@ -19,7 +19,7 @@ namespace CP77Tools.UI.Functionality
     public class Logging
     {
 
-        
+
         private SUI app;
         public Logging(SUI _SUI) { this.app = _SUI; }
 
@@ -28,29 +28,16 @@ namespace CP77Tools.UI.Functionality
 
         public void UI_Logger_PropertyChanging(object sender, PropertyChangingEventArgs e)
         {
-     //       Trace.Write(e.PropertyName);
         }
 
         public void UI_Logger_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (sender is LoggerService _logger)
             {
-             //   Trace.Write(e.PropertyName);
 
-                switch (e.PropertyName)
-                {
-                    case "Progress":
-                        {
-                            UIProgressCounter(_logger); break;
-                        }
-                    default:
-                        break;
-                }
+                switch (e.PropertyName) { case "Progress": { UIProgressCounter(_logger); break; } default: break; }
             }
-            else
-            {
-           //     Trace.Write(e.PropertyName);
-            }
+            else { }
         }
 
         public void UI_Logger_OnStringLogged(object sender, LogStringEventArgs e)
@@ -95,18 +82,8 @@ namespace CP77Tools.UI.Functionality
 
                     if (_logger.Progress.Item1 == 1)
                     {
-                        try
-                        {
-                            
-                        }
-                        catch
-                        {
-
-                        }
+                        try { } catch { }
                     }
-                    
-
-
                 }
 
             }));
@@ -120,54 +97,31 @@ namespace CP77Tools.UI.Functionality
             {
                 case General.TaskType.Archive:
                     flyoutInstance.CreateNewLogItem(General.TaskType.Archive, TaskID);
-
-                    
-
-
                     if (Properties.Settings.Default.OpenOutDir) { Process.Start("explorer.exe", app.archivedata.Archive_OutPath); }
                     break;
                 case General.TaskType.CR2W:
                     flyoutInstance.CreateNewLogItem(General.TaskType.CR2W, TaskID);
-
-                    if (Properties.Settings.Default.OpenOutDir)
-                    {
-                        Process.Start("explorer.exe", app.cr2wdata.CR2W_OutPath);
-                    }
+                    if (Properties.Settings.Default.OpenOutDir) { Process.Start("explorer.exe", app.cr2wdata.CR2W_OutPath); }
                     break;
                 case General.TaskType.Dump:
                     flyoutInstance.CreateNewLogItem(General.TaskType.Dump, TaskID);
-
-                    if (Properties.Settings.Default.OpenOutDir)
-                    {
-                        Process.Start("explorer.exe", app.dumpdata.Dump_OutPath);
-                    }
+                    if (Properties.Settings.Default.OpenOutDir) { Process.Start("explorer.exe", app.dumpdata.Dump_OutPath); }
                     break;
                 case General.TaskType.Hash:
                     flyoutInstance.CreateNewLogItem(General.TaskType.Hash, TaskID);
-
                     break;
                 case General.TaskType.Oodle:
                     flyoutInstance.CreateNewLogItem(General.TaskType.Oodle, TaskID);
-
-                    if (Properties.Settings.Default.OpenOutDir)
-                    {
-                        Process.Start("explorer.exe", app.oodledata.Oodle_OutPath);
-                    }
+                    if (Properties.Settings.Default.OpenOutDir) { Process.Start("explorer.exe", app.oodledata.Oodle_OutPath); }
                     break;
                 case General.TaskType.Repack:
                     flyoutInstance.CreateNewLogItem(General.TaskType.Repack, TaskID);
-
-                    if (Properties.Settings.Default.OpenOutDir)
-                    {
-                        Process.Start("explorer.exe", app.repackdata.Repack_OutPath);
-                    }
+                    if (Properties.Settings.Default.OpenOutDir) { Process.Start("explorer.exe", app.repackdata.Repack_OutPath); }
                     break;
             }
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
-           //     app.Main_ProgressBar_UIElement_ProgressBar.Value = 0;
-              //  app.Main_ProgressOutput_UIElement_TextBlock.Text = "[Succes] - Finished : " + CurrentTaskType.ToString();
-            //    app.Main_OutputBox_UIElement_ComboBox.Items.Add("[Succes] - Finished : " + CurrentTaskType.ToString());
+
                 TaskCounter = 0;
             }));
         }

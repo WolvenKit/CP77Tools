@@ -18,51 +18,21 @@ using WolvenKit.Common.Tools.DDS;
 namespace CP77Tools.UI.Data
 {
 
-    public class QueuedTask
-    {
-        public int taskID { get; set; }
-        public Task task { get; set; }
-        public General.TaskType tasktype { get; set; }
-        public ArchiveData.TaskType subtypearchive { get; set; }
-
-        public QueuedTask(int i, Task t, General.TaskType tt)
-        {
-            taskID = i;
-            task = t;
-            tasktype = tt;
-        }
-    }
+  
     public class General
     {
 
         public static List<int> TaskIDList = new List<int>();
-       // public static ConcurrentQueue<Task> cq = new ConcurrentQueue<Task>();
         public Dictionary<int, Task> TaskTodoDict = new Dictionary<int, Task>();
+        public enum TaskType { Archive, Dump, CR2W, Hash, Oodle, Repack, }
 
-
-
-
-
-        public  General()
-        {
-
-        }
-
-      
-
-        public async Task AddTaskToQueueAsync(QueuedTask queuedTask)
-        {
-
-        }
-
-        public async void JustWaiting()
-        {
-            
-        //    await foreach (QueuedTask i)
-        //    {
-              
-      //      }
-        }
+        // OTHER
+        public static string[] OMD_Output;
+        public enum OMD_Type { Single, Multi }
+        public bool InterceptLog = false;
+        public Tools ToolsInstance { get; set; }  // Remove and relink to SUI
+        public SettingsPage SettingsInstance { get; set; }
+        public ToolLogFlyout toolLogFlyoutInstance { get; set; }
 
         public int TaskIDGen()
         {
@@ -72,38 +42,28 @@ namespace CP77Tools.UI.Data
 
         }
 
-        public enum ColorShade
-        {
-            
-            Dark,
-            Light
-        }
+        public enum ColorShade { Dark, Light }
 
-        public string[] Colors2 = new string[]
-        {
-            "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna"
-        };
+        public string[] Colors2 = new string[] { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber", "Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
 
         public string CurrentTheme = "Dark.Steel";
 
-        public string ThemeFinder()
-        {
-            return CurrentTheme;
-        }
+        public string ThemeFinder() { return CurrentTheme; }
         public string ThemeHelper(string Theme)
-        {
-
+        { 
             CurrentTheme = Theme;
-
-            return Theme;
-            
+            Properties.Settings.Default.Theme = CurrentTheme.Split('.')[0];
+            Properties.Settings.Default.ThemeAccent = CurrentTheme.Split('.')[1];
+            Properties.Settings.Default.Save();
+            return Theme; 
         }
+
 
 
         public class Preset
         {
             internal string name;
-            internal Dictionary<string,string> Pdata;
+            internal Dictionary<string, string> Pdata;
             public General.TaskType Type { get; set; }
             public string Name { get; set; }
             public Dictionary<string, string> PresetData { get; set; }
@@ -115,38 +75,9 @@ namespace CP77Tools.UI.Data
                 name = _name;
                 PresetData = data;
                 Pdata = data;
-
-
             }
-
         }
 
-
-  
-
-        public enum TaskType { Archive, Dump, CR2W, Hash, Oodle, Repack, }
-
-        // OTHER
-        public static string[] OMD_Output;
-
-
-        public enum OMD_Type        {            Single,            Multi        }
-
-
-        public bool InterceptLog = false;
-
-
-        public Tools ToolsInstance { get; set; }
-        public SettingsPage SettingsInstance { get; set; }
-
-        public ToolLogFlyout toolLogFlyoutInstance { get; set; }
-
-
-
-
+       
     }
-
-   
-
-
 }

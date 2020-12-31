@@ -1,0 +1,13 @@
+﻿<controls:MetroWindow  xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" x:Name="WindowOption" x:Class="CP77Tools.UI.Views.Notifications.GeneralNotification"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CP77Tools.UI.Views.Notifications"
+        mc:Ignorable="d"
+        Title="Default Name" Height="99" Topmost="True" Width="338" ShowMaxRestoreButton="False" ShowMinButton="False" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBlock x:Name="TextOption" Text="TextBlock" TextWrapping="Wrap" Margin="25,10,5,5" TextAlignment="Left"/>
+
+    </Grid>
+</controls:MetroWindow>

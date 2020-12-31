@@ -17,7 +17,7 @@
         WindowTransitionsEnabled="False"
 
         GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" Icon="/Resources/CP77      TOols.png"  MinWidth="1350" MinHeight="650" TitleBarHeight="50" Background="{DynamicResource MahApps.HamburgerMenu.Pane.Background}">
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Icon="/Resources/CP77      TOols.png"  MinWidth="1350" MinHeight="650" TitleBarHeight="50" Background="{DynamicResource MahApps.HamburgerMenu.Pane.Background}" Loaded="MetroWindow_Loaded">
 
     <controls:MetroWindow.Resources>
 
