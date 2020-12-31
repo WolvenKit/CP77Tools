@@ -50,7 +50,7 @@ namespace CP77Tools.UI.Views.Tabs.Logs
 
            if(Properties.Settings.Default.EnablePopUps)
             {
-                    ToastNotification notification = new ToastNotification(taskType.ToString() + " Task Finished", "The " + taskType.ToString() + " has finished" + "\n" + "You can see the results on the task page.", 1);
+                    ToastNotification notification = new ToastNotification(taskType.ToString() + " Task Finished", "The " + taskType.ToString() + " has finished" + "\n" + "", 2);
                     notification.Show();
                 }
              
