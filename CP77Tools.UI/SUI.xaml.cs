@@ -152,11 +152,14 @@ namespace CP77Tools.UI
             UI_Logger.OnStringLogged += log.UI_Logger_OnStringLogged;
             UI_Logger.PropertyChanging += log.UI_Logger_PropertyChanging;
 
-
-            var NewYear = this.ShowMessageAsync("Happy New Year!", 
-                "The CP77Tools and CDPR Modding Community wish you a happy new year!");
-            Properties.Settings.Default.HasSeenNewYear = true;
-            Properties.Settings.Default.Save();
+            if (!Properties.Settings.Default.HasSeenNewYear)
+            {
+                var NewYear = this.ShowMessageAsync("Happy New Year!",
+"The CP77Tools and CDPR Modding Community wish you a Happy New Year!!!!");
+                Properties.Settings.Default.HasSeenNewYear = true;
+                Properties.Settings.Default.Save();
+            }
+        
 
 
          // backgroundworker();
