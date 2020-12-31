@@ -1,4 +1,6 @@
 ﻿using CP77Tools.UI.Data;
+using CP77Tools.UI.Functionality;
+using CP77Tools.UI.Views.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,14 +35,24 @@ namespace CP77Tools.UI.Views.Tabs.Logs
 
         }
 
-        public void CreateNewLogItem(General.TaskType taskType)
+        public void CreateNewLogItem(General.TaskType taskType, int TaskID)
         {
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 LogItem logItem = new LogItem(2);
             logItem.SenderLabel.Content = taskType.ToString();
-            logItem.SenderText.Text = "A task with type : " + taskType.ToString() + " has finished.";
+                logItem.SenderText.Text = "[" + taskType.ToString() + "] - " + TaskID.ToString() + " has finished.";
             LogItemWrapPanel.Children.Add(logItem);
+
+
+
+                 // THIS IS AN OPTION NEED A IF BOOL FROM SETTIGNS ok ? Ok ? 
+                ToastNotification notification = new ToastNotification(taskType.ToString() + " Task Finished", "The " + taskType.ToString() + " has finished" + "\n" + "You can see the results on the task page.", 1);
+                notification.Show();
+
+
+                UserInterfaceLogic.controller.CloseAsync();
+
             }));
 
         }

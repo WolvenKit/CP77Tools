@@ -30,16 +30,24 @@ namespace CP77Tools.UI.Views.Pages
     /// <summary>
     /// Interaction logic for Tools.xaml
     /// </summary>
-    public partial class Tools : Page
+    public partial class Tools : UserControl
     {
-        private ArchiveData.TaskType selectedTaskType;
         public static int darklight { get; set; }
         public Tools()
         {
-            InitializeComponent();
-            SUI.sui.generaldata.ToolsInstance = this;
-            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
-            this.DataContext = this;
+            
+                InitializeComponent();
+
+
+
+
+                SUI.sui.generaldata.ToolsInstance = this;
+                // ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+                this.DataContext = this;
+            
+       
+
+            
      
 
         }
@@ -53,48 +61,48 @@ namespace CP77Tools.UI.Views.Pages
                 return;
             if (sender == ArhiveBottomTab)
             {
-                TabItem Current = (TabItem)ArhiveBottomTab.SelectedItem;
-
-                switch (Current.Header)
+                TabItem CurrentMain = (TabItem)ToolsTab.SelectedItem;
+                switch (CurrentMain.Header)
                 {
-                    case "New Task":
-                       //  _CustomTab = new CustomTab();
-                      //  Current.Content = _CustomTab;
-                        selectedTaskType = ArchiveData.TaskType.Custom;
+                    case "Archive":
+                        TabItem Current = (TabItem)ArhiveBottomTab.SelectedItem;
 
+                        switch (Current.Header)
+                        {
+                            case "New Task":                         
+                                Functionality.UserInterfaceLogic.selectedArchiveTaskType = ArchiveData.TaskType.Custom;
+                                break;
+                            case "Extract":                              
+                                Functionality.UserInterfaceLogic.selectedArchiveTaskType = ArchiveData.TaskType.Extract;
+                                break;
+                            case "Uncook":                         
+                                Functionality.UserInterfaceLogic.selectedArchiveTaskType = ArchiveData.TaskType.Uncook;
+                                break;
+                            case "Dump":                             
+                                Functionality.UserInterfaceLogic.selectedArchiveTaskType = ArchiveData.TaskType.Dump;
+                                break;
+                            case "List":                            
+                                Functionality.UserInterfaceLogic.selectedArchiveTaskType = ArchiveData.TaskType.List;
+                                break;
+                            case "Extract Single":                             
+                                Functionality.UserInterfaceLogic.selectedArchiveTaskType = ArchiveData.TaskType.Single;
+                                break;
+                        }
                         break;
-                    case "Extract":
-                  //      Current.Content = new ExtractTab();
-//
-                     selectedTaskType = ArchiveData.TaskType.Extract;
-
+                    case "CR2W":
                         break;
-                    case "Uncook":
-                   ///     Current.Content = new UncookTab();
-                   //
-                       selectedTaskType = ArchiveData.TaskType.Uncook;
-
+                    case "Repack":
                         break;
                     case "Dump":
-                     //   Current.Content = new DumpTab();
-
-                        selectedTaskType = ArchiveData.TaskType.Dump;
-
                         break;
-                    case "List":
-                      //  Current.Content = new ListTab();
-
-                       selectedTaskType = ArchiveData.TaskType.List;
-
+                    case "Hash":
                         break;
-                    case "Extract Single":
-                     //   Current.Content = new ExtractSingleTab();
-
-                        selectedTaskType = ArchiveData.TaskType.Single;
-
+                    case "Oodle":
                         break;
                 }
-                Trace.Write(selectedTaskType);
+
+               
+                Trace.Write(Functionality.UserInterfaceLogic.selectedArchiveTaskType);
             }
           
 

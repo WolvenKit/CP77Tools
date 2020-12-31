@@ -32,7 +32,6 @@ namespace CP77Tools.UI.Views.Tabs.Archive
             {
                 return;
             }
-            SUI.sui.archivedata.Archive_List = true;
 
         }
 
@@ -58,6 +57,8 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
         private void ArchiveLaunchTaskButton_Click(object sender, RoutedEventArgs e)
         {
+            SUI.sui.archivedata.Archive_List = true;
+
             CreateDumpTaskk();
 
 
@@ -66,16 +67,9 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
         private void CreateDumpTaskk()
         {
-            TabItem NewTask = new TabItem();
-            NewTask.Header = "[" + ArchiveData.TaskType.List + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
+          
             var sometask = new TaskTemplate(General.TaskType.Archive);
-            sometask.ArchiveTaskConceptGrid.ItemsSource = null; sometask.TaskTitleLabel.Content = "Task : List Archive Task";
-
-            //      sometask.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;   // LETS ADD THIS LATER JUST INFO THO 
-            sometask.TaskFinalGroup.Header = "List Task Settings";
-            sometask.ArchiveSelectedInputConceptDropDown1.ItemsSource = SelectedInputConceptDropDown1.ItemsSource;
-            NewTask.Content = sometask;
-            SUI.sui.generaldata.ToolsInstance.ArchiveSubTab.Items.Add(NewTask);
+          
 
 
         }

@@ -1,4 +1,5 @@
 ﻿using ControlzEx.Theming;
+using CP77Tools.UI.Data;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace CP77Tools.UI.Views.Pages
     /// <summary>
     /// Interaction logic for SettingsPage.xaml
     /// </summary>
-    public partial class SettingsPage : Page
+    public partial class SettingsPage : UserControl
     {
         public string localaccent;
         public SettingsPage()
@@ -29,7 +30,7 @@ namespace CP77Tools.UI.Views.Pages
             ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
             AccentBox.ItemsSource = SUI.sui.generaldata.Colors2;
 
-           
+            SUI.sui.generaldata.SettingsInstance = this;
              
 
 

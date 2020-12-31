@@ -1,0 +1,45 @@
+﻿<controls:MetroWindow  xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls" x:Class="CP77Tools.UI.Views.Notifications.ToastNotification"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CP77Tools.UI.Views.Notifications"
+        mc:Ignorable="d"
+        Title="ToastNotification" Height="174" Width="409" ShowMinButton="False" ShowMaxRestoreButton="False" HorizontalAlignment="Right" VerticalAlignment="Bottom" AllowsTransparency="True" WindowStyle="None" Background="Transparent" ShowSystemMenu="False" ShowTitleBar="False" NonActiveBorderBrush="{x:Null}" WindowTitleBrush="{x:Null}" NonActiveWindowTitleBrush="{x:Null}">
+    <Grid x:Name="BackGround" RenderTransformOrigin="0,1" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" >
+
+        <!-- Notification area -->
+
+        <StackPanel Margin="10,60,10,11">
+
+            <TextBlock x:Name="NoteTExt" TextWrapping="Wrap" Margin="5" MinHeight="95">
+          A task just finished.<LineBreak /><LineBreak />
+          Something just happened and you are being notified of it.
+            </TextBlock>
+        </StackPanel>
+        <controls:MetroHeader x:Name="Header" Header="Text" Margin="10,15,10,129"/>
+        <!-- Animation -->
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <BeginStoryboard>
+                    <Storyboard Completed="Storyboard_Completed">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)">
+                            <SplineDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)">
+                            <SplineDoubleKeyFrame KeyTime="0:0:2" Value="1"/>
+                            <SplineDoubleKeyFrame KeyTime="0:0:4" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+
+        <Grid.RenderTransform>
+            <ScaleTransform ScaleY="1" />
+        </Grid.RenderTransform>
+
+    </Grid>
+</controls:MetroWindow>

@@ -20,12 +20,12 @@ namespace CP77Tools.UI.Views.Pages
     /// <summary>
     /// Interaction logic for AboutPage.xaml
     /// </summary>
-    public partial class AboutPage : Page
+    public partial class AboutPage : UserControl
     {
         public AboutPage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+            //ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
 
 
         }

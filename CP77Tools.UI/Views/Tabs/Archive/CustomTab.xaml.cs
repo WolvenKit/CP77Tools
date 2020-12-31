@@ -273,21 +273,9 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
         private void CreateArchiveTask()
         {
-
-            TabItem NewTask = new TabItem();
-            NewTask.Header = "[" + ArchiveData.TaskType.Custom + " - " +  SUI.sui.generaldata.TaskIDGen() + "]";
             var sometask = new TaskTemplate(General.TaskType.Archive);
 
 
-            sometask.TaskTitleLabel.Content = "Task : Custom Archive Task";
-
-
-            sometask.ArchiveTaskConceptGrid.ItemsSource = null;
-            sometask.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
-            sometask.TaskFinalGroup.Header = "Custom Archive Task Settings";
-            sometask.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
-            NewTask.Content = sometask;  
-            SUI.sui.generaldata.ToolsInstance.ArchiveSubTab.Items.Add(NewTask);
         }
 
 
@@ -301,7 +289,6 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
 
             OutPathSelector.Show();
-
 
 
         }

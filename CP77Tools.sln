@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CP77.CR2W", "CP77.CR2W\CP77
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CP77.Common", "CP77.Common\CP77.Common.csproj", "{68969FC1-A6A2-44D0-BBB3-3A9B196FA4CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CP77.MSTests", "CP77.MSTests\CP77.MSTests.csproj", "{78302151-8D4B-407B-A2FE-5774C471F8AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CP77.MSTests", "CP77.MSTests\CP77.MSTests.csproj", "{78302151-8D4B-407B-A2FE-5774C471F8AA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CP77Tools.UI", "CP77Tools.UI\CP77Tools.UI.csproj", "{8E55014F-60B9-4C9F-94F6-CC5285401A7C}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -19,7 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CP77Tools.UI", "CP77Tools.U
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F8371C0-34C6-480F-8F67-4D92D623459A}"
-EndProject
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

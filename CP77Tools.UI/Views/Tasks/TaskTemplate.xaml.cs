@@ -28,6 +28,8 @@ namespace CP77Tools.UI.Views.Tasks
     public partial class TaskTemplate : UserControl
     {
         public General.TaskType localtasktype;
+
+        private TaskTemplate tT;
         public TaskTemplate(General.TaskType maintype)
         {
             localtasktype = maintype;
@@ -66,25 +68,27 @@ namespace CP77Tools.UI.Views.Tasks
 
         private void UI_Logger_OnStringLogged(object sender, CP77.Common.Services.LogStringEventArgs e)
         {
-            var a = new StaTaskScheduler(2);
+
+         //   if (e.Logtype != Logtype.Error) {
+        //    var a = new StaTaskScheduler(2);
 
             
-           Task.Factory.StartNew(() =>
-            {
-                AddToTaskLog(e.Logtype, e.Message);
-            }, CancellationToken.None, TaskCreationOptions.None, a);
-           
-            
-            
-            //Task newtask = new Task(() => AddToTaskLog(e.Logtype, e.Message));
-
-
-            //Task.Factory.StartNew(() => AddToTaskLog(e.Logtype, e.Message)).ContinueWith(r => AddToTaskLog(e.Logtype, e.Message), scheduler);
+         //  Task.Factory.StartNew(() =>
+        //    {
+               // AddToTaskLog(e.Logtype, e.Message);
+       //     }, CancellationToken.None, TaskCreationOptions.None, a);
 
 
 
+                //Task newtask = new Task(() => AddToTaskLog(e.Logtype, e.Message));
 
-       
+
+                //Task.Factory.StartNew(() => AddToTaskLog(e.Logtype, e.Message)).ContinueWith(r => AddToTaskLog(e.Logtype, e.Message), scheduler);
+
+
+       //     }
+
+
 
 
 
@@ -142,32 +146,32 @@ namespace CP77Tools.UI.Views.Tasks
 
         private void StartHashTask()
         {
-            SUI.sui.ui.ThreadedTaskSender( General.TaskType.Hash);
+            SUI.sui.ui.ThreadedTaskSender( General.TaskType.Hash, this);
         }
 
         private void StartOodleTask()
         {
-            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Oodle);
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Oodle, this);
         }
 
         private void StartRepackTask()
         {
-            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Repack);
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Repack, this);
         }
 
         private void StartDumpTask()
         {
-            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Dump);
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Dump, this);
         }
 
         private void StartCR2WTask()
         {
-            SUI.sui.ui.ThreadedTaskSender(General.TaskType.CR2W);
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.CR2W, this);
         }
 
         public void StartArchiveTask()
         {
-            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Archive);
+            SUI.sui.ui.ThreadedTaskSender(General.TaskType.Archive,this);
         }
 
         private void TaskLogWrap_SizeChanged(object sender, SizeChangedEventArgs e)

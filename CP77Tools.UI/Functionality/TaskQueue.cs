@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,37 +8,58 @@ using System.Threading.Tasks;
 
 namespace CP77Tools.UI.Functionality
 {
+
     public class TaskQueue
     {
-        private SemaphoreSlim semaphore;
-        public TaskQueue()
+        
+    }
+
+
+    public sealed class ItemDequeuedEventArgs<T> : EventArgs
+    {
+        public T Item { get; set; }
+    }
+
+    public sealed class EventfulConcurrentQueue<T>
+    {
+        private ConcurrentQueue<T> _queue;
+
+        public EventfulConcurrentQueue()
         {
-            semaphore = new SemaphoreSlim(1);
+            _queue = new ConcurrentQueue<T>();
         }
 
-        public async Task<T> Enqueue<T>(Func<Task<T>> taskGenerator)
+        public void Enqueue(T item)
         {
-            await semaphore.WaitAsync();
-            try
-            {
-                return await taskGenerator();
-            }
-            finally
-            {
-                semaphore.Release();
-            }
+            _queue.Enqueue(item);
+            OnItemEnqueued();
         }
-        public async Task Enqueue(Func<Task> taskGenerator)
+
+        public bool TryDequeue(out T result)
         {
-            await semaphore.WaitAsync();
-            try
+            var success = _queue.TryDequeue(out result);
+
+            if (success)
             {
-                await taskGenerator();
+                OnItemDequeued(result);
             }
-            finally
-            {
-                semaphore.Release();
-            }
+            return success;
         }
+
+        public event EventHandler ItemEnqueued;
+        public event EventHandler<ItemDequeuedEventArgs<T>> ItemDequeued;
+
+        void OnItemEnqueued()
+        {
+            ItemEnqueued?.Invoke(this, EventArgs.Empty);
+        }
+
+        void OnItemDequeued(T item)
+        {
+            ItemDequeued?.Invoke(this, new ItemDequeuedEventArgs<T> { Item = item });
+        }
+
+
     }
+
 }

@@ -1,4 +1,4 @@
-﻿<Page
+﻿<UserControl
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,10 +7,10 @@
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:ucTest="clr-namespace:CP77Tools.UI.Views.Tabs.Dump" 
     x:Class="CP77Tools.UI.Views.Pages.AboutPage"
       mc:Ignorable="d" 
-     d:DesignHeight="700" d:DesignWidth="1100"      Title="AboutPage">
+     d:DesignHeight="700" d:DesignWidth="1100"      >
 
     <Grid>
-        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}" Margin="0,20,0,-20">
+        <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}" Margin="0,0,0,0">
 
             <Label Content="About" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <Separator Margin="0,30,0,0" VerticalAlignment="Top" Height="15"/>
@@ -48,4 +48,4 @@
 
 
     </Grid>
-</Page>
+</UserControl>

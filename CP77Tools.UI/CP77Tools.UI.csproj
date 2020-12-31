@@ -3,6 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+
+
     <UseWPF>true</UseWPF>
     <StartupObject>CP77Tools.UI.App</StartupObject>
   </PropertyGroup>
@@ -13,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\CP77      TOols.png" />
+    <None Remove="Resources\CP77-TOols.png" />
     <None Remove="Resources\Cyberpunk-2077-Jun-25th-Screenshots-9-2060x1159.jpg" />
     <None Remove="Resources\FinalLogo.png" />
     <None Remove="Resources\MainLogo.png" />
@@ -33,7 +38,6 @@
     <PackageReference Include="MahApps.Metro" Version="2.4.3" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
     <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
-    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\CP77      TOols.png" />
+    <Resource Include="Resources\CP77-TOols.png" />
     <Resource Include="Resources\Cyberpunk-2077-Jun-25th-Screenshots-9-2060x1159.jpg" />
     <Resource Include="Resources\FinalLogo.png" />
     <Resource Include="Resources\MainLogo.png" />

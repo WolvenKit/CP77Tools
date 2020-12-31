@@ -1,4 +1,4 @@
-﻿<Page
+﻿<UserControl
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -15,16 +15,17 @@
     Style="{DynamicResource PageStyle}"
 
       mc:Ignorable="d" 
+
       d:DesignHeight="700" d:DesignWidth="1100"
-      Title="Tools">
-    <Page.Resources>
+      >
+    <UserControl.Resources>
         <DataTemplate x:Key="tabItemTemplate">
             <Grid>
                 <Rectangle Fill="Gray"/>
                 <ContentPresenter Content="{Binding}"/>
             </Grid>
         </DataTemplate>
-    </Page.Resources>
+    </UserControl.Resources>
     <Grid>
 
 
@@ -171,10 +172,10 @@
                                        Foreground="{DynamicResource MahApps.Brushes.AccentBase}"
                                        Kind="ArrowLeftCircle"  HorizontalAlignment="Right" MouseDown="PackIconFeatherIcons_MouseDown" Height="40" VerticalAlignment="Bottom" />
         <mah:FlyoutsControl HorizontalAlignment="Right" Background="{DynamicResource MahApps.Brushes.ThemeBackground}" >
-            <mah:Flyout Theme="Adapt" x:Name="ToolsLogFlyOut" IsOpen="True" Header="Tools Log" Position="Right" IsOpenChanged="ToolsLogFlyOut_IsOpenChanged" Margin="800,0,0,0" HorizontalAlignment="Left" Width="300" Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+            <mah:Flyout Theme="Adapt" x:Name="ToolsLogFlyOut" IsOpen="False" Header="Tools Log" Position="Right" IsOpenChanged="ToolsLogFlyOut_IsOpenChanged" Margin="800,0,0,0" HorizontalAlignment="Left" Width="300" Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
                 <ucLogs:ToolLogFlyout Width="279" Background="{DynamicResource MahApps.Brushes.ThemeBackground}"/>
             </mah:Flyout>
         </mah:FlyoutsControl>
         <Label x:Name="LogsLabel" Content="Logs" HorizontalAlignment="Right" Margin="0,0,52,9" VerticalAlignment="Bottom" Height="30" FontWeight="Bold"/>
     </Grid>
-</Page>
+</UserControl>

@@ -1,7 +1,6 @@
 ﻿using CP77Tools.Tasks;
 using CP77Tools.UI.Functionality.Customs;
 using Microsoft.Win32;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +12,8 @@ using System.Windows.Controls;
 using CP77Tools.UI.Data.Tasks;
 using CP77Tools.UI.Data;
 using System.Collections.Concurrent;
+using System.Windows;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace CP77Tools.UI.Functionality
 {
@@ -21,15 +22,18 @@ namespace CP77Tools.UI.Functionality
         private SUI sui;
         public UserInterfaceLogic(SUI _sui) { this.sui = _sui; }
 
+        public static ArchiveData.TaskType selectedArchiveTaskType;
 
+        private General.TaskType CurrentTaskType;
 
         // Creates Tasks based on Taskindex.
-        private void TaskManager(General.TaskType taskindex)
+        private void TaskManager(General.TaskType taskindex, Views.Tasks.TaskTemplate taskTemplate)
         {
+            CurrentTaskType = taskindex;
             switch (taskindex)
             {
                 case General.TaskType.Archive:
-                    if (sui.archivedata.Archive_Path.Length > 0) { StartArchiveTask(); }
+                    if (sui.archivedata.Archive_Path.Length > 0) { StartArchiveTask(taskTemplate); }
                     break;
 
                 case General.TaskType.CR2W:
@@ -64,8 +68,8 @@ namespace CP77Tools.UI.Functionality
             Task OTask = new Task(() => ConsoleFunctions.OodleTask(p1,p2,p3)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
             OTask.Start(); 
             
-            OTask.Wait(); sui.log.TaskFinished(General.TaskType.Oodle); 
-            sui.log.TaskFinished(General.TaskType.Oodle);
+        //    OTask.Wait(); sui.log.TaskFinished(General.TaskType.Oodle); 
+        //    sui.log.TaskFinished(General.TaskType.Oodle);
 
         }
 
@@ -89,8 +93,8 @@ namespace CP77Tools.UI.Functionality
             Task DTask = new Task(() => ConsoleFunctions.DumpTask(p1,p2,p3,p4,p5));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
             DTask.Start(); 
             
-            DTask.Wait(); sui.log.TaskFinished(General.TaskType.Dump); 
-            sui.log.TaskFinished(General.TaskType.Dump);
+           // DTask.Wait(); sui.log.TaskFinished(General.TaskType.Dump); 
+          //  sui.log.TaskFinished(General.TaskType.Dump);
 
         }
 
@@ -102,8 +106,8 @@ namespace CP77Tools.UI.Functionality
             Task RTask = new Task(() => ConsoleFunctions.PackTask(p1,p2));  // FIX THIS TOO 
             RTask.Start(); 
             
-            RTask.Wait(); sui.log.TaskFinished(General.TaskType.Repack); 
-            sui.log.TaskFinished(General.TaskType.Repack);
+        //    RTask.Wait(); sui.log.TaskFinished(General.TaskType.Repack); 
+         //   sui.log.TaskFinished(General.TaskType.Repack);
 
         }
 
@@ -118,12 +122,12 @@ namespace CP77Tools.UI.Functionality
             Task CTask = new Task(() => ConsoleFunctions.Cr2wTask(p1,p2,p3,p4)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
             CTask.Start(); 
             
-            CTask.Wait(); sui.log.TaskFinished(General.TaskType.CR2W); 
-            sui.log.TaskFinished(General.TaskType.CR2W);
+         //   CTask.Wait(); sui.log.TaskFinished(General.TaskType.CR2W); 
+          //  sui.log.TaskFinished(General.TaskType.CR2W);
 
         }
 
-        private async void StartArchiveTask()
+        private void StartArchiveTask(Views.Tasks.TaskTemplate taskTemplate)
         {
             var p1 = sui.archivedata.Archive_Path;
             var p2 = sui.archivedata.Archive_OutPath;
@@ -137,18 +141,87 @@ namespace CP77Tools.UI.Functionality
             var p10 = sui.archivedata.Archive_Regex;
             sui.archivedata.resetarchivedata();
 
-            Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));       
-            General.cq.Enqueue(ATask);
-           // sui.log.TaskFinished(General.TaskType.Archive);
 
+
+            Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
+            //  QueuedTask NewQueuedTask = new QueuedTask(General.TaskIDList.Count, ATask, General.TaskType.Archive) ;
+            // General.TaskQueue.Enqueue(NewQueuedTask);
+
+
+            backgroundworker("[ Archive | " + selectedArchiveTaskType.ToString() + " ]", "An Archive task is busy... \n Please wait...");
+
+            ATask.Start();
+            ATask.Wait();
+
+
+
+
+
+
+
+            SUI.sui.log.TaskFinished(General.TaskType.Archive, General.TaskIDList.Count);
+
+
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+              {
+                  TabItem NewTask = new TabItem();
+                  NewTask.Header = "[" + selectedArchiveTaskType.ToString() + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
+
+
+                  taskTemplate.TaskTitleLabel.Content = "Archive Task : " + selectedArchiveTaskType.ToString();
+
+
+                  taskTemplate.ArchiveTaskConceptGrid.ItemsSource = null;
+                //  taskTemplate.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
+                taskTemplate.TaskFinalGroup.Header = selectedArchiveTaskType.ToString() + "Archive Task Settings";
+                //  taskTemplate.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
+                NewTask.Content = taskTemplate;
+                  SUI.sui.generaldata.ToolsInstance.ArchiveSubTab.Items.Add(NewTask);
+
+            }));
         }
 
 
+        public static ProgressDialogController controller;
 
+        public void backgroundworker(string title,string message)
+        {
+           SUI.sui.ProgressDialogHelper(title,message);
+
+
+
+
+
+               //   var a = SUI.sui.ShowProgressAsync("Archive Task", "Working Please wait.");
+              //    a.Wait();
+              //    controller = a.Result;
+             //     controller.SetCancelable(false);
+               //   controller.Canceled += Controller_Canceled;
+
+          
+
+
+    
+
+
+
+
+
+
+
+
+
+
+        }
+
+        private void Controller_Canceled(object sender, EventArgs e)
+        {
+            controller.CloseAsync();
+        }
 
 
         // Creates Thread and sends TaskIndicator to taskmanager to run task on thread.
-        public void ThreadedTaskSender(General.TaskType item) { Thread worker = new Thread(() => TaskManager(item)); worker.IsBackground = true; worker.Start(); }
+        public void ThreadedTaskSender(General.TaskType item, Views.Tasks.TaskTemplate taskTemplate) { Thread worker = new Thread(() => TaskManager(item,taskTemplate)); worker.IsBackground = true; worker.Start(); }
 
    
 

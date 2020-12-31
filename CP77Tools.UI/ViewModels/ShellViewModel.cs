@@ -22,45 +22,32 @@ namespace CP77Tools.UI.ViewModels
             {
                 Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Tool },
                 Label = "Tools",
-                NavigationType = typeof(Tools),
-                NavigationDestination = new Uri("Views/Pages/ToolsPage.xaml", UriKind.RelativeOrAbsolute)
+         //       NavigationType = typeof(Tools),
+          //      NavigationDestination = new Uri("Views/Pages/ToolsPage.xaml", UriKind.RelativeOrAbsolute)
+
             });
-            //this.Menu.Add(new MenuItem()
-            //{
-            //    Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Database },
-            //    Label = "Modding Databank",
-            //    NavigationType = typeof(Tools),
-            //    NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
-            //});
-            //this.Menu.Add(new MenuItem()
-            //{
-            //    Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Database },
-            //    Label = "Modding Databank",
-            //    NavigationType = typeof(Tools),
-            //    NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
-            //});
-            //this.Menu.Add(new MenuItem()
-            //{
-            //    Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Database },
-            //    Label = "Modding Databank",
-            //    NavigationType = typeof(Tools),
-            //    NavigationDestination = new Uri("Views/Pages/Tools.xaml", UriKind.RelativeOrAbsolute)
-            //});
+
 
             this.OptionsMenu.Add(new MenuItem()
             {
                 Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Settings },
                 Label = "Settings",
-                NavigationType = typeof(Tools),
-                NavigationDestination = new Uri("Views/Pages/SettingsPage.xaml", UriKind.RelativeOrAbsolute)
+           //     NavigationType = typeof(SettingsPage),
+           //     NavigationDestination = new Uri("Views/Pages/SettingsPage.xaml", UriKind.RelativeOrAbsolute)
+
+
             });
             this.OptionsMenu.Add(new MenuItem()
             {
                 Icon = new PackIconFeatherIcons() { Kind = PackIconFeatherIconsKind.Info },
                 Label = "About",
-                NavigationType = typeof(Tools),
-                NavigationDestination = new Uri("Views/Pages/AboutPage.xaml", UriKind.RelativeOrAbsolute)
+            //    NavigationType = typeof(AboutPage),
+            //    NavigationDestination = new Uri("Views/Pages/AboutPage.xaml", UriKind.RelativeOrAbsolute)
             });
+
+
+
+
         }
 
 

@@ -20,12 +20,12 @@ namespace CP77Tools.UI.Views.Pages
     /// <summary>
     /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class MainPage : UserControl
     {
         public MainPage()
         {
             InitializeComponent();
-            ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
+          //  ThemeManager.Current.ChangeTheme(this, SUI.sui.generaldata.ThemeFinder());
         }
 
 

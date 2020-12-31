@@ -71,16 +71,9 @@ namespace CP77Tools.UI.Views.Tabs.Archive
 
         private void CreateSingleExtractTask()
         {
-            TabItem NewTask = new TabItem();
-            NewTask.Header = "[" + ArchiveData.TaskType.Single + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
+           
             var sometask = new TaskTemplate(General.TaskType.Archive);
-            sometask.ArchiveTaskConceptGrid.ItemsSource = null; sometask.TaskTitleLabel.Content = "Task : Extract Single From Archive Task";
-
-            //      sometask.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
-            sometask.TaskFinalGroup.Header = "Custom Archive Task Settings";
-            sometask.ArchiveSelectedInputConceptDropDown1.ItemsSource = SelectedInputConceptDropDown1.ItemsSource;
-            NewTask.Content = sometask;
-            SUI.sui.generaldata.ToolsInstance.ArchiveSubTab.Items.Add(NewTask);
+           
 
 
         }

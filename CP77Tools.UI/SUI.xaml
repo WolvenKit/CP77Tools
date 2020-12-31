@@ -1,4 +1,5 @@
 ﻿<controls:MetroWindow 
+
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
@@ -9,106 +10,95 @@
         x:Class="CP77Tools.UI.SUI"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:CP77Tools.UI.ViewModels"
-        xmlns:ui="http://schemas.modernwpf.com/2019"
-
-        Title=""
-        Height="650"
-        Width="1350"
+        xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:UCMainPage="clr-namespace:CP77Tools.UI.Views.Pages" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    Title=""
+        Height="700"
+        Width="1400"
         WindowTransitionsEnabled="False"
 
         GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" Icon="/Resources/ThickLogo.png" IconOverlayBehavior="HiddenTitleBar" MinWidth="1350" MinHeight="650" TitleBarHeight="40"  IconBitmapScalingMode="HighQuality">
-
-    <controls:MetroWindow.DataContext>
-        <viewModels:ShellViewModel />
-    </controls:MetroWindow.DataContext>
-    
-    <controls:MetroWindow.LeftWindowCommands>
-        <controls:WindowCommands ShowSeparators="False">
-            <Button x:Name="GoBackButton"
-              Width="{Binding ElementName=HamburgerMenuControl, Path=CompactPaneLength}"
-              AutomationProperties.Name="Go back"
-              Click="GoBack_OnClick">
-                <controls:FontIcon AutomationProperties.Name="Go back icon"
-                           FontSize="14"
-                           Glyph="&#xE72B;" />
-            </Button>
-        </controls:WindowCommands>
-    </controls:MetroWindow.LeftWindowCommands>
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Icon="/Resources/CP77      TOols.png"  MinWidth="1350" MinHeight="650" TitleBarHeight="50" Background="{DynamicResource MahApps.HamburgerMenu.Pane.Background}">
 
     <controls:MetroWindow.Resources>
 
-        <DataTemplate x:Key="MenuItemTemplate" DataType="{x:Type viewModels:MenuItem}">
-            <Grid Height="48">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:HamburgerMenu}}, Path=CompactPaneLength, Mode=OneWay}" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <ContentControl Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Content="{Binding Icon}"
-                        Focusable="False" />
-                <TextBlock Grid.Column="1"
-                   VerticalAlignment="Center"
-                   FontSize="16"
-                   Text="{Binding Label}" />
-            </Grid>
-        </DataTemplate>
-
-        <Style BasedOn="{StaticResource {x:Type Frame}}" TargetType="{x:Type Frame}">
-            <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent4}" />
-            <Setter Property="ClipToBounds" Value="True" />
-            <Setter Property="ContentTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <controls:TransitioningContentControl Content="{Binding}"
-                                                  RestartTransitionOnContentChange="True"
-                                                  Transition="Custom">
-                            <controls:TransitioningContentControl.CustomVisualStates>
-                                <VisualState x:Name="CustomTransition">
-                                    <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
-                                                   Storyboard.TargetName="CurrentContentPresentationSite"
-                                                   Storyboard.TargetProperty="(UIElement.Opacity)">
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00.150" Value="1" />
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
-                                                   Storyboard.TargetName="CurrentContentPresentationSite"
-                                                   Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="200" />
-                                            <SplineDoubleKeyFrame KeySpline="0.1, 0.9, 0.2, 1"
-                                            KeyTime="00:00:00.300"
-                                            Value="0" />
-                                        </DoubleAnimationUsingKeyFrames>
-
-                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
-                                                   Storyboard.TargetName="PreviousContentPresentationSite"
-                                                   Storyboard.TargetProperty="(UIElement.Opacity)">
-                                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
-                                        </DoubleAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </controls:TransitioningContentControl.CustomVisualStates>
-                        </controls:TransitioningContentControl>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
     </controls:MetroWindow.Resources>
+    <Grid>
 
-    <controls:HamburgerMenu x:Name="HamburgerMenuControl"
-                          DisplayMode="CompactInline"
-                          IsPaneOpen="False"
-                          ItemInvoked="HamburgerMenuControl_OnItemInvoked"
-                          ItemTemplate="{StaticResource MenuItemTemplate}"
-                          ItemsSource="{Binding Menu}"
-                          OptionsItemTemplate="{StaticResource MenuItemTemplate}"
-                          OptionsItemsSource="{Binding OptionsMenu}" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" />
-    
-    
+
+        <mah:MetroAnimatedTabControl x:Name="TabControlMain" TabStripPlacement="Left" Background="{DynamicResource MahApps.HamburgerMenu.Pane.Background}" Grid.RowSpan="2" SelectionChanged="TabControlMain_SelectionChanged">
+            <mah:MetroTabItem     x:Name="tab45" Header="Expander" MinWidth="100" mah:HeaderedControlHelper.HeaderMargin="0,0,0,0"   >
+
+                <TabItem.HeaderTemplate>
+                    <ItemContainerTemplate>
+                        <WrapPanel Margin="5,25,0,0" Orientation="Horizontal" MouseLeftButtonDown="PackIconFeatherIcons_MouseLeftButtonDown" Background="{DynamicResource MahApps.HamburgerMenu.Pane.Background}">
+                            <iconPacks:PackIconFeatherIcons Height="32" Kind="Menu" Width="32" MouseLeftButtonDown="PackIconFeatherIcons_MouseLeftButtonDown"/>
+                        </WrapPanel>
+                    </ItemContainerTemplate>
+                </TabItem.HeaderTemplate>
+
+
+            </mah:MetroTabItem>
+            <mah:MetroTabItem     x:Name="tab1" Header="Home" MinWidth="100" mah:HeaderedControlHelper.HeaderMargin="10,0,0,0" MaxHeight="89" MinHeight="89" >
+
+                <TabItem.HeaderTemplate>
+                    <ItemContainerTemplate>
+                        <WrapPanel Margin="5,50,0,0" Orientation="Horizontal">
+                            <iconPacks:PackIconFeatherIcons Height="32" Kind="Home" Width="32"/>
+                            <TextBlock Margin="10,0,0,0"><Run Text="Home"/></TextBlock>
+                        </WrapPanel>
+                    </ItemContainerTemplate>
+                </TabItem.HeaderTemplate>
+
+                <UCMainPage:MainPage/>
+
+            </mah:MetroTabItem>
+
+            <mah:MetroTabItem     x:Name="tab2" Header="Tools" MinWidth="100" mah:HeaderedControlHelper.HeaderMargin="10,0,0,0" >
+
+                <TabItem.HeaderTemplate>
+                    <ItemContainerTemplate>
+                        <WrapPanel Margin="5,35,0,0" Orientation="Horizontal">
+                            <iconPacks:PackIconFeatherIcons Height="32" Kind="Tool" Width="32"/>
+                            <TextBlock Margin="10,0,0,0"><Run Text="Tools"/></TextBlock>
+                        </WrapPanel>
+                    </ItemContainerTemplate>
+                </TabItem.HeaderTemplate>
+
+
+            </mah:MetroTabItem>
+
+
+            <mah:MetroTabItem     x:Name="tab3" Header="Settings" MinWidth="100" mah:HeaderedControlHelper.HeaderMargin="0,0,0,0" MinHeight="39" MaxHeight="74"  >
+
+                <TabItem.HeaderTemplate>
+                    <ItemContainerTemplate>
+                        <WrapPanel Grid.Row="1" Margin="5,35,0,0" Orientation="Horizontal">
+                            <iconPacks:PackIconFeatherIcons Height="32" Kind="Settings" Width="32"/>
+                            <TextBlock Margin="10,0,0,0"><Run Text="Settings"/></TextBlock>
+                        </WrapPanel>
+                    </ItemContainerTemplate>
+                </TabItem.HeaderTemplate>
+
+
+            </mah:MetroTabItem>
+
+
+            <mah:MetroTabItem     x:Name="tab4" Header="About" MinWidth="100" mah:HeaderedControlHelper.HeaderMargin="0,0,0,0"  >
+
+                <TabItem.HeaderTemplate>
+                    <ItemContainerTemplate>
+                        <WrapPanel Margin="5,35,0,0" Orientation="Horizontal">
+                            <iconPacks:PackIconFeatherIcons Height="32" Kind="Info" Width="32"/>
+                            <TextBlock Margin="10,0,0,0"><Run Text="About"/></TextBlock>
+                        </WrapPanel>
+                    </ItemContainerTemplate>
+                </TabItem.HeaderTemplate>
+
+
+            </mah:MetroTabItem>
+        </mah:MetroAnimatedTabControl>
+    </Grid>
+
 
 </controls:MetroWindow>
                       

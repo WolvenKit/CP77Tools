@@ -6,18 +6,63 @@ using CP77Tools.UI.Views.Tabs.Logs;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
+using System.Windows.Controls;
 using WolvenKit.Common.Tools.DDS;
 
 namespace CP77Tools.UI.Data
 {
+
+    public class QueuedTask
+    {
+        public int taskID { get; set; }
+        public Task task { get; set; }
+        public General.TaskType tasktype { get; set; }
+        public ArchiveData.TaskType subtypearchive { get; set; }
+
+        public QueuedTask(int i, Task t, General.TaskType tt)
+        {
+            taskID = i;
+            task = t;
+            tasktype = tt;
+        }
+    }
     public class General
     {
 
         public static List<int> TaskIDList = new List<int>();
+       // public static ConcurrentQueue<Task> cq = new ConcurrentQueue<Task>();
+        public Dictionary<int, Task> TaskTodoDict = new Dictionary<int, Task>();
+
+
+
+
+
+        public  General()
+        {
+
+        }
+
+      
+
+        public async Task AddTaskToQueueAsync(QueuedTask queuedTask)
+        {
+
+        }
+
+        public async void JustWaiting()
+        {
+            
+        //    await foreach (QueuedTask i)
+        //    {
+              
+      //      }
+        }
 
         public int TaskIDGen()
         {
@@ -92,12 +137,16 @@ namespace CP77Tools.UI.Data
 
 
         public Tools ToolsInstance { get; set; }
+        public SettingsPage SettingsInstance { get; set; }
 
         public ToolLogFlyout toolLogFlyoutInstance { get; set; }
 
-         public static ConcurrentQueue<Task> cq = new ConcurrentQueue<Task>();
+
+
 
     }
+
+   
 
 
 }
