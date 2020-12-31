@@ -23,6 +23,10 @@ namespace CP77Tools.UI.Functionality
         public UserInterfaceLogic(SUI _sui) { this.sui = _sui; }
 
         public static ArchiveData.TaskType selectedArchiveTaskType;
+        public static CR2WData.CR2WTaskType selectedCR2WTaskType;
+        public static DumpData.DumpTaskType selectedDumpTaskType;
+        public static OodleData.OodleTaskType selectedOodleTaskType;
+        public static RepackData.RepackTaskType selectedRepackTaskType;
 
         private General.TaskType CurrentTaskType;
 
@@ -37,15 +41,15 @@ namespace CP77Tools.UI.Functionality
                     break;
 
                 case General.TaskType.CR2W:
-                    if (sui.cr2wdata.CR2W_Path.Length > 0) { StartCR2WTask(); }
+                    if (sui.cr2wdata.CR2W_Path.Length > 0) { StartCR2WTask(taskTemplate); }
                     break;
 
                 case General.TaskType.Repack:
-                    if (sui.repackdata.Repack_Path.Length > 0) { StartRepackTask(); }
+                    if (sui.repackdata.Repack_Path.Length > 0) { StartRepackTask(taskTemplate); }
                     break;
 
                 case General.TaskType.Dump:
-                    if (sui.dumpdata.Dump_Path.Length > 0) { StartDumpTask(); }
+                    if (sui.dumpdata.Dump_Path.Length > 0) { StartDumpTask(taskTemplate); }
                     break;
 
                 case General.TaskType.Hash:
@@ -53,12 +57,12 @@ namespace CP77Tools.UI.Functionality
                     break;
 
                 case General.TaskType.Oodle:
-                    if (sui.oodledata.Oodle_Path.Length > 0) { StartOodleTask(); }
+                    if (sui.oodledata.Oodle_Path.Length > 0) { StartOodleTask(taskTemplate); }
                     break;
             }
         }
 
-        private void StartOodleTask()
+        private void StartOodleTask(Views.Tasks.TaskTemplate taskTemplate)
         {
             var p1 = sui.oodledata.Oodle_Path[0];
             var p2 = sui.oodledata.Oodle_OutPath;
@@ -66,11 +70,29 @@ namespace CP77Tools.UI.Functionality
             sui.oodledata.resetoodledata();
 
             Task OTask = new Task(() => ConsoleFunctions.OodleTask(p1,p2,p3)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
+
+            backgroundworker("[ Oodle | " + selectedOodleTaskType.ToString() + " ]", "An Oodle task is busy... \n Please wait..."); // ShowDialog
+
             OTask.Start(); 
             
-        //    OTask.Wait(); sui.log.TaskFinished(General.TaskType.Oodle); 
-        //    sui.log.TaskFinished(General.TaskType.Oodle);
+           OTask.Wait(); sui.log.TaskFinished(General.TaskType.Oodle, General.TaskIDList.Count);
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                TabItem NewTask = new TabItem();
+                NewTask.Header = "[" + selectedOodleTaskType.ToString() + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
 
+
+                taskTemplate.TaskTitleLabel.Content = "Oodle Task : " + selectedOodleTaskType.ToString();
+
+
+                taskTemplate.ArchiveTaskConceptGrid.ItemsSource = null;
+                //  taskTemplate.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
+                taskTemplate.TaskFinalGroup.Header = selectedOodleTaskType.ToString() + " Oodle Task Settings";
+                //  taskTemplate.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
+                NewTask.Content = taskTemplate;
+                SUI.sui.generaldata.ToolsInstance.OodleSubTab.Items.Add(NewTask);
+
+            }));
         }
 
         private void StartHashTask()
@@ -81,7 +103,7 @@ namespace CP77Tools.UI.Functionality
             //HTask.Wait(); sui.log.TaskFinished(General.TaskType.Hash);
         }
 
-        private void StartDumpTask()
+        private void StartDumpTask(Views.Tasks.TaskTemplate taskTemplate)
         {
             var p1 = sui.dumpdata.Dump_Path;
             var p2 = sui.dumpdata.Dump_Imports;
@@ -91,27 +113,70 @@ namespace CP77Tools.UI.Functionality
             sui.dumpdata.resetdumpdata();
 
             Task DTask = new Task(() => ConsoleFunctions.DumpTask(p1,p2,p3,p4,p5));// FIX THIS WHEN MULTISELECT IS POSSIBLE!
+
+            backgroundworker("[ Dump | " + selectedDumpTaskType.ToString() + " ]", "A Dump task is busy... \n Please wait..."); // ShowDialog
+
+
             DTask.Start(); 
             
-           // DTask.Wait(); sui.log.TaskFinished(General.TaskType.Dump); 
-          //  sui.log.TaskFinished(General.TaskType.Dump);
+            DTask.Wait();
 
+            sui.log.TaskFinished(General.TaskType.Dump, General.TaskIDList.Count);
+
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                TabItem NewTask = new TabItem();
+                NewTask.Header = "[" + selectedDumpTaskType.ToString() + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
+
+
+                taskTemplate.TaskTitleLabel.Content = "Dump Task : " + selectedDumpTaskType.ToString();
+
+
+                taskTemplate.ArchiveTaskConceptGrid.ItemsSource = null;
+                //  taskTemplate.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
+                taskTemplate.TaskFinalGroup.Header = selectedDumpTaskType.ToString() + " Dump Task Settings";
+                //  taskTemplate.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
+                NewTask.Content = taskTemplate;
+                SUI.sui.generaldata.ToolsInstance.DumpSubTab.Items.Add(NewTask);
+
+            }));
         }
 
-        private void StartRepackTask()
+        private void StartRepackTask(Views.Tasks.TaskTemplate taskTemplate)
         {
             var p1 = sui.repackdata.Repack_Path;
             var p2 = sui.repackdata.Repack_OutPath;
             sui.repackdata.resetrepackdata();
             Task RTask = new Task(() => ConsoleFunctions.PackTask(p1,p2));  // FIX THIS TOO 
-            RTask.Start(); 
-            
-        //    RTask.Wait(); sui.log.TaskFinished(General.TaskType.Repack); 
-         //   sui.log.TaskFinished(General.TaskType.Repack);
 
+            backgroundworker("[ Repack | " + selectedRepackTaskType.ToString() + " ]", "A Repack task is busy... \n Please wait..."); // ShowDialog
+
+            RTask.Start();             
+           RTask.Wait(); 
+
+
+
+            sui.log.TaskFinished(General.TaskType.Repack, General.TaskIDList.Count);
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                TabItem NewTask = new TabItem();
+                NewTask.Header = "[" + selectedRepackTaskType.ToString() + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
+
+
+                taskTemplate.TaskTitleLabel.Content = "Repack Task : " + selectedRepackTaskType.ToString();
+
+
+                taskTemplate.ArchiveTaskConceptGrid.ItemsSource = null;
+                //  taskTemplate.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
+                taskTemplate.TaskFinalGroup.Header = selectedRepackTaskType.ToString() + " Repack Task Settings";
+                //  taskTemplate.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
+                NewTask.Content = taskTemplate;
+                SUI.sui.generaldata.ToolsInstance.RepackSubTab.Items.Add(NewTask);
+
+            }));
         }
 
-        private void StartCR2WTask()
+        private void StartCR2WTask(Views.Tasks.TaskTemplate taskTemplate)
         {
             var p1 = sui.cr2wdata.CR2W_Path;
             var p2 = sui.cr2wdata.CR2W_OutPath;
@@ -120,11 +185,42 @@ namespace CP77Tools.UI.Functionality
             sui.cr2wdata.resetcr2wdata();
 
             Task CTask = new Task(() => ConsoleFunctions.Cr2wTask(p1,p2,p3,p4)); // FIX THIS WHEN MULTISELECT IS POSSIBLE!
+
+
+
+
+            backgroundworker("[ CR2W | " + selectedCR2WTaskType.ToString() + " ]", "A CR2W task is busy... \n Please wait..."); // ShowDialog
+
+
             CTask.Start(); 
             
-         //   CTask.Wait(); sui.log.TaskFinished(General.TaskType.CR2W); 
-          //  sui.log.TaskFinished(General.TaskType.CR2W);
+            CTask.Wait(); 
 
+
+
+
+
+            sui.log.TaskFinished(General.TaskType.CR2W, General.TaskIDList.Count);
+
+
+
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                TabItem NewTask = new TabItem();
+                NewTask.Header = "[" + selectedCR2WTaskType.ToString() + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
+
+
+                taskTemplate.TaskTitleLabel.Content = "CR2W Task : " + selectedCR2WTaskType.ToString();
+
+
+                taskTemplate.ArchiveTaskConceptGrid.ItemsSource = null;
+                //  taskTemplate.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
+                taskTemplate.TaskFinalGroup.Header = selectedCR2WTaskType.ToString() + " CR2W Task Settings";
+                //  taskTemplate.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
+                NewTask.Content = taskTemplate;
+                SUI.sui.generaldata.ToolsInstance.CR2WSubTab.Items.Add(NewTask);
+
+            }));
         }
 
         private void StartArchiveTask(Views.Tasks.TaskTemplate taskTemplate)
@@ -138,25 +234,17 @@ namespace CP77Tools.UI.Functionality
             var p7 = sui.archivedata.Archive_UncookFileType;
             var p8 = sui.archivedata.Archive_Hash;
             var p9 = sui.archivedata.Archive_Pattern;
-            var p10 = sui.archivedata.Archive_Regex;
-            sui.archivedata.resetarchivedata();
+            var p10 = sui.archivedata.Archive_Regex;  // Set locals 
+
+            sui.archivedata.resetarchivedata(); // Reset Globals
+
+            Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));  // Create Task
 
 
-
-            Task ATask = new Task(() => ConsoleFunctions.ArchiveTask(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
-            //  QueuedTask NewQueuedTask = new QueuedTask(General.TaskIDList.Count, ATask, General.TaskType.Archive) ;
-            // General.TaskQueue.Enqueue(NewQueuedTask);
-
-
-            backgroundworker("[ Archive | " + selectedArchiveTaskType.ToString() + " ]", "An Archive task is busy... \n Please wait...");
+            backgroundworker("[ Archive | " + selectedArchiveTaskType.ToString() + " ]", "An Archive task is busy... \n Please wait..."); // ShowDialog
 
             ATask.Start();
             ATask.Wait();
-
-
-
-
-
 
 
             SUI.sui.log.TaskFinished(General.TaskType.Archive, General.TaskIDList.Count);
@@ -173,7 +261,7 @@ namespace CP77Tools.UI.Functionality
 
                   taskTemplate.ArchiveTaskConceptGrid.ItemsSource = null;
                 //  taskTemplate.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;
-                taskTemplate.TaskFinalGroup.Header = selectedArchiveTaskType.ToString() + "Archive Task Settings";
+                taskTemplate.TaskFinalGroup.Header = selectedArchiveTaskType.ToString() + " Archive Task Settings";
                 //  taskTemplate.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
                 NewTask.Content = taskTemplate;
                   SUI.sui.generaldata.ToolsInstance.ArchiveSubTab.Items.Add(NewTask);
@@ -187,31 +275,6 @@ namespace CP77Tools.UI.Functionality
         public void backgroundworker(string title,string message)
         {
            SUI.sui.ProgressDialogHelper(title,message);
-
-
-
-
-
-               //   var a = SUI.sui.ShowProgressAsync("Archive Task", "Working Please wait.");
-              //    a.Wait();
-              //    controller = a.Result;
-             //     controller.SetCancelable(false);
-               //   controller.Canceled += Controller_Canceled;
-
-          
-
-
-    
-
-
-
-
-
-
-
-
-
-
         }
 
         private void Controller_Canceled(object sender, EventArgs e)
@@ -222,33 +285,14 @@ namespace CP77Tools.UI.Functionality
 
         // Creates Thread and sends TaskIndicator to taskmanager to run task on thread.
         public void ThreadedTaskSender(General.TaskType item, Views.Tasks.TaskTemplate taskTemplate) { Thread worker = new Thread(() => TaskManager(item,taskTemplate)); worker.IsBackground = true; worker.Start(); }
-
-   
-
+        
        
 
 
 
-        // TooltipsSetter
         public void SetToolTips()
         {
-            //Archive
-        //    sui.Archive_SelectArchive_UIElement_Button.ToolTip = sui.generaldata.ToolTipArchive_Path;
-       //     sui.Archive_SelectOutputPath_UIElement_Button.ToolTip = sui.generaldata.ToolTipArchive_OutputPath;
-      //      sui.Archive_Dump_UIElement_Checkbox.ToolTip = sui.generaldata.ToolTipArchive_Dump;
-      //      sui.Archive_Extract_UIElement_Checkbox.ToolTip = sui.generaldata.ToolTipArchive_Extract;
-      //      sui.Archive_List_UIElement_Checkbox.ToolTip = sui.generaldata.ToolTipArchive_List;
-      //      sui.Archive_Uncook_UIElement_Checkbox.ToolTip = sui.generaldata.ToolTipArchive_Uncook;
-     //       sui.Archive_Hash_UIElement_TextBox.ToolTip = sui.generaldata.ToolTipArchive_Hash;
-      //      sui.Archive_Start_UIElement_Button.ToolTip = sui.generaldata.ToolTipArchive;
-            //Dump
-       //     sui.Dump_PathIndicatorSelected_UIElement_TextBlock.ToolTip = sui.generaldata.ToolTipDump_Path;
-       //     sui.Dump_Imports_UIElement_CheckBox.ToolTip = sui.generaldata.ToolTipDump_Imports;
-       //     sui.Dump_MissingHashes_UIElement_CheckBox.ToolTip = sui.generaldata.ToolTipDump_MissingHashes;
-       //     sui.Dump_Info_UIElement_CheckBox.ToolTip = sui.generaldata.ToolTipDump_Info;
-            //CR2W
-            //Hash
-            //Oodle
+    
         }
     }
 }

@@ -90,14 +90,68 @@ namespace CP77Tools.UI.Views.Pages
                         }
                         break;
                     case "CR2W":
+                        TabItem Current2 = (TabItem)ArhiveBottomTab_Copy.SelectedItem;
+
+                        switch (Current2.Header)
+                        {
+                            case "New Task":
+                                Functionality.UserInterfaceLogic.selectedCR2WTaskType = CR2WData.CR2WTaskType.Custom;
+                                break;
+                            case "All Information":
+                                Functionality.UserInterfaceLogic.selectedCR2WTaskType = CR2WData.CR2WTaskType.All;
+                                break;
+                            case "Class Information":
+                                Functionality.UserInterfaceLogic.selectedCR2WTaskType = CR2WData.CR2WTaskType.Chunks;
+                                break;
+                           
+                        }
                         break;
                     case "Repack":
+                        TabItem Current3 = (TabItem)ArhiveBottomTab_Copy2.SelectedItem;
+
+                        switch (Current3.Header)
+                        {
+                            case "Repack":
+                                Functionality.UserInterfaceLogic.selectedRepackTaskType = RepackData.RepackTaskType.Repack;
+                                break;
+                        }
                         break;
                     case "Dump":
+                        TabItem Current5 = (TabItem)ArhiveBottomTab_Copy3.SelectedItem;
+
+                        switch (Current5.Header)
+                        {
+                            case "New Task":
+                                Functionality.UserInterfaceLogic.selectedDumpTaskType = DumpData.DumpTaskType.Custom;
+                                break;
+                            case "Imports":
+                                Functionality.UserInterfaceLogic.selectedDumpTaskType = DumpData.DumpTaskType.Imports;
+                                break;
+                            case "Class Information":
+                                Functionality.UserInterfaceLogic.selectedDumpTaskType = DumpData.DumpTaskType.ClassInfo;
+                                break;
+                            case "XBM Information":
+                                Functionality.UserInterfaceLogic.selectedDumpTaskType = DumpData.DumpTaskType.Info;
+                                break;
+                            case "Missing Hashes":
+                                Functionality.UserInterfaceLogic.selectedDumpTaskType = DumpData.DumpTaskType.MissingHashes;
+                                break;
+
+                        }
                         break;
                     case "Hash":
                         break;
                     case "Oodle":
+                        TabItem Current4 = (TabItem)ArhiveBottomTab_Copy32.SelectedItem;
+
+                        switch (Current4.Header)
+                        {
+                            case "Decompress":
+                                Functionality.UserInterfaceLogic.selectedOodleTaskType = OodleData.OodleTaskType.Decompress;
+                                break;
+                  
+
+                        }
                         break;
                 }
 

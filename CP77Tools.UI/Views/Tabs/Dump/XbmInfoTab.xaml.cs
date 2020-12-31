@@ -67,16 +67,8 @@ namespace CP77Tools.UI.Views.Tabs.Dump
 
         private void CreateDumpTaskk()
         {
-            TabItem NewTask = new TabItem();
-            NewTask.Header = "[" + DumpData.DumpTaskType.Info + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
             var sometask = new TaskTemplate(General.TaskType.Dump);
-            sometask.ArchiveTaskConceptGrid.ItemsSource = null; sometask.TaskTitleLabel.Content = "Task : Dump XBM Info Task";
 
-            //      sometask.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;   // LETS ADD THIS LATER JUST INFO THO 
-            sometask.TaskFinalGroup.Header = "Xbm Info Task Settings";
-            sometask.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
-            NewTask.Content = sometask;
-            SUI.sui.generaldata.ToolsInstance.ArchiveSubTab.Items.Add(NewTask);
 
 
         }

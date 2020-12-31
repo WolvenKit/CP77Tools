@@ -64,7 +64,7 @@
             </TabItem>
             <TabItem Header="CR2W">
                 <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
-                    <mah:MetroTabControl>
+                    <mah:MetroTabControl x:Name="CR2WSubTab">
                         <TabItem Header="Create Task">
                             <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                                 <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
@@ -86,7 +86,7 @@
             </TabItem>
             <TabItem Header="Repack">
                 <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
-                    <mah:MetroTabControl>
+                    <mah:MetroTabControl x:Name="RepackSubTab">
                         <TabItem Header="Create Task">
                             <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                                 <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy2" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
@@ -103,14 +103,14 @@
             </TabItem>
             <TabItem Header="Dump">
                 <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
-                    <mah:MetroTabControl>
+                    <mah:MetroTabControl x:Name="DumpSubTab">
                         <TabItem Header="Create Task">
                             <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                                 <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy3" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
                                     <TabItem Header="New Task">
                                         <ucDump:CustomTab/>
                                     </TabItem>
-                                    <TabItem Header="All Information">
+                                    <TabItem Header="Imports">
                                         <ucDump:ImportsTab/>
                                     </TabItem>
                                     <TabItem Header="Class Information">
@@ -131,7 +131,7 @@
             </TabItem>
             <TabItem Header="Hash">
                 <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
-                    <mah:MetroTabControl>
+                    <mah:MetroTabControl x:Name="HashSubTab">
                         <TabItem Header="Create Task">
                             <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                                 <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy34" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >
@@ -148,7 +148,7 @@
             </TabItem>
             <TabItem Header="Oodle">
                 <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
-                    <mah:MetroTabControl>
+                    <mah:MetroTabControl x:Name="OodleSubTab">
                         <TabItem Header="Create Task">
                             <Grid Background="{DynamicResource MahApps.Brushes.Menu.Background}">
                                 <controls:MetroTabControl x:Name="ArhiveBottomTab_Copy32" TabStripPlacement="Bottom" SelectionChanged="ArhiveBottomTab_SelectionChanged" >

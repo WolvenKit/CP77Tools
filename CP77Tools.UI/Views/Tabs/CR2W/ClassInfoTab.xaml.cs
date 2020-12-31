@@ -66,16 +66,9 @@ namespace CP77Tools.UI.Views.Tabs.CR2W
 
         private void CreateDumpTaskk()
         {
-            TabItem NewTask = new TabItem();
-            NewTask.Header = "[" + CR2WData.CR2WTaskType.Chunks + " - " + SUI.sui.generaldata.TaskIDGen() + "]";
+           
             var sometask = new TaskTemplate(General.TaskType.CR2W);
-            sometask.ArchiveTaskConceptGrid.ItemsSource = null; sometask.TaskTitleLabel.Content = "Task : CR2W Class Info Task";
-
-            //      sometask.ArchiveTaskConceptGrid.ItemsSource = this.ArchiveTaskConceptGrid.ItemsSource;   // LETS ADD THIS LATER JUST INFO THO 
-            sometask.TaskFinalGroup.Header = "Class Info Task Settings";
-            sometask.ArchiveSelectedInputConceptDropDown1.ItemsSource = ArchiveSelectedInputConceptDropDown1.ItemsSource;
-            NewTask.Content = sometask;
-            SUI.sui.generaldata.ToolsInstance.ArchiveSubTab.Items.Add(NewTask);
+            
 
 
         }
