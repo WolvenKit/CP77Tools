@@ -14,7 +14,7 @@ namespace CP77Tools.Commands
         {
             AddOption(new Option<string[]>(new[] {"--path", "-p"}, "Input path to .archive."));
             AddOption(new Option<string>(new[] {"--outpath", "-o"}, "Output directory to extract files to."));
-            AddOption(new Option<string>(new[] {"--pattern", "-w"}, "Use optional search pattern, e.g. *.ink. If bith regex and pattern is definedm, pattern will be used first"));
+            AddOption(new Option<string>(new[] {"--pattern", "-w"}, "Use optional search pattern, e.g. *.ink. If both regex and pattern is defined, pattern will be used first"));
             AddOption(new Option<string>(new[] {"--regex", "-r"}, "Use optional regex pattern."));
             AddOption(new Option<bool>(new[] {"--extract", "-e"}, "Extract files from archive."));
             AddOption(new Option<bool>(new[] {"--dump", "-d"}, "Dump archive information."));

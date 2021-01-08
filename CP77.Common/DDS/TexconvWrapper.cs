@@ -114,17 +114,17 @@ namespace WolvenKit.Common.Tools.DDS
     public static class TexconvWrapper
     {
 
-        public static string Convert(string outDir,
+        private static string textconvpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DDS/texconv.exe");
+
+
+        public static bool Convert(string outDir,
             string filepath,
             EUncookExtension filetype,
             EFormat format = EFormat.R8G8B8A8_UNORM,
             int mipmaps = 0
             )
         {
-            string textconvpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DDS/texconv.exe");
             var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
-
-            var argsss = $" -o '{outDir}' -y -f {format}  -ft {filetype} '{filepath}'";
 
             var proc = new ProcessStartInfo(textconvpath)
             {
@@ -145,16 +145,14 @@ namespace WolvenKit.Common.Tools.DDS
             if (!fi.Exists)
             {
                 logger.LogString($"Could not convert {fi.FullName}.", Logtype.Error);
+                return false;
             }
 
-            return fi.FullName;
+            return true;
         }
 
         public static void VFlip(string outDir, string filepath, EFormat format = EFormat.R8G8B8A8_UNORM)
         {
-            string textconvpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DDS/texconv.exe");
-            var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
-
             var proc = new ProcessStartInfo(textconvpath)
             {
                 WorkingDirectory = Path.GetDirectoryName(textconvpath),
