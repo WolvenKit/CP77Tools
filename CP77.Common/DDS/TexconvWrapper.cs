@@ -150,6 +150,25 @@ namespace WolvenKit.Common.Tools.DDS
             return fi.FullName;
         }
 
+        public static void VFlip(string outDir, string filepath, EFormat format = EFormat.R8G8B8A8_UNORM)
+        {
+            string textconvpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DDS/texconv.exe");
+            var logger = ServiceLocator.Default.ResolveType<ILoggerService>();
+
+            var proc = new ProcessStartInfo(textconvpath)
+            {
+                WorkingDirectory = Path.GetDirectoryName(textconvpath),
+                Arguments = $" -o \"{outDir}\" -y -f {format} -vflip \"{filepath}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true,
+
+            };
+            using (var p = Process.Start(proc))
+            {
+                p.WaitForExit();
+            }
+        }
 
         
     }
