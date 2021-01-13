@@ -76,6 +76,7 @@ namespace CP77.MSTests
             GroupedFiles = bm.GroupedFiles;
         }
 
+        [TestMethod]
         public void Test_All_Extensions()
         {
             Test_Extension();
@@ -836,10 +837,10 @@ namespace CP77.MSTests
             else
                 files = GroupedFiles.Keys.Where(k => k.Equals(extension)).ToList();
 
-            var sb = new StringBuilder();
-
             Parallel.ForEach(files, ext =>
             {
+                var sb = new StringBuilder();
+                
                 var results = Test_Archive_Items(GroupedFiles[ext]);
 
                 var successCount = results.Count(r => r.Success);
@@ -862,12 +863,12 @@ namespace CP77.MSTests
                     
                     failures.Add(ext, results.Where(r => !r.Success));
                 }
+                
+                Console.WriteLine(sb.ToString());
             });
 
             if (failures.Any())
             {
-                Console.WriteLine(sb.ToString());
-
                 if (WriteToFile)
                 {
                     var resultDir = Path.Combine(Environment.CurrentDirectory, TestResultsDirectory);
@@ -921,12 +922,13 @@ namespace CP77.MSTests
                             });
                             break;
                         default:
+                            var hasAdditionalBytes = c.additionalCr2WFileBytes != null && c.additionalCr2WFileBytes.Any();
                             results.Add(new TestResult
                             {
                                 ArchiveItem = file,
-                                Success = c.additionalCr2WFileBytes.Any(),
-                                Result = c.additionalCr2WFileBytes.Any() ? TestResult.ResultType.HasAdditionalBytes : TestResult.ResultType.NoError,
-                                Message = c.additionalCr2WFileBytes.Any() ? $"Additional Bytes: {c.additionalCr2WFileBytes.Length}" : null
+                                Success = !hasAdditionalBytes,
+                                Result = hasAdditionalBytes ? TestResult.ResultType.HasAdditionalBytes : TestResult.ResultType.NoError,
+                                Message = hasAdditionalBytes ? $"Additional Bytes: {c.additionalCr2WFileBytes.Length}" : null
                             });
                             break;
                     }
