@@ -50,7 +50,7 @@ namespace CP77.CR2W.Archive
 
         public (byte[], List<byte[]>) GetFileData()
         {
-            return _parentArchive.GetFileData(NameHash64, false);
+            return _parentArchive.GetFileData(NameHash64, true);
         }
 
         private void Read(BinaryReader br, IHashService mainController)
