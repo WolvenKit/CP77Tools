@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CP77.Common\CP77.Common.csproj" />
     <ProjectReference Include="..\CP77.CR2W\CP77.CR2W.csproj" />
-    <ProjectReference Include="..\CP77Tools\CP77Tools.csproj" />
   </ItemGroup>
 
   <ItemGroup>

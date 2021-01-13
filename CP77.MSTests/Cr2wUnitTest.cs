@@ -855,7 +855,6 @@ namespace CP77.MSTests
                 
                 if (WriteToFile)
                 {
-                    // Only write failures
                     if (results.Any(r => !r.Success))
                     {
                         var resultPath = Path.Combine(resultDir, $"{ext[1..]}.csv");
@@ -865,7 +864,7 @@ namespace CP77.MSTests
                 }
             });
             
-            var logPath = Path.Combine(resultDir, $"{nameof(Cr2wUnitTest)}.log");
+            var logPath = Path.Combine(resultDir, $"logfile_{(string.IsNullOrEmpty(extension) ? string.Empty : $"{extension[1..]}_")}{DateTime.Now:yyyyMMddHHmmss}.log");
             File.WriteAllText(logPath, sb.ToString());
             Console.WriteLine(sb.ToString());
 

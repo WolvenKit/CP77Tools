@@ -25,7 +25,7 @@ namespace CP77.CR2W.Archive
         public string FileName => string.IsNullOrEmpty(_nameStr) ? $"{NameHash64}.bin" : _nameStr;
         public string Extension => Path.GetExtension(FileName);
 
-        private readonly Archive _parentArchive;
+        private Archive _parentArchive;
 
         public ArchiveItem(BinaryReader br, Archive parent)
         {
