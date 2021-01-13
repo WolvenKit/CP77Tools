@@ -828,7 +828,10 @@ namespace CP77.MSTests
 
         private void Test_Extension(string extension = null)
         {
-            var failures = new Dictionary<string, IEnumerable<TestResult>>();
+            var resultDir = Path.Combine(Environment.CurrentDirectory, TestResultsDirectory);
+            Directory.CreateDirectory(resultDir);
+
+            var success = true;
 
             List<string> files;
 
@@ -837,57 +840,39 @@ namespace CP77.MSTests
             else
                 files = GroupedFiles.Keys.Where(k => k.Equals(extension)).ToList();
 
+            var sb = new StringBuilder();
+            
             Parallel.ForEach(files, ext =>
             {
-                var sb = new StringBuilder();
-                
-                var results = Test_Archive_Items(GroupedFiles[ext]);
+                var results = Read_Archive_Items(GroupedFiles[ext]);
 
                 var successCount = results.Count(r => r.Success);
                 var totalCount = GroupedFiles[ext].Count;
                 
                 sb.AppendLine($"{ext} -> Successful Reads: {successCount} / {totalCount} ({(int)(((double)successCount / (double)totalCount) * 100)}%)");
 
-                if (results.Any(r => !r.Success))
-                {
-                    sb.AppendLine("Failed to read:");
-
-                    foreach (var r in results.Where(r => !r.Success))
-                    {
-                        sb.AppendLine($"\n{r.ArchiveItem.NameHash64} - {r.ArchiveItem.FileName}");
-                        sb.AppendLine($"({r.Result})");
-                        
-                        if (!string.IsNullOrEmpty(r.Message))
-                            sb.AppendLine($"{r.Message}");
-                    }
-                    
-                    failures.Add(ext, results.Where(r => !r.Success));
-                }
+                if (success && results.Any(r => !r.Success)) success = false;
                 
-                Console.WriteLine(sb.ToString());
-            });
-
-            if (failures.Any())
-            {
                 if (WriteToFile)
                 {
-                    var resultDir = Path.Combine(Environment.CurrentDirectory, TestResultsDirectory);
-                    Directory.CreateDirectory(resultDir);
-                    
-                    foreach (var ext in failures.Keys)
+                    // Only write failures
+                    if (results.Any(r => !r.Success))
                     {
-                        if (failures[ext].All(f => f.Success)) break;
-                        
-                        var resultPath = Path.Combine(resultDir, $"{ext[1..]}.json");
-                        File.WriteAllText(resultPath, JsonConvert.SerializeObject(failures[ext]));
+                        var resultPath = Path.Combine(resultDir, $"{ext[1..]}.csv");
+                        var csv = TestResultAsCsv(results.Where(r => !r.Success));
+                        File.WriteAllText(resultPath, csv);
                     }
                 }
-                
-                Assert.Fail();
-            }
+            });
+            
+            var logPath = Path.Combine(resultDir, $"{nameof(Cr2wUnitTest)}.log");
+            File.WriteAllText(logPath, sb.ToString());
+            Console.WriteLine(sb.ToString());
+
+            if (!success) Assert.Fail();
         }
 
-        private IEnumerable<TestResult> Test_Archive_Items(List<ArchiveItem> files)
+        private IEnumerable<TestResult> Read_Archive_Items(List<ArchiveItem> files)
         {
             var results = new List<TestResult>();
             
@@ -928,7 +913,8 @@ namespace CP77.MSTests
                                 ArchiveItem = file,
                                 Success = !hasAdditionalBytes,
                                 Result = hasAdditionalBytes ? TestResult.ResultType.HasAdditionalBytes : TestResult.ResultType.NoError,
-                                Message = hasAdditionalBytes ? $"Additional Bytes: {c.additionalCr2WFileBytes.Length}" : null
+                                Message = hasAdditionalBytes ? $"Additional Bytes: {c.additionalCr2WFileBytes.Length}" : null,
+                                AdditionalBytes = hasAdditionalBytes ? c.additionalCr2WFileBytes.Length : 0
                             });
                             break;
                     }
@@ -940,11 +926,28 @@ namespace CP77.MSTests
                         ArchiveItem = file,
                         Success = false,
                         Result = TestResult.ResultType.RuntimeException,
+                        ExceptionType = e.GetType(),
                         Message = e.Message
                     });
                 }
 
             return results;
+        }
+
+        private string TestResultAsCsv(IEnumerable<TestResult> results)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(
+                $@"{nameof(ArchiveItem.NameHash64)},{nameof(ArchiveItem.FileName)},{nameof(TestResult.Result)},{nameof(TestResult.Success)},{nameof(TestResult.AdditionalBytes)},{nameof(TestResult.ExceptionType)},{nameof(TestResult.Message)}");
+
+            foreach (var r in results)
+            {
+                sb.AppendLine(
+                    $"{r.ArchiveItem.NameHash64},{r.ArchiveItem.FileName},{r.Result},{r.Success},{r.AdditionalBytes},{r.ExceptionType?.FullName},{r.Message}");
+            }
+
+            return sb.ToString();
         }
 
         private class TestResult
@@ -962,7 +965,9 @@ namespace CP77.MSTests
             
             [JsonConverter(typeof(StringEnumConverter))]
             public ResultType Result { get; set; }
+            public int AdditionalBytes { get; set; }
             public bool Success { get; set; }
+            public Type ExceptionType { get; set; }
             public string Message { get; set; }
         }
     }
