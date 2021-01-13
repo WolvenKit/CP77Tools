@@ -25,7 +25,7 @@ namespace CP77.CR2W.Archive
         public string FileName => string.IsNullOrEmpty(_nameStr) ? $"{NameHash64}.bin" : _nameStr;
         public string Extension => Path.GetExtension(FileName);
 
-        private Archive _parentArchive;
+        private readonly Archive _parentArchive;
 
         public ArchiveItem(BinaryReader br, Archive parent)
         {
@@ -46,6 +46,16 @@ namespace CP77.CR2W.Archive
             FirstOffsetTableIdx = firstOffsetTableIdx;
             LastOffsetTableIdx = lastOffsetTableIdx;
             SHA1Hash = sha1hash;
+        }
+
+        public (byte[], List<byte[]>) GetFileData()
+        {
+            return _parentArchive.GetFileData(NameHash64);
+        }
+
+        public Archive GetParentArchive()
+        {
+            return _parentArchive;
         }
 
         private void Read(BinaryReader br, IHashService mainController)
