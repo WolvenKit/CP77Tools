@@ -462,11 +462,6 @@ namespace CP77.CR2W.Archive
             return b;
         }
 
-        public ArTable GetTable()
-        {
-            return _table;
-        }
-
         /// <summary>
         /// Gets the bytes of one file by index from the archive.
         /// </summary>
