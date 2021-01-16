@@ -55,14 +55,12 @@ namespace CP77.CR2W.Uncooker
 
             uint maskTileSize = blob.Header.MaskTileSize.val;
 
-            var atlasData = blob.AtlasData;
-            var tilesData = blob.TilesData;
 
-            byte[] atlas = buffers[atlasData.Buffer.GetBytes()[0] - 1];
+            byte[] atlas = buffers[0];
             uint[] tiles;
 
             //Read tilesdata buffer into appropriate variable type
-            var b = buffers[tilesData.Buffer.GetBytes()[0] - 1];
+            var b = buffers[1];
             tiles = new uint[b.Length / 4];
             for (int i = 0, j = 0; i < b.Length; i += 4, j++)
             {
@@ -76,11 +74,24 @@ namespace CP77.CR2W.Uncooker
             {
                 return false;
             }
+
+            //{
+            //    var mFilename = filename + $"__.dds";
+            //    var newpath = Path.Combine(path, mFilename);
+            //    using (var ddsStream = new FileStream($"{newpath}", FileMode.Create, FileAccess.Write))
+            //    {
+            //        DDSUtils.GenerateAndWriteHeader(ddsStream, new DDSMetadata(atlasWidth, atlasHeight, 0, EFormat.R8_UNORM, 8, false, 0, false));
+            //
+            //        ddsStream.Write(atlasRaw);
+            //    }
+            //}
+            
+
             byte[] maskData = new byte[maskWidth * maskHeight];
             
 
             Directory.CreateDirectory(path);
-            for (uint i = 0; i < maskTileSize; i++)
+            for (int i = 0; i < maskTileSize; i++)
             {
                 var mFilename = filename + $"_{i}.dds";
                 var newpath = Path.Combine(path, mFilename);
@@ -107,7 +118,7 @@ namespace CP77.CR2W.Uncooker
             return true;
         }
 
-        private static void Decode(ref byte[] maskData, uint maskWidth, uint maskHeight, uint mWidthLow, uint mHeightLow, byte[] atlasData, uint atlasWidth, uint atlasHeight, uint[] tileData, uint maskTileSize, uint maskIndex)
+        private static void Decode(ref byte[] maskData, uint maskWidth, uint maskHeight, uint mWidthLow, uint mHeightLow, byte[] atlasData, uint atlasWidth, uint atlasHeight, uint[] tileData, uint maskTileSize, int maskIndex)
         {
             uint widthInTiles0 = DivCeil(maskWidth, maskTileSize);
             uint heightInTiles0 = DivCeil(maskHeight, maskTileSize);
@@ -126,7 +137,7 @@ namespace CP77.CR2W.Uncooker
 
         }
         
-        private static void DecodeSingle(ref byte[] maskData, uint maskWidth, uint maskHeight, byte[] atlasData, uint atlasWidth, uint atlasHeight, uint x, uint y, uint[] tilesData, uint maskTileSize, uint maskIndex, uint tilesOffset, uint smallScale)
+        private static void DecodeSingle(ref byte[] maskData, uint maskWidth, uint maskHeight, byte[] atlasData, uint atlasWidth, uint atlasHeight, uint x, uint y, uint[] tilesData, uint maskTileSize, int maskIndex, uint tilesOffset, uint smallScale)
         {
             uint widthInTiles = DivCeil(maskWidth / smallScale, maskTileSize);
 
@@ -138,24 +149,24 @@ namespace CP77.CR2W.Uncooker
             uint paramOffset = tilesData[tileIndex * 2];
             uint paramBits = tilesData[tileIndex * 2 + 1];
 
-            if ((paramBits & (1 << ((int)maskIndex))) == 0)
+            if ((paramBits & (1 << maskIndex)) == 0)
                 return;
 
-            uint extraAdd = CountBits((uint)(paramBits & ((1 << ((int)maskIndex)) - 1)));
+            uint extraAdd = CountBits((uint)(paramBits & ((1 << maskIndex) - 1)));
 
             uint tileDecl = tilesData[paramOffset + extraAdd];
 
-            uint dx = tileDecl & 0x3ff;
-            uint dy = (tileDecl >> 10) & 0x3ff;
-            uint sx = (tileDecl >> 20) & 0xf;
-            uint sy = (tileDecl >> 24) & 0xf;
+            uint dx = tileDecl & 0x3ffU;
+            uint dy = (tileDecl >> 10) & 0x3ffU;
+            uint sx = (tileDecl >> 20) & 0xfU;
+            uint sy = (tileDecl >> 24) & 0xfU;
 
             uint atlasTileSize = maskTileSize + 2;
 
-            uint x1 = (uint)(1 << (int)sx) - 1;
-            uint xi = x & x1;
-            uint y1 = (uint)(1 << (int)sy) - 1;
-            uint yi = y & y1;
+            int x1 = (1 << (int)sx) - 1;
+            int xi = (int)(x & x1);
+            int y1 = (1 << (int)sy) - 1;
+            int yi = (int)(y & y1);
 
             uint ux = (x >> (int)sx) % maskTileSize + 1 + dx * atlasTileSize;
             uint uy = (y >> (int)sy) % maskTileSize + 1 + dy * atlasTileSize;
@@ -171,31 +182,29 @@ namespace CP77.CR2W.Uncooker
 
         }
 
-        private static byte BilinearInterpolation(byte q00, byte q10, byte q01, byte q11, uint x, uint x1, uint y, uint y1)
+
+        private static int Lerp(int l, int r, float t)
         {
-            uint sc = 256;
+            return (int)(l + (r - l) * t);
+        }
+        private static byte BilinearInterpolation(byte q00, byte q10, byte q01, byte q11, int x, int x1, int y, int y1)
+        {
+            const int sc = 256;
 
-            if(x1 == 0 || y1 == 0)
-            {
-                return q00;
-            }
+            int q00s = q00 * sc;
+            int q10s = q10 * sc;
+            int q01s = q01 * sc;
+            int q11s = q11 * sc;
 
-            uint q00s = q00 * sc;
-            uint q10s = q10 * sc;
-            uint q01s = q01 * sc;
-            uint q11s = q11 * sc;
 
-            uint a0 = q00s;
-            uint a1 = (q10s - q00s) * x / x1;
-            uint a2 = (q01s - q00s) * y / y1;
-            uint a3 = (q00s - q01s - q10s + q11s) * x * y / x1 / y1;
+            int a1 = Lerp(q00s, q10s, x / (float)x1);
+            int a2 = Lerp(q01s, q11s, x / (float)x1);
+            int a = Lerp(a1, a2, y / (float)y1);
 
-            uint f = a0 + a1 + a2 + a3;
 
-            uint r = f / sc;
+            int r = a / sc;
             if (r > 255)
                 r = 255;
-
             return (byte)r;
         }
     }
