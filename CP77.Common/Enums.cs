@@ -16,7 +16,9 @@
         xbm,
         csv,
         json,
-        mlmask
+        mlmask,
+        cubemap,
+        envprobe
     }
 
     /// <summary>
