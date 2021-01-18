@@ -56,6 +56,7 @@ namespace CP77.CR2W
 
             #region unbundle
 
+            Directory.CreateDirectory(outfile.Directory.FullName);
             File.WriteAllBytes(outfile.FullName, file);            
 
             #endregion
