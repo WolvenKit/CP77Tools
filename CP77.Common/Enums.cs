@@ -18,7 +18,8 @@
         json,
         mlmask,
         cubemap,
-        envprobe
+        envprobe,
+        texarray
     }
 
     /// <summary>
