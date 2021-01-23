@@ -55,6 +55,9 @@
     <Content Update="C:\Users\ghost\.nuget\packages\wolvenkit.cyberformats\1.0.0\contentFiles\any\net5.0-windows7.0\Resources\archivehashes.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="C:\Users\ghost\.nuget\packages\wolvenkit.cyberformats\1.0.1\contentFiles\any\net5.0-windows7.0\Resources\archivehashes.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
