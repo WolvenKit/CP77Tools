@@ -7,6 +7,16 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/rfuzzo/cp77tools)](https://github.com/WolvenKit/CP77Tools/releases)
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/rfuzzo/cp77tools?include_prereleases)](https://github.com/WolvenKit/CP77Tools/releases)
 
+
+-------------
+
+# ❗  This repository is archived. 
+
+# ❗  It will be maintained here: https://github.com/WolvenKit/Wolvenkit
+
+
+-------------
+
 Modding tools for the CDPR Cyberpunk 2077 video game.
 
 ## Latest Stable Release
